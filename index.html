@@ -5,434 +5,325 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Prisma BI — Data & Business Intelligence Consulting</title>
   <meta name="description" content="Claridad para decidir con datos: dashboards accionables para ventas, costos y rentabilidad. Agendá un diagnóstico o mirá una demo de 2 minutos."/>
+  <link rel="icon" href="favicon.ico"/>
 
-  <link rel="icon" href="/favicon.ico"/>
-
-  <!-- Premium typography -->
+  <!-- Tipografía premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* palette */
-      --ink:#061221;
-      --ink2:#040b16;
-      --panel:rgba(8,20,40,.58);
-      --stroke:rgba(255,255,255,.14);
-      --stroke2:rgba(255,255,255,.10);
+      /* Base */
+      --bg0:#02050d;
+      --bg1:#050b16;
+      --panel: rgba(8, 14, 28, .62);
+      --border: rgba(255,255,255,.10);
+      --text:#eef3ff;
+      --muted: rgba(238,243,255,.72);
 
-      --text:#F6FAFF;
-      --muted:rgba(246,250,255,.76);
+      /* Brand (azul francia + cyan) */
+      --cyan:#2ad4ff;
+      --teal:#00e7b6;
+      --blue:#1e7cff;
 
-      --aqua:#20D7FF;
-      --teal:#00E7B6;
-      --btn:#0CC7FF;
-      --btn2:#00E7B6;
+      /* Buttons */
+      --btn1:#19c1ff;
+      --btn2:#00e7b6;
 
-      --shadow: 0 22px 70px rgba(0,0,0,.55);
-      --shadowSoft: 0 18px 60px rgba(0,0,0,.35);
+      /* Type scale */
+      --h1: clamp(44px, 5.4vw, 78px);
+      --lead: clamp(16px, 1.25vw, 20px);
 
-      --h1: clamp(40px, 4.4vw, 66px);
-      --lead: clamp(15px, 1.15vw, 18px);
-      --base: 16px;
+      --shadow: 0 28px 90px rgba(0,0,0,.55);
+      --shadow2: 0 18px 60px rgba(0,0,0,.38);
+      --radius: 18px;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,body{margin:0}
     body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size: var(--base);
-      color: var(--text);
-      background: radial-gradient(1100px 700px at 15% 10%, rgba(32,215,255,.14), transparent 60%),
-                  radial-gradient(900px 600px at 70% 10%, rgba(0,231,182,.10), transparent 60%),
-                  linear-gradient(180deg, var(--ink), var(--ink2));
+      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 20% 12%, rgba(46,124,255,.22), transparent 62%),
+        radial-gradient(820px 520px at 78% 18%, rgba(0,231,182,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
       overflow-x:hidden;
     }
-
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
+    .container{max-width:1180px;margin:0 auto;padding:0 28px}
 
-    .container{
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-
-    /* top accent */
+    /* top glow line */
     body:before{
-      content:"";
-      position:fixed;
-      left:0; right:0; top:0;
-      height:4px;
-      background:linear-gradient(90deg, transparent, rgba(32,215,255,.95), rgba(0,231,182,.90), transparent);
-      z-index:9999;
+      content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
+      background:linear-gradient(90deg, transparent, rgba(46,124,255,.85), rgba(42,212,255,.85), rgba(0,231,182,.80), transparent);
+      filter: blur(.2px);
+      opacity:.9;
+      pointer-events:none;
     }
 
     /* NAV */
     header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: rgba(5,12,22,.55);
-      backdrop-filter: blur(14px) saturate(160%);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      position:sticky;top:0;z-index:50;
+      background: rgba(2,5,13,.62);
+      backdrop-filter: blur(14px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
     .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding: 14px 0;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px 0;gap:16px;
     }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
+    .brandlock{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brandlock img{width:22px;height:22px;object-fit:contain}
+    .brandname{font-size:16px;letter-spacing:.2px;opacity:.95}
+    .menu{display:flex;gap:26px;align-items:center;font-weight:700}
+    .menu a{opacity:.78;position:relative;padding:8px 0}
+    .menu a:hover,.menu a.active{opacity:1}
+    .menu a.active:after,.menu a:hover:after{
+      content:"";position:absolute;left:0;right:0;bottom:-10px;height:3px;border-radius:999px;
+      background:linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 22px rgba(42,212,255,.35);
+    }
+    .navcta{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(9,14,28,.35);
       font-weight:800;
-      letter-spacing:.2px;
-      font-family: Sora, Inter, system-ui, sans-serif;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
     }
-    .brand img{
-      width:30px;height:30px;
-      object-fit:contain;
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
-    }
-    .brand span{opacity:.96}
+    .navcta:hover{filter:brightness(1.08)}
+    @media (max-width:980px){ .menu{display:none} }
 
-    .menu{
-      display:flex;
-      gap:28px;
-      font-weight:700;
-      align-items:center;
-      font-family: Sora, Inter, system-ui, sans-serif;
-    }
-    .menu a{
-      opacity:.85;
-      position:relative;
-      font-size:14px;
-    }
-    .menu a:hover,
-    .menu a.active{opacity:1}
-    .menu a:hover:after,
-    .menu a.active:after{
-      content:"";
-      position:absolute;
-      left:0; right:0; bottom:-10px;
-      height:3px;
-      border-radius:999px;
-      background: linear-gradient(90deg, var(--aqua), var(--teal));
-    }
-
-    .nav-cta{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(10,20,40,.42);
-      font-weight:800;
-      font-family: Sora, Inter, system-ui, sans-serif;
-      font-size:13px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.25);
-    }
-    .nav-cta:hover{filter:brightness(1.08); transform: translateY(-1px)}
-    @media (max-width: 980px){
-      .menu{display:none}
-    }
-
-    /* HERO */
+    /* HERO (modelo estilo publicidad) */
     .hero{
       position:relative;
-      min-height: 560px;
-      padding: 56px 0 48px;
+      min-height: calc(100vh - 72px);
+      display:flex;
+      align-items:center;
+      padding:64px 0 60px;
       overflow:hidden;
     }
 
-    /* background image layer */
+    /* Fondo con tu hero-bg real */
     .hero:before{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute;inset:0;
       background:
-        radial-gradient(1200px 600px at 15% 20%, rgba(32,215,255,.35), transparent 55%),
-        radial-gradient(900px 600px at 70% 15%, rgba(0,231,182,.16), transparent 55%),
-        linear-gradient(180deg, rgba(3,10,18,.55), rgba(3,10,18,.85)),
-        url("/assets/brand/hero-bg.jpg");
+        linear-gradient(90deg, rgba(2,5,13,.92) 10%, rgba(2,5,13,.66) 52%, rgba(2,5,13,.22) 100%),
+        radial-gradient(900px 520px at 66% 22%, rgba(46,124,255,.22), transparent 60%),
+        radial-gradient(900px 520px at 72% 70%, rgba(0,231,182,.10), transparent 62%),
+        url("assets/brand/hero-bg.jpg?v=3");
       background-size: cover;
-      background-position: center;
-      filter: saturate(1.05) contrast(1.02);
+      background-position: center right;
+      filter: saturate(115%) contrast(106%);
       transform: scale(1.02);
-      z-index:0;
+      z-index:-2;
     }
 
-    /* subtle vignette */
+    /* sutil blur / glow */
     .hero:after{
       content:"";
-      position:absolute;
-      inset:-2px;
+      position:absolute;inset:-40px;
       background:
-        radial-gradient(900px 500px at 20% 45%, rgba(0,0,0,.08), rgba(0,0,0,.70)),
-        radial-gradient(900px 500px at 75% 45%, rgba(0,0,0,.15), rgba(0,0,0,.78));
-      z-index:0;
+        radial-gradient(520px 320px at 26% 35%, rgba(42,212,255,.16), transparent 70%),
+        radial-gradient(620px 360px at 78% 28%, rgba(46,124,255,.16), transparent 72%),
+        radial-gradient(620px 360px at 72% 82%, rgba(0,231,182,.10), transparent 70%);
+      z-index:-1;
       pointer-events:none;
     }
 
-    .hero-inner{
-      position:relative;
-      z-index:1;
+    .heroGrid{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
       align-items:center;
-      gap: 24px;
+      gap:28px;
+    }
+    @media (max-width:980px){
+      .hero{min-height:auto;padding:56px 0 44px}
+      .heroGrid{grid-template-columns:1fr;gap:26px}
     }
 
-    @media (max-width: 980px){
-      .hero-inner{grid-template-columns: 1fr; gap: 28px}
+    .microBrand{
+      display:flex;align-items:center;gap:10px;margin:0 0 16px;
+      opacity:.95;
     }
-
-    /* top mini brand line like the mock */
-    .hero-brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom: 16px;
+    .microBrand img{width:20px;height:20px;object-fit:contain}
+    .microBrand .title{
+      font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;
     }
-    .hero-brand img{
-      width:54px;height:54px;
-      object-fit:contain;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,.55));
-    }
-
-    .hero-brand .title{
-      font-family: Sora, Inter, system-ui, sans-serif;
-      font-weight:800;
-      letter-spacing:.04em;
-      font-size: 22px;
-      line-height:1;
-    }
-    .hero-brand .title b{
-      background: linear-gradient(90deg, var(--aqua), var(--teal));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      font-weight:800;
-    }
-    .hero-brand .sub{
-      margin-top:6px;
-      font-size: 12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color: rgba(246,250,255,.68);
-      font-weight:700;
+    .microBrand .subtitle{
+      font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      font-size:11px;color:rgba(238,243,255,.55);
+      margin-top:2px;
     }
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius: 999px;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(8,20,40,.35);
-      box-shadow: 0 18px 50px rgba(0,0,0,.28);
-      margin-bottom: 18px;
-      font-family: Sora, Inter, system-ui, sans-serif;
+      background:rgba(5,10,20,.45);
+      box-shadow: 0 12px 34px rgba(0,0,0,.35);
+      margin:0 0 18px;
+      width:max-content;
       font-weight:800;
-      font-size:13px;
+      color:rgba(238,243,255,.92);
     }
     .pill i{
       width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(90deg, var(--aqua), var(--teal));
-      box-shadow: 0 0 18px rgba(32,215,255,.55);
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 20px rgba(42,212,255,.45);
     }
 
     h1{
-      margin: 0 0 10px;
-      font-family: Sora, Inter, system-ui, sans-serif;
-      font-size: var(--h1);
-      line-height: 1.06;
-      letter-spacing:-.02em;
-      font-weight: 800;
-      text-shadow: 0 16px 40px rgba(0,0,0,.35);
-    }
-
-    h1 .accent{
-      background: linear-gradient(90deg, var(--aqua), var(--teal));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
+      margin:0 0 14px;
+      font-size:var(--h1);
+      line-height:1.02;
       font-weight:800;
+      letter-spacing:-.02em;
     }
-
+    h1 .accent{
+      background:linear-gradient(90deg, var(--cyan), var(--teal));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow: 0 0 28px rgba(42,212,255,.18);
+    }
     .lede{
-      margin: 0 0 18px;
-      color: var(--muted);
-      max-width: 62ch;
-      font-size: var(--lead);
-      line-height: 1.65;
-      text-shadow: 0 14px 34px rgba(0,0,0,.26);
+      margin:0 0 18px;
+      font-size:var(--lead);
+      color:var(--muted);
+      max-width:68ch;
+      line-height:1.7;
     }
 
-    .ctaRow{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin: 14px 0 18px;
+    /* CTAs como el modelo */
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
+    .cta{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 18px;border-radius:12px;
+      border:1px solid rgba(0,0,0,.12);
+      background: linear-gradient(90deg, rgba(25,193,255,.92), rgba(0,231,182,.92));
+      color:#07101f;
+      font-weight:800;
+      box-shadow: var(--shadow2);
     }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 13px 18px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-family: Sora, Inter, system-ui, sans-serif;
-      font-size: 13px;
+    .cta:hover{filter:brightness(1.04);transform:translateY(-1px)}
+    .cta svg{width:18px;height:18px}
+    .subcta{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 18px;border-radius:12px;
+      background: rgba(8,14,28,.45);
       border:1px solid rgba(255,255,255,.16);
-      box-shadow: 0 18px 55px rgba(0,0,0,.38);
-      transition: transform .15s ease, filter .15s ease;
-      user-select:none;
+      font-weight:800;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
     }
-    .btn.primary{
-      color: #03111f;
-      border-color: rgba(0,0,0,.10);
-      background: linear-gradient(90deg, rgba(12,199,255,.95), rgba(0,231,182,.92));
-    }
-    .btn.secondary{
-      background: rgba(8,20,40,.40);
-      color: rgba(246,250,255,.92);
-      border-color: rgba(255,255,255,.18);
-    }
-    .btn:hover{transform: translateY(-1px); filter: brightness(1.06)}
-    .btn svg{width:18px;height:18px}
+    .subcta:hover{filter:brightness(1.08);transform:translateY(-1px)}
 
-    .checks{
-      display:grid;
-      gap:10px;
-      margin-top: 8px;
-      max-width: 56ch;
-      font-size: 14px;
-      color: rgba(246,250,255,.92);
-    }
+    /* bullets */
+    .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:62ch}
+    .bullets li{display:flex;align-items:flex-start;gap:10px;color:rgba(238,243,255,.86)}
     .check{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      text-shadow: 0 12px 30px rgba(0,0,0,.22);
+      width:22px;height:22px;border-radius:999px;
+      background: rgba(0,231,182,.18);
+      border:1px solid rgba(0,231,182,.32);
+      display:grid;place-items:center;flex:0 0 22px;margin-top:2px;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
     }
-    .check .dot{
-      width:22px;height:22px;
-      border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,.12)),
-                  linear-gradient(180deg, rgba(32,215,255,.90), rgba(0,231,182,.85));
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
-      display:grid;
-      place-items:center;
-      flex: 0 0 22px;
-      margin-top: 1px;
-    }
-    .check .dot:before{
-      content:"✓";
-      font-weight: 900;
-      font-size: 13px;
-      color:#03111f;
-    }
-    .check em{opacity:.9; font-style: italic}
+    .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.95);font-size:14px}
 
-    /* Right portrait – blends with bg like the mock */
-    .portraitWrap{
-      display:flex;
-      justify-content:flex-end;
-      align-items:flex-end;
+    /* FOTO a la derecha como “modelo” */
+    .portraitWrap{display:flex;justify-content:flex-end}
+    .portrait{
+      width:min(520px, 100%);
+      position:relative;
+      filter: drop-shadow(0 34px 70px rgba(0,0,0,.55));
+    }
+    .portrait img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      transform: translateY(8px);
+    }
+    /* glow sutil detrás de la persona */
+    .portrait:before{
+      content:"";
+      position:absolute;
+      inset:-40px -30px -40px -30px;
+      background:
+        radial-gradient(280px 220px at 55% 35%, rgba(42,212,255,.18), transparent 70%),
+        radial-gradient(320px 240px at 60% 70%, rgba(0,231,182,.10), transparent 72%);
+      z-index:-1;
+      filter: blur(2px);
     }
     @media (max-width:980px){
       .portraitWrap{justify-content:center}
     }
 
-    .portrait{
-      width: min(520px, 100%);
-      height: auto;
-      filter: drop-shadow(0 26px 80px rgba(0,0,0,.55));
-      transform: translateY(8px);
-    }
-
-    /* SECTIONS (simple, keeps premium dark) */
-    section{
-      padding: 60px 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.28));
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-    .secTitle{
-      font-family:Sora, Inter, system-ui, sans-serif;
+    /* Sections (resto de tu web) */
+    section{padding:72px 0}
+    .sectionTitle{
+      text-align:center;margin:0 0 10px;
+      font-size: clamp(26px, 2.6vw, 42px);
       font-weight:800;
       letter-spacing:-.01em;
-      margin:0 0 8px;
-      font-size: 34px;
+    }
+    .sectionLead{
       text-align:center;
-    }
-    .secSub{
-      text-align:center;
-      max-width: 78ch;
-      margin: 0 auto 24px;
-      color: rgba(246,250,255,.70);
-      font-size: 14px;
+      color:rgba(238,243,255,.62);
+      max-width:86ch;margin:0 auto 28px;
       line-height:1.7;
-    }
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 980px){
-      .cards{grid-template-columns:1fr}
-    }
-    .card{
-      background: rgba(8,20,40,.38);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      padding: 18px 18px 16px;
-      box-shadow: var(--shadowSoft);
-    }
-    .card h3{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      margin:0 0 10px;
-      font-size: 15px;
-      font-weight:800;
-    }
-    .card p{
-      margin:0;
-      color: rgba(246,250,255,.70);
-      font-size: 13px;
-      line-height:1.7;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-family:Sora, Inter, system-ui, sans-serif;
-      font-weight:800;
-      font-size: 12px;
-      color: rgba(246,250,255,.92);
-      margin-bottom: 10px;
-    }
-    .chip i{
-      width:7px;height:7px;border-radius:999px;
-      background: linear-gradient(90deg, var(--aqua), var(--teal));
-      box-shadow: 0 0 14px rgba(32,215,255,.45);
+      font-size:15px;
     }
 
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:980px){.grid3{grid-template-columns:1fr}}
+
+    .card{
+      background: rgba(8,14,28,.52);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding:20px 18px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.26);
+    }
+    .kicker{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800;margin-bottom:8px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 18px rgba(42,212,255,.28);
+    }
+    .small{color:rgba(238,243,255,.70);line-height:1.7;font-size:14px;margin:0}
+
+    .sep{
+      height:1px;max-width:1050px;margin:0 auto;
+      background: linear-gradient(90deg, transparent, rgba(46,124,255,.28), rgba(42,212,255,.22), rgba(0,231,182,.18), transparent);
+    }
+
+    .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media (max-width:980px){.contactGrid{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.contactGrid{grid-template-columns:1fr}}
+
+    .cBox{
+      background: rgba(8,14,28,.52);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding:16px 16px;
+    }
+    .cBox .t{font-weight:800;margin:0 0 6px}
+    .cBox .v{margin:0;color:rgba(238,243,255,.70);font-size:14px}
+
     footer{
-      padding: 26px 0;
+      padding:26px 0;
       text-align:center;
-      color: rgba(246,250,255,.55);
-      font-size: 13px;
-      background: rgba(0,0,0,.30);
-      border-top: 1px solid rgba(255,255,255,.06);
+      color:rgba(238,243,255,.55);
+      font-size:13px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important;animation:none!important}
     }
   </style>
 </head>
@@ -441,157 +332,161 @@
 
 <header>
   <div class="container nav">
-    <a class="brand" href="#home" aria-label="Prisma BI">
-      <img src="/assets/brand/prisma-logo.png" alt="Prisma BI logo">
-      <span>Prisma BI</span>
-    </a>
+    <div class="brandlock">
+      <!-- cache-busting para GitHub Pages -->
+      <img src="assets/brand/prisma-logo.png?v=3" alt="Prisma BI logo">
+      <div class="brandname">Prisma BI</div>
+    </div>
 
-    <nav class="menu" aria-label="Menú">
+    <nav class="menu">
       <a class="active" href="#home">Inicio</a>
       <a href="#services">Servicios</a>
       <a href="#packages">Paquetes</a>
       <a href="#contact">Contacto</a>
     </nav>
 
-    <a class="nav-cta" href="#packages">Ver demo (2 min) →</a>
+    <a class="navcta" href="#packages">Ver demo (2 min) →</a>
   </div>
 </header>
 
-<main>
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="container hero-inner">
+<section id="home" class="hero">
+  <div class="container heroGrid">
 
-      <!-- LEFT -->
-      <div>
-        <div class="hero-brand" aria-label="Prisma BI">
-          <img src="/assets/brand/prisma-logo.png" alt="Prisma BI">
-          <div>
-            <div class="title">PRISMA <b>BI</b></div>
-            <div class="sub">DATA &amp; BUSINESS INTELLIGENCE CONSULTING</div>
-          </div>
-        </div>
-
-        <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
-
-        <h1>
-          Claridad para decidir <br>
-          <span class="accent">con datos</span>.
-        </h1>
-
-        <p class="lede">
-          Dashboards accionables para ventas, costos y rentabilidad.
-        </p>
-
-        <div class="ctaRow">
-          <a class="btn primary" id="cta-wa" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/>
-            </svg>
-            Agendar diagnóstico
-          </a>
-
-          <a class="btn secondary" href="#packages">Ver demo (2 min) →</a>
-        </div>
-
-        <div class="checks">
-          <div class="check"><span class="dot"></span> Diagnóstico <em>preciso</em> y rápido</div>
-          <div class="check"><span class="dot"></span> KPIs correctos para decidir</div>
-          <div class="check"><span class="dot"></span> Dashboards estratégicos</div>
+    <div>
+      <div class="microBrand">
+        <img src="assets/brand/prisma-logo.png?v=3" alt="Prisma BI">
+        <div>
+          <div class="title">PRISMA <span style="background:linear-gradient(90deg,var(--cyan),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">BI</span></div>
+          <div class="subtitle">DATA & BUSINESS INTELLIGENCE CONSULTING</div>
         </div>
       </div>
 
-      <!-- RIGHT -->
-      <div class="portraitWrap">
-        <img class="portrait" src="/assets/brand/daiana.png" alt="Daiana Beltrán — Prisma BI">
+      <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
+
+      <h1>Claridad para decidir <span class="accent">con datos</span>.</h1>
+
+      <p class="lede">
+        Dashboards accionables para ventas, costos y rentabilidad.
+      </p>
+
+      <div class="ctaRow">
+        <a class="cta" id="cta-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Agendar diagnóstico por WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/>
+          </svg>
+          Agendar diagnóstico
+        </a>
+
+        <a class="subcta" href="#packages">Ver demo (2 min) →</a>
       </div>
 
+      <ul class="bullets">
+        <li><span class="check"></span> <span><strong>Diagnóstico</strong> <em>preciso</em> y rápido</span></li>
+        <li><span class="check"></span> <span><strong>KPIs correctos</strong> para decidir</span></li>
+        <li><span class="check"></span> <span><strong>Dashboards</strong> estratégicos</span></li>
+      </ul>
     </div>
-  </section>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="container">
-      <h2 class="secTitle">Servicios</h2>
-      <p class="secSub">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
-
-      <div class="cards">
-        <div class="card">
-          <div class="chip"><i></i> Diagnóstico</div>
-          <h3>Diagnóstico & mapa de decisiones</h3>
-          <p>Aclaramos el problema real, priorizamos preguntas, definimos KPIs y fuentes.</p>
-        </div>
-        <div class="card">
-          <div class="chip"><i></i> Dashboards</div>
-          <h3>Dashboards ejecutivos (Power BI)</h3>
-          <p>Tableros claros de ventas, costos, rentabilidad y performance para dirección y áreas.</p>
-        </div>
-        <div class="card">
-          <div class="chip"><i></i> Modelo</div>
-          <h3>Modelo de datos + calidad</h3>
-          <p>Estructura confiable (RAW→CLEAN→BI), reconciliación y reglas de negocio.</p>
-        </div>
+    <div class="portraitWrap">
+      <div class="portrait">
+        <img src="assets/brand/daiana.png?v=3" alt="Daiana Beltrán">
       </div>
     </div>
-  </section>
 
-  <!-- PACKAGES -->
-  <section id="packages">
-    <div class="container">
-      <h2 class="secTitle">Paquetes</h2>
-      <p class="secSub">3 opciones claras (sin sobreoferta): empezás por un diagnóstico y elegís el nivel de implementación.</p>
+  </div>
+</section>
 
-      <div class="cards">
-        <div class="card">
-          <div class="chip"><i></i> 1) Diagnóstico</div>
-          <h3>Entrada rápida</h3>
-          <p>Reunión + mapa de KPIs + plan de tablero (qué va y qué no).</p>
-        </div>
-        <div class="card">
-          <div class="chip"><i></i> 2) Dashboard BI</div>
-          <h3>Implementación</h3>
-          <p>Modelo + KPIs + dashboard ejecutivo (ventas/costos/rentabilidad) con iteración real.</p>
-        </div>
-        <div class="card">
-          <div class="chip"><i></i> 3) Sistema de decisión</div>
-          <h3>Escala & adopción</h3>
-          <p>Calidad + reconciliación + dashboards por área + acompañamiento para lectura y decisiones.</p>
-        </div>
+<div class="sep"></div>
+
+<section id="services">
+  <div class="container">
+    <h2 class="sectionTitle">Servicios</h2>
+    <p class="sectionLead">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> Diagnóstico & mapa de decisiones</div>
+        <p class="small">Aclaramos el problema real, priorizamos preguntas, definimos KPIs y fuentes.</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> Dashboards ejecutivos (Power BI)</div>
+        <p class="small">Tableros claros de ventas, costos, rentabilidad y performance para dirección y áreas.</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> Modelo de datos + calidad</div>
+        <p class="small">Estructura confiable (RAW→CLEAN→BI), reconciliación y reglas de negocio.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <h2 class="secTitle">Contacto</h2>
-      <p class="secSub">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
+<div class="sep"></div>
 
-      <div class="cards">
-        <div class="card">
-          <div class="chip"><i></i> Ubicación</div>
-          <h3>Argentina (UTC-3)</h3>
-          <p>Trabajo remoto para LATAM.</p>
-        </div>
-        <div class="card">
-          <div class="chip"><i></i> WhatsApp</div>
-          <h3>Agendar diagnóstico</h3>
-          <p><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p>
-        </div>
-        <div class="card">
-          <div class="chip"><i></i> Email</div>
-          <h3>daianabeltran@gmail.com</h3>
-          <p><a href="mailto:daianabeltran@gmail.com">Enviar email</a></p>
-        </div>
+<section id="packages">
+  <div class="container">
+    <h2 class="sectionTitle">Paquetes</h2>
+    <p class="sectionLead">3 opciones claras (sin sobreoferta): empezás por un diagnóstico y elegís el nivel de implementación.</p>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> 1) Diagnóstico</div>
+        <p class="small">Reunión + KPIs + plan de tablero.</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> 2) Dashboard BI</div>
+        <p class="small">Modelo + KPIs + tablero ejecutivo (ventas/costos/rentabilidad).</p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> 3) Sistema de decisión</div>
+        <p class="small">Calidad + dashboards por área + acompañamiento para adopción.</p>
       </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section id="contact">
+  <div class="container">
+    <h2 class="sectionTitle">Contacto</h2>
+    <p class="sectionLead">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
+
+    <div class="contactGrid">
+      <div class="cBox">
+        <p class="t">Ubicación</p>
+        <p class="v">Argentina (UTC-3) · Remoto LATAM</p>
+      </div>
+      <div class="cBox">
+        <p class="t">WhatsApp</p>
+        <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p>
+      </div>
+      <div class="cBox">
+        <p class="t">Email</p>
+        <p class="v"><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></p>
+      </div>
+      <div class="cBox">
+        <p class="t">LinkedIn</p>
+        <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">/in/daiana-beltran</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
 
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Smooth scroll
+  document.querySelectorAll('.menu a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const id=a.getAttribute('href').slice(1);
+      const el=document.getElementById(id);
+      if(!el) return;
+      window.scrollTo({top:el.getBoundingClientRect().top+scrollY-78, behavior:'smooth'});
+    });
+  });
 
   // WhatsApp
   (function(){
@@ -603,7 +498,7 @@
       "Fuentes de datos: (Excel / sistema / ERP / Mercado Libre / etc.) ____\n\n" +
       "¿Cómo seguimos?";
     const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
-    ["cta-wa","wa-link"].forEach(id=>{
+    ["cta-whatsapp","wa-link"].forEach(id=>{
       const el=document.getElementById(id);
       if(el) el.href=url;
     });
