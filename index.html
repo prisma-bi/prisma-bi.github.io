@@ -28,6 +28,9 @@
       --h2: clamp(26px, 3.0vw, 44px);
       --lead: clamp(18px, 1.3vw, 22px);
       --base: clamp(16px, 1vw, 18px);
+
+      /* Hero background (agregá este archivo) */
+      --hero-bg: url("assets/brand/hero-bg.jpg");
     }
 
     *{box-sizing:border-box}
@@ -81,23 +84,61 @@
     .navcta:hover{filter:brightness(1.08)}
     @media (max-width:980px){ .menu{display:none} }
 
-    .hero{padding:92px 0 44px; position:relative; overflow:hidden}
-    .hero:before{
-      content:""; position:absolute; inset:-40px;
+    /* ==============================
+       HERO — ESTILO POSTER PRO TECH
+       ============================== */
+    .hero{
+      padding:92px 0 56px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Fondo dashboard + fallback */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      z-index:0;
+
+      /* orden: imagen + degradés */
       background:
-        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0/72px 72px,
-        linear-gradient(180deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/72px 72px;
-      opacity:.12;
-      mask-image: radial-gradient(500px 260px at 35% 40%, black 55%, transparent 100%);
+        var(--hero-bg) center/cover no-repeat,
+        radial-gradient(1100px 620px at 70% 25%, rgba(42,212,255,.18), transparent 60%),
+        radial-gradient(1000px 700px at 20% 15%, rgba(0,231,182,.12), transparent 60%),
+        linear-gradient(180deg, rgba(7,19,39,.85), rgba(3,7,18,.92));
+      filter: saturate(1.05) contrast(1.05);
+      opacity: .90;
+    }
+
+    /* Overlay para contraste del texto */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        radial-gradient(900px 520px at 22% 30%, rgba(42,212,255,.18), transparent 60%),
+        linear-gradient(90deg, rgba(3,7,18,.94) 0%, rgba(3,7,18,.78) 55%, rgba(3,7,18,.25) 100%);
       pointer-events:none;
     }
 
-    .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:20px;align-items:center}
-    @media (max-width:980px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+    .hero-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 26px;
+      align-items:center;
+    }
+    @media (max-width:980px){
+      .hero{padding:72px 0 44px;}
+      .hero-grid{grid-template-columns:1fr;gap:34px}
+    }
 
     .logoRow{display:flex;align-items:center;gap:12px;margin:0 0 14px}
     .logoRow img{width:44px;height:44px}
     .logoRow .t1{font-weight:900;font-size:20px;letter-spacing:.2px}
+
     .tagpill{
       display:inline-flex;align-items:center;gap:10px;
       background:rgba(10,20,40,.62);
@@ -106,6 +147,7 @@
       width:max-content;
       box-shadow: 0 12px 30px rgba(0,0,0,.28);
       margin:0 0 18px;
+      backdrop-filter: blur(10px);
     }
     .tagpill i{
       width:10px;height:10px;border-radius:999px;
@@ -126,6 +168,7 @@
       color:var(--brand2);
       box-shadow:0 10px 26px rgba(0,0,0,.25);
       font-weight:900;
+      backdrop-filter: blur(10px);
     }
 
     .ctaRow{display:flex;gap:12px;flex-wrap:wrap}
@@ -136,7 +179,8 @@
       font-weight:900;
       color:#051225;
       background:linear-gradient(90deg,var(--cta),var(--cta2));
-      box-shadow: var(--shadow);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      transition: transform .18s ease, filter .18s ease;
     }
     .cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
     .subcta{
@@ -147,37 +191,63 @@
       background:rgba(10,20,40,.55);
       color:rgba(245,247,255,.95);
       font-weight:900;
+      transition: transform .18s ease, filter .18s ease;
+      backdrop-filter: blur(10px);
     }
     .subcta:hover{filter:brightness(1.08);transform:translateY(-1px)}
     .cta svg{width:18px;height:18px}
 
-    .portrait-wrap{display:flex;justify-content:center;align-self:center}
+    /* ========= FOTO — SIN TARJETA BLANCA (LOOK POSTER) ========= */
+    .portrait-wrap{
+      display:flex;
+      justify-content:flex-end;
+      align-items:flex-end;
+    }
+    @media (max-width:980px){
+      .portrait-wrap{justify-content:center}
+    }
+
+    /* Eliminamos la "tarjeta" visual */
     .portrait-card{
-      width:min(520px,100%);
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(10,20,40,.35);
-      box-shadow: 0 26px 80px rgba(0,0,0,.60);
+      width:min(560px,100%);
+      border-radius:0;
+      overflow:visible;
+      border:none;
+      background:transparent;
+      box-shadow:none;
       position:relative;
+      padding:0;
     }
-    .portrait-card:before{
-      content:"";position:absolute;inset:-2px;
-      background:radial-gradient(480px 260px at 30% 30%, rgba(42,212,255,.30), transparent 55%),
-                 radial-gradient(500px 280px at 70% 20%, rgba(0,231,182,.18), transparent 55%);
-      opacity:.55; pointer-events:none; mix-blend-mode:screen;
+
+    .portrait{
+      width: min(520px, 100%);
+      height:auto;
+      position:relative;
+      z-index:1;
+
+      /* sombra estilo poster */
+      filter:
+        drop-shadow(0 26px 60px rgba(0,0,0,.55))
+        drop-shadow(0 10px 22px rgba(0,0,0,.35));
+      transform: translateY(6px);
     }
-    .portrait{width:100%;height:auto;position:relative;z-index:1}
+
     .portrait-note{
-      position:absolute; left:14px; bottom:14px; z-index:2;
-      font-size:12px; font-weight:700;
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      z-index:2;
+      font-size:12px;
+      font-weight:700;
       color:rgba(245,247,255,.78);
       background:rgba(3,7,18,.55);
       border:1px solid rgba(255,255,255,.12);
-      padding:8px 10px;border-radius:999px;
+      padding:8px 10px;
+      border-radius:999px;
       backdrop-filter: blur(10px);
     }
 
+    /* ======= Secciones ======= */
     section{padding:64px 0}
     .sep{
       height:2px;
@@ -198,6 +268,7 @@
       border-radius:18px;
       padding:22px;
       box-shadow: 0 18px 60px rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
     }
     .kicker{display:inline-flex;align-items:center;gap:10px;font-weight:900;margin-bottom:10px}
     .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--brand2))}
@@ -212,6 +283,7 @@
       border:1px solid rgba(255,255,255,.14);
       background:rgba(3,7,18,.35);
       font-weight:900;
+      backdrop-filter: blur(10px);
     }
     .btn.primary{
       color:#051225;
@@ -227,6 +299,7 @@
       border:1px solid rgba(255,255,255,.12);
       border-radius:18px;
       padding:18px;
+      backdrop-filter: blur(10px);
     }
     .c .t{font-weight:900;margin-bottom:6px}
     .c .v{color:var(--muted)}
@@ -298,6 +371,7 @@
 
       <div class="portrait-wrap">
         <div class="portrait-card">
+          <!-- PNG sin fondo -->
           <img class="portrait" src="assets/brand/daiana.png" alt="Daiana Beltrán"/>
           <div class="portrait-note">Prisma BI · by Daiana Beltrán</div>
         </div>
@@ -448,3 +522,4 @@
 
 </body>
 </html>
+
