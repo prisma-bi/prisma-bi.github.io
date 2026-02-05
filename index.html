@@ -6,28 +6,34 @@
   <title>Prisma BI — Data & Business Intelligence Consulting</title>
   <meta name="description" content="Claridad para decidir con datos: dashboards accionables para ventas, costos y rentabilidad. Agendá un diagnóstico o mirá una demo de 2 minutos."/>
 
+  <link rel="icon" href="/favicon.ico"/>
+
+  <!-- Premium typography -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#071225;
-      --bg2:#030712;
-
-      --text:#F4F7FF;
-      --muted:rgba(244,247,255,.78);
-
-      --cyan:#37D6FF;   /* “azul francia” */
-      --teal:#00E7B6;
-
-      --glass:rgba(7,18,37,.45);
+      /* palette */
+      --ink:#061221;
+      --ink2:#040b16;
+      --panel:rgba(8,20,40,.58);
       --stroke:rgba(255,255,255,.14);
+      --stroke2:rgba(255,255,255,.10);
 
-      --shadow: 0 30px 90px rgba(0,0,0,.60);
-      --shadow2: 0 18px 55px rgba(0,0,0,.45);
+      --text:#F6FAFF;
+      --muted:rgba(246,250,255,.76);
 
-      --h1: clamp(44px, 6.2vw, 82px);
-      --lead: clamp(16px, 1.2vw, 20px);
+      --aqua:#20D7FF;
+      --teal:#00E7B6;
+      --btn:#0CC7FF;
+      --btn2:#00E7B6;
+
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --shadowSoft: 0 18px 60px rgba(0,0,0,.35);
+
+      --h1: clamp(40px, 4.4vw, 66px);
+      --lead: clamp(15px, 1.15vw, 18px);
       --base: 16px;
     }
 
@@ -35,434 +41,574 @@
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      font-size:var(--base);
-      color:var(--text);
-      background: radial-gradient(900px 520px at 20% 15%, rgba(55,214,255,.10), transparent 58%),
-                  radial-gradient(900px 600px at 75% 25%, rgba(0,231,182,.08), transparent 55%),
-                  linear-gradient(180deg, var(--bg), var(--bg2));
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size: var(--base);
+      color: var(--text);
+      background: radial-gradient(1100px 700px at 15% 10%, rgba(32,215,255,.14), transparent 60%),
+                  radial-gradient(900px 600px at 70% 10%, rgba(0,231,182,.10), transparent 60%),
+                  linear-gradient(180deg, var(--ink), var(--ink2));
       overflow-x:hidden;
     }
 
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    .container{max-width:1200px;margin:0 auto;padding:0 28px}
 
-    /* Top bar accent (como “premium”) */
-    body:before{
-      content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
-      background:linear-gradient(90deg, rgba(55,214,255,.0), rgba(55,214,255,.9), rgba(0,231,182,.9), rgba(55,214,255,.0));
-      filter: blur(.2px);
+    .container{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
     }
 
-    /* Header */
+    /* top accent */
+    body:before{
+      content:"";
+      position:fixed;
+      left:0; right:0; top:0;
+      height:4px;
+      background:linear-gradient(90deg, transparent, rgba(32,215,255,.95), rgba(0,231,182,.90), transparent);
+      z-index:9999;
+    }
+
+    /* NAV */
     header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(3,7,18,.55);
-      backdrop-filter:saturate(160%) blur(12px);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(5,12,22,.55);
+      backdrop-filter: blur(14px) saturate(160%);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:16px 0;gap:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 14px 0;
     }
-    .brandlock{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.2px}
-    .brandlock img{width:34px;height:34px}
-    .brandname{font-size:18px}
-    nav.menu{display:flex;gap:26px;font-weight:800;align-items:center}
-    nav.menu a{opacity:.82;position:relative}
-    nav.menu a:hover, nav.menu a.active{opacity:1}
-    nav.menu a:hover:after, nav.menu a.active:after{
-      content:"";position:absolute;left:0;right:0;bottom:-10px;height:3px;border-radius:99px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-    }
-    .navcta{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(8,18,36,.55);
-      font-weight:900;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-    }
-    .navcta:hover{filter:brightness(1.08)}
-    @media (max-width:980px){ nav.menu{display:none} }
 
-    /* HERO “como la imagen modelo” */
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+      font-family: Sora, Inter, system-ui, sans-serif;
+    }
+    .brand img{
+      width:30px;height:30px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
+    }
+    .brand span{opacity:.96}
+
+    .menu{
+      display:flex;
+      gap:28px;
+      font-weight:700;
+      align-items:center;
+      font-family: Sora, Inter, system-ui, sans-serif;
+    }
+    .menu a{
+      opacity:.85;
+      position:relative;
+      font-size:14px;
+    }
+    .menu a:hover,
+    .menu a.active{opacity:1}
+    .menu a:hover:after,
+    .menu a.active:after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:-10px;
+      height:3px;
+      border-radius:999px;
+      background: linear-gradient(90deg, var(--aqua), var(--teal));
+    }
+
+    .nav-cta{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(10,20,40,.42);
+      font-weight:800;
+      font-family: Sora, Inter, system-ui, sans-serif;
+      font-size:13px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+    }
+    .nav-cta:hover{filter:brightness(1.08); transform: translateY(-1px)}
+    @media (max-width: 980px){
+      .menu{display:none}
+    }
+
+    /* HERO */
     .hero{
       position:relative;
-      min-height: calc(100vh - 74px);
-      display:flex;align-items:center;
-      padding:64px 0 52px;
+      min-height: 560px;
+      padding: 56px 0 48px;
       overflow:hidden;
     }
 
-    /* Fondo con imagen + overlays */
-    .hero::before{
+    /* background image layer */
+    .hero:before{
       content:"";
-      position:absolute;inset:0;
+      position:absolute;
+      inset:0;
       background:
-        linear-gradient(90deg, rgba(3,7,18,.92) 0%, rgba(3,7,18,.78) 46%, rgba(3,7,18,.40) 72%, rgba(3,7,18,.18) 100%),
-        radial-gradient(900px 650px at 18% 35%, rgba(55,214,255,.18), transparent 60%),
-        radial-gradient(900px 650px at 68% 30%, rgba(0,231,182,.10), transparent 58%),
-        url("./assets/brand/hero-bg.jpg");
+        radial-gradient(1200px 600px at 15% 20%, rgba(32,215,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 70% 15%, rgba(0,231,182,.16), transparent 55%),
+        linear-gradient(180deg, rgba(3,10,18,.55), rgba(3,10,18,.85)),
+        url("/assets/brand/hero-bg.jpg");
       background-size: cover;
       background-position: center;
-      filter: saturate(1.06) contrast(1.06);
+      filter: saturate(1.05) contrast(1.02);
       transform: scale(1.02);
       z-index:0;
     }
 
-    /* Un leve “mist” para lujo */
-    .hero::after{
+    /* subtle vignette */
+    .hero:after{
       content:"";
-      position:absolute;inset:-40px;
-      background: radial-gradient(700px 380px at 28% 22%, rgba(255,255,255,.10), transparent 60%);
-      opacity:.18;
-      pointer-events:none;
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 500px at 20% 45%, rgba(0,0,0,.08), rgba(0,0,0,.70)),
+        radial-gradient(900px 500px at 75% 45%, rgba(0,0,0,.15), rgba(0,0,0,.78));
       z-index:0;
+      pointer-events:none;
     }
 
-    .hero-grid{
-      position:relative;z-index:1;
-      display:grid;grid-template-columns: 1.05fr .95fr;
-      gap:22px;align-items:center;
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items:center;
+      gap: 24px;
     }
-    @media (max-width:980px){ .hero-grid{grid-template-columns:1fr;gap:36px} }
 
-    .kickerRow{
-      display:flex;align-items:center;gap:12px;margin:0 0 14px;
+    @media (max-width: 980px){
+      .hero-inner{grid-template-columns: 1fr; gap: 28px}
     }
-    .kickerRow img{width:44px;height:44px}
-    .k1{font-weight:900;font-size:22px;letter-spacing:.3px}
-    .k1 span{color:var(--cyan)}
-    .k2{
-      color:rgba(244,247,255,.62);
-      font-weight:700;
-      font-size:12px;
+
+    /* top mini brand line like the mock */
+    .hero-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom: 16px;
+    }
+    .hero-brand img{
+      width:54px;height:54px;
+      object-fit:contain;
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,.55));
+    }
+
+    .hero-brand .title{
+      font-family: Sora, Inter, system-ui, sans-serif;
+      font-weight:800;
+      letter-spacing:.04em;
+      font-size: 22px;
+      line-height:1;
+    }
+    .hero-brand .title b{
+      background: linear-gradient(90deg, var(--aqua), var(--teal));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:800;
+    }
+    .hero-brand .sub{
+      margin-top:6px;
+      font-size: 12px;
       letter-spacing:.22em;
       text-transform:uppercase;
-      margin-top:2px;
+      color: rgba(246,250,255,.68);
+      font-weight:700;
     }
 
     .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(8,18,36,.55);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
       border:1px solid rgba(255,255,255,.14);
-      width:max-content;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-      margin:0 0 18px;
+      background: rgba(8,20,40,.35);
+      box-shadow: 0 18px 50px rgba(0,0,0,.28);
+      margin-bottom: 18px;
+      font-family: Sora, Inter, system-ui, sans-serif;
+      font-weight:800;
+      font-size:13px;
     }
     .pill i{
       width:10px;height:10px;border-radius:999px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 18px rgba(55,214,255,.55);
+      background: linear-gradient(90deg, var(--aqua), var(--teal));
+      box-shadow: 0 0 18px rgba(32,215,255,.55);
     }
-    .pill b{font-weight:900}
 
     h1{
-      margin:0 0 10px;
-      font-size:var(--h1);
-      line-height:1.04;
-      font-weight:900;
+      margin: 0 0 10px;
+      font-family: Sora, Inter, system-ui, sans-serif;
+      font-size: var(--h1);
+      line-height: 1.06;
       letter-spacing:-.02em;
+      font-weight: 800;
       text-shadow: 0 16px 40px rgba(0,0,0,.35);
     }
-    .accent{
-      background:linear-gradient(90deg,var(--cyan),rgba(55,214,255,.85));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .lead{
-      max-width:70ch;
-      color:var(--muted);
-      font-size:var(--lead);
-      line-height:1.7;
-      margin:0 0 18px;
+
+    h1 .accent{
+      background: linear-gradient(90deg, var(--aqua), var(--teal));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:800;
     }
 
-    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:18px 0 16px}
-
-    .btnPrimary{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:12px 18px;border-radius:12px;
-      border:1px solid rgba(0,0,0,.12);
-      background: linear-gradient(180deg, rgba(0,231,182,.92), rgba(55,214,255,.78));
-      color:#061325;
-      font-weight:900;
-      box-shadow: var(--shadow2);
+    .lede{
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 62ch;
+      font-size: var(--lead);
+      line-height: 1.65;
+      text-shadow: 0 14px 34px rgba(0,0,0,.26);
     }
-    .btnPrimary:hover{filter:brightness(1.06);transform:translateY(-1px)}
-    .btnGhost{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:12px 18px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(6,14,28,.35);
-      color: rgba(244,247,255,.92);
-      font-weight:900;
-      box-shadow: 0 16px 50px rgba(0,0,0,.28);
-    }
-    .btnGhost:hover{filter:brightness(1.08);transform:translateY(-1px)}
 
-    .bullets{margin:0;padding:0;list-style:none;display:grid;gap:10px;max-width:65ch}
-    .bullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,247,255,.88)}
-    .tick{
-      width:22px;height:22px;border-radius:999px;flex:0 0 22px;margin-top:2px;
-      background:linear-gradient(180deg, rgba(55,214,255,.90), rgba(0,231,182,.78));
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
-      display:grid;place-items:center;
-      color:#071225;
-      font-weight:900;
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin: 14px 0 18px;
     }
-    .bullets em{font-style:italic;color:rgba(244,247,255,.92)}
-    .bullets strong{font-weight:900}
 
-    /* Foto derecha: sin marco blanco, glow como el modelo */
-    .portraitZone{
-      position:relative;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-family: Sora, Inter, system-ui, sans-serif;
+      font-size: 13px;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 18px 55px rgba(0,0,0,.38);
+      transition: transform .15s ease, filter .15s ease;
+      user-select:none;
+    }
+    .btn.primary{
+      color: #03111f;
+      border-color: rgba(0,0,0,.10);
+      background: linear-gradient(90deg, rgba(12,199,255,.95), rgba(0,231,182,.92));
+    }
+    .btn.secondary{
+      background: rgba(8,20,40,.40);
+      color: rgba(246,250,255,.92);
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.06)}
+    .btn svg{width:18px;height:18px}
+
+    .checks{
+      display:grid;
+      gap:10px;
+      margin-top: 8px;
+      max-width: 56ch;
+      font-size: 14px;
+      color: rgba(246,250,255,.92);
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      text-shadow: 0 12px 30px rgba(0,0,0,.22);
+    }
+    .check .dot{
+      width:22px;height:22px;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,.12)),
+                  linear-gradient(180deg, rgba(32,215,255,.90), rgba(0,231,182,.85));
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      display:grid;
+      place-items:center;
+      flex: 0 0 22px;
+      margin-top: 1px;
+    }
+    .check .dot:before{
+      content:"✓";
+      font-weight: 900;
+      font-size: 13px;
+      color:#03111f;
+    }
+    .check em{opacity:.9; font-style: italic}
+
+    /* Right portrait – blends with bg like the mock */
+    .portraitWrap{
       display:flex;
       justify-content:flex-end;
       align-items:flex-end;
-      min-height:520px;
     }
-    .portraitGlow{
-      position:absolute;inset:auto 0 0 auto;
-      width:min(520px, 92%);
-      height: min(520px, 54vh);
-      background: radial-gradient(260px 260px at 40% 30%, rgba(55,214,255,.20), transparent 65%),
-                  radial-gradient(260px 260px at 70% 35%, rgba(0,231,182,.12), transparent 65%);
-      filter: blur(10px);
-      opacity:.75;
-      pointer-events:none;
-    }
-    .portraitImg{
-      width:min(560px, 98%);
-      height:auto;
-      filter: drop-shadow(0 30px 70px rgba(0,0,0,.60));
-      transform: translateY(10px);
-    }
-
     @media (max-width:980px){
-      .portraitZone{justify-content:center;min-height:auto}
-      .portraitImg{transform:none}
+      .portraitWrap{justify-content:center}
     }
 
-    /* Secciones (mismo look, más limpio) */
-    section{padding:66px 0}
-    .sectionTitle{
-      text-align:center;
-      margin:0 0 24px;
+    .portrait{
+      width: min(520px, 100%);
+      height: auto;
+      filter: drop-shadow(0 26px 80px rgba(0,0,0,.55));
+      transform: translateY(8px);
     }
-    .sectionTitle h2{
-      margin:0 0 10px;
-      font-weight:900;
+
+    /* SECTIONS (simple, keeps premium dark) */
+    section{
+      padding: 60px 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.28));
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .secTitle{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      font-weight:800;
       letter-spacing:-.01em;
-      font-size: clamp(26px, 3vw, 40px);
+      margin:0 0 8px;
+      font-size: 34px;
+      text-align:center;
     }
-    .sectionTitle p{
-      margin:0 auto;
-      max-width:86ch;
-      color:rgba(244,247,255,.72);
+    .secSub{
+      text-align:center;
+      max-width: 78ch;
+      margin: 0 auto 24px;
+      color: rgba(246,250,255,.70);
+      font-size: 14px;
       line-height:1.7;
     }
-
     .cards{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
-    @media (max-width:980px){ .cards{grid-template-columns:1fr} }
-
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr}
+    }
     .card{
-      background:rgba(8,18,36,.40);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      padding:22px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.30);
+      background: rgba(8,20,40,.38);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadowSoft);
     }
-    .card .k{
-      display:flex;align-items:center;gap:10px;
-      font-weight:900;margin-bottom:10px;
+    .card h3{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      margin:0 0 10px;
+      font-size: 15px;
+      font-weight:800;
     }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
+    .card p{
+      margin:0;
+      color: rgba(246,250,255,.70);
+      font-size: 13px;
+      line-height:1.7;
     }
-    .card p{margin:0;color:rgba(244,247,255,.74);line-height:1.7}
-
-    .sep{
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(55,214,255,.35), rgba(0,231,182,.25), transparent);
-      margin:0 auto;
-      max-width:1100px;
-      opacity:.9;
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-family:Sora, Inter, system-ui, sans-serif;
+      font-weight:800;
+      font-size: 12px;
+      color: rgba(246,250,255,.92);
+      margin-bottom: 10px;
+    }
+    .chip i{
+      width:7px;height:7px;border-radius:999px;
+      background: linear-gradient(90deg, var(--aqua), var(--teal));
+      box-shadow: 0 0 14px rgba(32,215,255,.45);
     }
 
     footer{
-      padding:28px 0;
-      color:rgba(244,247,255,.62);
+      padding: 26px 0;
       text-align:center;
-      font-size:14px;
-      background:rgba(3,7,18,.35);
-      border-top:1px solid rgba(255,255,255,.06);
+      color: rgba(246,250,255,.55);
+      font-size: 13px;
+      background: rgba(0,0,0,.30);
+      border-top: 1px solid rgba(255,255,255,.06);
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="container nav">
-      <div class="brandlock">
-        <img src="./assets/brand/prisma-logo.png" alt="Prisma BI logo"/>
-        <div class="brandname">Prisma BI</div>
-      </div>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="Prisma BI">
+      <img src="/assets/brand/prisma-logo.png" alt="Prisma BI logo">
+      <span>Prisma BI</span>
+    </a>
 
-      <nav class="menu">
-        <a class="active" href="#home">Inicio</a>
-        <a href="#services">Servicios</a>
-        <a href="#packages">Paquetes</a>
-        <a href="#contact">Contacto</a>
-      </nav>
+    <nav class="menu" aria-label="Menú">
+      <a class="active" href="#home">Inicio</a>
+      <a href="#services">Servicios</a>
+      <a href="#packages">Paquetes</a>
+      <a href="#contact">Contacto</a>
+    </nav>
 
-      <a class="navcta" href="#packages">Ver demo (2 min) →</a>
-    </div>
-  </header>
+    <a class="nav-cta" href="#packages">Ver demo (2 min) →</a>
+  </div>
+</header>
 
+<main>
+  <!-- HERO -->
   <section id="home" class="hero">
-    <div class="container hero-grid">
+    <div class="container hero-inner">
 
+      <!-- LEFT -->
       <div>
-        <div class="kickerRow">
-          <img src="./assets/brand/prisma-logo.png" alt="Prisma BI"/>
+        <div class="hero-brand" aria-label="Prisma BI">
+          <img src="/assets/brand/prisma-logo.png" alt="Prisma BI">
           <div>
-            <div class="k1">PRISMA <span>BI</span></div>
-            <div class="k2">Data & Business Intelligence Consulting</div>
+            <div class="title">PRISMA <b>BI</b></div>
+            <div class="sub">DATA &amp; BUSINESS INTELLIGENCE CONSULTING</div>
           </div>
         </div>
 
-        <div class="pill"><i></i><b>CLARIDAD PARA DECIDIR</b></div>
+        <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
 
         <h1>
-          Claridad para decidir <span class="accent">con datos</span>.
+          Claridad para decidir <br>
+          <span class="accent">con datos</span>.
         </h1>
 
-        <p class="lead">
-          Dashboards accionables para <strong>ventas</strong>, <strong>costos</strong> y <strong>rentabilidad</strong>.
+        <p class="lede">
+          Dashboards accionables para ventas, costos y rentabilidad.
         </p>
 
         <div class="ctaRow">
-          <a class="btnPrimary" id="cta-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Agendar diagnóstico por WhatsApp">
+          <a class="btn primary" id="cta-wa" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/>
+            </svg>
             Agendar diagnóstico
           </a>
-          <a class="btnGhost" href="#packages">Ver demo (2 min) →</a>
+
+          <a class="btn secondary" href="#packages">Ver demo (2 min) →</a>
         </div>
 
-        <ul class="bullets">
-          <li><span class="tick">✓</span> <strong>Diagnóstico</strong> <em>preciso</em> y rápido</li>
-          <li><span class="tick">✓</span> <strong>KPIs correctos</strong> para decidir</li>
-          <li><span class="tick">✓</span> <strong>Dashboards</strong> estratégicos</li>
-        </ul>
+        <div class="checks">
+          <div class="check"><span class="dot"></span> Diagnóstico <em>preciso</em> y rápido</div>
+          <div class="check"><span class="dot"></span> KPIs correctos para decidir</div>
+          <div class="check"><span class="dot"></span> Dashboards estratégicos</div>
+        </div>
       </div>
 
-      <div class="portraitZone">
-        <div class="portraitGlow"></div>
-        <img class="portraitImg" src="./assets/brand/daiana.png" alt="Daiana Beltrán">
+      <!-- RIGHT -->
+      <div class="portraitWrap">
+        <img class="portrait" src="/assets/brand/daiana.png" alt="Daiana Beltrán — Prisma BI">
       </div>
 
     </div>
   </section>
 
-  <div class="sep"></div>
-
+  <!-- SERVICES -->
   <section id="services">
     <div class="container">
-      <div class="sectionTitle">
-        <h2>Servicios</h2>
-        <p>De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
-      </div>
+      <h2 class="secTitle">Servicios</h2>
+      <p class="secSub">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
 
       <div class="cards">
         <div class="card">
-          <div class="k"><span class="dot"></span>Diagnóstico & mapa de decisiones</div>
+          <div class="chip"><i></i> Diagnóstico</div>
+          <h3>Diagnóstico & mapa de decisiones</h3>
           <p>Aclaramos el problema real, priorizamos preguntas, definimos KPIs y fuentes.</p>
         </div>
         <div class="card">
-          <div class="k"><span class="dot"></span>Dashboards ejecutivos (Power BI)</div>
+          <div class="chip"><i></i> Dashboards</div>
+          <h3>Dashboards ejecutivos (Power BI)</h3>
           <p>Tableros claros de ventas, costos, rentabilidad y performance para dirección y áreas.</p>
         </div>
         <div class="card">
-          <div class="k"><span class="dot"></span>Modelo de datos + calidad</div>
+          <div class="chip"><i></i> Modelo</div>
+          <h3>Modelo de datos + calidad</h3>
           <p>Estructura confiable (RAW→CLEAN→BI), reconciliación y reglas de negocio.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="sep"></div>
-
+  <!-- PACKAGES -->
   <section id="packages">
     <div class="container">
-      <div class="sectionTitle">
-        <h2>Paquetes</h2>
-        <p>3 opciones claras (sin sobreoferta): empezás por un diagnóstico y elegís el nivel de implementación.</p>
-      </div>
+      <h2 class="secTitle">Paquetes</h2>
+      <p class="secSub">3 opciones claras (sin sobreoferta): empezás por un diagnóstico y elegís el nivel de implementación.</p>
 
       <div class="cards">
         <div class="card">
-          <div class="k"><span class="dot"></span>1) Diagnóstico</div>
-          <p><strong>Entrada rápida.</strong> Reunión + KPIs + plan de tablero.</p>
-        </div>
-        <div class="card" style="border-color:rgba(55,214,255,.28)">
-          <div class="k"><span class="dot"></span>2) Dashboard BI</div>
-          <p><strong>Implementación.</strong> Modelo + KPIs + dashboard ejecutivo.</p>
+          <div class="chip"><i></i> 1) Diagnóstico</div>
+          <h3>Entrada rápida</h3>
+          <p>Reunión + mapa de KPIs + plan de tablero (qué va y qué no).</p>
         </div>
         <div class="card">
-          <div class="k"><span class="dot"></span>3) Sistema de decisión</div>
-          <p><strong>Escala & adopción.</strong> Calidad + dashboards por área + acompañamiento.</p>
+          <div class="chip"><i></i> 2) Dashboard BI</div>
+          <h3>Implementación</h3>
+          <p>Modelo + KPIs + dashboard ejecutivo (ventas/costos/rentabilidad) con iteración real.</p>
+        </div>
+        <div class="card">
+          <div class="chip"><i></i> 3) Sistema de decisión</div>
+          <h3>Escala & adopción</h3>
+          <p>Calidad + reconciliación + dashboards por área + acompañamiento para lectura y decisiones.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="sep"></div>
-
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
-      <div class="sectionTitle">
-        <h2>Contacto</h2>
-        <p>Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
-      </div>
+      <h2 class="secTitle">Contacto</h2>
+      <p class="secSub">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
 
       <div class="cards">
-        <div class="card"><div class="k"><span class="dot"></span>Ubicación</div><p>Argentina (UTC-3) · Remoto LATAM</p></div>
-        <div class="card"><div class="k"><span class="dot"></span>WhatsApp</div><p><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p></div>
-        <div class="card"><div class="k"><span class="dot"></span>Email</div><p><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></p></div>
+        <div class="card">
+          <div class="chip"><i></i> Ubicación</div>
+          <h3>Argentina (UTC-3)</h3>
+          <p>Trabajo remoto para LATAM.</p>
+        </div>
+        <div class="card">
+          <div class="chip"><i></i> WhatsApp</div>
+          <h3>Agendar diagnóstico</h3>
+          <p><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p>
+        </div>
+        <div class="card">
+          <div class="chip"><i></i> Email</div>
+          <h3>daianabeltran@gmail.com</h3>
+          <p><a href="mailto:daianabeltran@gmail.com">Enviar email</a></p>
+        </div>
       </div>
     </div>
   </section>
+</main>
 
-  <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
+<footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
 
-    // WhatsApp
-    (function(){
-      const phone = "542996032267";
-      const msg =
-        "¡Hola Daiana! 👋 Vi Prisma BI y quiero agendar un diagnóstico.\n\n" +
-        "Mi negocio es: ____\n" +
-        "Hoy necesito claridad sobre: (ventas / costos / rentabilidad / performance) ____\n" +
-        "Fuentes de datos: (Excel / sistema / ERP / Mercado Libre / etc.) ____\n\n" +
-        "¿Cómo seguimos?";
-      const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
-
-      ["cta-whatsapp","wa-link"].forEach(id=>{
-        const el=document.getElementById(id);
-        if(el) el.href=url;
-      });
-    })();
-  </script>
+  // WhatsApp
+  (function(){
+    const phone = "542996032267";
+    const msg =
+      "¡Hola Daiana! 👋 Vi Prisma BI y quiero agendar un diagnóstico.\n\n" +
+      "Mi negocio es: ____\n" +
+      "Hoy necesito claridad sobre: (ventas / costos / rentabilidad / performance) ____\n" +
+      "Fuentes de datos: (Excel / sistema / ERP / Mercado Libre / etc.) ____\n\n" +
+      "¿Cómo seguimos?";
+    const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+    ["cta-wa","wa-link"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.href=url;
+    });
+  })();
+</script>
 
 </body>
 </html>
