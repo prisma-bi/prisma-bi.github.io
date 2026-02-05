@@ -3,77 +3,85 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
   <title>Prisma BI — Data & Business Intelligence Consulting</title>
   <meta name="description" content="Claridad para decidir con datos: dashboards accionables para ventas, costos y rentabilidad. Agendá un diagnóstico o mirá una demo de 2 minutos."/>
-
   <link rel="icon" href="favicon.ico"/>
 
-  <!-- Tipografía pro (muy parecida al look de tu imagen) -->
+  <!-- Tipografía premium (muy similar al look “pro/tech”) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg0:#050a14;
-      --bg1:#071628;
+      /* Fondo */
+      --bg0:#02050e;
+      --bg1:#040a18;
 
-      --text:#f4f8ff;
+      /* Texto */
+      --text:#F4F8FF;
       --muted:rgba(244,248,255,.72);
 
-      --cyan:#2ad4ff;
-      --teal:#00e7b6;
-      --line:rgba(255,255,255,.10);
+      /* “Azul Francia” + acentos */
+      --fr:#1E7CFF;         /* azul francia */
+      --cyan:#2AD4FF;       /* cyan tech */
+      --teal:#00E7B6;       /* verde agua */
 
-      --panel: rgba(8,14,28,.55);
-      --shadow: 0 24px 80px rgba(0,0,0,.60);
-      --shadow2: 0 18px 50px rgba(0,0,0,.38);
+      /* UI */
+      --card:rgba(10,18,38,.56);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.08);
+      --shadow:0 24px 80px rgba(0,0,0,.55);
+      --shadow2:0 16px 50px rgba(0,0,0,.35);
+      --r:18px;
 
-      --radius:18px;
-
-      --h2: clamp(26px, 2.8vw, 44px);
-      --base: 16px;
+      /* Tipografía */
+      --h1: clamp(44px, 5.4vw, 84px);
+      --lead: clamp(16px, 1.25vw, 20px);
+      --h2: clamp(26px, 2.7vw, 44px);
     }
 
     *{box-sizing:border-box}
     html,body{margin:0}
     body{
-      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      font-size:var(--base);
+      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
-      background: linear-gradient(180deg,var(--bg1),var(--bg0));
+      background:
+        radial-gradient(900px 520px at 18% 12%, rgba(30,124,255,.22), transparent 62%),
+        radial-gradient(820px 520px at 78% 18%, rgba(0,231,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
       overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
     .container{max-width:1180px;margin:0 auto;padding:0 28px}
 
-    /* Línea superior pro */
+    /* Línea superior “premium” */
     body:before{
       content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
-      background:linear-gradient(90deg, transparent, rgba(42,212,255,.85), rgba(0,231,182,.75), rgba(42,212,255,.85), transparent);
-      opacity:.95;
+      background:linear-gradient(90deg, transparent, rgba(30,124,255,.88), rgba(42,212,255,.88), rgba(0,231,182,.78), transparent);
       pointer-events:none;
+      filter: blur(.2px);
+      opacity:.95;
     }
 
     /* NAV */
     header{
       position:sticky;top:0;z-index:50;
-      background:rgba(3,8,16,.68);
+      background:rgba(2,5,14,.66);
       backdrop-filter: blur(14px) saturate(170%);
-      border-bottom:1px solid rgba(255,255,255,.07);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
     .nav{
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;padding:16px 0;
     }
-    .brandlock{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brandlock{display:flex;align-items:center;gap:12px;font-weight:800}
     .brandlock img{
-      width:22px;height:22px;object-fit:contain;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.40));
+      width:24px;height:24px;object-fit:contain;
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,.45));
     }
-    .brandname{opacity:.95;font-size:15px}
-
+    .brandname{font-size:16px;letter-spacing:.2px;opacity:.96}
     .menu{display:flex;gap:26px;align-items:center;font-weight:700}
     .menu a{opacity:.78;position:relative;padding:8px 0}
     .menu a:hover,.menu a.active{opacity:1}
@@ -82,148 +90,276 @@
       background:linear-gradient(90deg,var(--cyan),var(--teal));
       box-shadow:0 0 22px rgba(42,212,255,.35);
     }
-
     .navcta{
+      position:relative;
       display:inline-flex;align-items:center;gap:10px;
       padding:12px 16px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,20,40,.35);
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(10,18,38,.35);
       font-weight:800;
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      box-shadow: 0 14px 44px rgba(0,0,0,.28);
+      overflow:hidden;
+      transform: translateZ(0);
     }
-    .navcta:hover{filter:brightness(1.08);transform:translateY(-1px)}
-
+    .navcta:after{
+      content:"";position:absolute;inset:-1px;border-radius:999px;
+      background:linear-gradient(90deg, rgba(30,124,255,.35), rgba(42,212,255,.28), rgba(0,231,182,.22));
+      opacity:0;filter:blur(14px);
+      transition:opacity .22s ease;
+      pointer-events:none;
+    }
+    .navcta:hover{transform:translateY(-1px);filter:brightness(1.08)}
+    .navcta:hover:after{opacity:.65}
     @media (max-width:980px){ .menu{display:none} }
 
-    /* HERO = imagen final EXACTA */
+    /* HERO “galáctico + dashboard behind” */
     .hero{
       position:relative;
-      min-height: 74vh;
+      min-height: calc(92vh - 72px);
       display:flex;
       align-items:center;
+      padding:64px 0 60px;
       overflow:hidden;
-      border-bottom:1px solid rgba(255,255,255,.06);
     }
 
-    /* la imagen “publicidad” completa */
+    /* Capa “dashboard” (usa tu imagen si la tenés) */
     .hero:before{
       content:"";
       position:absolute;inset:0;
       background:
-        radial-gradient(900px 560px at 70% 20%, rgba(42,212,255,.12), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55)),
-        url("assets/brand/hero-pro.png?v=10");
+        /* oscurece de izquierda a derecha como en el modelo */
+        linear-gradient(90deg, rgba(2,5,14,.94) 10%, rgba(2,5,14,.68) 52%, rgba(2,5,14,.20) 100%),
+        /* halos galácticos */
+        radial-gradient(900px 560px at 68% 20%, rgba(30,124,255,.22), transparent 60%),
+        radial-gradient(900px 560px at 76% 82%, rgba(0,231,182,.10), transparent 62%),
+        radial-gradient(720px 420px at 40% 38%, rgba(42,212,255,.12), transparent 65%),
+        /* si NO tenés dashboard, comentá la línea de abajo */
+        url("assets/brand/hero-bg.jpg?v=9");
       background-size: cover;
-      background-position: center;
+      background-position: center right;
+      filter: saturate(120%) contrast(108%);
+      transform: scale(1.02);
       z-index:-2;
-      filter: contrast(1.05) saturate(1.05);
     }
 
-    /* viñeta premium */
+    /* “estrellas” + grilla suave (ruido visual mínimo) */
     .hero:after{
       content:"";
-      position:absolute;inset:0;
-      background: radial-gradient(1200px 700px at 50% 25%, transparent 30%, rgba(0,0,0,.55) 75%);
-      z-index:-1;
+      position:absolute;inset:-60px;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.35), transparent 55%),
+        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.25), transparent 55%),
+        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.25), transparent 55%),
+        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.22), transparent 55%),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/80px 80px,
+        linear-gradient(180deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0/80px 80px,
+        radial-gradient(1200px 700px at 50% 28%, transparent 38%, rgba(0,0,0,.55) 78%);
+      opacity:.20;
       pointer-events:none;
+      z-index:-1;
+      mask-image: radial-gradient(700px 420px at 30% 40%, black 55%, transparent 100%);
     }
 
-    /* Overlay invisible para SEO + botones clickeables */
-    .heroOverlay{
-      width:100%;
-      padding:54px 0;
-    }
-
-    /* Caja de CTAs (posicionada para calzar con tu imagen) */
-    .ctaDock{
-      margin-top: 240px; /* ajusta si querés subir/bajar */
-      max-width: 560px;
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:34px;
+      align-items:center;
     }
     @media (max-width:980px){
-      .hero{min-height: 70vh}
-      .ctaDock{margin-top: 280px; max-width: 100%}
+      .hero{min-height:auto;padding:56px 0 44px}
+      .heroGrid{grid-template-columns:1fr;gap:26px}
     }
 
-    .ctaRow{display:flex;gap:12px;flex-wrap:wrap}
+    /* Micro brand */
+    .microBrand{
+      display:flex;align-items:center;gap:12px;margin:0 0 16px;
+    }
+    .microBrand img{width:24px;height:24px;object-fit:contain}
+    .microBrand .t{
+      font-weight:800;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:13px;
+      opacity:.95;
+    }
+    .microBrand .s{
+      margin-top:2px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(244,248,255,.55);
+      font-weight:700;
+    }
 
-    /* Botón PRO (glow + shine) */
-    .btnPro{
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(6,12,26,.45);
+      box-shadow:0 14px 40px rgba(0,0,0,.34);
+      width:max-content;
+      margin:0 0 18px;
+      font-weight:800;
+      color:rgba(244,248,255,.92);
+    }
+    .pill i{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      box-shadow:0 0 22px rgba(42,212,255,.45);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:var(--h1);
+      line-height:1.02;
+      font-weight:800;
+      letter-spacing:-.03em;
+      text-shadow: 0 16px 44px rgba(0,0,0,.35);
+    }
+    .accent{
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .lede{
+      margin:0 0 18px;
+      font-size:var(--lead);
+      color:rgba(244,248,255,.78);
+      max-width:64ch;
+      line-height:1.72;
+      text-shadow: 0 12px 34px rgba(0,0,0,.22);
+    }
+
+    /* BOTONES PRO (muy resaltados, “publicidad”) */
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
+
+    .btnPrimary{
       position:relative;
       display:inline-flex;align-items:center;gap:10px;
-      padding:14px 18px;border-radius:12px;
+      padding:14px 20px;border-radius:12px;
       font-weight:900;
-      border:1px solid rgba(0,0,0,.12);
-      color:#04101f;
-      background: linear-gradient(90deg, rgba(0,231,182,.98), rgba(42,212,255,.96));
+      color:#06101f;
+      background: linear-gradient(90deg, rgba(30,124,255,.98), rgba(42,212,255,.96), rgba(0,231,182,.92));
+      border:1px solid rgba(0,0,0,.14);
       box-shadow:
-        0 18px 60px rgba(0,0,0,.32),
-        0 0 40px rgba(42,212,255,.18);
+        0 22px 78px rgba(0,0,0,.35),
+        0 0 0 1px rgba(42,212,255,.12) inset,
+        0 0 48px rgba(30,124,255,.22);
       overflow:hidden;
+      transform: translateZ(0);
+      transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
     }
-    .btnPro:before{
+    .btnPrimary:before{
       content:"";
       position:absolute;top:-40%;left:-40%;
       width:50%;height:180%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.68), transparent);
       transform: rotate(18deg);
       opacity:0;
     }
-    .btnPro:hover{
+    .btnPrimary:hover{
       transform: translateY(-1px);
       filter: brightness(1.06);
       box-shadow:
-        0 26px 80px rgba(0,0,0,.40),
-        0 0 55px rgba(42,212,255,.22);
+        0 30px 90px rgba(0,0,0,.42),
+        0 0 0 1px rgba(42,212,255,.16) inset,
+        0 0 70px rgba(30,124,255,.28);
     }
-    .btnPro:hover:before{opacity:.9;animation: shine .85s ease forwards;}
+    .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
     @keyframes shine{
       0%{left:-40%;opacity:0}
       15%{opacity:.9}
       100%{left:120%;opacity:0}
     }
+    .btnPrimary svg{width:18px;height:18px}
 
-    .btnGhost{
+    .btnSecondary{
+      position:relative;
       display:inline-flex;align-items:center;gap:10px;
-      padding:14px 18px;border-radius:12px;
+      padding:14px 20px;border-radius:12px;
       font-weight:900;
-      border:1px solid rgba(255,255,255,.22);
-      background: rgba(10,20,40,.35);
-      box-shadow: 0 18px 50px rgba(0,0,0,.26);
+      border:1px solid rgba(255,255,255,.20);
+      background:
+        radial-gradient(140px 80px at 20% 30%, rgba(30,124,255,.18), transparent 70%),
+        radial-gradient(140px 80px at 80% 70%, rgba(0,231,182,.12), transparent 70%),
+        rgba(10,18,38,.42);
+      box-shadow: 0 18px 56px rgba(0,0,0,.28);
+      transition: transform .16s ease, filter .16s ease, box-shadow .16s ease, border-color .16s ease;
+      overflow:hidden;
     }
-    .btnGhost:hover{filter:brightness(1.08);transform:translateY(-1px)}
+    .btnSecondary:after{
+      content:"";position:absolute;inset:-1px;border-radius:12px;
+      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.16), rgba(0,231,182,.14));
+      opacity:0;filter:blur(14px);
+      transition:opacity .2s ease;
+      pointer-events:none;
+    }
+    .btnSecondary:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+      border-color: rgba(42,212,255,.28);
+      box-shadow: 0 26px 74px rgba(0,0,0,.34);
+    }
+    .btnSecondary:hover:after{opacity:.8}
 
-    .btnPro svg{width:18px;height:18px}
+    /* bullets */
+    .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:62ch}
+    .bullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86)}
+    .check{
+      width:22px;height:22px;border-radius:999px;
+      background: rgba(0,231,182,.16);
+      border:1px solid rgba(0,231,182,.30);
+      display:grid;place-items:center;flex:0 0 22px;margin-top:2px;
+      box-shadow:0 12px 28px rgba(0,0,0,.25);
+    }
+    .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
+
+    /* FOTO (PNG sin fondo) */
+    .portraitWrap{display:flex;justify-content:flex-end}
+    @media (max-width:980px){ .portraitWrap{justify-content:center} }
+    .portrait{
+      width:min(560px, 100%);
+      position:relative;
+      filter: drop-shadow(0 36px 78px rgba(0,0,0,.58));
+    }
+    .portrait img{transform: translateY(10px)}
+    .portrait:before{
+      content:"";
+      position:absolute;inset:-70px -70px -70px -70px;
+      background:
+        radial-gradient(360px 280px at 55% 35%, rgba(30,124,255,.18), transparent 72%),
+        radial-gradient(380px 300px at 60% 72%, rgba(0,231,182,.10), transparent 74%);
+      z-index:-1;
+      filter: blur(2px);
+    }
 
     /* Sections */
-    section{padding:72px 0}
     .sep{
       height:1px;max-width:1050px;margin:0 auto;
-      background: linear-gradient(90deg, transparent, rgba(42,212,255,.22), rgba(0,231,182,.16), transparent);
+      background: linear-gradient(90deg, transparent, rgba(30,124,255,.26), rgba(42,212,255,.20), rgba(0,231,182,.16), transparent);
     }
-
-    .title{
-      text-align:center;
+    section{padding:72px 0}
+    .sectionTitle{
+      text-align:center;margin:0 0 10px;
       font-size:var(--h2);
-      margin:0 0 10px;
-      font-weight:900;
+      font-weight:800;
       letter-spacing:-.02em;
     }
-    .lead{
+    .sectionLead{
       text-align:center;
-      margin:0 auto 28px;
-      max-width:86ch;
       color:rgba(244,248,255,.62);
+      max-width:86ch;margin:0 auto 28px;
       line-height:1.7;
-      font-size:14px;
+      font-size:15px;
     }
-
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media (max-width:980px){.grid3{grid-template-columns:1fr}}
-
+    @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
     .card{
-      background: var(--panel);
+      background:
+        radial-gradient(220px 140px at 20% 20%, rgba(30,124,255,.10), transparent 72%),
+        rgba(10,18,38,.52);
       border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
+      border-radius: var(--r);
       padding:20px 18px;
       box-shadow: var(--shadow2);
       transition: transform .18s ease, border-color .18s ease, filter .18s ease;
@@ -233,25 +369,25 @@
       border-color: rgba(42,212,255,.22);
       filter: brightness(1.06);
     }
-    .kicker{display:flex;align-items:center;gap:10px;font-weight:900;margin-bottom:8px}
+    .kicker{display:flex;align-items:center;gap:10px;font-weight:800;margin-bottom:8px}
     .dot{
       width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(90deg,var(--cyan),var(--teal));
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
       box-shadow:0 0 18px rgba(42,212,255,.28);
     }
     .small{margin:0;color:rgba(244,248,255,.72);line-height:1.7;font-size:14px}
 
     .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    @media (max-width:980px){.contactGrid{grid-template-columns:1fr 1fr}}
-    @media (max-width:640px){.contactGrid{grid-template-columns:1fr}}
-
+    @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
+    @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
     .cBox{
-      background: rgba(8,14,28,.52);
+      background: rgba(10,18,38,.52);
       border:1px solid rgba(255,255,255,.10);
       border-radius: 16px;
       padding:16px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.22);
     }
-    .cBox .t{font-weight:900;margin:0 0 6px}
+    .cBox .t{font-weight:800;margin:0 0 6px}
     .cBox .v{margin:0;color:rgba(244,248,255,.70);font-size:14px}
 
     footer{
@@ -259,6 +395,10 @@
       text-align:center;
       color:rgba(244,248,255,.55);
       font-size:13px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important;animation:none!important}
     }
   </style>
 </head>
@@ -268,8 +408,8 @@
 <header>
   <div class="container nav">
     <div class="brandlock">
-      <!-- FIX logo: agrego ?v= para cache + tamaño correcto -->
-      <img src="assets/brand/prisma-logo.png?v=10" alt="Prisma BI logo">
+      <!-- Si el logo a veces “no aparece”, mantené el ?v= para cache -->
+      <img src="assets/brand/prisma-logo.png?v=9" alt="Prisma BI logo">
       <div class="brandname">Prisma BI</div>
     </div>
 
@@ -285,20 +425,51 @@
 </header>
 
 <section id="home" class="hero">
-  <div class="container heroOverlay">
-    <!-- botones clickeables ubicados sobre tu imagen -->
-    <div class="ctaDock">
+  <div class="container heroGrid">
+
+    <div>
+      <div class="microBrand">
+        <img src="assets/brand/prisma-logo.png?v=9" alt="Prisma BI">
+        <div>
+          <div class="t">PRISMA <span style="background:linear-gradient(90deg,var(--cyan),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">BI</span></div>
+          <div class="s">DATA &amp; BUSINESS INTELLIGENCE CONSULTING</div>
+        </div>
+      </div>
+
+      <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
+
+      <h1>Claridad para decidir <span class="accent">con datos</span>.</h1>
+
+      <p class="lede">
+        Dashboards accionables para <strong>ventas</strong>, <strong>costos</strong> y <strong>rentabilidad</strong>.
+        Si hoy tenés Excel, reportes o un sistema… pero las decisiones siguen siendo “a ojo”, te ayudo a ordenar el ruido y convertirlo en un tablero simple de lectura del negocio.
+      </p>
+
       <div class="ctaRow">
-        <a class="btnPro" id="cta-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Agendar diagnóstico por WhatsApp">
+        <a class="btnPrimary" id="cta-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Agendar diagnóstico por WhatsApp">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/>
           </svg>
           Agendar diagnóstico
         </a>
 
-        <a class="btnGhost" href="#packages">Ver demo (2 min) →</a>
+        <a class="btnSecondary" href="#packages">Ver demo (2 min) →</a>
+      </div>
+
+      <ul class="bullets">
+        <li><span class="check"></span> <span><strong>Diagnóstico</strong> preciso y rápido</span></li>
+        <li><span class="check"></span> <span><strong>KPIs correctos</strong>: qué mirar (y qué dejar de mirar)</span></li>
+        <li><span class="check"></span> <span><strong>Dashboards estratégicos</strong> listos para usar</span></li>
+      </ul>
+    </div>
+
+    <div class="portraitWrap">
+      <div class="portrait">
+        <!-- tu PNG sin fondo -->
+        <img src="assets/brand/daiana.png?v=9" alt="Daiana Beltrán">
       </div>
     </div>
+
   </div>
 </section>
 
@@ -306,8 +477,8 @@
 
 <section id="services">
   <div class="container">
-    <h2 class="title">Servicios</h2>
-    <p class="lead">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
+    <h2 class="sectionTitle">Servicios</h2>
+    <p class="sectionLead">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
 
     <div class="grid3">
       <div class="card">
@@ -330,21 +501,21 @@
 
 <section id="packages">
   <div class="container">
-    <h2 class="title">Paquetes</h2>
-    <p class="lead">3 opciones claras (sin sobreoferta): empezás por un diagnóstico y elegís el nivel de implementación.</p>
+    <h2 class="sectionTitle">Paquetes</h2>
+    <p class="sectionLead">3 opciones claras (sin sobreoferta): empezás por un diagnóstico y elegís el nivel de implementación.</p>
 
     <div class="grid3">
       <div class="card">
         <div class="kicker"><span class="dot"></span> 1) Diagnóstico</div>
-        <p class="small">Reunión + KPIs + plan de tablero.</p>
+        <p class="small">Reunión + mapa de KPIs + plan de tablero (qué va y qué no).</p>
       </div>
       <div class="card">
         <div class="kicker"><span class="dot"></span> 2) Dashboard BI</div>
-        <p class="small">Modelo + KPIs + tablero ejecutivo (ventas/costos/rentabilidad).</p>
+        <p class="small">Modelo + KPIs + dashboard ejecutivo (ventas/costos/rentabilidad) con iteración real.</p>
       </div>
       <div class="card">
         <div class="kicker"><span class="dot"></span> 3) Sistema de decisión</div>
-        <p class="small">Calidad + dashboards por área + acompañamiento para adopción.</p>
+        <p class="small">Calidad + dashboards por área + acompañamiento para lectura y decisiones.</p>
       </div>
     </div>
   </div>
@@ -354,8 +525,8 @@
 
 <section id="contact">
   <div class="container">
-    <h2 class="title">Contacto</h2>
-    <p class="lead">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
+    <h2 class="sectionTitle">Contacto</h2>
+    <p class="sectionLead">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
 
     <div class="contactGrid">
       <div class="cBox">
