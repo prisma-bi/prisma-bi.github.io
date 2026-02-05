@@ -14,20 +14,16 @@
 
   <style>
     :root{
-      /* Fondo */
       --bg0:#02050e;
       --bg1:#040a18;
 
-      /* Texto */
       --text:#F4F8FF;
       --muted:rgba(244,248,255,.72);
 
-      /* “Azul Francia” + acentos */
       --fr:#1E7CFF;
       --cyan:#2AD4FF;
       --teal:#00E7B6;
 
-      /* UI */
       --card:rgba(10,18,38,.56);
       --stroke:rgba(255,255,255,.12);
       --stroke2:rgba(255,255,255,.08);
@@ -35,10 +31,13 @@
       --shadow2:0 16px 50px rgba(0,0,0,.35);
       --r:18px;
 
-      /* Tipografía */
       --h1: clamp(44px, 5.4vw, 84px);
       --lead: clamp(16px, 1.25vw, 20px);
       --h2: clamp(26px, 2.7vw, 44px);
+
+      /* NUEVO: tamaños logo (control central) */
+      --logo-nav: 36px;     /* antes 24px */
+      --logo-hero: 54px;    /* antes 24px */
     }
 
     *{box-sizing:border-box}
@@ -56,7 +55,6 @@
     img{max-width:100%;display:block}
     .container{max-width:1180px;margin:0 auto;padding:0 28px}
 
-    /* Línea superior “premium” */
     body:before{
       content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
       background:linear-gradient(90deg, transparent, rgba(30,124,255,.88), rgba(42,212,255,.88), rgba(0,231,182,.78), transparent);
@@ -77,32 +75,30 @@
       gap:16px;padding:16px 0;
     }
 
-    /* ✅ BRAND: más grande + “placa” + halo (como el modelo) */
+    /* === BRAND NAV (LOGO MÁS GRANDE + “BADGE” PRO) === */
     .brandlock{display:flex;align-items:center;gap:12px;font-weight:800}
-    .brandlock img{
-      width:52px;               /* más grande */
-      height:52px;
-      object-fit:contain;
-
-      padding:8px;
-      border-radius:16px;
-      background: rgba(6,12,26,.40);
-      border: 1px solid rgba(255,255,255,.13);
-
+    .brandmark{
+      width: calc(var(--logo-nav) + 18px);
+      height: calc(var(--logo-nav) + 18px);
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(120px 80px at 30% 30%, rgba(30,124,255,.22), transparent 65%),
+        radial-gradient(120px 80px at 70% 70%, rgba(0,231,182,.14), transparent 70%),
+        rgba(10,18,38,.40);
+      border:1px solid rgba(255,255,255,.14);
       box-shadow:
-        0 22px 70px rgba(0,0,0,.48),
-        0 0 0 1px rgba(42,212,255,.10) inset,
-        0 0 44px rgba(30,124,255,.22);
-
-      image-rendering: -webkit-optimize-contrast;
-      filter: saturate(118%) contrast(116%);
+        0 20px 60px rgba(0,0,0,.35),
+        0 0 0 1px rgba(42,212,255,.10) inset;
     }
-    .brandname{
-      font-size:18px;
-      letter-spacing:.2px;
-      opacity:.98;
-      font-weight:900;
+    .brandmark img{
+      width:var(--logo-nav);
+      height:var(--logo-nav);
+      object-fit:contain;
+      filter: drop-shadow(0 14px 26px rgba(0,0,0,.45));
     }
+    .brandname{font-size:16px;letter-spacing:.2px;opacity:.98}
 
     .menu{display:flex;gap:26px;align-items:center;font-weight:700}
     .menu a{opacity:.78;position:relative;padding:8px 0}
@@ -152,7 +148,7 @@
         radial-gradient(900px 560px at 68% 20%, rgba(30,124,255,.22), transparent 60%),
         radial-gradient(900px 560px at 76% 82%, rgba(0,231,182,.10), transparent 62%),
         radial-gradient(720px 420px at 40% 38%, rgba(42,212,255,.12), transparent 65%),
-        url("./assets/brand/hero-bg.jpg?v=9");
+        url("assets/brand/hero-bg.jpg?v=9");
       background-size: cover;
       background-position: center right;
       filter: saturate(120%) contrast(108%);
@@ -188,45 +184,45 @@
       .heroGrid{grid-template-columns:1fr;gap:26px}
     }
 
-    /* Micro brand */
+    /* === MICRO BRAND HERO (LOGO MÁS GRANDE COMO EN EL MODELO) === */
     .microBrand{
-      display:flex;align-items:center;gap:12px;margin:0 0 16px;
+      display:flex;align-items:center;gap:14px;margin:0 0 16px;
     }
-
-    /* ✅ HERO LOGO: grande + placa + halo */
-    .microBrand img{
-      width:54px;
-      height:54px;
-      object-fit:contain;
-
-      padding:9px;
-      border-radius:18px;
-      background: rgba(6,12,26,.36);
-      border: 1px solid rgba(255,255,255,.13);
-
+    .microMark{
+      width: calc(var(--logo-hero) + 18px);
+      height: calc(var(--logo-hero) + 18px);
+      border-radius: 18px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(160px 110px at 25% 25%, rgba(30,124,255,.22), transparent 65%),
+        radial-gradient(160px 110px at 80% 80%, rgba(0,231,182,.14), transparent 72%),
+        rgba(10,18,38,.40);
+      border:1px solid rgba(255,255,255,.14);
       box-shadow:
-        0 26px 74px rgba(0,0,0,.52),
-        0 0 0 1px rgba(42,212,255,.10) inset,
-        0 0 52px rgba(30,124,255,.24);
-
-      image-rendering: -webkit-optimize-contrast;
-      filter: saturate(118%) contrast(116%);
+        0 22px 70px rgba(0,0,0,.40),
+        0 0 0 1px rgba(42,212,255,.10) inset;
     }
-
+    .microMark img{
+      width:var(--logo-hero);
+      height:var(--logo-hero);
+      object-fit:contain;
+      filter: drop-shadow(0 18px 34px rgba(0,0,0,.50));
+    }
     .microBrand .t{
       font-weight:900;
-      letter-spacing:.10em;
+      letter-spacing:.12em;
       text-transform:uppercase;
-      font-size:13px;
-      opacity:.95;
+      font-size:14px;
+      opacity:.98;
     }
     .microBrand .s{
-      margin-top:2px;
-      letter-spacing:.22em;
+      margin-top:4px;
+      letter-spacing:.24em;
       text-transform:uppercase;
       font-size:11px;
       color:rgba(244,248,255,.55);
-      font-weight:700;
+      font-weight:800;
     }
 
     .pill{
@@ -237,7 +233,7 @@
       box-shadow:0 14px 40px rgba(0,0,0,.34);
       width:max-content;
       margin:0 0 18px;
-      font-weight:800;
+      font-weight:900;
       color:rgba(244,248,255,.92);
     }
     .pill i{
@@ -250,7 +246,7 @@
       margin:0 0 12px;
       font-size:var(--h1);
       line-height:1.02;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:-.03em;
       text-shadow: 0 16px 44px rgba(0,0,0,.35);
     }
@@ -267,7 +263,6 @@
       text-shadow: 0 12px 34px rgba(0,0,0,.22);
     }
 
-    /* BOTONES PRO */
     .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
 
     .btnPrimary{
@@ -339,7 +334,6 @@
     }
     .btnSecondary:hover:after{opacity:.8}
 
-    /* bullets */
     .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:62ch}
     .bullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86)}
     .check{
@@ -351,7 +345,6 @@
     }
     .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
 
-    /* FOTO */
     .portraitWrap{display:flex;justify-content:flex-end}
     @media (max-width:980px){ .portraitWrap{justify-content:center} }
     .portrait{
@@ -370,7 +363,6 @@
       filter: blur(2px);
     }
 
-    /* Sections */
     .sep{
       height:1px;max-width:1050px;margin:0 auto;
       background: linear-gradient(90deg, transparent, rgba(30,124,255,.26), rgba(42,212,255,.20), rgba(0,231,182,.16), transparent);
@@ -379,7 +371,7 @@
     .sectionTitle{
       text-align:center;margin:0 0 10px;
       font-size:var(--h2);
-      font-weight:800;
+      font-weight:900;
       letter-spacing:-.02em;
     }
     .sectionLead{
@@ -406,7 +398,7 @@
       border-color: rgba(42,212,255,.22);
       filter: brightness(1.06);
     }
-    .kicker{display:flex;align-items:center;gap:10px;font-weight:800;margin-bottom:8px}
+    .kicker{display:flex;align-items:center;gap:10px;font-weight:900;margin-bottom:8px}
     .dot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
@@ -424,7 +416,7 @@
       padding:16px;
       box-shadow: 0 18px 55px rgba(0,0,0,.22);
     }
-    .cBox .t{font-weight:800;margin:0 0 6px}
+    .cBox .t{font-weight:900;margin:0 0 6px}
     .cBox .v{margin:0;color:rgba(244,248,255,.70);font-size:14px}
 
     footer{
@@ -432,6 +424,13 @@
       text-align:center;
       color:rgba(244,248,255,.55);
       font-size:13px;
+    }
+
+    @media (max-width:640px){
+      :root{
+        --logo-nav: 32px;
+        --logo-hero: 46px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -445,8 +444,9 @@
 <header>
   <div class="container nav">
     <div class="brandlock">
-      <!-- ✅ ruta robusta + cache bust -->
-      <img src="./assets/brand/prisma-logo.png?v=9" alt="Prisma BI logo">
+      <div class="brandmark" aria-hidden="true">
+        <img src="assets/brand/prisma-logo.png?v=9" alt="">
+      </div>
       <div class="brandname">Prisma BI</div>
     </div>
 
@@ -466,7 +466,9 @@
 
     <div>
       <div class="microBrand">
-        <img src="./assets/brand/prisma-logo.png?v=9" alt="Prisma BI">
+        <div class="microMark" aria-hidden="true">
+          <img src="assets/brand/prisma-logo.png?v=9" alt="">
+        </div>
         <div>
           <div class="t">PRISMA <span style="background:linear-gradient(90deg,var(--cyan),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">BI</span></div>
           <div class="s">DATA &amp; BUSINESS INTELLIGENCE CONSULTING</div>
@@ -502,7 +504,7 @@
 
     <div class="portraitWrap">
       <div class="portrait">
-        <img src="./assets/brand/daiana.png?v=9" alt="Daiana Beltrán">
+        <img src="assets/brand/daiana.png?v=9" alt="Daiana Beltrán">
       </div>
     </div>
 
@@ -613,10 +615,11 @@
     const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
     ["cta-whatsapp","wa-link"].forEach(id=>{
       const el=document.getElementById(id);
-    if(el) el.href=url;
+      if(el) el.href=url;
     });
   })();
 </script>
 
 </body>
 </html>
+
