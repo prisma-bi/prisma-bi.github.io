@@ -7,7 +7,7 @@
   <meta name="description" content="Claridad para decidir con datos: dashboards accionables para ventas, costos y rentabilidad. Agendá un diagnóstico o mirá una demo de 2 minutos."/>
   <link rel="icon" href="favicon.ico"/>
 
-  <!-- Tipografía premium (muy similar al look “pro/tech”) -->
+  <!-- Tipografía premium -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -23,9 +23,9 @@
       --muted:rgba(244,248,255,.72);
 
       /* “Azul Francia” + acentos */
-      --fr:#1E7CFF;         /* azul francia */
-      --cyan:#2AD4FF;       /* cyan tech */
-      --teal:#00E7B6;       /* verde agua */
+      --fr:#1E7CFF;
+      --cyan:#2AD4FF;
+      --teal:#00E7B6;
 
       /* UI */
       --card:rgba(10,18,38,.56);
@@ -76,12 +76,34 @@
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;padding:16px 0;
     }
+
+    /* ✅ BRAND: más grande + “placa” + halo (como el modelo) */
     .brandlock{display:flex;align-items:center;gap:12px;font-weight:800}
     .brandlock img{
-      width:24px;height:24px;object-fit:contain;
-      filter: drop-shadow(0 12px 22px rgba(0,0,0,.45));
+      width:52px;               /* más grande */
+      height:52px;
+      object-fit:contain;
+
+      padding:8px;
+      border-radius:16px;
+      background: rgba(6,12,26,.40);
+      border: 1px solid rgba(255,255,255,.13);
+
+      box-shadow:
+        0 22px 70px rgba(0,0,0,.48),
+        0 0 0 1px rgba(42,212,255,.10) inset,
+        0 0 44px rgba(30,124,255,.22);
+
+      image-rendering: -webkit-optimize-contrast;
+      filter: saturate(118%) contrast(116%);
     }
-    .brandname{font-size:16px;letter-spacing:.2px;opacity:.96}
+    .brandname{
+      font-size:18px;
+      letter-spacing:.2px;
+      opacity:.98;
+      font-weight:900;
+    }
+
     .menu{display:flex;gap:26px;align-items:center;font-weight:700}
     .menu a{opacity:.78;position:relative;padding:8px 0}
     .menu a:hover,.menu a.active{opacity:1}
@@ -112,7 +134,7 @@
     .navcta:hover:after{opacity:.65}
     @media (max-width:980px){ .menu{display:none} }
 
-    /* HERO “galáctico + dashboard behind” */
+    /* HERO */
     .hero{
       position:relative;
       min-height: calc(92vh - 72px);
@@ -122,19 +144,15 @@
       overflow:hidden;
     }
 
-    /* Capa “dashboard” (usa tu imagen si la tenés) */
     .hero:before{
       content:"";
       position:absolute;inset:0;
       background:
-        /* oscurece de izquierda a derecha como en el modelo */
         linear-gradient(90deg, rgba(2,5,14,.94) 10%, rgba(2,5,14,.68) 52%, rgba(2,5,14,.20) 100%),
-        /* halos galácticos */
         radial-gradient(900px 560px at 68% 20%, rgba(30,124,255,.22), transparent 60%),
         radial-gradient(900px 560px at 76% 82%, rgba(0,231,182,.10), transparent 62%),
         radial-gradient(720px 420px at 40% 38%, rgba(42,212,255,.12), transparent 65%),
-        /* si NO tenés dashboard, comentá la línea de abajo */
-        url("assets/brand/hero-bg.jpg?v=9");
+        url("./assets/brand/hero-bg.jpg?v=9");
       background-size: cover;
       background-position: center right;
       filter: saturate(120%) contrast(108%);
@@ -142,7 +160,6 @@
       z-index:-2;
     }
 
-    /* “estrellas” + grilla suave (ruido visual mínimo) */
     .hero:after{
       content:"";
       position:absolute;inset:-60px;
@@ -175,9 +192,29 @@
     .microBrand{
       display:flex;align-items:center;gap:12px;margin:0 0 16px;
     }
-    .microBrand img{width:24px;height:24px;object-fit:contain}
+
+    /* ✅ HERO LOGO: grande + placa + halo */
+    .microBrand img{
+      width:54px;
+      height:54px;
+      object-fit:contain;
+
+      padding:9px;
+      border-radius:18px;
+      background: rgba(6,12,26,.36);
+      border: 1px solid rgba(255,255,255,.13);
+
+      box-shadow:
+        0 26px 74px rgba(0,0,0,.52),
+        0 0 0 1px rgba(42,212,255,.10) inset,
+        0 0 52px rgba(30,124,255,.24);
+
+      image-rendering: -webkit-optimize-contrast;
+      filter: saturate(118%) contrast(116%);
+    }
+
     .microBrand .t{
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.10em;
       text-transform:uppercase;
       font-size:13px;
@@ -230,7 +267,7 @@
       text-shadow: 0 12px 34px rgba(0,0,0,.22);
     }
 
-    /* BOTONES PRO (muy resaltados, “publicidad”) */
+    /* BOTONES PRO */
     .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
 
     .btnPrimary{
@@ -314,7 +351,7 @@
     }
     .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
 
-    /* FOTO (PNG sin fondo) */
+    /* FOTO */
     .portraitWrap{display:flex;justify-content:flex-end}
     @media (max-width:980px){ .portraitWrap{justify-content:center} }
     .portrait{
@@ -408,8 +445,8 @@
 <header>
   <div class="container nav">
     <div class="brandlock">
-      <!-- Si el logo a veces “no aparece”, mantené el ?v= para cache -->
-      <img src="assets/brand/prisma-logo.png?v=9" alt="Prisma BI logo">
+      <!-- ✅ ruta robusta + cache bust -->
+      <img src="./assets/brand/prisma-logo.png?v=9" alt="Prisma BI logo">
       <div class="brandname">Prisma BI</div>
     </div>
 
@@ -429,7 +466,7 @@
 
     <div>
       <div class="microBrand">
-        <img src="assets/brand/prisma-logo.png?v=9" alt="Prisma BI">
+        <img src="./assets/brand/prisma-logo.png?v=9" alt="Prisma BI">
         <div>
           <div class="t">PRISMA <span style="background:linear-gradient(90deg,var(--cyan),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">BI</span></div>
           <div class="s">DATA &amp; BUSINESS INTELLIGENCE CONSULTING</div>
@@ -465,8 +502,7 @@
 
     <div class="portraitWrap">
       <div class="portrait">
-        <!-- tu PNG sin fondo -->
-        <img src="assets/brand/daiana.png?v=9" alt="Daiana Beltrán">
+        <img src="./assets/brand/daiana.png?v=9" alt="Daiana Beltrán">
       </div>
     </div>
 
@@ -577,7 +613,7 @@
     const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
     ["cta-whatsapp","wa-link"].forEach(id=>{
       const el=document.getElementById(id);
-      if(el) el.href=url;
+    if(el) el.href=url;
     });
   })();
 </script>
