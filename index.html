@@ -22,10 +22,10 @@
       --text:#F4F8FF;
       --muted:rgba(244,248,255,.72);
 
-      /* “Azul Francia” + acentos */
-      --fr:#1E7CFF;
-      --cyan:#2AD4FF;
-      --teal:#00E7B6;
+      /* Acentos */
+      --fr:#1E7CFF;         /* azul francia */
+      --cyan:#2AD4FF;       /* cyan tech */
+      --teal:#00E7B6;       /* verde agua */
 
       /* UI */
       --card:rgba(10,18,38,.56);
@@ -38,7 +38,9 @@
       /* Tipografía */
       --h1: clamp(44px, 5.4vw, 84px);
       --lead: clamp(16px, 1.25vw, 20px);
-      --h2: clamp(26px, 2.7vw, 44px);
+      --h2: clamp(28px, 3vw, 46px);
+
+      --secPad: 86px;
     }
 
     *{box-sizing:border-box}
@@ -76,24 +78,20 @@
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;padding:16px 0;
     }
-
-    /* BRAND NAV */
     .brandlock{display:flex;align-items:center;gap:12px;font-weight:800}
-    .brandBadge{
-      width:46px;height:46px;border-radius:14px;
+    .brandlock .mark{
+      width:42px;height:42px;border-radius:14px;
       background:
-        radial-gradient(90px 60px at 30% 30%, rgba(30,124,255,.22), transparent 70%),
-        radial-gradient(90px 60px at 70% 70%, rgba(0,231,182,.14), transparent 70%),
-        rgba(10,18,38,.42);
+        radial-gradient(140px 80px at 25% 25%, rgba(30,124,255,.20), transparent 70%),
+        radial-gradient(140px 80px at 75% 75%, rgba(0,231,182,.14), transparent 70%),
+        rgba(10,18,38,.45);
       border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 18px 50px rgba(0,0,0,.28);
+      box-shadow: 0 18px 50px rgba(0,0,0,.30);
       display:grid;place-items:center;
-      overflow:hidden;
-      flex:0 0 46px;
     }
-    .brandBadge img{
-      width:22px;height:22px;object-fit:contain;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,.45));
+    .brandlock img{
+      width:18px;height:18px;object-fit:contain;
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,.45));
     }
     .brandname{font-size:16px;letter-spacing:.2px;opacity:.96}
 
@@ -115,6 +113,7 @@
       box-shadow: 0 14px 44px rgba(0,0,0,.28);
       overflow:hidden;
       transform: translateZ(0);
+      white-space:nowrap;
     }
     .navcta:after{
       content:"";position:absolute;inset:-1px;border-radius:999px;
@@ -137,6 +136,7 @@
       overflow:hidden;
     }
 
+    /* Fondo dashboard + oscurecimiento */
     .hero:before{
       content:"";
       position:absolute;inset:0;
@@ -150,9 +150,10 @@
       background-position: center right;
       filter: saturate(120%) contrast(108%);
       transform: scale(1.02);
-      z-index:-2;
+      z-index:-3;
     }
 
+    /* estrellas/grilla */
     .hero:after{
       content:"";
       position:absolute;inset:-60px;
@@ -161,13 +162,31 @@
         radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.25), transparent 55%),
         radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.25), transparent 55%),
         radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.22), transparent 55%),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/80px 80px,
-        linear-gradient(180deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0/80px 80px,
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/90px 90px,
+        linear-gradient(180deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0/90px 90px,
         radial-gradient(1200px 700px at 50% 28%, transparent 38%, rgba(0,0,0,.55) 78%);
       opacity:.20;
       pointer-events:none;
+      z-index:-2;
+      mask-image: radial-gradient(740px 460px at 30% 42%, black 55%, transparent 100%);
+    }
+
+    /* curva “galáctica” inferior como tu imagen 2 */
+    .heroWave{
+      position:absolute;
+      left:-8%;
+      right:-8%;
+      bottom:-70px;
+      height:260px;
+      background:
+        radial-gradient(900px 220px at 50% 10%, rgba(42,212,255,.20), transparent 70%),
+        radial-gradient(900px 220px at 55% 35%, rgba(0,231,182,.12), transparent 72%),
+        linear-gradient(90deg, rgba(30,124,255,.12), rgba(42,212,255,.10), rgba(0,231,182,.10));
+      filter: blur(0.2px);
+      opacity:.65;
+      transform: rotate(-2deg);
       z-index:-1;
-      mask-image: radial-gradient(700px 420px at 30% 40%, black 55%, transparent 100%);
+      mask-image: radial-gradient(900px 240px at 50% 30%, black 55%, transparent 100%);
     }
 
     .heroGrid{
@@ -179,17 +198,16 @@
     @media (max-width:980px){
       .hero{min-height:auto;padding:56px 0 44px}
       .heroGrid{grid-template-columns:1fr;gap:26px}
+      .heroWave{display:none;}
     }
 
-    /* LOGO CON TÍTULO EN HERO (GRANDE) */
+    /* LOGO CON TITULO GRANDE (en vez de microBrand repetido) */
     .heroLogoTitle{
-      width: min(520px, 100%);
-      margin: 0 0 12px;
-      filter: drop-shadow(0 18px 44px rgba(0,0,0,.45));
-      opacity: .98;
+      margin:0 0 18px;
+      width:min(460px, 92%);
+      filter: drop-shadow(0 26px 80px rgba(0,0,0,.55));
+      opacity:.98;
     }
-    @media (max-width:980px){ .heroLogoTitle{width:min(440px, 100%)} }
-    @media (max-width:520px){ .heroLogoTitle{width:min(330px, 100%)} }
 
     .pill{
       display:inline-flex;align-items:center;gap:10px;
@@ -313,7 +331,7 @@
     }
     .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
 
-    /* FOTO */
+    /* FOTO (PNG sin fondo) */
     .portraitWrap{display:flex;justify-content:flex-end}
     @media (max-width:980px){ .portraitWrap{justify-content:center} }
     .portrait{
@@ -332,69 +350,133 @@
       filter: blur(2px);
     }
 
+    /* ====== SECCIONES “menos sobrias” (como imagen 2) ====== */
+    .sec{
+      position:relative;
+      padding: var(--secPad) 0;
+      overflow:hidden;
+    }
+    .sec:before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(900px 520px at 20% 20%, rgba(30,124,255,.14), transparent 62%),
+        radial-gradient(900px 520px at 78% 10%, rgba(42,212,255,.10), transparent 62%),
+        radial-gradient(900px 520px at 70% 85%, rgba(0,231,182,.08), transparent 60%),
+        linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
+      opacity:1;
+      z-index:-3;
+    }
+    .sec:after{
+      content:"";
+      position:absolute;inset:-80px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/110px 110px,
+        linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0/110px 110px,
+        radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.0), rgba(0,0,0,.72));
+      opacity:.18;
+      z-index:-2;
+      pointer-events:none;
+      mask-image: radial-gradient(780px 520px at 50% 40%, black 55%, transparent 100%);
+    }
+
     .sep{
       height:1px;max-width:1050px;margin:0 auto;
       background: linear-gradient(90deg, transparent, rgba(30,124,255,.26), rgba(42,212,255,.20), rgba(0,231,182,.16), transparent);
     }
-    section{padding:72px 0}
+
     .sectionTitle{
       text-align:center;margin:0 0 10px;
       font-size:var(--h2);
       font-weight:800;
       letter-spacing:-.02em;
+      text-shadow: 0 18px 46px rgba(0,0,0,.30);
     }
     .sectionLead{
       text-align:center;
-      color:rgba(244,248,255,.62);
-      max-width:86ch;margin:0 auto 28px;
+      color:rgba(244,248,255,.66);
+      max-width:90ch;margin:0 auto 32px;
       line-height:1.7;
       font-size:15px;
     }
+
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
 
     .card{
+      position:relative;
       background:
-        radial-gradient(220px 140px at 20% 20%, rgba(30,124,255,.10), transparent 72%),
-        rgba(10,18,38,.52);
-      border:1px solid rgba(255,255,255,.10);
+        radial-gradient(320px 180px at 18% 18%, rgba(30,124,255,.16), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
       border-radius: var(--r);
-      padding:20px 18px;
-      box-shadow: var(--shadow2);
+      padding:22px 18px;
+      box-shadow: 0 20px 64px rgba(0,0,0,.34);
       transition: transform .18s ease, border-color .18s ease, filter .18s ease;
+      overflow:hidden;
+    }
+    .card:after{
+      content:"";
+      position:absolute;inset:-1px;border-radius: var(--r);
+      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.12), rgba(0,231,182,.12));
+      opacity:0;filter:blur(16px);
+      transition:opacity .2s ease;
+      pointer-events:none;
     }
     .card:hover{
       transform: translateY(-2px);
-      border-color: rgba(42,212,255,.22);
+      border-color: rgba(42,212,255,.24);
       filter: brightness(1.06);
     }
+    .card:hover:after{opacity:.85}
+
     .kicker{display:flex;align-items:center;gap:10px;font-weight:800;margin-bottom:8px}
     .dot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
       box-shadow:0 0 18px rgba(42,212,255,.28);
     }
-    .small{margin:0;color:rgba(244,248,255,.72);line-height:1.7;font-size:14px}
+    .small{margin:0;color:rgba(244,248,255,.76);line-height:1.75;font-size:14px}
 
+    /* Contact */
     .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
     @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
 
     .cBox{
-      background: rgba(10,18,38,.52);
-      border:1px solid rgba(255,255,255,.10);
+      position:relative;
+      background:
+        radial-gradient(220px 120px at 20% 20%, rgba(30,124,255,.14), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
       border-radius: 16px;
       padding:16px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.22);
+      box-shadow: 0 20px 64px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .cBox:after{
+      content:"";
+      position:absolute;inset:-1px;border-radius:16px;
+      background:linear-gradient(90deg, rgba(30,124,255,.16), rgba(42,212,255,.12), rgba(0,231,182,.10));
+      opacity:.18;filter:blur(16px);
+      pointer-events:none;
     }
     .cBox .t{font-weight:800;margin:0 0 6px}
-    .cBox .v{margin:0;color:rgba(244,248,255,.70);font-size:14px}
+    .cBox .v{margin:0;color:rgba(244,248,255,.74);font-size:14px}
 
     footer{
-      padding:26px 0;
+      padding:30px 0;
       text-align:center;
       color:rgba(244,248,255,.55);
       font-size:13px;
+      position:relative;
+    }
+    footer:before{
+      content:"";
+      position:absolute;left:0;right:0;top:0;height:1px;
+      background: linear-gradient(90deg, transparent, rgba(30,124,255,.18), rgba(42,212,255,.14), rgba(0,231,182,.12), transparent);
+      opacity:.9;
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -408,8 +490,8 @@
 <header>
   <div class="container nav">
     <div class="brandlock">
-      <div class="brandBadge" aria-hidden="true">
-        <img src="assets/brand/prisma-logo.png?v=9" alt="">
+      <div class="mark">
+        <img src="assets/brand/prisma-logo.png?v=9" alt="Prisma BI logo">
       </div>
       <div class="brandname">Prisma BI</div>
     </div>
@@ -426,19 +508,19 @@
 </header>
 
 <section id="home" class="hero">
-  <div class="container heroGrid">
+  <div class="heroWave" aria-hidden="true"></div>
 
+  <div class="container heroGrid">
     <div>
-      <!-- LOGO CON TÍTULO EN GRANDE -->
-      <img
-        class="heroLogoTitle"
-        src="assets/brand/logo-con-titulo.png?v=9"
-        alt="Prisma BI — Claridad para decidir con datos."
-      />
+      <!-- LOGO CON TITULO GRANDE -->
+      <img class="heroLogoTitle"
+           src="assets/brand/logo-con-titulo.png?v=9"
+           alt="PRISMA BI — Claridad para decidir con datos.">
 
       <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
 
-      <h1>Dashboards que convierten datos en <span class="accent">decisiones</span>.</h1>
+      <!-- H1 (ya NO repite el slogan del logo) -->
+      <h1>Dashboards que convierten <span class="accent">datos</span> en decisiones.</h1>
 
       <p class="lede">
         Dashboards accionables para <strong>ventas</strong>, <strong>costos</strong> y <strong>rentabilidad</strong>.
@@ -468,13 +550,12 @@
         <img src="assets/brand/daiana.png?v=9" alt="Daiana Beltrán">
       </div>
     </div>
-
   </div>
 </section>
 
 <div class="sep"></div>
 
-<section id="services">
+<section id="services" class="sec">
   <div class="container">
     <h2 class="sectionTitle">Servicios</h2>
     <p class="sectionLead">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
@@ -498,7 +579,7 @@
 
 <div class="sep"></div>
 
-<section id="packages">
+<section id="packages" class="sec">
   <div class="container">
     <h2 class="sectionTitle">Paquetes</h2>
     <p class="sectionLead">3 opciones claras: empezás por un diagnóstico y elegís el nivel de implementación.</p>
@@ -522,7 +603,7 @@
 
 <div class="sep"></div>
 
-<section id="contact">
+<section id="contact" class="sec">
   <div class="container">
     <h2 class="sectionTitle">Contacto</h2>
     <p class="sectionLead">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
@@ -583,4 +664,3 @@
 
 </body>
 </html>
-
