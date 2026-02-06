@@ -7,35 +7,26 @@
   <meta name="description" content="Claridad para decidir con datos: dashboards accionables para ventas, costos y rentabilidad. Agendá un diagnóstico o mirá una demo de 2 minutos."/>
   <link rel="icon" href="favicon.ico"/>
 
-  <!-- Tipografía premium -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Fondo */
       --bg0:#02050e;
       --bg1:#040a18;
 
-      /* Texto */
       --text:#F4F8FF;
       --muted:rgba(244,248,255,.72);
 
-      /* Acentos */
-      --fr:#1E7CFF;         /* azul francia */
-      --cyan:#2AD4FF;       /* cyan tech */
-      --teal:#00E7B6;       /* verde agua */
+      --fr:#1E7CFF;
+      --cyan:#2AD4FF;
+      --teal:#00E7B6;
 
-      /* UI */
-      --card:rgba(10,18,38,.56);
-      --stroke:rgba(255,255,255,.12);
-      --stroke2:rgba(255,255,255,.08);
       --shadow:0 24px 80px rgba(0,0,0,.55);
       --shadow2:0 16px 50px rgba(0,0,0,.35);
       --r:18px;
 
-      /* Tipografía */
       --h1: clamp(44px, 5.4vw, 84px);
       --lead: clamp(16px, 1.25vw, 20px);
       --h2: clamp(28px, 3vw, 46px);
@@ -58,7 +49,6 @@
     img{max-width:100%;display:block}
     .container{max-width:1180px;margin:0 auto;padding:0 28px}
 
-    /* Línea superior “premium” */
     body:before{
       content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
       background:linear-gradient(90deg, transparent, rgba(30,124,255,.88), rgba(42,212,255,.88), rgba(0,231,182,.78), transparent);
@@ -76,24 +66,26 @@
     }
     .nav{
       display:flex;align-items:center;justify-content:space-between;
-      gap:16px;padding:16px 0;
+      gap:16px;padding:14px 0;
     }
-    .brandlock{display:flex;align-items:center;gap:12px;font-weight:800}
-    .brandlock .mark{
-      width:42px;height:42px;border-radius:14px;
-      background:
-        radial-gradient(140px 80px at 25% 25%, rgba(30,124,255,.20), transparent 70%),
-        radial-gradient(140px 80px at 75% 75%, rgba(0,231,182,.14), transparent 70%),
-        rgba(10,18,38,.45);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 18px 50px rgba(0,0,0,.30);
-      display:grid;place-items:center;
+
+    /* BRAND (logo con titulo grande) */
+    .brandlock{
+      display:flex;align-items:center;gap:12px;
+      min-width: 260px;
     }
-    .brandlock img{
-      width:18px;height:18px;object-fit:contain;
-      filter: drop-shadow(0 12px 22px rgba(0,0,0,.45));
+    .brandlock a{display:flex;align-items:center;gap:12px}
+    .brandlock img.brandTitle{
+      height:44px;              /* <-- tamaño visible */
+      width:auto;
+      object-fit:contain;
+      filter: drop-shadow(0 18px 45px rgba(0,0,0,.38));
+      opacity:.98;
     }
-    .brandname{font-size:16px;letter-spacing:.2px;opacity:.96}
+    @media (max-width:520px){
+      .brandlock{min-width:auto}
+      .brandlock img.brandTitle{height:38px;}
+    }
 
     .menu{display:flex;gap:26px;align-items:center;font-weight:700}
     .menu a{opacity:.78;position:relative;padding:8px 0}
@@ -129,14 +121,12 @@
     /* HERO */
     .hero{
       position:relative;
-      min-height: calc(92vh - 72px);
+      min-height: calc(86vh - 72px);  /* <-- un poco menos alto para subir la foto */
       display:flex;
       align-items:center;
-      padding:64px 0 60px;
+      padding:44px 0 52px;           /* <-- menos padding arriba */
       overflow:hidden;
     }
-
-    /* Fondo dashboard + oscurecimiento */
     .hero:before{
       content:"";
       position:absolute;inset:0;
@@ -152,8 +142,6 @@
       transform: scale(1.02);
       z-index:-3;
     }
-
-    /* estrellas/grilla */
     .hero:after{
       content:"";
       position:absolute;inset:-60px;
@@ -170,19 +158,12 @@
       z-index:-2;
       mask-image: radial-gradient(740px 460px at 30% 42%, black 55%, transparent 100%);
     }
-
-    /* curva “galáctica” inferior como tu imagen 2 */
     .heroWave{
-      position:absolute;
-      left:-8%;
-      right:-8%;
-      bottom:-70px;
-      height:260px;
+      position:absolute;left:-8%;right:-8%;bottom:-70px;height:260px;
       background:
         radial-gradient(900px 220px at 50% 10%, rgba(42,212,255,.20), transparent 70%),
         radial-gradient(900px 220px at 55% 35%, rgba(0,231,182,.12), transparent 72%),
         linear-gradient(90deg, rgba(30,124,255,.12), rgba(42,212,255,.10), rgba(0,231,182,.10));
-      filter: blur(0.2px);
       opacity:.65;
       transform: rotate(-2deg);
       z-index:-1;
@@ -196,17 +177,9 @@
       align-items:center;
     }
     @media (max-width:980px){
-      .hero{min-height:auto;padding:56px 0 44px}
+      .hero{min-height:auto;padding:46px 0 44px}
       .heroGrid{grid-template-columns:1fr;gap:26px}
       .heroWave{display:none;}
-    }
-
-    /* LOGO CON TITULO GRANDE (en vez de microBrand repetido) */
-    .heroLogoTitle{
-      margin:0 0 18px;
-      width:min(460px, 92%);
-      filter: drop-shadow(0 26px 80px rgba(0,0,0,.55));
-      opacity:.98;
     }
 
     .pill{
@@ -247,15 +220,12 @@
       text-shadow: 0 12px 34px rgba(0,0,0,.22);
     }
 
-    /* BOTONES PRO */
     .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
-
     .btnPrimary{
       position:relative;
       display:inline-flex;align-items:center;gap:10px;
       padding:14px 20px;border-radius:12px;
-      font-weight:900;
-      color:#06101f;
+      font-weight:900;color:#06101f;
       background: linear-gradient(90deg, rgba(30,124,255,.98), rgba(42,212,255,.96), rgba(0,231,182,.92));
       border:1px solid rgba(0,0,0,.14);
       box-shadow:
@@ -263,7 +233,6 @@
         0 0 0 1px rgba(42,212,255,.12) inset,
         0 0 48px rgba(30,124,255,.22);
       overflow:hidden;
-      transform: translateZ(0);
       transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
     }
     .btnPrimary:before{
@@ -274,14 +243,7 @@
       transform: rotate(18deg);
       opacity:0;
     }
-    .btnPrimary:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.06);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,.42),
-        0 0 0 1px rgba(42,212,255,.16) inset,
-        0 0 70px rgba(30,124,255,.28);
-    }
+    .btnPrimary:hover{transform: translateY(-1px);filter: brightness(1.06);}
     .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
     @keyframes shine{
       0%{left:-40%;opacity:0}
@@ -304,22 +266,8 @@
       transition: transform .16s ease, filter .16s ease, box-shadow .16s ease, border-color .16s ease;
       overflow:hidden;
     }
-    .btnSecondary:after{
-      content:"";position:absolute;inset:-1px;border-radius:12px;
-      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.16), rgba(0,231,182,.14));
-      opacity:0;filter:blur(14px);
-      transition:opacity .2s ease;
-      pointer-events:none;
-    }
-    .btnSecondary:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.08);
-      border-color: rgba(42,212,255,.28);
-      box-shadow: 0 26px 74px rgba(0,0,0,.34);
-    }
-    .btnSecondary:hover:after{opacity:.8}
+    .btnSecondary:hover{transform: translateY(-1px);filter: brightness(1.08);border-color: rgba(42,212,255,.28);}
 
-    /* bullets */
     .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:62ch}
     .bullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86)}
     .check{
@@ -331,7 +279,6 @@
     }
     .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
 
-    /* FOTO (PNG sin fondo) */
     .portraitWrap{display:flex;justify-content:flex-end}
     @media (max-width:980px){ .portraitWrap{justify-content:center} }
     .portrait{
@@ -339,10 +286,10 @@
       position:relative;
       filter: drop-shadow(0 36px 78px rgba(0,0,0,.58));
     }
-    .portrait img{transform: translateY(10px)}
+    .portrait img{transform: translateY(0px)} /* <-- sube un poco */
     .portrait:before{
       content:"";
-      position:absolute;inset:-70px -70px -70px -70px;
+      position:absolute;inset:-70px;
       background:
         radial-gradient(360px 280px at 55% 35%, rgba(30,124,255,.18), transparent 72%),
         radial-gradient(380px 300px at 60% 72%, rgba(0,231,182,.10), transparent 74%);
@@ -350,7 +297,6 @@
       filter: blur(2px);
     }
 
-    /* ====== SECCIONES “menos sobrias” (como imagen 2) ====== */
     .sec{
       position:relative;
       padding: var(--secPad) 0;
@@ -364,7 +310,6 @@
         radial-gradient(900px 520px at 78% 10%, rgba(42,212,255,.10), transparent 62%),
         radial-gradient(900px 520px at 70% 85%, rgba(0,231,182,.08), transparent 60%),
         linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
-      opacity:1;
       z-index:-3;
     }
     .sec:after{
@@ -424,11 +369,7 @@
       transition:opacity .2s ease;
       pointer-events:none;
     }
-    .card:hover{
-      transform: translateY(-2px);
-      border-color: rgba(42,212,255,.24);
-      filter: brightness(1.06);
-    }
+    .card:hover{transform: translateY(-2px);border-color: rgba(42,212,255,.24);filter: brightness(1.06);}
     .card:hover:after{opacity:.85}
 
     .kicker{display:flex;align-items:center;gap:10px;font-weight:800;margin-bottom:8px}
@@ -439,7 +380,6 @@
     }
     .small{margin:0;color:rgba(244,248,255,.76);line-height:1.75;font-size:14px}
 
-    /* Contact */
     .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
     @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
@@ -489,11 +429,11 @@
 
 <header>
   <div class="container nav">
+    <!-- LOGO CON TITULO EN EL NAV -->
     <div class="brandlock">
-      <div class="mark">
-        <img src="assets/brand/prisma-logo.png?v=9" alt="Prisma BI logo">
-      </div>
-      <div class="brandname">Prisma BI</div>
+      <a href="#home" aria-label="Ir al inicio">
+        <img class="brandTitle" src="assets/brand/logo-con-titulo.png?v=9" alt="PRISMA BI — Claridad para decidir con datos.">
+      </a>
     </div>
 
     <nav class="menu">
@@ -512,15 +452,9 @@
 
   <div class="container heroGrid">
     <div>
-      <!-- LOGO CON TITULO GRANDE -->
-      <img class="heroLogoTitle"
-           src="assets/brand/logo-con-titulo.png?v=9"
-           alt="PRISMA BI — Claridad para decidir con datos.">
-
       <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
 
-      <!-- H1 (ya NO repite el slogan del logo) -->
-      <h1>Dashboards que convierten <span class="accent">datos</span> en decisiones.</h1>
+      <h1>Claridad para decidir con <span class="accent">Datos</span>.</h1>
 
       <p class="lede">
         Dashboards accionables para <strong>ventas</strong>, <strong>costos</strong> y <strong>rentabilidad</strong>.
