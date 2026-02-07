@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Prisma BI — Data & Business Intelligence Consulting</title>
-  <meta name="description" content="Claridad para decidir con datos: dashboards accionables para ventas, costos y rentabilidad. Agendá un diagnóstico o mirá una demo de 2 minutos."/>
+  <title>Prisma BI — Consultora de Datos & BI</title>
+  <meta name="description" content="Dashboards simples para decidir mejor: ventas, costos y rentabilidad. Si hoy tenés Excel o reportes sueltos, te ayudo a convertirlos en un tablero claro para dirección."/>
   <link rel="icon" href="favicon.ico"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,11 +27,11 @@
       --shadow2:0 16px 50px rgba(0,0,0,.35);
       --r:18px;
 
-      --h1: clamp(44px, 5.4vw, 84px);
-      --lead: clamp(16px, 1.25vw, 20px);
+      --h1: clamp(44px, 5.4vw, 82px);
+      --lead: clamp(16px, 1.2vw, 20px);
       --h2: clamp(28px, 3vw, 46px);
 
-      --secPad: 86px;
+      --secPad: 84px;
     }
 
     *{box-sizing:border-box}
@@ -72,22 +72,23 @@
     /* BRAND (logo con titulo grande) */
     .brandlock{
       display:flex;align-items:center;gap:12px;
-      min-width: 260px;
+      min-width: 300px;
     }
     .brandlock a{display:flex;align-items:center;gap:12px}
     .brandlock img.brandTitle{
-      height:44px;              /* <-- tamaño visible */
+      height:56px;              /* ✅ más grande */
       width:auto;
       object-fit:contain;
       filter: drop-shadow(0 18px 45px rgba(0,0,0,.38));
       opacity:.98;
+      transform: translateY(1px);
     }
     @media (max-width:520px){
       .brandlock{min-width:auto}
-      .brandlock img.brandTitle{height:38px;}
+      .brandlock img.brandTitle{height:44px;}
     }
 
-    .menu{display:flex;gap:26px;align-items:center;font-weight:700}
+    .menu{display:flex;gap:26px;align-items:center;font-weight:800}
     .menu a{opacity:.78;position:relative;padding:8px 0}
     .menu a:hover,.menu a.active{opacity:1}
     .menu a.active:after,.menu a:hover:after{
@@ -101,7 +102,7 @@
       padding:12px 16px;border-radius:999px;
       border:1px solid rgba(255,255,255,.16);
       background: rgba(10,18,38,.35);
-      font-weight:800;
+      font-weight:900;
       box-shadow: 0 14px 44px rgba(0,0,0,.28);
       overflow:hidden;
       transform: translateZ(0);
@@ -121,17 +122,17 @@
     /* HERO */
     .hero{
       position:relative;
-      min-height: calc(86vh - 72px);  /* <-- un poco menos alto para subir la foto */
+      min-height: calc(86vh - 72px);
       display:flex;
       align-items:center;
-      padding:44px 0 52px;           /* <-- menos padding arriba */
+      padding:44px 0 52px;
       overflow:hidden;
     }
     .hero:before{
       content:"";
       position:absolute;inset:0;
       background:
-        linear-gradient(90deg, rgba(2,5,14,.94) 10%, rgba(2,5,14,.68) 52%, rgba(2,5,14,.20) 100%),
+        linear-gradient(90deg, rgba(2,5,14,.95) 10%, rgba(2,5,14,.70) 52%, rgba(2,5,14,.20) 100%),
         radial-gradient(900px 560px at 68% 20%, rgba(30,124,255,.22), transparent 60%),
         radial-gradient(900px 560px at 76% 82%, rgba(0,231,182,.10), transparent 62%),
         radial-gradient(720px 420px at 40% 38%, rgba(42,212,255,.12), transparent 65%),
@@ -152,7 +153,7 @@
         radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.22), transparent 55%),
         linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/90px 90px,
         linear-gradient(180deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0/90px 90px,
-        radial-gradient(1200px 700px at 50% 28%, transparent 38%, rgba(0,0,0,.55) 78%);
+        radial-gradient(1200px 700px at 50% 28%, transparent 38%, rgba(0,0,0,.58) 78%);
       opacity:.20;
       pointer-events:none;
       z-index:-2;
@@ -182,6 +183,7 @@
       .heroWave{display:none;}
     }
 
+    /* ✅ pill ya NO repite "Claridad..." */
     .pill{
       display:inline-flex;align-items:center;gap:10px;
       padding:10px 14px;border-radius:999px;
@@ -190,7 +192,7 @@
       box-shadow:0 14px 40px rgba(0,0,0,.34);
       width:max-content;
       margin:0 0 18px;
-      font-weight:800;
+      font-weight:900;
       color:rgba(244,248,255,.92);
     }
     .pill i{
@@ -203,7 +205,7 @@
       margin:0 0 12px;
       font-size:var(--h1);
       line-height:1.02;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:-.03em;
       text-shadow: 0 16px 44px rgba(0,0,0,.35);
     }
@@ -279,22 +281,39 @@
     }
     .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
 
+    /* FOTO (integrada, sin “corte” visual) */
     .portraitWrap{display:flex;justify-content:flex-end}
     @media (max-width:980px){ .portraitWrap{justify-content:center} }
     .portrait{
       width:min(560px, 100%);
       position:relative;
       filter: drop-shadow(0 36px 78px rgba(0,0,0,.58));
+      padding-bottom: 18px;         /* ✅ aire abajo */
+      overflow: visible;
     }
-    .portrait img{transform: translateY(0px)} /* <-- sube un poco */
+    .portrait img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      transform: translateY(6px) scale(.98); /* ✅ integra mejor */
+      will-change: transform;
+    }
     .portrait:before{
       content:"";
-      position:absolute;inset:-70px;
+      position:absolute;inset:-90px;
       background:
         radial-gradient(360px 280px at 55% 35%, rgba(30,124,255,.18), transparent 72%),
         radial-gradient(380px 300px at 60% 72%, rgba(0,231,182,.10), transparent 74%);
       z-index:-1;
       filter: blur(2px);
+    }
+    .portrait:after{
+      content:"";
+      position:absolute;left:-10%;right:-10%;bottom:0;height:88px;
+      background: linear-gradient(180deg, rgba(2,5,14,0), rgba(2,5,14,.70));
+      opacity:.55;
+      pointer-events:none;
+      border-radius: 22px;
     }
 
     .sec{
@@ -333,14 +352,14 @@
     .sectionTitle{
       text-align:center;margin:0 0 10px;
       font-size:var(--h2);
-      font-weight:800;
+      font-weight:900;
       letter-spacing:-.02em;
       text-shadow: 0 18px 46px rgba(0,0,0,.30);
     }
     .sectionLead{
       text-align:center;
       color:rgba(244,248,255,.66);
-      max-width:90ch;margin:0 auto 32px;
+      max-width:92ch;margin:0 auto 34px;
       line-height:1.7;
       font-size:15px;
     }
@@ -372,14 +391,57 @@
     .card:hover{transform: translateY(-2px);border-color: rgba(42,212,255,.24);filter: brightness(1.06);}
     .card:hover:after{opacity:.85}
 
-    .kicker{display:flex;align-items:center;gap:10px;font-weight:800;margin-bottom:8px}
+    .kicker{display:flex;align-items:center;gap:10px;font-weight:900;margin-bottom:10px}
     .dot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
       box-shadow:0 0 18px rgba(42,212,255,.28);
     }
-    .small{margin:0;color:rgba(244,248,255,.76);line-height:1.75;font-size:14px}
 
+    .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
+
+    /* ✅ bullets internos, prolijos */
+    .miniBullets{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+    .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
+    .miniBullets .miniCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(42,212,255,.10);
+      border:1px solid rgba(42,212,255,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .miniBullets .miniCheck:before{content:"✓";font-weight:900;color:rgba(42,212,255,.95);font-size:12px}
+
+    /* PROCESO */
+    .steps{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px
+    }
+    @media (max-width:980px){ .steps{grid-template-columns:1fr} }
+    .step{
+      position:relative;
+      background: rgba(10,18,38,.52);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding:16px;
+      box-shadow: 0 18px 54px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .step:after{
+      content:"";position:absolute;inset:-1px;border-radius:16px;
+      background:linear-gradient(90deg, rgba(30,124,255,.14), rgba(42,212,255,.10), rgba(0,231,182,.10));
+      opacity:.18;filter:blur(16px);pointer-events:none;
+    }
+    .step .n{
+      font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:30px;height:30px;border-radius:10px;
+      background: rgba(0,231,182,.10);
+      border:1px solid rgba(0,231,182,.22);
+      margin-bottom:10px;
+    }
+    .step .t{margin:0 0 6px;font-weight:900}
+    .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
+
+    /* CONTACT */
     .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
     @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
@@ -402,7 +464,7 @@
       opacity:.18;filter:blur(16px);
       pointer-events:none;
     }
-    .cBox .t{font-weight:800;margin:0 0 6px}
+    .cBox .t{font-weight:900;margin:0 0 6px}
     .cBox .v{margin:0;color:rgba(244,248,255,.74);font-size:14px}
 
     footer{
@@ -429,7 +491,6 @@
 
 <header>
   <div class="container nav">
-    <!-- LOGO CON TITULO EN EL NAV -->
     <div class="brandlock">
       <a href="#home" aria-label="Ir al inicio">
         <img class="brandTitle" src="assets/brand/logo-con-titulo.png?v=9" alt="PRISMA BI — Claridad para decidir con datos.">
@@ -452,13 +513,15 @@
 
   <div class="container heroGrid">
     <div>
-      <div class="pill"><i></i> CLARIDAD PARA DECIDIR</div>
+      <div class="pill"><i></i> VENTAS · COSTOS · RENTABILIDAD</div>
 
       <h1>Claridad para decidir con <span class="accent">Datos</span>.</h1>
 
+      <!-- ✅ lógica “Franco Pisso”: dolor → claridad → autoridad → oferta -->
       <p class="lede">
-        Dashboards accionables para <strong>ventas</strong>, <strong>costos</strong> y <strong>rentabilidad</strong>.
-        Si hoy tenés Excel, reportes o un sistema… pero las decisiones siguen siendo “a ojo”, te ayudo a ordenar el ruido y convertirlo en un tablero simple de lectura del negocio.
+        Si hoy tenés <strong>Excel</strong>, reportes o un sistema… pero las decisiones se toman “a ojo”,
+        es normal que pase esto: <strong>datos dispersos</strong>, <strong>métricas mezcladas</strong> y <strong>tiempo perdido</strong>.
+        Mi trabajo es convertir ese ruido en un tablero simple para leer el negocio y tomar decisiones con seguridad.
       </p>
 
       <div class="ctaRow">
@@ -469,13 +532,13 @@
           Agendar diagnóstico
         </a>
 
-        <a class="btnSecondary" href="#packages">Ver demo (2 min) →</a>
+        <a class="btnSecondary" href="#packages">Ver paquetes →</a>
       </div>
 
       <ul class="bullets">
-        <li><span class="check"></span> <span><strong>Diagnóstico</strong> preciso y rápido</span></li>
-        <li><span class="check"></span> <span><strong>KPIs correctos</strong>: qué mirar (y qué dejar de mirar)</span></li>
-        <li><span class="check"></span> <span><strong>Dashboards estratégicos</strong> listos para usar</span></li>
+        <li><span class="check"></span> <span><strong>Te llevás claridad</strong>: qué mirar, qué ignorar y por qué</span></li>
+        <li><span class="check"></span> <span><strong>KPIs bien definidos</strong> (sin confusión ni “métricas de vanidad”)</span></li>
+        <li><span class="check"></span> <span><strong>Un tablero listo</strong> para dirección (ventas/costos/rentabilidad)</span></li>
       </ul>
     </div>
 
@@ -492,20 +555,74 @@
 <section id="services" class="sec">
   <div class="container">
     <h2 class="sectionTitle">Servicios</h2>
-    <p class="sectionLead">De “reportes sueltos” a un sistema simple para decidir: diagnóstico → KPIs → modelo → dashboard → adopción.</p>
+    <p class="sectionLead">
+      Servicios pensados para empresas que quieren decisiones claras, sin tecnicismos.
+      Trabajo de punta a punta: desde el problema real hasta el tablero que se usa.
+    </p>
 
     <div class="grid3">
       <div class="card">
-        <div class="kicker"><span class="dot"></span> Diagnóstico & mapa de decisiones</div>
-        <p class="small">Aclaramos el problema real, priorizamos preguntas, definimos KPIs y fuentes.</p>
+        <div class="kicker"><span class="dot"></span> 1) Diagnóstico & mapa de decisiones</div>
+        <p class="small">Aclaramos el problema, ordenamos la información y definimos qué medir.</p>
+        <ul class="miniBullets">
+          <li><span class="miniCheck"></span><span>Entrevista breve para entender el negocio y el dolor real.</span></li>
+          <li><span class="miniCheck"></span><span>Lista de <strong>KPIs clave</strong> (con definición simple y fórmula).</span></li>
+          <li><span class="miniCheck"></span><span>Plan de tablero: qué incluye, qué no, y por qué.</span></li>
+        </ul>
       </div>
+
       <div class="card">
-        <div class="kicker"><span class="dot"></span> Dashboards ejecutivos (Power BI)</div>
-        <p class="small">Tableros claros de ventas, costos, rentabilidad y performance para dirección y áreas.</p>
+        <div class="kicker"><span class="dot"></span> 2) Dashboards ejecutivos (Power BI)</div>
+        <p class="small">Un tablero claro para ventas, costos y rentabilidad. Hecho para decidir rápido.</p>
+        <ul class="miniBullets">
+          <li><span class="miniCheck"></span><span>Tablero ejecutivo con KPIs + tendencias + cortes por producto/cliente/zona.</span></li>
+          <li><span class="miniCheck"></span><span>Lectura simple: qué pasa, por qué pasa, qué hacer.</span></li>
+          <li><span class="miniCheck"></span><span>Iteración real: lo vemos, lo ajustamos y queda usable.</span></li>
+        </ul>
       </div>
+
       <div class="card">
-        <div class="kicker"><span class="dot"></span> Modelo de datos + calidad</div>
-        <p class="small">Estructura confiable (RAW→CLEAN→BI), reconciliación y reglas de negocio.</p>
+        <div class="kicker"><span class="dot"></span> 3) Datos confiables (orden + control)</div>
+        <p class="small">Antes del tablero, los datos tienen que ser confiables. Si no, el tablero miente.</p>
+        <ul class="miniBullets">
+          <li><span class="miniCheck"></span><span>Unifico fuentes (Excel / sistema / ERP / eCommerce) en una sola “base”.</span></li>
+          <li><span class="miniCheck"></span><span>Reglas de negocio: mismos criterios para todos (sin discusiones).</span></li>
+          <li><span class="miniCheck"></span><span>Controles de calidad: duplicados, nulos, totales que “no cierran”.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="sec">
+  <div class="container">
+    <h2 class="sectionTitle">Cómo trabajamos</h2>
+    <p class="sectionLead">
+      Método simple: primero claridad (dolor + foco), después tablero (solución), y por último adopción (que se use).
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <p class="t">Entender el dolor</p>
+        <p class="d">Qué decisiones están trabadas hoy y qué impacto económico tienen (tiempo, dinero, margen).</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <p class="t">Definir lo importante</p>
+        <p class="d">KPIs simples, claros y accionables. Menos métricas, más decisiones.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <p class="t">Construir el tablero</p>
+        <p class="d">Un dashboard ejecutivo (Power BI) para leer el negocio en minutos.</p>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <p class="t">Acompañar la adopción</p>
+        <p class="d">Te enseño cómo leerlo y convertirlo en acciones (sin depender de mí).</p>
       </div>
     </div>
   </div>
@@ -516,20 +633,37 @@
 <section id="packages" class="sec">
   <div class="container">
     <h2 class="sectionTitle">Paquetes</h2>
-    <p class="sectionLead">3 opciones claras: empezás por un diagnóstico y elegís el nivel de implementación.</p>
+    <p class="sectionLead">Tres opciones claras. Todas empiezan con diagnóstico, porque sin claridad se pierde plata.</p>
 
     <div class="grid3">
       <div class="card">
         <div class="kicker"><span class="dot"></span> 1) Diagnóstico</div>
-        <p class="small">Reunión + mapa de KPIs + plan de tablero (qué va y qué no).</p>
+        <p class="small"><strong>Te llevás:</strong></p>
+        <ul class="miniBullets">
+          <li><span class="miniCheck"></span><span>Mapa de decisiones (qué mirar / qué ignorar).</span></li>
+          <li><span class="miniCheck"></span><span>KPIs definidos + “cómo se calculan”.</span></li>
+          <li><span class="miniCheck"></span><span>Plan del tablero (qué va, qué no y prioridades).</span></li>
+        </ul>
       </div>
+
       <div class="card">
         <div class="kicker"><span class="dot"></span> 2) Dashboard BI</div>
-        <p class="small">Modelo + KPIs + dashboard ejecutivo (ventas/costos/rentabilidad) con iteración real.</p>
+        <p class="small"><strong>Incluye:</strong></p>
+        <ul class="miniBullets">
+          <li><span class="miniCheck"></span><span>Diagnóstico + KPIs.</span></li>
+          <li><span class="miniCheck"></span><span>Dashboard ejecutivo de ventas/costos/rentabilidad.</span></li>
+          <li><span class="miniCheck"></span><span>1 ronda de ajustes para que quede “listo para dirección”.</span></li>
+        </ul>
       </div>
+
       <div class="card">
         <div class="kicker"><span class="dot"></span> 3) Sistema de decisión</div>
-        <p class="small">Calidad + dashboards por área + acompañamiento para lectura y decisiones.</p>
+        <p class="small"><strong>Para empresas que quieren consistencia:</strong></p>
+        <ul class="miniBullets">
+          <li><span class="miniCheck"></span><span>Orden y control de datos (unificación + reglas).</span></li>
+          <li><span class="miniCheck"></span><span>Dashboards por área (dirección / comercial / finanzas / ops).</span></li>
+          <li><span class="miniCheck"></span><span>Acompañamiento para lectura y decisiones (adopción real).</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -540,7 +674,9 @@
 <section id="contact" class="sec">
   <div class="container">
     <h2 class="sectionTitle">Contacto</h2>
-    <p class="sectionLead">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
+    <p class="sectionLead">
+      Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.
+    </p>
 
     <div class="contactGrid">
       <div class="cBox">
