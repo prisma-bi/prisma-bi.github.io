@@ -59,88 +59,43 @@
 
 /* NAV */
 header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(2,5,14,.78);          /* un poco más sólido */
+  position:sticky; top:0; z-index:50;
+  background:rgba(2,5,14,.66);
   backdrop-filter: blur(14px) saturate(170%);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display:flex; align-items:center; justify-content:space-between;
   gap:16px;
-  padding:10px 0;                        /* ↓ menos padding para “hacer lugar” al logo */
-  min-height:86px;                       /* ↑ asegura altura cómoda */
+  padding:10px 0;            /* menos padding para que “entre” más logo */
+  min-height:86px;           /* asegura altura */
 }
 
-/* BRAND (logo con título grande) */
+/* BRAND */
 .brandlock{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-width: 360px;                      /* ↑ más espacio para el logo */
+  display:flex; align-items:center; gap:12px;
+  min-width: 360px;          /* le damos espacio real */
 }
+.brandlock a{display:flex;align-items:center;gap:12px}
 
-.brandlock a{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
+/* LOGO GRANDE */
 .brandlock img.brandTitle{
-  height:72px;                           /* ✅ MÁS GRANDE (antes 56px) */
+  height:74px;               /* 🔥 más grande */
   width:auto;
   object-fit:contain;
   filter: drop-shadow(0 18px 45px rgba(0,0,0,.38));
-  opacity:1;
-  transform: translateY(2px);
+  opacity:.98;
+  transform: translateY(1px);
 }
-
-/* Menú */
-.menu{display:flex;gap:26px;align-items:center;font-weight:800}
-.menu a{opacity:.78;position:relative;padding:8px 0}
-.menu a:hover,.menu a.active{opacity:1}
-.menu a.active:after,.menu a:hover:after{
-  content:"";position:absolute;left:0;right:0;bottom:-10px;height:3px;border-radius:999px;
-  background:linear-gradient(90deg,var(--cyan),var(--teal));
-  box-shadow:0 0 22px rgba(42,212,255,.35);
-}
-
-/* CTA */
-.navcta{
-  position:relative;
-  display:inline-flex;align-items:center;gap:10px;
-  padding:12px 16px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  background: rgba(10,18,38,.35);
-  font-weight:900;
-  box-shadow: 0 14px 44px rgba(0,0,0,.28);
-  overflow:hidden;
-  transform: translateZ(0);
-  white-space:nowrap;
-}
-.navcta:after{
-  content:"";position:absolute;inset:-1px;border-radius:999px;
-  background:linear-gradient(90deg, rgba(30,124,255,.35), rgba(42,212,255,.28), rgba(0,231,182,.22));
-  opacity:0;filter:blur(14px);
-  transition:opacity .22s ease;
-  pointer-events:none;
-}
-.navcta:hover{transform:translateY(-1px);filter:brightness(1.08)}
-.navcta:hover:after{opacity:.65}
 
 /* Responsive */
 @media (max-width:980px){
   .menu{display:none}
   .brandlock{min-width:auto}
-  .brandlock img.brandTitle{height:64px;}
-  .nav{min-height:78px;}
 }
-
 @media (max-width:520px){
-  .brandlock img.brandTitle{height:56px;}
-  .nav{min-height:72px;}
+  .brandlock img.brandTitle{height:54px;}
 }
 
     /* HERO */
@@ -315,13 +270,21 @@ header{
       padding-bottom: 18px;         /* ✅ aire abajo */
       overflow: visible;
     }
-    .portrait img{
-      width:100%;
-      height:auto;
-      object-fit:contain;
-      transform: translateY(6px) scale(.98); /* ✅ integra mejor */
-      will-change: transform;
-    }
+   .portrait img{
+  width:100%;
+  height:auto;
+  display:block;
+  transform: translateY(8px) scale(.99);
+  will-change: transform;
+
+  /* ✅ Fade de bordes (mata el “cuadrado” del PNG) */
+  -webkit-mask-image: radial-gradient(120% 120% at 55% 45%, #000 62%, transparent 78%);
+  mask-image: radial-gradient(120% 120% at 55% 45%, #000 62%, transparent 78%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
     .portrait:before{
       content:"";
       position:absolute;inset:-90px;
