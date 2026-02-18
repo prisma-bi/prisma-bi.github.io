@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Prisma BI — Consultora de Data & Business Intelligence</title>
-  <meta name="description" content="Dashboards ejecutivos y sistema de decisión: KPIs con definición única, control de datos y rutina semanal. Prisma BI by Daiana Beltrán."/>
+  <meta name="description" content="Dashboards ejecutivos y sistema de decisión: KPIs con definición única, control de datos y rutina semanal. Prisma BI."/>
   <meta name="theme-color" content="#0b1b3a"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,13 @@
     :root{
       --ink:#0b1220;
       --muted:#5a677a;
-      --line:rgba(15,23,42,.12);
+      --line:rgba(15,23,42,.10);
       --bg:#ffffff;
       --panel:#ffffff;
 
-      --brand:#0ea5e9;      /* celeste */
-      --brand2:#22c55e;     /* verde */
-      --brand3:#0b1b3a;     /* azul profundo */
+      --brand:#0ea5e9;
+      --brand2:#22c55e;
+      --brand3:#0b1b3a;
       --accent:#06b6d4;
 
       --shadow: 0 18px 60px rgba(2,6,23,.10);
@@ -30,7 +30,7 @@
       --r:18px;
       --container: 1180px;
 
-      --h1: clamp(36px, 5vw, 66px);
+      --h1: clamp(34px, 5vw, 64px);
       --h2: clamp(26px, 3.2vw, 44px);
       --lead: clamp(16px, 1.2vw, 20px);
     }
@@ -46,8 +46,9 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{max-width:var(--container); margin:0 auto; padding:0 22px}
+    .sr{position:absolute;left:-9999px}
 
-    /* --- Top bar (tipo Overdata, pero más fino) --- */
+    /* ===== Topbar (sin mail personal) ===== */
     .topbar{
       background: linear-gradient(90deg, rgba(14,165,233,.16), rgba(34,197,94,.10));
       border-bottom:1px solid rgba(2,6,23,.06);
@@ -62,7 +63,7 @@
     .topbar .item{display:flex; gap:8px; align-items:center}
     .topbar svg{width:16px;height:16px; opacity:.75}
 
-    /* --- Header/Nav --- */
+    /* ===== Header/Nav ===== */
     header{
       position:sticky; top:0; z-index:60;
       background: rgba(255,255,255,.88);
@@ -83,12 +84,12 @@
       font-weight:900; letter-spacing:-.02em; line-height:1.05;
     }
     .brand .tag{
-      font-size:12px; color:rgba(2,6,23,.62); font-weight:700;
+      font-size:12px; color:rgba(2,6,23,.62); font-weight:800;
     }
 
     .menu{display:flex; gap:18px; align-items:center}
     .menu a{
-      font-weight:800; font-size:14px;
+      font-weight:900; font-size:14px;
       color:rgba(2,6,23,.72);
       padding:10px 10px;
       border-radius: 12px;
@@ -109,6 +110,7 @@
       transition: transform .15s ease, filter .15s ease, border-color .15s ease;
       font-size:14px;
       white-space:nowrap;
+      cursor:pointer;
     }
     .btn:hover{transform: translateY(-1px); filter:brightness(1.02); border-color: rgba(14,165,233,.25)}
     .btnPrimary{
@@ -116,15 +118,68 @@
       color:#052032;
       border-color: rgba(2,6,23,.08);
     }
-
     .burger{display:none}
+
     @media (max-width:980px){
       .menu{display:none}
       .burger{display:inline-flex}
       .brand{min-width:auto}
     }
 
-    /* --- Hero --- */
+    /* ===== Mobile Panel ===== */
+    .overlay{
+      position:fixed; inset:0;
+      background: rgba(2,6,23,.45);
+      display:none;
+      z-index:80;
+    }
+    .panel{
+      position:fixed;
+      top:0; right:0;
+      height:100vh;
+      width:min(92vw, 380px);
+      background:#fff;
+      border-left:1px solid rgba(2,6,23,.10);
+      box-shadow: 0 30px 90px rgba(2,6,23,.22);
+      transform: translateX(100%);
+      transition: transform .22s ease;
+      z-index:90;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+    }
+    .panel.open{transform: translateX(0)}
+    .overlay.show{display:block}
+    .pHead{
+      padding:16px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(2,6,23,.08);
+      background: linear-gradient(90deg, rgba(14,165,233,.08), rgba(34,197,94,.06));
+    }
+    .pHead .t{font-weight:900; color: rgba(2,6,23,.78)}
+    .pClose{
+      width:42px;height:42px;border-radius: 14px;
+      border:1px solid rgba(2,6,23,.10);
+      background:#fff;
+      display:grid; place-items:center;
+    }
+    .pNav{padding:14px 10px; display:grid; gap:6px}
+    .pNav a{
+      padding:12px 12px;
+      border-radius: 14px;
+      font-weight:900;
+      color: rgba(2,6,23,.78);
+      border:1px solid transparent;
+    }
+    .pNav a:hover{background: rgba(14,165,233,.08); border-color: rgba(14,165,233,.18)}
+    .pFoot{
+      padding:14px 14px 18px;
+      border-top:1px solid rgba(2,6,23,.08);
+      display:grid; gap:10px;
+    }
+
+    /* ===== Hero Slider (Overdata-style) ===== */
     .hero{
       position:relative;
       overflow:hidden;
@@ -133,42 +188,61 @@
         radial-gradient(900px 420px at 15% 8%, rgba(14,165,233,.14), transparent 60%),
         radial-gradient(900px 420px at 78% 12%, rgba(34,197,94,.10), transparent 60%),
         linear-gradient(180deg, #ffffff, #fbfdff);
-    }
-    .heroInner{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:26px;
-      align-items:center;
-      padding: 54px 0 46px;
-      position:relative;
-      z-index:2;
-    }
-    @media (max-width:980px){
-      .heroInner{grid-template-columns:1fr; padding:44px 0 34px}
+      min-height: 560px;
     }
 
-    /* Fondo imagen (tipo slider pero simple) */
-    .heroMedia{
-      position:absolute;
-      inset:0;
+    .slider{
+      position:relative;
+      height: min(620px, calc(100vh - 120px));
+      min-height: 560px;
+    }
+    .slide{
+      position:absolute; inset:0;
+      opacity:0;
+      transition: opacity .45s ease;
+      display:grid;
+      place-items:center;
+    }
+    .slide.active{opacity:1}
+    .slideBg{
+      position:absolute; inset:0;
       z-index:0;
-      pointer-events:none;
-      opacity:.16; /* importante para que sea blanco/clean */
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.72)),
-        url("assets/hero/hero-bg.jpg");
       background-size: cover;
       background-position: center;
-      filter: saturate(115%) contrast(105%);
+      filter: saturate(115%) contrast(106%);
+      opacity:.14; /* blanco y limpio */
+    }
+    .slideShade{
+      position:absolute; inset:0;
+      z-index:1;
+      background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.68));
     }
 
-    /* Canvas red animada (líneas blancas) */
+    /* Red animada encima del hero (muy visible) */
     #net{
       position:absolute;
       inset:0;
-      z-index:1;
+      z-index:2;
       pointer-events:none;
-      opacity:.9;
+      opacity: 1; /* para que se vea */
+    }
+
+    .heroInner{
+      position:relative;
+      z-index:3;
+      width:100%;
+      padding: 54px 0 46px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:26px;
+      align-items:center;
+    }
+    @media (max-width:980px){
+      .heroGrid{grid-template-columns:1fr; padding:44px 0 34px}
+      .hero{min-height: 640px}
+      .slider{min-height: 640px}
     }
 
     .pill{
@@ -208,12 +282,12 @@
       font-size: var(--lead);
       line-height: 1.7;
       color: rgba(2,6,23,.70);
-      max-width: 68ch;
+      max-width: 70ch;
     }
     .lede strong{color: rgba(2,6,23,.88)}
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin: 18px 0 10px}
 
-    .bullets{margin:0; padding:0; list-style:none; display:grid; gap:10px; max-width: 70ch}
+    .bullets{margin:0; padding:0; list-style:none; display:grid; gap:10px; max-width: 72ch}
     .bullets li{display:flex; gap:10px; align-items:flex-start; color: rgba(2,6,23,.78)}
     .check{
       width:22px;height:22px;border-radius:999px;
@@ -248,7 +322,7 @@
       gap:10px; margin-bottom: 12px;
     }
     @media (max-width:520px){
-      .statRow{grid-template-columns:1fr; }
+      .statRow{grid-template-columns:1fr}
     }
     .stat{
       border:1px solid rgba(2,6,23,.10);
@@ -256,7 +330,7 @@
       padding:12px;
       background: rgba(255,255,255,.92);
     }
-    .stat .k{font-size:12px; color: rgba(2,6,23,.60); font-weight:800}
+    .stat .k{font-size:12px; color: rgba(2,6,23,.60); font-weight:900}
     .stat .v{font-size:18px; font-weight:900; margin-top:4px}
     .mini{
       margin-top:12px;
@@ -269,7 +343,50 @@
       line-height:1.6;
     }
 
-    /* --- Sections --- */
+    /* Slider controls */
+    .dots{
+      position:absolute;
+      left:0; right:0; bottom: 18px;
+      z-index: 5;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      border:1px solid rgba(2,6,23,.20);
+      background: rgba(255,255,255,.70);
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .dot.active{
+      background: linear-gradient(90deg, rgba(14,165,233,.95), rgba(34,197,94,.90));
+      border-color: rgba(2,6,23,.08);
+      transform: scale(1.15);
+    }
+    .arrow{
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      z-index:6;
+      width:46px;height:46px;
+      border-radius: 16px;
+      border:1px solid rgba(2,6,23,.10);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      display:grid; place-items:center;
+      cursor:pointer;
+      box-shadow: var(--shadow2);
+    }
+    .arrow:hover{border-color: rgba(14,165,233,.25)}
+    .arrow svg{width:18px;height:18px; opacity:.85}
+    .arrow.prev{left: 12px}
+    .arrow.next{right: 12px}
+    @media (max-width:980px){
+      .arrow{display:none}
+    }
+
+    /* ===== Sections ===== */
     section.sec{padding: 78px 0}
     .sep{
       height:1px;
@@ -285,13 +402,13 @@
     }
     .sub{
       text-align:center;
-      max-width: 90ch;
+      max-width: 92ch;
       margin: 0 auto 32px;
       color: rgba(2,6,23,.64);
       line-height: 1.7;
       font-size: 15px;
+      font-weight:700;
     }
-
     .grid3{display:grid; grid-template-columns: repeat(3,1fr); gap:16px}
     @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
 
@@ -307,14 +424,14 @@
     }
     .card:hover{transform: translateY(-2px); border-color: rgba(14,165,233,.24); box-shadow: var(--shadow);}
     .kicker{display:flex; align-items:center; gap:10px; font-weight: 900; margin-bottom: 8px}
-    .dot{
+    .kDot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--brand), var(--brand2));
       box-shadow: 0 0 16px rgba(14,165,233,.20);
     }
-    .small{margin:0; color: rgba(2,6,23,.66); line-height:1.7; font-size:14px}
+    .small{margin:0; color: rgba(2,6,23,.66); line-height:1.7; font-size:14px; font-weight:700}
     .miniBullets{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
-    .miniBullets li{display:flex; gap:10px; align-items:flex-start; color: rgba(2,6,23,.74); font-size:14px; line-height:1.55}
+    .miniBullets li{display:flex; gap:10px; align-items:flex-start; color: rgba(2,6,23,.74); font-size:14px; line-height:1.55; font-weight:700}
     .miniCheck{
       width:18px;height:18px;border-radius:999px;
       background: rgba(14,165,233,.10);
@@ -325,7 +442,115 @@
     }
     .miniCheck:before{content:"✓"; font-weight:900; color: rgba(2,132,199,.95); font-size:12px}
 
-    /* --- Video section (responsive) --- */
+    /* ===== Ejemplos (cards clickeables) ===== */
+    .examplesGrid{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:16px;
+    }
+    @media (max-width:980px){ .examplesGrid{grid-template-columns:1fr} }
+    .exCard{
+      border-radius: 20px;
+      border:1px solid rgba(2,6,23,.10);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      background:#fff;
+      cursor:pointer;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .exCard:hover{transform: translateY(-2px); border-color: rgba(14,165,233,.24); box-shadow: var(--shadow);}
+    .exThumb{
+      height: 160px;
+      background: linear-gradient(90deg, rgba(14,165,233,.20), rgba(34,197,94,.14));
+      position:relative;
+      overflow:hidden;
+    }
+    .exThumb img{
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:.92;
+    }
+    .exBody{padding:14px 14px 16px}
+    .exTitle{margin:0 0 8px; font-weight:900; color: rgba(2,6,23,.86)}
+    .exText{margin:0; font-size:14px; line-height:1.6; color: rgba(2,6,23,.66); font-weight:700}
+    .tagRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .tag{
+      font-size:12px;
+      font-weight:900;
+      color: rgba(2,6,23,.70);
+      border:1px solid rgba(2,6,23,.10);
+      background: rgba(255,255,255,.80);
+      padding:6px 10px;
+      border-radius: 999px;
+    }
+
+    /* ===== Modal ===== */
+    .modalOverlay{
+      position:fixed; inset:0;
+      background: rgba(2,6,23,.55);
+      display:none;
+      z-index:100;
+      padding: 22px;
+    }
+    .modal{
+      max-width: 980px;
+      margin: 4vh auto 0;
+      background:#fff;
+      border-radius: 22px;
+      border:1px solid rgba(2,6,23,.10);
+      box-shadow: 0 40px 120px rgba(2,6,23,.28);
+      overflow:hidden;
+      display:grid;
+      grid-template-rows:auto 1fr;
+    }
+    .modalHead{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 14px;
+      border-bottom:1px solid rgba(2,6,23,.08);
+      background: linear-gradient(90deg, rgba(14,165,233,.08), rgba(34,197,94,.06));
+    }
+    .modalHead .mTitle{font-weight:900; color: rgba(2,6,23,.80)}
+    .modalClose{
+      width:42px;height:42px;border-radius: 14px;
+      border:1px solid rgba(2,6,23,.10);
+      background:#fff;
+      display:grid; place-items:center;
+      cursor:pointer;
+    }
+    .modalBody{
+      padding: 16px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media (max-width:980px){
+      .modalBody{grid-template-columns:1fr}
+      .modal{margin: 2vh auto 0}
+    }
+    .mock{
+      border-radius: 18px;
+      border:1px solid rgba(2,6,23,.10);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      background: #0b1b3a;
+      min-height: 280px;
+      position:relative;
+    }
+    .mock img{width:100%;height:100%;object-fit:cover;opacity:.85}
+    .mSide{
+      border-radius: 18px;
+      border:1px solid rgba(2,6,23,.10);
+      box-shadow: var(--shadow2);
+      background:#fff;
+      padding:14px;
+    }
+    .mSide h3{margin:0 0 8px; font-size:16px; font-weight:900}
+    .mSide p{margin:0 0 10px; color: rgba(2,6,23,.66); line-height:1.65; font-weight:700; font-size:14px}
+    .mList{margin:0; padding:0; list-style:none; display:grid; gap:8px}
+    .mList li{display:flex; gap:10px; align-items:flex-start; color: rgba(2,6,23,.74); font-weight:700; font-size:14px; line-height:1.55}
+    .mList li:before{content:"✓"; font-weight:900; color: rgba(21,128,61,.95)}
+
+    /* ===== Video ===== */
     .videoWrap{
       max-width: 980px;
       margin: 0 auto;
@@ -349,15 +574,14 @@
       aspect-ratio: 16 / 9;
       background: #0b1b3a;
     }
-    .videoFrame iframe,
-    .videoFrame video{
+    .videoFrame iframe,.videoFrame video{
       position:absolute; inset:0;
       width:100%; height:100%;
       border:0;
       display:block;
     }
 
-    /* --- Marquee logos --- */
+    /* ===== Marquee logos ===== */
     .marquee{
       border-top:1px solid rgba(2,6,23,.06);
       border-bottom:1px solid rgba(2,6,23,.06);
@@ -379,17 +603,10 @@
       filter: grayscale(1);
       transition: opacity .2s ease, filter .2s ease, transform .2s ease;
     }
-    .logo:hover{
-      opacity:1;
-      filter: grayscale(0);
-      transform: translateY(-1px);
-    }
-    @keyframes scroll{
-      0%{transform: translateX(0)}
-      100%{transform: translateX(-50%)}
-    }
+    .logo:hover{opacity:1;filter: grayscale(0);transform: translateY(-1px)}
+    @keyframes scroll{0%{transform: translateX(0)}100%{transform: translateX(-50%)}}
 
-    /* --- Testimonials slider --- */
+    /* ===== Testimonials slider ===== */
     .tWrap{
       max-width: 980px;
       margin: 0 auto;
@@ -417,7 +634,6 @@
     }
     .iconBtn:hover{transform: translateY(-1px); border-color: rgba(14,165,233,.25)}
     .iconBtn svg{width:18px;height:18px; opacity:.8}
-
     .tBody{padding:18px}
     .quote{
       margin:0;
@@ -439,13 +655,11 @@
     }
     .who .meta{display:grid}
     .who .name{font-weight:900}
-    .who .role{font-size:13px; color: rgba(2,6,23,.58); font-weight:800}
+    .who .role{font-size:13px; color: rgba(2,6,23,.58); font-weight:900}
 
-    /* --- Contact --- */
-    .contactGrid{display:grid; grid-template-columns: repeat(4,1fr); gap:14px}
-    @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
-    @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
-
+    /* ===== Contact ===== */
+    .contactGrid{display:grid; grid-template-columns: repeat(3,1fr); gap:14px}
+    @media (max-width:980px){ .contactGrid{grid-template-columns:1fr} }
     .cBox{
       background:#fff;
       border:1px solid rgba(2,6,23,.10);
@@ -454,7 +668,7 @@
       padding: 16px;
     }
     .cBox .t{margin:0 0 6px; font-weight:900; color: rgba(2,6,23,.78)}
-    .cBox .v{margin:0; color: rgba(2,6,23,.64); font-weight:700; font-size:14px; line-height:1.6}
+    .cBox .v{margin:0; color: rgba(2,6,23,.64); font-weight:800; font-size:14px; line-height:1.6}
 
     footer{
       padding: 28px 0;
@@ -463,6 +677,7 @@
       font-size: 13px;
       border-top:1px solid rgba(2,6,23,.08);
       background: #fbfdff;
+      font-weight:700;
     }
 
     /* WhatsApp float */
@@ -475,7 +690,7 @@
       background: linear-gradient(90deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
       box-shadow: 0 18px 50px rgba(2,6,23,.18);
       display:grid; place-items:center;
-      z-index: 80;
+      z-index: 70;
       border:1px solid rgba(2,6,23,.08);
       transition: transform .15s ease, filter .15s ease;
     }
@@ -485,22 +700,23 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none!important; animation:none!important}
       #net{display:none}
+      .track{animation:none!important}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Top bar -->
+  <!-- Topbar (solo WhatsApp + LinkedIn opcional) -->
   <div class="topbar">
     <div class="container row">
       <div class="item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
-        <span>daianabeltran@gmail.com</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A18 18 0 0 1 4 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.01l-2.21 2.22Z"/></svg>
+        <span>WhatsApp: +54 299 603 2267</span>
       </div>
       <div class="item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A18 18 0 0 1 4 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.01l-2.21 2.22Z"/></svg>
-        <span>+54 299 603 2267</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14Zm-9 16v-7H7v7h3Zm-1.5-8.1A1.9 1.9 0 1 0 8.5 7a1.9 1.9 0 0 0 0 3.8ZM19 19v-4.1c0-2.5-1.3-3.7-3-3.7a2.6 2.6 0 0 0-2.3 1.3V12H11v7h2.7v-3.5c0-.9.2-1.8 1.3-1.8s1.1 1.1 1.1 1.8V19H19Z"/></svg>
+        <span>LinkedIn</span>
       </div>
     </div>
   </div>
@@ -509,7 +725,6 @@
   <header>
     <div class="container nav">
       <div class="brand">
-        <!-- Opcional: logo -->
         <img src="assets/brand/logo.png" alt="Prisma BI" onerror="this.style.display='none'">
         <div>
           <div class="name">PRISMA BI</div>
@@ -529,66 +744,173 @@
       <div class="navRight">
         <a class="btn" href="#packages">Ver opciones →</a>
         <a class="btn btnPrimary" id="cta-top" href="#" target="_blank" rel="noopener">Agendar diagnóstico</a>
-        <a class="btn burger" href="#menu" aria-label="Abrir menú" title="Menú">☰</a>
+        <button class="btn burger" id="openPanel" aria-label="Abrir menú" title="Menú">☰</button>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Mobile Overlay + Panel -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+  <aside class="panel" id="panel" aria-label="Menú móvil">
+    <div class="pHead">
+      <div class="t">Menú</div>
+      <button class="pClose" id="closePanel" aria-label="Cerrar">✕</button>
+    </div>
+    <nav class="pNav">
+      <a href="#home" data-close>Inicio</a>
+      <a href="#services" data-close>Servicios</a>
+      <a href="#method" data-close>Método</a>
+      <a href="#examples" data-close>Ejemplos</a>
+      <a href="#clients" data-close>Clientes</a>
+      <a href="#contact" data-close>Contacto</a>
+    </nav>
+    <div class="pFoot">
+      <a class="btn btnPrimary" id="cta-mobile" href="#" target="_blank" rel="noopener">Agendar diagnóstico</a>
+      <a class="btn" href="#packages" data-close>Ver opciones →</a>
+    </div>
+  </aside>
+
+  <!-- Hero Slider -->
   <section id="home" class="hero">
-    <div class="heroMedia" aria-hidden="true"></div>
-    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="slider" id="slider" aria-label="Slider principal">
 
-    <div class="container heroInner">
-      <div>
-        <div class="pill"><i></i> TABLERO · REGLAS · RUTINA SEMANAL</div>
+      <!-- Red animada -->
+      <canvas id="net" aria-hidden="true"></canvas>
 
-        <h1>Convertí datos en <span class="accent">decisiones claras</span>.</h1>
-
-        <p class="lede">
-          Somos una consultora boutique: ordenamos tus datos, definimos KPIs con criterio único
-          y lo bajamos a un tablero que <strong>se usa</strong> (con rutina semanal).
-          Menos “reportes sueltos”. Más control, foco y decisiones defendibles.
-        </p>
-
-        <div class="ctaRow">
-          <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener">Agendar diagnóstico (20 min)</a>
-          <a class="btn" href="#services">Ver qué resolvemos →</a>
-        </div>
-
-        <ul class="bullets">
-          <li><span class="check"></span><span><strong>Mapa de decisiones</strong>: qué mirar / qué ignorar / por qué.</span></li>
-          <li><span class="check"></span><span><strong>KPIs con definición única</strong> (glosario + fórmula + fuente).</span></li>
-          <li><span class="check"></span><span><strong>Control de datos (QA)</strong> para que el tablero no mienta.</span></li>
-        </ul>
-      </div>
-
-      <div class="heroCard" aria-label="Vista previa de entregable">
-        <div class="head">
-          <span>Entregable ejecutivo · lectura en 5 minutos</span>
-          <span style="font-weight:900;color:rgba(2,6,23,.55)">Prisma BI</span>
-        </div>
-        <div class="body">
-          <div class="statRow">
-            <div class="stat">
-              <div class="k">Ventas</div>
-              <div class="v">$ 128.4M</div>
+      <!-- Slide 1 -->
+      <div class="slide active" data-slide="0">
+        <div class="slideBg" style="background-image:url('assets/hero/slide1.jpg');"></div>
+        <div class="slideShade" aria-hidden="true"></div>
+        <div class="container heroInner">
+          <div class="heroGrid">
+            <div>
+              <div class="pill"><i></i> TABLERO · REGLAS · RUTINA SEMANAL</div>
+              <h1>Decisiones <span class="accent">defendibles</span> con datos.</h1>
+              <p class="lede">
+                Prisma BI implementa un sistema simple para <strong>medir, decidir y sostener</strong> decisiones:
+                KPIs con definición única, control de calidad (QA) y tablero ejecutivo de lectura rápida.
+              </p>
+              <div class="ctaRow">
+                <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener">Agendar diagnóstico (20 min)</a>
+                <a class="btn" href="#services">Ver qué resolvemos →</a>
+              </div>
+              <ul class="bullets">
+                <li><span class="check"></span><span><strong>Mapa de decisiones</strong>: qué mirar / qué ignorar / por qué.</span></li>
+                <li><span class="check"></span><span><strong>KPIs con criterio único</strong> (glosario + fórmula + fuente).</span></li>
+                <li><span class="check"></span><span><strong>QA</strong>: si el dato no cierra, el tablero no se usa.</span></li>
+              </ul>
             </div>
-            <div class="stat">
-              <div class="k">Margen</div>
-              <div class="v">23.8%</div>
+
+            <div class="heroCard">
+              <div class="head">
+                <span>Tablero ejecutivo · lectura en 5 minutos</span>
+                <span style="font-weight:900;color:rgba(2,6,23,.55)">Prisma BI</span>
+              </div>
+              <div class="body">
+                <div class="statRow">
+                  <div class="stat"><div class="k">Ventas</div><div class="v">$ 128.4M</div></div>
+                  <div class="stat"><div class="k">Margen</div><div class="v">23.8%</div></div>
+                  <div class="stat"><div class="k">Clientes TOP</div><div class="v">12</div></div>
+                </div>
+                <div class="mini"><strong>Objetivo:</strong> que cada métrica termine en una acción semanal.</div>
+              </div>
             </div>
-            <div class="stat">
-              <div class="k">Clientes TOP</div>
-              <div class="v">12</div>
-            </div>
-          </div>
-          <div class="mini">
-            <strong>Lectura:</strong> qué pasó, por qué pasó y cuál es la acción.
-            <br/>Objetivo: criterio único + rutina + control.
           </div>
         </div>
       </div>
+
+      <!-- Slide 2 -->
+      <div class="slide" data-slide="1">
+        <div class="slideBg" style="background-image:url('assets/hero/slide2.jpg');"></div>
+        <div class="slideShade" aria-hidden="true"></div>
+        <div class="container heroInner">
+          <div class="heroGrid">
+            <div>
+              <div class="pill"><i></i> RENTABILIDAD · CONTROL · FOCO</div>
+              <h1>Tu tablero no informa: <span class="accent">orienta</span>.</h1>
+              <p class="lede">
+                Si hoy tenés Excel, ERP o reportes sueltos, lo normal es que haya números… pero no haya verdad.
+                Ordenamos datos y dejamos un tablero que se puede defender en dirección.
+              </p>
+              <div class="ctaRow">
+                <a class="btn btnPrimary" href="#packages">Ver paquetes →</a>
+                <a class="btn" href="#examples">Ver ejemplos →</a>
+              </div>
+              <ul class="bullets">
+                <li><span class="check"></span><span>Separar <strong>clientes grandes</strong> de <strong>clientes rentables</strong>.</span></li>
+                <li><span class="check"></span><span>Detectar <strong>drenajes silenciosos</strong>: descuentos, logística, costos ocultos.</span></li>
+                <li><span class="check"></span><span>Reglas + rutina para sostener decisiones en el tiempo.</span></li>
+              </ul>
+            </div>
+
+            <div class="heroCard">
+              <div class="head"><span>Checklist QA · control de datos</span><span style="font-weight:900;color:rgba(2,6,23,.55)">Incluido</span></div>
+              <div class="body">
+                <div class="mini">
+                  <strong>Ejemplos de chequeos:</strong><br/>
+                  • Totales que cierran (Ventas / Costos / Margen)<br/>
+                  • Duplicados y nulos críticos<br/>
+                  • Fechas y períodos consistentes<br/>
+                  • Reglas de negocio documentadas
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide" data-slide="2">
+        <div class="slideBg" style="background-image:url('assets/hero/slide3.jpg');"></div>
+        <div class="slideShade" aria-hidden="true"></div>
+        <div class="container heroInner">
+          <div class="heroGrid">
+            <div>
+              <div class="pill"><i></i> IMPLEMENTACIÓN BOUTIQUE</div>
+              <h1>Menos “más gráficos”. Más <span class="accent">criterio</span>.</h1>
+              <p class="lede">
+                Prisma BI trabaja como consultora boutique: definimos el problema real, priorizamos y
+                entregamos un tablero usable con reglas. Sin humo. Sin sobrecarga.
+              </p>
+              <div class="ctaRow">
+                <a class="btn btnPrimary" href="#contact">Hablemos →</a>
+                <a class="btn" href="#method">Ver método →</a>
+              </div>
+              <ul class="bullets">
+                <li><span class="check"></span><span>Diagnóstico breve y accionable (entregable).</span></li>
+                <li><span class="check"></span><span>Implementación del tablero (Power BI) alineada a decisiones.</span></li>
+                <li><span class="check"></span><span>Rutina semanal para adopción real.</span></li>
+              </ul>
+            </div>
+
+            <div class="heroCard">
+              <div class="head"><span>Demo · 60–90s (tu marca)</span><span style="font-weight:900;color:rgba(2,6,23,.55)">Video</span></div>
+              <div class="body">
+                <div class="mini">
+                  Recomendación: video corto mostrando 3 cosas:
+                  <strong>problema → lectura del tablero → acción semanal</strong>.
+                  <br/>Se embebe abajo en “Video”.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button class="arrow prev" id="prevSlide" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 19 8.5 12l7-7 1.5 1.5L11.5 12l5.5 5.5z"/></svg>
+      </button>
+      <button class="arrow next" id="nextSlide" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M8.5 19 7 17.5 12.5 12 7 6.5 8.5 5l7 7z"/></svg>
+      </button>
+
+      <div class="dots" aria-label="Paginación">
+        <div class="dot active" data-dot="0"></div>
+        <div class="dot" data-dot="1"></div>
+        <div class="dot" data-dot="2"></div>
+      </div>
+
     </div>
   </section>
 
@@ -598,36 +920,36 @@
   <section id="services" class="sec">
     <div class="container">
       <h2 class="title">Servicios</h2>
-      <p class="sub">Tu empresa no necesita “más gráficos”. Necesita un sistema simple para medir, decidir y sostener decisiones semana a semana.</p>
+      <p class="sub">Tu empresa no necesita “más dashboards”. Necesita un sistema para medir, decidir y sostener decisiones con datos confiables.</p>
 
       <div class="grid3">
         <div class="card">
-          <div class="kicker"><span class="dot"></span> 1) Diagnóstico & Mapa de Decisiones</div>
+          <div class="kicker"><span class="kDot"></span> 1) Diagnóstico & Mapa de Decisión</div>
           <p class="small">Aclaramos el problema real, definimos KPIs útiles y armamos el plan del tablero (alcance + prioridades).</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Relevamiento ejecutivo: decisiones clave y dolores operativos.</span></li>
+            <li><span class="miniCheck"></span><span>Decisiones clave y dolores operativos.</span></li>
             <li><span class="miniCheck"></span><span>KPIs con definición única (sin discusiones internas).</span></li>
-            <li><span class="miniCheck"></span><span>Plan de tablero: qué va / qué no va / por qué.</span></li>
+            <li><span class="miniCheck"></span><span>Plan del tablero: qué va / qué no va / por qué.</span></li>
           </ul>
         </div>
 
         <div class="card">
-          <div class="kicker"><span class="dot"></span> 2) Dashboard Ejecutivo (Power BI)</div>
+          <div class="kicker"><span class="kDot"></span> 2) Dashboard Ejecutivo (Power BI)</div>
           <p class="small">Ventas · Costos · Rentabilidad. Un tablero claro, usable y listo para dirección.</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>KPIs + tendencias + cortes por producto/cliente/zona.</span></li>
-            <li><span class="miniCheck"></span><span>Lectura “5 minutos”: qué pasa, por qué, acción.</span></li>
-            <li><span class="miniCheck"></span><span>Iteración real: ajustes hasta que quede operativo.</span></li>
+            <li><span class="miniCheck"></span><span>Lectura “5 min”: qué pasó, por qué, acción.</span></li>
+            <li><span class="miniCheck"></span><span>Cortes por producto/cliente/zona/periodo.</span></li>
+            <li><span class="miniCheck"></span><span>Iteración real hasta que quede operativo.</span></li>
           </ul>
         </div>
 
         <div class="card">
-          <div class="kicker"><span class="dot"></span> 3) Control de Datos (QA) & Rutina</div>
-          <p class="small">Sin control, el tablero miente. Dejamos reglas + chequeos + rutina semanal para sostener decisiones.</p>
+          <div class="kicker"><span class="kDot"></span> 3) Control de Datos (QA) & Rutina</div>
+          <p class="small">Sin control, el tablero miente. Dejamos reglas + chequeos + rutina semanal.</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Chequeos: duplicados, nulos, totales que no cierran.</span></li>
-            <li><span class="miniCheck"></span><span>Reglas de negocio y glosario compartido.</span></li>
-            <li><span class="miniCheck"></span><span>Rutina: reunión semanal + acciones + seguimiento.</span></li>
+            <li><span class="miniCheck"></span><span>Duplicados, nulos, totales, coherencia de fechas.</span></li>
+            <li><span class="miniCheck"></span><span>Glosario de negocio + documentación simple.</span></li>
+            <li><span class="miniCheck"></span><span>Rutina semanal: decisiones + acciones + seguimiento.</span></li>
           </ul>
         </div>
       </div>
@@ -644,16 +966,16 @@
 
       <div class="grid3">
         <div class="card">
-          <div class="kicker"><span class="dot"></span> Paso 1 · Diagnóstico</div>
+          <div class="kicker"><span class="kDot"></span> Paso 1 · Diagnóstico</div>
           <p class="small">Definimos decisiones que hoy se toman “a ojo” y dónde se pierde margen/tiempo.</p>
         </div>
         <div class="card">
-          <div class="kicker"><span class="dot"></span> Paso 2 · Marco de medición</div>
-          <p class="small">KPIs + reglas + fuentes. Todos miran lo mismo.</p>
+          <div class="kicker"><span class="kDot"></span> Paso 2 · Criterio único</div>
+          <p class="small">KPIs + reglas + fuentes. Todos miran lo mismo. Se terminan las discusiones internas.</p>
         </div>
         <div class="card">
-          <div class="kicker"><span class="dot"></span> Paso 3 · Implementación + Rutina</div>
-          <p class="small">Tablero operativo + QA + reunión semanal para convertir datos en acciones.</p>
+          <div class="kicker"><span class="kDot"></span> Paso 3 · Implementación + Rutina</div>
+          <p class="small">Tablero operativo + QA + rutina semanal para transformar datos en acciones.</p>
         </div>
       </div>
     </div>
@@ -661,11 +983,86 @@
 
   <div class="sep"></div>
 
-  <!-- Video -->
+  <!-- Ejemplos (mini cards clickeables + modal) -->
   <section id="examples" class="sec">
     <div class="container">
+      <h2 class="title">Ejemplos</h2>
+      <p class="sub">Secciones típicas que “cierran” en dirección. Podés reemplazar las imágenes por tus demos.</p>
+
+      <div class="examplesGrid">
+        <article class="exCard" data-example="0" role="button" aria-label="Abrir ejemplo 1">
+          <div class="exThumb">
+            <img src="assets/examples/ex1.jpg" alt="Ejemplo: Rentabilidad por cliente" onerror="this.remove()">
+          </div>
+          <div class="exBody">
+            <h3 class="exTitle">Clientes que dejan margen</h3>
+            <p class="exText">Separar “grandes” de “rentables”. Detectar drenajes silenciosos.</p>
+            <div class="tagRow">
+              <span class="tag">Rentabilidad</span><span class="tag">Clientes</span><span class="tag">Acción</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="exCard" data-example="1" role="button" aria-label="Abrir ejemplo 2">
+          <div class="exThumb">
+            <img src="assets/examples/ex2.jpg" alt="Ejemplo: Productos" onerror="this.remove()">
+          </div>
+          <div class="exBody">
+            <h3 class="exTitle">Productos que suman vs consumen</h3>
+            <p class="exText">Mix, margen y volumen. Qué empujar y qué corregir.</p>
+            <div class="tagRow">
+              <span class="tag">Productos</span><span class="tag">Mix</span><span class="tag">Margen</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="exCard" data-example="2" role="button" aria-label="Abrir ejemplo 3">
+          <div class="exThumb">
+            <img src="assets/examples/ex3.jpg" alt="Ejemplo: Operaciones" onerror="this.remove()">
+          </div>
+          <div class="exBody">
+            <h3 class="exTitle">Operación y costos ocultos</h3>
+            <p class="exText">Logística, tiempos, costos indirectos y oportunidades rápidas.</p>
+            <div class="tagRow">
+              <span class="tag">Operación</span><span class="tag">Costos</span><span class="tag">QA</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <div class="modalHead">
+        <div class="mTitle" id="mTitle">Ejemplo</div>
+        <button class="modalClose" id="modalClose" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modalBody">
+        <div class="mock">
+          <img id="mImg" src="" alt="Vista ejemplo">
+        </div>
+        <div class="mSide">
+          <h3 id="mH">Qué resuelve</h3>
+          <p id="mP"></p>
+          <h3 style="margin-top:12px">Qué mirás en 5 minutos</h3>
+          <ul class="mList" id="mList"></ul>
+          <div style="margin-top:12px">
+            <a class="btn btnPrimary" id="cta-example" href="#" target="_blank" rel="noopener">Quiero esto en mi empresa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Video -->
+  <section class="sec" style="background:linear-gradient(180deg,#fff,#fbfdff)">
+    <div class="container">
       <h2 class="title">Video (tu marca)</h2>
-      <p class="sub">Acá podés mostrar un demo corto (60–90s): qué problema resuelve tu tablero y cómo se lee.</p>
+      <p class="sub">Demo corto (60–90s): problema → tablero → acción semanal. Eso vende muchísimo.</p>
 
       <div class="videoWrap">
         <div class="videoBar">
@@ -674,18 +1071,14 @@
         </div>
 
         <div class="videoFrame">
-          <!-- OPCIÓN A (RECOMENDADA): YouTube/Vimeo embebido
-               1) Subí el video como "No listado"
-               2) Pegá el link, sacá el ID, y reemplazá abajo
-               Ej: https://www.youtube.com/watch?v=VIDEO_ID  -->
+          <!-- OPCIÓN A: YouTube/Vimeo embebido (No listado). Reemplazá VIDEO_ID -->
           <iframe
-            id="yt"
             src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
             title="Demo Prisma BI"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
 
-          <!-- OPCIÓN B: Video MP4 local (comentá el iframe y descomentá esto)
+          <!-- OPCIÓN B: MP4 local (comentá el iframe y descomentá esto)
           <video controls playsinline poster="assets/video/poster.jpg">
             <source src="assets/video/prisma-demo.mp4" type="video/mp4"/>
             Tu navegador no soporta video HTML5.
@@ -699,15 +1092,14 @@
   <!-- Cinta logos -->
   <section id="clients" class="marquee" aria-label="Clientes">
     <div class="container" style="margin-bottom:10px">
-      <div style="font-weight:900; color:rgba(2,6,23,.78); text-align:center;">Clientes / marcas (ejemplo)</div>
+      <div style="font-weight:900; color:rgba(2,6,23,.78); text-align:center;">Clientes / marcas (o sectores)</div>
       <div style="text-align:center; color:rgba(2,6,23,.60); font-size:13px; font-weight:800; margin-top:6px;">
-        Reemplazá estos logos por los tuyos (o poné “Sectores” si no querés marcas todavía).
+        Si aún no querés poner marcas, reemplazá por “Retail · Servicios · Industria · Salud · Educación · Oil & Gas”.
       </div>
     </div>
 
-    <!-- truco: duplicamos la fila para que el scroll sea continuo -->
     <div style="display:flex; width:100%; overflow:hidden;">
-      <div class="track" id="trackA">
+      <div class="track">
         <img class="logo" src="assets/logos/logo1.png" alt="Cliente 1" onerror="this.style.display='none'">
         <img class="logo" src="assets/logos/logo2.png" alt="Cliente 2" onerror="this.style.display='none'">
         <img class="logo" src="assets/logos/logo3.png" alt="Cliente 3" onerror="this.style.display='none'">
@@ -727,15 +1119,15 @@
   <div class="sep"></div>
 
   <!-- Paquetes -->
-  <section id="packages" class="sec" style="background:linear-gradient(180deg,#fff,#fbfdff)">
+  <section id="packages" class="sec">
     <div class="container">
       <h2 class="title">Paquetes</h2>
-      <p class="sub">Tres opciones claras. Todo arranca por diagnóstico para no construir a ciegas.</p>
+      <p class="sub">Tres opciones claras. La base siempre es diagnóstico (para no construir a ciegas).</p>
 
       <div class="grid3">
         <div class="card">
-          <div class="kicker"><span class="dot"></span> 1) Diagnóstico (entregable)</div>
-          <p class="small"><strong>Ideal si:</strong> querés ordenar y definir KPIs antes de invertir en un tablero.</p>
+          <div class="kicker"><span class="kDot"></span> 1) Diagnóstico (entregable)</div>
+          <p class="small"><strong>Para quién:</strong> cuando hay dudas y querés ordenar sin gastar de más.</p>
           <ul class="miniBullets">
             <li><span class="miniCheck"></span><span>Mapa de decisiones + KPIs definidos.</span></li>
             <li><span class="miniCheck"></span><span>Plan del tablero (alcance + prioridades).</span></li>
@@ -744,20 +1136,20 @@
         </div>
 
         <div class="card">
-          <div class="kicker"><span class="dot"></span> 2) Dashboard BI (dirección)</div>
-          <p class="small"><strong>Ideal si:</strong> necesitás tablero ejecutivo de rentabilidad y lectura rápida.</p>
+          <div class="kicker"><span class="kDot"></span> 2) Dashboard BI (dirección)</div>
+          <p class="small"><strong>Para quién:</strong> si querés tablero ejecutivo de rentabilidad y lectura rápida.</p>
           <ul class="miniBullets">
             <li><span class="miniCheck"></span><span>Diagnóstico + tablero ventas/costos/margen.</span></li>
             <li><span class="miniCheck"></span><span>Segmentación por producto/cliente/zona.</span></li>
-            <li><span class="miniCheck"></span><span>1 ronda de ajustes incluida.</span></li>
+            <li><span class="miniCheck"></span><span>Iteración de ajustes incluida.</span></li>
           </ul>
         </div>
 
         <div class="card">
-          <div class="kicker"><span class="dot"></span> 3) Sistema de decisión (áreas)</div>
-          <p class="small"><strong>Ideal si:</strong> querés consistencia y adopción real (no solo mirar).</p>
+          <div class="kicker"><span class="kDot"></span> 3) Sistema de decisión (áreas)</div>
+          <p class="small"><strong>Para quién:</strong> si querés consistencia y adopción real (no solo “mirar”).</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Reglas + control de calidad (QA) continuo.</span></li>
+            <li><span class="miniCheck"></span><span>Reglas + control de calidad (QA).</span></li>
             <li><span class="miniCheck"></span><span>Tableros por área (dir/comercial/fin/ops).</span></li>
             <li><span class="miniCheck"></span><span>Acompañamiento mensual (rutina + mejora).</span></li>
           </ul>
@@ -768,15 +1160,15 @@
 
   <div class="sep"></div>
 
-  <!-- Testimonios (estilo “reseñas” en carrusel) -->
-  <section class="sec">
+  <!-- Testimonios (para consultora: mejor “rol + industria + resultado”) -->
+  <section class="sec" style="background:linear-gradient(180deg,#fff,#fbfdff)">
     <div class="container">
-      <h2 class="title">Lo que dicen</h2>
-      <p class="sub">Si todavía no tenés reseñas, podés empezar con 3 testimonios de trabajos/pilotos (con permiso). Después los reemplazamos por reseñas reales.</p>
+      <h2 class="title">Testimonios</h2>
+      <p class="sub">En consultoría de data, esto convierte más que “estrellas”: rol + industria + resultado. (Después lo reemplazamos por reseñas reales).</p>
 
       <div class="tWrap" aria-label="Testimonios">
         <div class="tTop">
-          <div class="l">Testimonios</div>
+          <div class="l">Lo que dicen</div>
           <div class="tBtns">
             <button class="iconBtn" id="prev" aria-label="Anterior">
               <svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 19 8.5 12l7-7 1.5 1.5L11.5 12l5.5 5.5z"/></svg>
@@ -798,22 +1190,20 @@
         </div>
       </div>
 
-      <!-- Nota sobre Google Reviews -->
       <div style="max-width:980px;margin:14px auto 0;color:rgba(2,6,23,.62);font-size:13px;line-height:1.6;font-weight:700">
-        <strong>Sobre “comentarios de Google”:</strong> Google no permite “traer” reseñas por código sin API/servicio.
-        La opción legal/rápida es: (a) embebir un <em>Google Maps</em> de tu ficha, o (b) usar testimonios aprobados por clientes.
-        Si querés, te armo la sección “Google Maps embed” cuando tengas tu ficha creada.
+        Si querés “como Google” (estético), lo replico visualmente, pero con tus testimonios/casos.
+        Traer reseñas reales desde Google requiere ficha de Google Business + embed (Maps) o una integración con API.
       </div>
     </div>
   </section>
 
   <div class="sep"></div>
 
-  <!-- Contacto -->
-  <section id="contact" class="sec" style="background:linear-gradient(180deg,#fff,#fbfdff)">
+  <!-- Contacto (sin mail personal) -->
+  <section id="contact" class="sec">
     <div class="container">
       <h2 class="title">Contacto</h2>
-      <p class="sub">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.</p>
+      <p class="sub">Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y claridad.</p>
 
       <div class="contactGrid">
         <div class="cBox">
@@ -825,18 +1215,14 @@
           <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p>
         </div>
         <div class="cBox">
-          <p class="t">Email</p>
-          <p class="v"><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></p>
-        </div>
-        <div class="cBox">
           <p class="t">LinkedIn</p>
-          <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">/in/daiana-beltran</a></p>
+          <p class="v"><a href="https://www.linkedin.com/" target="_blank" rel="noopener">Abrir perfil</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
+  <footer>© <span id="y"></span> Prisma BI · Consultora de Data & BI</footer>
 
   <!-- WhatsApp floating -->
   <a class="waFloat" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -848,6 +1234,23 @@
   <script>
     // Año footer
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // WhatsApp links (tu número)
+    (function(){
+      const phone = "542996032267";
+      const msg =
+        "¡Hola! 👋 Vi Prisma BI y quiero agendar un diagnóstico (20 min).\n\n" +
+        "Mi negocio es: ____\n" +
+        "Qué necesito mirar: (ventas / costos / rentabilidad / performance) ____\n" +
+        "Fuentes de datos: (Excel / sistema / ERP / etc.) ____\n\n" +
+        "¿Cómo seguimos?";
+      const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+
+      ["cta-top","cta-hero","cta-mobile","wa-link","wa-float","cta-example"].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el) el.href=url;
+      });
+    })();
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -861,24 +1264,108 @@
       });
     });
 
-    // WhatsApp links
-    (function(){
-      const phone = "542996032267";
-      const msg =
-        "¡Hola Daiana! 👋 Vi Prisma BI y quiero agendar un diagnóstico.\n\n" +
-        "Mi negocio es: ____\n" +
-        "Qué necesito mirar: (ventas / costos / rentabilidad / performance) ____\n" +
-        "Fuentes de datos: (Excel / sistema / ERP / Mercado Libre / etc.) ____\n\n" +
-        "¿Cómo seguimos?";
-      const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+    // Mobile panel
+    const overlay = document.getElementById('overlay');
+    const panel = document.getElementById('panel');
+    const openPanel = document.getElementById('openPanel');
+    const closePanel = document.getElementById('closePanel');
 
-      ["cta-top","cta-hero","wa-link","wa-float"].forEach(id=>{
-        const el=document.getElementById(id);
-        if(el) el.href=url;
+    function showPanel(){
+      overlay.classList.add('show');
+      panel.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+    }
+    function hidePanel(){
+      overlay.classList.remove('show');
+      panel.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+    }
+    openPanel?.addEventListener('click', showPanel);
+    closePanel?.addEventListener('click', hidePanel);
+    overlay?.addEventListener('click', hidePanel);
+    panel.querySelectorAll('[data-close]').forEach(a=>a.addEventListener('click', hidePanel));
+
+    // Hero Slider
+    const slides = [...document.querySelectorAll('.slide')];
+    const dots = [...document.querySelectorAll('.dot')];
+    let idx = 0;
+    let timer = null;
+
+    function go(i){
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s,si)=>s.classList.toggle('active', si===idx));
+      dots.forEach((d,di)=>d.classList.toggle('active', di===idx));
+    }
+    function next(){ go(idx+1); }
+    function prev(){ go(idx-1); }
+
+    document.getElementById('nextSlide')?.addEventListener('click', ()=>{ next(); reset(); });
+    document.getElementById('prevSlide')?.addEventListener('click', ()=>{ prev(); reset(); });
+    dots.forEach(d=>d.addEventListener('click', ()=>{ go(+d.dataset.dot); reset(); }));
+
+    function reset(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(next, 6500);
+    }
+    reset();
+
+    // Ejemplos (modal)
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const mTitle = document.getElementById('mTitle');
+    const mImg = document.getElementById('mImg');
+    const mP = document.getElementById('mP');
+    const mList = document.getElementById('mList');
+
+    const examples = [
+      {
+        title:"Clientes que dejan margen",
+        img:"assets/examples/ex1.jpg",
+        desc:"Separar clientes 'grandes' de clientes 'rentables'. Detectar descuentos, devoluciones, logística y costos que drenan margen.",
+        points:["Top clientes por margen y por ventas (no es lo mismo).","Rentabilidad por segmento/zona.","Drenajes: descuentos, logística, reclamos.","Acción: a quién empujar, a quién corregir, a quién soltar."]
+      },
+      {
+        title:"Productos que suman vs consumen",
+        img:"assets/examples/ex2.jpg",
+        desc:"Ordenar el mix: qué productos empujar, cuáles ajustar precio/costo y cuáles están consumiendo operación.",
+        points:["Margen y volumen por categoría/subcategoría.","Top productos por margen real.","Descuentos y variación de precio.","Acción: foco comercial y ajustes de pricing."]
+      },
+      {
+        title:"Operación y costos ocultos",
+        img:"assets/examples/ex3.jpg",
+        desc:"Identificar cuellos de botella y costos indirectos: tiempos, logística, retrabajos y errores de carga.",
+        points:["Tiempos/lead time y variabilidad.","Costos ocultos por proceso.","Calidad de datos (QA) por fuente.","Acción: quick wins operativos medibles."]
+      }
+    ];
+
+    function openModal(i){
+      const ex = examples[i];
+      mTitle.textContent = ex.title;
+      mImg.src = ex.img;
+      mImg.alt = ex.title;
+      mP.textContent = ex.desc;
+      mList.innerHTML = "";
+      ex.points.forEach(p=>{
+        const li = document.createElement('li');
+        li.textContent = p;
+        mList.appendChild(li);
       });
-    })();
+      modalOverlay.style.display = "block";
+      modalOverlay.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      modalOverlay.style.display = "none";
+      modalOverlay.setAttribute('aria-hidden','true');
+    }
 
-    // Testimonios (carousel simple)
+    document.querySelectorAll('.exCard').forEach(card=>{
+      card.addEventListener('click', ()=> openModal(+card.dataset.example));
+    });
+    modalClose?.addEventListener('click', closeModal);
+    modalOverlay?.addEventListener('click', (e)=>{ if(e.target === modalOverlay) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === "Escape") closeModal(); });
+
+    // Testimonios
     const testimonials = [
       { q:"“En 2 semanas pasamos de reportes sueltos a un tablero que se lee en 5 minutos. Ahora las reuniones terminan en acciones.”", n:"Directora Comercial", r:"PyME · Retail" },
       { q:"“Lo mejor: KPIs con criterio único. Se terminó la discusión de ‘mis números vs tus números’.”", n:"Gerente de Operaciones", r:"Servicios · LATAM" },
@@ -893,7 +1380,7 @@
     document.getElementById('prev').addEventListener('click', ()=>{ t = (t - 1 + testimonials.length) % testimonials.length; paintT(); });
     document.getElementById('next').addEventListener('click', ()=>{ t = (t + 1) % testimonials.length; paintT(); });
 
-    // --- Canvas network (líneas blancas en movimiento tipo Overdata) ---
+    // Canvas Network (líneas blancas MUY visibles)
     (function(){
       const canvas = document.getElementById('net');
       const hero = document.querySelector('.hero');
@@ -901,15 +1388,17 @@
 
       let w, h, dpr;
       const nodes = [];
-      const NODE_COUNT = 54;          // más nodos = más red
-      const LINK_DIST = 155;          // distancia de link
-      const SPEED = 0.35;             // velocidad
-      const DOT_R = 1.25;             // tamaño del nodo
+
+      // Ajustes clave para que se vea como Overdata:
+      const NODE_COUNT = 70;        // más nodos = más red
+      const LINK_DIST = 175;        // más distancia = más conexiones
+      const SPEED = 0.33;           // movimiento suave
+      const DOT_R = 1.35;           // tamaño del nodo
 
       function resize(){
         dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
         w = Math.floor(hero.clientWidth);
-        h = Math.floor(hero.clientHeight);
+        h = Math.floor(hero.querySelector('.slider').clientHeight);
         canvas.width = Math.floor(w * dpr);
         canvas.height = Math.floor(h * dpr);
         canvas.style.width = w + 'px';
@@ -934,12 +1423,10 @@
       function step(){
         ctx.clearRect(0,0,w,h);
 
-        // fondo suave (para que se vean más las líneas)
-        // (si lo querés aún más visible, subí alpha)
-        ctx.fillStyle = 'rgba(255,255,255,0.02)';
+        // (Muy sutil) para que se note el movimiento
+        ctx.fillStyle = 'rgba(255,255,255,0.015)';
         ctx.fillRect(0,0,w,h);
 
-        // mover nodos
         for(const n of nodes){
           n.x += n.vx;
           n.y += n.vy;
@@ -947,7 +1434,7 @@
           if(n.y < 0 || n.y > h) n.vy *= -1;
         }
 
-        // dibujar links
+        // Links
         for(let i=0;i<nodes.length;i++){
           for(let j=i+1;j<nodes.length;j++){
             const a = nodes[i], b = nodes[j];
@@ -955,7 +1442,8 @@
             const dy = a.y - b.y;
             const dist = Math.sqrt(dx*dx + dy*dy);
             if(dist < LINK_DIST){
-              const alpha = 0.34 * (1 - dist / LINK_DIST); // visibilidad líneas
+              // alpha alto -> líneas visibles
+              const alpha = 0.62 * (1 - dist / LINK_DIST);
               ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
               ctx.lineWidth = 1;
               ctx.beginPath();
@@ -966,9 +1454,9 @@
           }
         }
 
-        // puntos
+        // Dots
         for(const n of nodes){
-          ctx.fillStyle = 'rgba(255,255,255,0.95)';
+          ctx.fillStyle = 'rgba(255,255,255,0.98)';
           ctx.beginPath();
           ctx.arc(n.x,n.y, DOT_R, 0, Math.PI*2);
           ctx.fill();
@@ -988,14 +1476,8 @@
         init();
       });
 
-      // Pausa si no visible (performance)
-      document.addEventListener('visibilitychange', ()=>{
-        // No cortamos RAF para mantener simple. Si querés, te lo optimizo.
-      });
-
       boot();
     })();
   </script>
 </body>
 </html>
-
