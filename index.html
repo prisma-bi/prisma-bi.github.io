@@ -1,730 +1,579 @@
+<!-- ✅ PRISMA BI — Landing (1 archivo) con: red neuronal animada PRO + mejor contraste + Opiniones con Google -->
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Prisma BI — Dirección • Rentabilidad • Control</title>
-  <meta name="description" content="Prisma BI ayuda a PyMEs y empresas a ordenar datos (Excel, ERP, sistemas) y convertirlos en decisiones consistentes: criterio único, control (QA) y rutina semanal." />
-
-  <!-- Tipografías (similar vibe pro/tech) -->
+  <meta name="description" content="Prisma BI instala un sistema de lectura ejecutiva: KPIs con definición única, control de datos (QA) y rutina semanal por área para decidir con criterio y sin discusiones." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #ffffff;
-      --ink: #0b1220;
-      --muted:#5b667a;
-      --line:#e7edf6;
+      --bg:#0b1220;
+      --ink:#0b1220;
+      --text:#0f172a;
+      --muted:#5b6475;
+
       --card:#ffffff;
-      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
-      --shadow2: 0 10px 30px rgba(15, 23, 42, .08);
-      --radius: 18px;
+      --line:rgba(15,23,42,.10);
 
-      --brand:#1f6feb;
-      --brand2:#12c2e9;
-      --brand3:#6a5cff;
+      --brand:#1d7dff;
+      --brand2:#15c7d2;
+      --shadow: 0 18px 50px rgba(2,6,23,.10);
 
-      --soft:#f6f9ff;
-      --soft2:#f3f6fb;
-      --chip:#eef5ff;
-      --ok:#19c37d;
-      --warn:#ffb020;
+      --r:18px;
+      --r2:24px;
+      --max:1160px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--ink);
-      line-height:1.45;
-      overflow-x:hidden;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:#fff}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-    a{ color:inherit; text-decoration:none; }
-    .container{ width:min(1180px, calc(100% - 40px)); margin:0 auto; }
-
-    /* Topbar */
+    /* Top bar */
     .topbar{
-      background: linear-gradient(90deg, rgba(31,111,235,.10), rgba(18,194,233,.10), rgba(106,92,255,.08));
-      border-bottom:1px solid rgba(15,23,42,.08);
-      font-size:13px;
+      position:sticky;top:0;z-index:50;
+      background:linear-gradient(90deg, rgba(29,125,255,.10), rgba(21,199,210,.10));
+      border-bottom:1px solid rgba(2,6,23,.06);
+      backdrop-filter: blur(10px);
     }
-    .topbar .wrap{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 0; gap:14px; flex-wrap:wrap;
+    .topbar .row{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;padding:10px 0;
     }
-    .top-left, .top-right{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.65);
-      border-radius:999px;
-      backdrop-filter: blur(8px);
+    .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      background:#fff;border:1px solid rgba(2,6,23,.08);
+      color:rgba(15,23,42,.78);font-size:13px
     }
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background: var(--ok);
-      box-shadow:0 0 0 6px rgba(25,195,125,.12);
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--brand2);box-shadow:0 0 14px rgba(21,199,210,.65)}
+    .ctaTop{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      color:#fff;font-weight:800;border:0;cursor:pointer;
+      box-shadow: 0 14px 30px rgba(29,125,255,.22);
+      white-space:nowrap;
     }
 
-    /* Header */
+    /* Header nav */
     header{
-      position:sticky; top:0; z-index:50;
-      background:rgba(255,255,255,.86);
-      backdrop-filter: blur(12px);
-      border-bottom:1px solid rgba(15,23,42,.08);
+      background:#fff;
+      border-bottom:1px solid rgba(2,6,23,.06);
     }
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:16px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;padding:14px 0;
     }
     .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width:220px;
+      display:flex;align-items:center;gap:12px;min-width:220px
     }
     .logo{
-      width:40px; height:40px; border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, var(--brand2), var(--brand), var(--brand3));
-      box-shadow: 0 10px 25px rgba(31,111,235,.25);
+      width:42px;height:42px;border-radius:14px;
+      background: radial-gradient(circle at 30% 30%, rgba(21,199,210,.95), rgba(29,125,255,.95));
+      box-shadow: 0 16px 35px rgba(29,125,255,.22);
     }
-    .brand strong{ font-weight:800; letter-spacing:.2px; }
-    .brand small{
-      display:block;
-      color:var(--muted);
-      font-weight:600;
-      margin-top:2px;
-      font-size:12px;
-    }
+    .brand b{display:block;font-size:15px;letter-spacing:.3px}
+    .brand small{display:block;color:rgba(15,23,42,.6);font-weight:700;margin-top:2px}
 
-    nav ul{
-      list-style:none; padding:0; margin:0;
-      display:flex; gap:18px; align-items:center;
-    }
-    nav a{
-      color:rgba(11,18,32,.78);
-      font-weight:700;
-      font-size:14px;
-      padding:10px 10px;
-      border-radius:10px;
-    }
-    nav a:hover{ background:rgba(31,111,235,.07); color:rgba(11,18,32,.92); }
-
-    .actions{ display:flex; gap:10px; align-items:center; }
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{font-weight:700;color:rgba(15,23,42,.78);font-size:14px}
+    nav a:hover{color:rgba(15,23,42,1)}
+    .navRight{display:flex;gap:10px;align-items:center}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:999px;
-      border:1px solid rgba(15,23,42,.12);
-      background:#fff;
-      box-shadow: 0 8px 18px rgba(15,23,42,.06);
-      font-weight:800;
-      cursor:pointer;
-      transition:.2s transform, .2s box-shadow, .2s background;
-      white-space:nowrap;
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:999px;
+      font-weight:800;font-size:14px;border:1px solid rgba(2,6,23,.10);
+      background:#fff;cursor:pointer;
     }
-    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(15,23,42,.10); }
     .btn.primary{
-      border:none;
-      color:#fff;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 16px 36px rgba(31,111,235,.22);
+      border:0;color:#fff;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      box-shadow: 0 14px 30px rgba(29,125,255,.20);
     }
-    .btn.primary:hover{ box-shadow: 0 22px 46px rgba(31,111,235,.28); }
-    .btn.ghost{
-      background: rgba(255,255,255,.7);
+    .burger{
+      display:none; width:42px;height:42px;border-radius:12px;
+      border:1px solid rgba(2,6,23,.10); background:#fff; cursor:pointer;
+      align-items:center;justify-content:center; flex-direction:column; gap:5px;
     }
+    .burger span{width:18px;height:2px;background:rgba(15,23,42,.75);border-radius:2px}
 
-    /* Mobile nav */
-    .burger{ display:none; }
-    .mobile-panel{
+    /* Mobile panel */
+    .panel{
       display:none;
-      border-top:1px solid rgba(15,23,42,.08);
-      background:rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
+      border-top:1px solid rgba(2,6,23,.06);
+      padding:12px 0;
     }
-    .mobile-panel a{
-      display:block;
-      padding:14px 0;
-      border-bottom:1px solid rgba(15,23,42,.06);
-      font-weight:800;
-      color:rgba(11,18,32,.86);
+    .panel a{
+      display:block;padding:10px 0;font-weight:800;color:rgba(15,23,42,.82)
     }
-    .mobile-panel .container{ padding:10px 0; }
 
-    /* Hero */
+    /* HERO with animated network */
     .hero{
       position:relative;
-      background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 65%, #ffffff 100%);
       overflow:hidden;
-      border-bottom:1px solid rgba(15,23,42,.06);
+      background:
+        radial-gradient(1100px 520px at 20% 15%, rgba(29,125,255,.18), transparent 55%),
+        radial-gradient(900px 480px at 85% 35%, rgba(21,199,210,.18), transparent 55%),
+        linear-gradient(180deg, #f7fbff 0%, #ffffff 60%);
+      border-bottom:1px solid rgba(2,6,23,.06);
     }
-    .hero-inner{
+    .heroInner{
       position:relative;
-      padding:54px 0 34px;
-      min-height: 560px;
+      padding:34px 0 34px;
+    }
+    .heroGrid{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap:28px;
-      align-items:center;
+      gap:18px;
+      align-items:stretch;
     }
-    .hero-kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(31,111,235,.08);
-      border:1px solid rgba(31,111,235,.18);
-      color:rgba(11,18,32,.88);
-      font-weight:900;
-      font-size:12px;
-      letter-spacing:.3px;
-      margin-bottom:14px;
-      width:fit-content;
-    }
-    .hero h1{
-      font-size: clamp(36px, 4.3vw, 56px);
-      line-height:1.02;
-      letter-spacing:-.6px;
-      margin:0 0 12px;
-      font-weight:900;
-    }
-    .accent{
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .hero p{
-      margin:0 0 18px;
-      color:rgba(11,18,32,.72);
-      font-size: 16px;
-      font-weight:700;
-      max-width: 54ch;
-    }
-    .hero-ctas{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin:16px 0 16px;
-    }
-    .bullets{
-      margin:14px 0 0;
-      display:grid; gap:10px;
-      padding:0;
-      list-style:none;
-    }
-    .bullets li{
-      display:flex; gap:10px; align-items:flex-start;
-      color:rgba(11,18,32,.78);
-      font-weight:750;
-      background: rgba(255,255,255,.72);
-      border:1px solid rgba(15,23,42,.10);
-      border-radius:14px;
-      padding:10px 12px;
-      box-shadow: 0 10px 24px rgba(15,23,42,.06);
-      backdrop-filter: blur(6px);
-    }
-    .check{
-      width:18px; height:18px; border-radius:7px;
-      background: rgba(25,195,125,.16);
-      display:inline-flex; align-items:center; justify-content:center;
-      margin-top:2px;
-      flex:0 0 auto;
-      border:1px solid rgba(25,195,125,.30);
-    }
-    .check svg{ width:12px; height:12px; fill: var(--ok); }
 
-    /* Right hero card */
-    .hero-card{
+    /* Slider */
+    .slider{
       position:relative;
-      background: rgba(255,255,255,.78);
-      border:1px solid rgba(15,23,42,.10);
-      border-radius: 22px;
+      min-height:380px;
+      border-radius:var(--r2);
       box-shadow: var(--shadow);
+      background:#0b1220;
       overflow:hidden;
-      padding:18px;
-      backdrop-filter: blur(10px);
+      border:1px solid rgba(2,6,23,.10);
     }
-    .hero-card .mini-title{
-      font-weight:900;
-      color:rgba(11,18,32,.86);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
+    .slide{
+      position:absolute; inset:0;
+      opacity:0; transform:translateX(10px);
+      transition: opacity .45s ease, transform .45s ease;
     }
-    .badge{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(18,194,233,.12);
-      border:1px solid rgba(18,194,233,.24);
-      color:rgba(11,18,32,.86);
-      font-weight:900;
-      white-space:nowrap;
-    }
-    .grid2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-    .stat{
-      background: rgba(246,249,255,.9);
-      border:1px solid rgba(15,23,42,.08);
-      border-radius:16px;
-      padding:12px;
-    }
-    .stat strong{
-      display:block;
-      font-weight:900;
-      color:rgba(11,18,32,.90);
-      font-size:13px;
-      margin-bottom:6px;
-    }
-    .stat span{ color:rgba(11,18,32,.68); font-weight:800; font-size:13px; }
-    .hero-card .note{
-      margin-top:12px;
-      font-size:13px;
-      font-weight:800;
-      color:rgba(11,18,32,.68);
-      background: rgba(255,255,255,.8);
-      border:1px dashed rgba(15,23,42,.16);
-      border-radius:14px;
-      padding:10px 12px;
+    .slide.active{opacity:1; transform:translateX(0)}
+    .bg{
+      position:absolute; inset:0;
+      background-size:cover;background-position:center;
+      filter: saturate(1.05) contrast(1.05);
+      transform:scale(1.03);
     }
 
-    /* Network canvas overlay in hero */
-    #network{
+    /* ✅ Overlay para que NO quede gris y se LEA bien */
+    .overlay{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(850px 520px at 20% 20%, rgba(255,255,255,.12), transparent 55%),
+        radial-gradient(700px 520px at 80% 35%, rgba(21,199,210,.10), transparent 60%),
+        linear-gradient(90deg, rgba(2,6,23,.80) 0%, rgba(2,6,23,.55) 55%, rgba(2,6,23,.35) 100%);
+    }
+
+    /* Neural network canvas */
+    #net{
       position:absolute; inset:0;
       width:100%; height:100%;
       opacity:1;
+      mix-blend-mode: screen;
       pointer-events:none;
     }
-    /* Soft vignette so text always reads */
-    .hero-vignette{
-      position:absolute; inset:0;
+
+    .slideContent{
+      position:relative;
+      height:100%;
+      display:flex;
+      padding:26px;
+    }
+    .leftCol{
+      width:min(560px, 100%);
+      display:flex; flex-direction:column; gap:14px;
+      justify-content:center;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 12px;border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.92);
+      font-weight:800;font-size:12px;letter-spacing:.4px;
+      width:max-content;
+    }
+    .h1{
+      margin:0;
+      font-size: clamp(30px, 3.8vw, 48px);
+      line-height:1.03;
+      color:#fff;
+      letter-spacing:-.6px;
+      text-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .h1 .accent{
+      background: linear-gradient(135deg, #7dd3ff, #4ff1ff);
+      -webkit-background-clip:text;background-clip:text;
+      color:transparent;
+      text-shadow:none;
+    }
+    .lead{
+      margin:0;
+      color:rgba(255,255,255,.86);
+      font-size:15.5px;
+      line-height:1.55;
+      max-width:55ch;
+      text-shadow: 0 10px 30px rgba(0,0,0,.35);
+      font-weight:600;
+    }
+    .heroBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+    .btnGhost{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:11px 14px;border-radius:999px;
+      font-weight:900;font-size:14px;border:1px solid rgba(255,255,255,.20);
+      background:rgba(255,255,255,.08);
+      color:#fff; cursor:pointer;
+      backdrop-filter: blur(8px);
+    }
+    .btnGhost:hover{background:rgba(255,255,255,.12)}
+    .heroProof{
+      margin-top:10px;
+      display:grid; gap:10px;
+    }
+    .proof{
+      display:flex;gap:10px;align-items:flex-start;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:16px;
+      padding:11px 12px;
+      backdrop-filter: blur(10px);
+    }
+    .check{
+      width:18px;height:18px;border-radius:6px;
+      background:rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.35);
+      box-shadow:0 0 18px rgba(34,197,94,.20);
+      position:relative; flex:0 0 auto; margin-top:2px;
+    }
+    .check:after{
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 30%, rgba(34,197,94,.85), transparent 60%);
+      opacity:.55;
+      border-radius:6px;
+    }
+    .proof b{display:block;color:#fff;font-size:13.5px}
+    .proof span{display:block;color:rgba(255,255,255,.80);font-size:13px;margin-top:2px;font-weight:600}
+
+    /* ✅ Checklist card: menos aglutinado */
+    .heroCard{
+      position:relative;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:24px;
+      padding:18px;
+      box-shadow: 0 28px 70px rgba(2,6,23,.18);
+      overflow:hidden;
+      height:100%;
+      display:flex;flex-direction:column;gap:12px;
+      justify-content:center;
+    }
+    .heroCard:before{
+      content:"";position:absolute;inset:-2px;
       background:
-        radial-gradient(1100px 520px at 20% 45%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.75) 40%, rgba(255,255,255,.45) 70%, rgba(255,255,255,0) 100%),
-        radial-gradient(1000px 520px at 75% 55%, rgba(255,255,255,.86) 0%, rgba(255,255,255,.60) 44%, rgba(255,255,255,0) 100%);
+        radial-gradient(500px 280px at 20% 20%, rgba(29,125,255,.14), transparent 55%),
+        radial-gradient(460px 280px at 80% 40%, rgba(21,199,210,.14), transparent 55%);
       pointer-events:none;
     }
+    .heroCardHeader{
+      position:relative;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      margin-bottom:2px;
+    }
+    .heroCardHeader b{font-size:14px}
+    .miniPill{
+      background:rgba(29,125,255,.08);
+      border:1px solid rgba(29,125,255,.20);
+      color:rgba(15,23,42,.80);
+      padding:7px 10px;border-radius:999px;font-weight:900;font-size:12px;
+      white-space:nowrap;
+    }
+    .grid2{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px; /* ✅ más aire */
+    }
+    .miniCard{
+      background:#fff;
+      border:1px solid rgba(2,6,23,.10);
+      border-radius:16px;
+      padding:12px;
+      min-height:72px; /* ✅ evita apretado */
+      display:flex;flex-direction:column;justify-content:center;
+    }
+    .miniCard b{font-size:13px}
+    .miniCard span{color:rgba(15,23,42,.68);font-weight:800;font-size:12.5px;margin-top:4px}
+    .result{
+      position:relative;
+      background:rgba(15,23,42,.03);
+      border:1px dashed rgba(15,23,42,.18);
+      border-radius:16px;
+      padding:12px;
+      color:rgba(15,23,42,.78);
+      font-weight:800;
+      font-size:13px;
+      margin-top:2px;
+    }
+
+    .dots{
+      position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+      display:flex; gap:8px; z-index:3;
+    }
+    .dotBtn{
+      width:9px;height:9px;border-radius:99px;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(255,255,255,.18);
+      cursor:pointer;
+    }
+    .dotBtn.active{background:rgba(255,255,255,.85)}
 
     /* Sections */
-    section{ padding:76px 0; }
-    .section-title{
-      text-align:center;
-      margin-bottom:14px;
+    section{padding:64px 0}
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 12px;border-radius:999px;
+      background:rgba(29,125,255,.08);
+      border:1px solid rgba(29,125,255,.14);
+      color:rgba(15,23,42,.70);
+      font-weight:900;font-size:12px;letter-spacing:.4px;
     }
-    .section-title h2{
-      margin:0 0 10px;
-      font-size: clamp(28px, 3vw, 40px);
-      letter-spacing:-.4px;
-      font-weight:900;
-    }
-    .section-title p{
-      margin:0 auto;
-      max-width: 72ch;
-      color:rgba(11,18,32,.70);
-      font-weight:750;
-      font-size:15px;
-    }
-
-    .card{
-      background: var(--card);
-      border:1px solid rgba(15,23,42,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-    }
-
-    /* About + Video */
-    .about{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:22px;
-      align-items:stretch;
-      margin-top:26px;
-    }
-    .video-wrap{
-      border-radius: 18px;
-      overflow:hidden;
-      border:1px solid rgba(15,23,42,.10);
-      box-shadow: var(--shadow2);
-      background:#000;
-      min-height: 320px;
-    }
-    .video-wrap iframe, .video-wrap video{
-      width:100%; height:100%;
-      display:block;
-    }
-    .about-box{
-      padding:22px;
-      position:relative;
-      overflow:hidden;
-    }
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border-radius:999px;
-      background: var(--chip);
-      border:1px solid rgba(31,111,235,.18);
-      color:rgba(11,18,32,.86);
-      font-weight:900; font-size:12px;
-    }
-    .about-box h3{
-      margin:14px 0 8px;
-      font-size: 24px;
-      letter-spacing:-.2px;
-      font-weight:900;
-    }
-    .about-box p{
-      margin:0 0 14px;
-      color:rgba(11,18,32,.72);
-      font-weight:750;
-    }
-    .trio{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:10px;
-      margin-top:14px;
-    }
-    .mini{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(15,23,42,.10);
-      background: rgba(246,249,255,.75);
-      box-shadow: 0 10px 22px rgba(15,23,42,.06);
-    }
-    .mini strong{ display:block; font-weight:900; margin-bottom:6px; }
-    .mini span{ color:rgba(11,18,32,.70); font-weight:800; font-size:13px; }
-
-    /* How it works */
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:26px;
-    }
-    .step{
-      padding:18px;
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(246,249,255,.95), #fff);
-      border:1px solid rgba(15,23,42,.10);
-      box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
-    }
-    .step .n{
-      width:36px; height:36px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      background: rgba(31,111,235,.12);
-      border:1px solid rgba(31,111,235,.24);
-      color: rgba(11,18,32,.90);
-      margin-bottom:10px;
-    }
-    .step h4{ margin:0 0 8px; font-weight:900; font-size:18px; }
-    .step p{ margin:0; color:rgba(11,18,32,.70); font-weight:750; }
-
-    /* Services */
-    .services{
+    h2{margin:12px 0 8px;font-size:34px;letter-spacing:-.6px}
+    .sub{margin:0;color:rgba(15,23,42,.68);font-weight:650;line-height:1.6;max-width:70ch}
+    .grid{
+      margin-top:22px;
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:16px;
-      margin-top:26px;
     }
-    .svc{
+    .card{
+      background:var(--card);
+      border:1px solid rgba(2,6,23,.08);
+      border-radius:22px;
+      box-shadow: 0 16px 40px rgba(2,6,23,.06);
       overflow:hidden;
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.10);
-      box-shadow: var(--shadow2);
-      background:#fff;
-      position:relative;
     }
-    .svc .img{
-      height:140px;
-      background-size:cover;
-      background-position:center;
-      position:relative;
-    }
-    .svc .img:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.10));
-    }
-    .svc .body{ padding:16px 16px 18px; }
-    .svc h4{ margin:0 0 8px; font-weight:900; }
-    .svc p{ margin:0; color:rgba(11,18,32,.70); font-weight:750; font-size:14px; }
-    .svc .tag{
-      position:absolute; top:12px; left:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      background: rgba(255,255,255,.82);
-      border:1px solid rgba(15,23,42,.12);
-      backdrop-filter: blur(6px);
+    .cardBody{padding:16px}
+    .card h3{margin:0 0 6px;font-size:18px}
+    .card p{margin:0;color:rgba(15,23,42,.66);font-weight:650;line-height:1.55}
+    .thumb{height:160px;background:#eaf2ff;border-bottom:1px solid rgba(2,6,23,.06);position:relative;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .iconBadge{
+      position:absolute; left:14px; bottom:-18px;
+      width:48px;height:48px;border-radius:16px;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      border:4px solid #fff;
+      box-shadow: 0 14px 30px rgba(29,125,255,.20);
     }
 
     /* Examples */
-    .examples{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
+    .examplesGrid{
+      margin-top:22px;
+      display:grid; grid-template-columns: repeat(4, 1fr);
       gap:14px;
-      margin-top:26px;
     }
     .ex{
-      border-radius:16px;
-      border:1px solid rgba(15,23,42,.10);
-      overflow:hidden;
+      border-radius:18px; overflow:hidden;
+      border:1px solid rgba(2,6,23,.08);
       background:#fff;
-      box-shadow: var(--shadow2);
-      transition:.2s transform;
+      box-shadow: 0 16px 40px rgba(2,6,23,.06);
       cursor:pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
     }
-    .ex:hover{ transform: translateY(-3px); }
-    .ex .thumb{
-      height:110px;
-      background-size:cover;
-      background-position:center;
-    }
-    .ex .cap{
-      padding:12px 12px 14px;
-    }
-    .ex strong{ display:block; font-weight:900; }
-    .ex span{ color:rgba(11,18,32,.66); font-weight:800; font-size:13px; }
+    .ex:hover{transform: translateY(-3px); box-shadow: 0 22px 60px rgba(2,6,23,.10)}
+    .ex .cap{padding:12px}
+    .ex b{display:block}
+    .ex small{display:block;color:rgba(15,23,42,.60);font-weight:800;margin-top:3px}
 
-    /* Clients marquee */
-    .marquee-wrap{
-      margin-top:26px;
-      border:1px solid rgba(15,23,42,.10);
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(246,249,255,.85), #fff);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-      position:relative;
-    }
-    .marquee{
-      display:flex;
-      gap:14px;
-      padding:18px 12px;
-      width:max-content;
-      animation: scroll 26s linear infinite;
-    }
-    .marquee:hover{ animation-play-state: paused; }
-    @keyframes scroll{
-      from{ transform: translateX(0); }
-      to{ transform: translateX(-50%); }
-    }
-    .logo-chip{
-      display:flex; align-items:center; justify-content:center;
+    /* Clients */
+    .clientsText{margin-top:10px;color:rgba(15,23,42,.68);font-weight:650;line-height:1.7;max-width:85ch}
+    .logos{
+      margin-top:18px;
+      display:grid; grid-template-columns: repeat(6, 1fr);
       gap:10px;
-      min-width: 180px;
-      padding:12px 14px;
-      border-radius:999px;
-      background: rgba(255,255,255,.85);
-      border:1px solid rgba(15,23,42,.10);
-      font-weight:900;
-      color:rgba(11,18,32,.78);
-      box-shadow: 0 10px 20px rgba(15,23,42,.06);
     }
-    .logo-dot{
-      width:10px; height:10px; border-radius:99px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 0 0 6px rgba(31,111,235,.12);
+    .logoBox{
+      height:54px;border-radius:16px;
+      border:1px solid rgba(2,6,23,.08);
+      background:linear-gradient(180deg,#fff,#f8fbff);
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(15,23,42,.55);
+      font-weight:900;font-size:12px;
     }
 
-    /* Testimonials slider */
-    .slider{
-      margin-top:26px;
+    /* Opinions (Google style) */
+    .opinionsWrap{
+      margin-top:20px;
+      border-radius:26px;
+      background: #f7f2df;
+      border:1px solid rgba(2,6,23,.08);
+      padding:26px;
       position:relative;
+      overflow:hidden;
     }
-    .slides{
-      display:flex;
-      gap:14px;
-      overflow:auto;
-      scroll-snap-type:x mandatory;
-      padding: 4px 2px 16px;
+    .opinionsHeader{
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      text-align:center;
     }
-    .slides::-webkit-scrollbar{ height:10px; }
-    .slides::-webkit-scrollbar-thumb{ background:rgba(15,23,42,.18); border-radius:999px; }
-    .t{
-      min-width: 320px;
-      scroll-snap-align:start;
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.10);
-      background:#fff;
-      box-shadow: var(--shadow2);
-    }
-    .who{
-      display:flex; align-items:center; gap:10px;
-      margin-bottom:10px;
-    }
-    .avatar{
-      width:36px; height:36px; border-radius:14px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      background: rgba(31,111,235,.12);
-      border:1px solid rgba(31,111,235,.22);
-      color: rgba(11,18,32,.86);
-    }
-    .who strong{ font-weight:900; }
-    .stars{ color: var(--warn); font-weight:900; letter-spacing:1px; margin-left:auto; }
-    .t p{ margin:0; color:rgba(11,18,32,.72); font-weight:800; }
+    .opinionsHeader h3{margin:0;font-size:26px}
+    .ratingLine{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .starsRow{display:flex;gap:4px;align-items:center}
+    .star{width:18px;height:18px}
+    .googleWordmark{width:84px;height:auto;margin-top:4px}
 
-    /* Contact */
-    .contact{
+    .carousel{
+      margin-top:18px;
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       gap:14px;
-      margin-top:26px;
       align-items:stretch;
     }
-    form{
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.10);
+    .review{
       background:#fff;
-      box-shadow: var(--shadow2);
-      display:grid;
-      gap:10px;
+      border:1px solid rgba(2,6,23,.08);
+      border-radius:20px;
+      padding:14px;
+      min-height:170px;
+      display:flex;flex-direction:column;gap:10px;
+      box-shadow: 0 16px 40px rgba(2,6,23,.06);
     }
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(15,23,42,.12);
-      background: rgba(246,249,255,.7);
-      font-family:inherit;
-      font-weight:800;
+    .revTop{display:flex;align-items:center;gap:10px}
+    .avatar{
+      width:38px;height:38px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;
+      background:#e8f2ff;
+      border:1px solid rgba(2,6,23,.06);
+      color:rgba(15,23,42,.70);
+    }
+    .revMeta b{display:block}
+    .revMeta small{display:block;color:rgba(15,23,42,.55);font-weight:800;margin-top:2px}
+    .revStars{display:flex;gap:3px}
+    .revText{color:rgba(15,23,42,.70);font-weight:650;line-height:1.6}
+
+    /* Contact */
+    .contactGrid{
+      margin-top:22px;
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    .form{
+      background:#fff;border:1px solid rgba(2,6,23,.08);
+      border-radius:22px;padding:16px;
+      box-shadow: 0 16px 40px rgba(2,6,23,.06);
+    }
+    .field{display:grid;gap:8px;margin-bottom:10px}
+    label{font-weight:900;font-size:13px;color:rgba(15,23,42,.74)}
+    input,textarea{
+      font:inherit;
+      padding:12px 12px;border-radius:14px;
+      border:1px solid rgba(2,6,23,.10);
       outline:none;
     }
-    textarea{ min-height:120px; resize:vertical; }
-    input:focus, textarea:focus{
-      border-color: rgba(31,111,235,.38);
-      box-shadow: 0 0 0 6px rgba(31,111,235,.10);
-      background:#fff;
-    }
-    .contact-card{
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.10);
-      background: linear-gradient(180deg, rgba(246,249,255,.9), #fff);
-      box-shadow: var(--shadow2);
-    }
-    .contact-card h4{ margin:0 0 8px; font-weight:900; }
-    .contact-card p{ margin:0 0 12px; color:rgba(11,18,32,.70); font-weight:800; }
-    .contact-list{ margin:0; padding:0; list-style:none; display:grid; gap:10px; }
-    .contact-list li{
-      display:flex; gap:10px; align-items:center;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.8);
-    }
-    .ico{
-      width:28px; height:28px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      background: rgba(18,194,233,.12);
-      border:1px solid rgba(18,194,233,.24);
-    }
-    .ico svg{ width:16px; height:16px; fill: rgba(11,18,32,.82); }
+    textarea{min-height:140px;resize:vertical}
+    .hint{color:rgba(15,23,42,.60);font-weight:650;line-height:1.6}
 
-    footer{
-      padding:26px 0;
-      border-top:1px solid rgba(15,23,42,.08);
-      background: #0b1220;
-      color: rgba(255,255,255,.82);
-    }
-    footer .foot{
-      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
-      align-items:center;
-      font-weight:800;
-      font-size:13px;
-    }
-    footer a{ color: rgba(255,255,255,.92); text-decoration:underline; text-underline-offset: 3px; }
-
-    /* Floating WhatsApp */
+    /* WhatsApp floating */
     .wa{
-      position:fixed;
-      right:16px; bottom:16px;
-      width:54px; height:54px;
-      border-radius:18px;
-      display:flex; align-items:center; justify-content:center;
-      background: #25D366;
-      box-shadow: 0 18px 40px rgba(0,0,0,.22);
-      z-index:60;
+      position:fixed; right:18px; bottom:18px; z-index:70;
+      width:54px;height:54px;border-radius:18px;
+      background:#25D366;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
+      display:flex;align-items:center;justify-content:center;
     }
-    .wa svg{ width:26px; height:26px; fill:#fff; }
+    .wa svg{width:26px;height:26px;fill:#fff}
+
+    /* Footer */
+    footer{
+      background:#0b1220;color:rgba(255,255,255,.78);
+      padding:34px 0;
+      margin-top:40px;
+    }
+    .footGrid{
+      display:grid; grid-template-columns: 1.2fr 1fr 1fr;
+      gap:18px;
+    }
+    .footGrid h4{margin:0 0 10px;color:#fff}
+    .footGrid a{display:block;color:rgba(255,255,255,.78);margin:8px 0;font-weight:700}
+    .copy{margin-top:18px;color:rgba(255,255,255,.55);font-weight:650}
 
     /* Responsive */
     @media (max-width: 980px){
-      nav ul{ display:none; }
-      .burger{ display:inline-flex; }
-      .hero-inner{ grid-template-columns: 1fr; min-height:auto; padding:40px 0 22px; }
-      .about{ grid-template-columns: 1fr; }
-      .steps{ grid-template-columns: 1fr; }
-      .services{ grid-template-columns: 1fr; }
-      .examples{ grid-template-columns: 1fr 1fr; }
-      .contact{ grid-template-columns: 1fr; }
-      .trio{ grid-template-columns: 1fr; }
+      .heroGrid{grid-template-columns:1fr;gap:14px}
+      .slider{min-height:420px}
+      .grid{grid-template-columns:1fr;gap:14px}
+      .examplesGrid{grid-template-columns:1fr 1fr}
+      .logos{grid-template-columns:1fr 1fr 1fr}
+      .carousel{grid-template-columns:1fr 1fr}
+      .contactGrid{grid-template-columns:1fr}
+      nav ul{display:none}
+      .burger{display:flex}
+      .panel.open{display:block}
     }
     @media (max-width: 520px){
-      .examples{ grid-template-columns: 1fr; }
-      .brand{ min-width:auto; }
-      .actions .btn.ghost{ display:none; }
+      .examplesGrid{grid-template-columns:1fr}
+      .carousel{grid-template-columns:1fr}
     }
   </style>
 </head>
 
 <body>
-  <!-- TOPBAR -->
+
+  <!-- TOP BAR -->
   <div class="topbar">
-    <div class="container wrap">
-      <div class="top-left">
-        <span class="pill"><span class="dot"></span> Consultora en Datos & BI</span>
-        <span class="pill">WhatsApp: <strong id="waTop">+54 299 60322676</strong></span>
-      </div>
-      <div class="top-right">
-        <!-- No ponemos tu mail personal. Si querés uno corporativo, lo cambiamos acá -->
-        <span class="pill">Contacto: <strong>WhatsApp / Formulario</strong></span>
+    <div class="container">
+      <div class="row">
+        <div class="chips">
+          <span class="chip"><span class="dot"></span> Consultora en Datos & BI</span>
+          <a class="chip" href="https://wa.me/5492996032267" target="_blank" rel="noopener">
+            WhatsApp: <b>+54 299 6 032 267</b>
+          </a>
+          <a class="chip" href="https://www.linkedin.com/in/daiana-beltran/?locale=es_ES" target="_blank" rel="noopener">
+            LinkedIn: <b>Daiana Beltrán</b>
+          </a>
+        </div>
+        <a class="ctaTop" href="#contacto">Agendar diagnóstico</a>
       </div>
     </div>
   </div>
 
   <!-- HEADER -->
   <header>
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="Prisma BI">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <strong>PRISMA BI</strong>
-          <small>Dirección • Rentabilidad • Control</small>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#home">
+          <span class="logo" aria-hidden="true"></span>
+          <span>
+            <b>PRISMA BI</b>
+            <small>Dirección • Rentabilidad • Control</small>
+          </span>
+        </a>
+
+        <nav aria-label="Navegación principal">
+          <ul>
+            <li><a href="#quienes">Quiénes somos</a></li>
+            <li><a href="#como">Cómo se trabaja</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#ejemplos">Ejemplos</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#opiniones">Opiniones</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <div class="navRight">
+          <a class="btn" href="#ejemplos">Ver ejemplos</a>
+          <a class="btn primary" href="#contacto">Agendar diagnóstico</a>
+          <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-      </a>
-
-      <nav aria-label="Menú principal">
-        <ul>
-          <li><a href="#quienes">Quiénes somos</a></li>
-          <li><a href="#como">Cómo se trabaja</a></li>
-          <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#ejemplos">Ejemplos</a></li>
-          <li><a href="#clientes">Clientes</a></li>
-          <li><a href="#opiniones">Opiniones</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </nav>
-
-      <div class="actions">
-        <button class="btn ghost burger" id="btnMenu" aria-label="Abrir menú">☰ Menú</button>
-        <a class="btn ghost" href="#ejemplos">Ver ejemplos</a>
-        <a class="btn primary" href="#contacto">Agendar diagnóstico</a>
       </div>
-    </div>
 
-    <div class="mobile-panel" id="mobilePanel">
-      <div class="container">
+      <div class="panel" id="panel">
         <a href="#quienes">Quiénes somos</a>
         <a href="#como">Cómo se trabaja</a>
         <a href="#servicios">Servicios</a>
@@ -738,261 +587,307 @@
 
   <!-- HERO -->
   <main id="home" class="hero">
-    <canvas id="network"></canvas>
-    <div class="hero-vignette"></div>
+    <div class="container heroInner">
+      <div class="heroGrid">
 
-    <div class="container hero-inner">
-      <div>
-        <div class="hero-kicker">CONTROL • GOBIERNO • CONFIANZA</div>
+        <!-- Slider -->
+        <div class="slider" aria-label="Hero slider">
+          <!-- Canvas de red neuronal (se une / desune / destella) -->
+          <canvas id="net"></canvas>
 
-        <h1>
-          Cuando los números cambian según quién los mire,
-          la empresa pierde <span class="accent">dirección</span>.
-        </h1>
+          <div class="slide active" data-i="0">
+            <div class="bg" style="background-image:url('assets/hero-1.jpg')"></div>
+            <div class="overlay"></div>
+            <div class="slideContent">
+              <div class="leftCol">
+                <span class="pill">CONTROL • GOBIERNO • CONFIANZA</span>
+                <h1 class="h1">
+                  Cuando los números cambian según quién los mire, la empresa pierde <span class="accent">dirección</span>.
+                </h1>
+                <p class="lead">
+                  Prisma BI acompaña a PyMEs y empresas a ordenar datos (Excel, ERP, sistemas, ventas, costos) y convertirlos en una lectura ejecutiva clara:
+                  <b>qué pasa</b>, <b>por qué pasa</b> y <b>qué acción mueve el resultado</b>.
+                </p>
+                <div class="heroBtns">
+                  <a class="btn primary" href="#contacto">Agendar diagnóstico (20 min)</a>
+                  <a class="btnGhost" href="#servicios">Ver servicios</a>
+                  <a class="btnGhost" href="#opiniones">Ver opiniones</a>
+                </div>
 
-        <p>
-          Prisma BI acompaña a PyMEs y empresas a ordenar datos (Excel, ERP, sistemas, ventas, costos) y convertirlos en una
-          lectura ejecutiva clara: <strong>qué pasa, por qué pasa y qué acción mueve el resultado</strong>.
-        </p>
+                <div class="heroProof">
+                  <div class="proof">
+                    <span class="check" aria-hidden="true"></span>
+                    <div>
+                      <b>KPI con definición única</b>
+                      <span>Glosario + fórmula + fuente: todos miran la misma verdad.</span>
+                    </div>
+                  </div>
+                  <div class="proof">
+                    <span class="check" aria-hidden="true"></span>
+                    <div>
+                      <b>Control (QA)</b>
+                      <span>Alertas, consistencia y validaciones para decidir con confianza.</span>
+                    </div>
+                  </div>
+                  <div class="proof">
+                    <span class="check" aria-hidden="true"></span>
+                    <div>
+                      <b>Rutina semanal</b>
+                      <span>Responsables por área, seguimiento y decisiones consistentes.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="hero-ctas">
-          <a class="btn primary" href="#contacto">Agendar diagnóstico (20 min)</a>
-          <a class="btn" href="#servicios">Ver servicios</a>
-          <a class="btn" href="#opiniones">Ver opiniones</a>
+          <div class="slide" data-i="1">
+            <div class="bg" style="background-image:url('assets/hero-2.jpg')"></div>
+            <div class="overlay"></div>
+            <div class="slideContent">
+              <div class="leftCol">
+                <span class="pill">MENOS DISCUSIONES • MÁS ACCIÓN</span>
+                <h2 class="h1">Un tablero útil no informa: <span class="accent">orienta</span>.</h2>
+                <p class="lead">
+                  Dirección y áreas dejan de “pelear reportes” cuando existe una fuente de verdad. Prisma BI instala un mapa único de lectura
+                  para priorizar, ejecutar y sostener resultados.
+                </p>
+                <div class="heroBtns">
+                  <a class="btn primary" href="#ejemplos">Ver dashboards</a>
+                  <a class="btnGhost" href="#como">Cómo se trabaja</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide" data-i="2">
+            <div class="bg" style="background-image:url('assets/hero-3.jpg')"></div>
+            <div class="overlay"></div>
+            <div class="slideContent">
+              <div class="leftCol">
+                <span class="pill">DIRECCIÓN • RENTABILIDAD • CONTROL</span>
+                <h2 class="h1">De datos dispersos a decisiones <span class="accent">consistentes</span>.</h2>
+                <p class="lead">
+                  El objetivo no es “hacer gráficos”. Es lograr que la empresa lea igual, mida igual y actúe igual. Con métricas claras, control de datos
+                  y una rutina ejecutiva, el tablero se usa y produce decisiones.
+                </p>
+                <div class="heroBtns">
+                  <a class="btn primary" href="#contacto">Pedir diagnóstico</a>
+                  <a class="btnGhost" href="#clientes">Ver clientes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checklist card -->
+          <div class="heroCard" aria-label="Checklist de control">
+            <div class="heroCardHeader">
+              <b>Checklist de control (ejemplo)</b>
+              <span class="miniPill">Lectura en 5 minutos</span>
+            </div>
+
+            <div class="grid2">
+              <div class="miniCard">
+                <b>Definición KPI única</b>
+                <span>OK • Glosario + fórmula</span>
+              </div>
+              <div class="miniCard">
+                <b>Fuente de verdad</b>
+                <span>SQL / DW • Modelo claro</span>
+              </div>
+              <div class="miniCard">
+                <b>Refresco & alertas</b>
+                <span>Automatizado • QA</span>
+              </div>
+              <div class="miniCard">
+                <b>Rutina ejecutiva</b>
+                <span>Semanal • Por área</span>
+              </div>
+            </div>
+
+            <div class="result">
+              Resultado: la dirección decide con el mismo mapa. Menos discusiones. Más acciones.
+            </div>
+          </div>
+
+          <div class="dots" aria-label="Controles del slider">
+            <button class="dotBtn active" data-go="0" aria-label="Slide 1"></button>
+            <button class="dotBtn" data-go="1" aria-label="Slide 2"></button>
+            <button class="dotBtn" data-go="2" aria-label="Slide 3"></button>
+          </div>
         </div>
 
-        <ul class="bullets">
-          <li>
-            <span class="check" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20.3 6.7a1 1 0 0 1 0 1.4l-9.1 9.1a1 1 0 0 1-1.4 0L3.7 11.1a1 1 0 1 1 1.4-1.4l5 5 8.4-8.4a1 1 0 0 1 1.4 0z"/></svg>
-            </span>
-            KPI con definición única (glosario + fórmula + fuente): todos miran la misma verdad.
-          </li>
-          <li>
-            <span class="check" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20.3 6.7a1 1 0 0 1 0 1.4l-9.1 9.1a1 1 0 0 1-1.4 0L3.7 11.1a1 1 0 1 1 1.4-1.4l5 5 8.4-8.4a1 1 0 0 1 1.4 0z"/></svg>
-            </span>
-            Control (QA): alertas, consistencia y validaciones para decidir con confianza.
-          </li>
-          <li>
-            <span class="check" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20.3 6.7a1 1 0 0 1 0 1.4l-9.1 9.1a1 1 0 0 1-1.4 0L3.7 11.1a1 1 0 1 1 1.4-1.4l5 5 8.4-8.4a1 1 0 0 1 1.4 0z"/></svg>
-            </span>
-            Rutina semanal: responsables por área, seguimiento y decisiones consistentes.
-          </li>
-        </ul>
-      </div>
-
-      <div class="hero-card">
-        <div class="mini-title">
-          Checklist de control (ejemplo)
-          <span class="badge">Lectura en 5 minutos</span>
-        </div>
-
-        <div class="grid2">
-          <div class="stat">
-            <strong>Definición KPI única</strong>
-            <span>OK • Glosario + fórmula</span>
-          </div>
-          <div class="stat">
-            <strong>Fuente de verdad</strong>
-            <span>SQL / DW • Modelo claro</span>
-          </div>
-          <div class="stat">
-            <strong>Refresco & alertas</strong>
-            <span>Automatizado • QA</span>
-          </div>
-          <div class="stat">
-            <strong>Rutina ejecutiva</strong>
-            <span>Semanal • Por área</span>
-          </div>
-        </div>
-
-        <div class="note">
-          Resultado: la dirección decide con el mismo mapa. Menos discusiones. Más acciones.
-        </div>
       </div>
     </div>
   </main>
 
-  <!-- QUIÉNES SOMOS + VIDEO -->
+  <!-- QUIÉNES -->
   <section id="quienes">
     <div class="container">
-      <div class="section-title">
-        <h2>Quiénes somos</h2>
-        <p>
-          Prisma BI es una consultora de datos y Business Intelligence orientada a dirección. El foco no es “mostrar gráficos”:
-          es instalar un sistema de lectura que se usa, se entiende y sostiene decisiones.
-        </p>
-      </div>
+      <span class="kicker">QUIÉNES SOMOS</span>
+      <h2>De “reportes” a decisiones consistentes.</h2>
+      <p class="sub">
+        Prisma BI es una consultora de datos y Business Intelligence orientada a dirección.
+        Su foco es instalar un sistema de lectura ejecutiva para decidir rápido y con criterio único:
+        <b>definiciones claras</b>, <b>control de datos</b> y <b>rutina de seguimiento</b>.
+      </p>
 
-      <div class="about">
-        <div class="video-wrap" id="videoBox">
-          <!-- OPCIÓN A: YouTube embed (recomendado para velocidad)
-               Pegá tu link y listo. Ej: https://www.youtube.com/watch?v=VIDEO_ID
-               Reemplazá VIDEO_ID abajo.
-          -->
-          <iframe
-            id="yt"
-            src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
-            title="Video Prisma BI"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-
-          <!-- OPCIÓN B: Video propio MP4 (descomentá y comentá el iframe)
-          <video controls poster="assets/poster.jpg">
-            <source src="assets/prisma-video.mp4" type="video/mp4" />
-            Tu navegador no soporta video HTML5.
-          </video>
-          -->
-        </div>
-
-        <div class="card about-box">
-          <span class="chip">Enfoque: dirección + rentabilidad</span>
-          <h3>De reportes sueltos a decisiones consistentes.</h3>
-          <p>
-            Prisma BI integra y ordena datos dispersos (Excel, ERP, sistemas internos) para convertirlos en una
-            lectura ejecutiva clara: <strong>qué está funcionando, qué está drenando margen y dónde actuar primero</strong>.
-          </p>
-
-          <div class="trio">
-            <div class="mini">
-              <strong>Claridad</strong>
-              <span>KPI con definición única para evitar interpretaciones.</span>
-            </div>
-            <div class="mini">
-              <strong>Control</strong>
-              <span>Validaciones, QA y alertas para confiar en los números.</span>
-            </div>
-            <div class="mini">
-              <strong>Acción</strong>
-              <span>Rutina semanal para convertir el tablero en decisiones.</span>
-            </div>
+      <div class="grid">
+        <div class="card">
+          <div class="cardBody">
+            <h3>Claridad</h3>
+            <p>KPIs con definición única (glosario + fórmula + fuente) para que cada área hable el mismo idioma.</p>
           </div>
-
-          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" href="#contacto">Pedir diagnóstico</a>
-            <a class="btn" href="#como">Ver cómo se trabaja</a>
+        </div>
+        <div class="card">
+          <div class="cardBody">
+            <h3>Control</h3>
+            <p>Validaciones, QA y alertas para confiar en los números antes de discutirlos.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cardBody">
+            <h3>Acción</h3>
+            <p>Rutina semanal por área: responsables, prioridades y decisiones sostenidas en el tiempo.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CÓMO SE TRABAJA -->
-  <section id="como" style="background: var(--soft2); border-top:1px solid rgba(15,23,42,.06); border-bottom:1px solid rgba(15,23,42,.06);">
+  <!-- CÓMO SE TRABAJA (sin “NO…”) -->
+  <section id="como" style="background:linear-gradient(180deg,#f7fbff, #ffffff)">
     <div class="container">
-      <div class="section-title">
-        <h2>Cómo se trabaja</h2>
-        <p>
-          El proceso es simple: primero se define qué mirar (y qué ignorar), después se ordenan definiciones y fuentes,
-          y recién ahí se construye el tablero que la empresa usa semanalmente.
-        </p>
-      </div>
+      <span class="kicker">CÓMO SE TRABAJA</span>
+      <h2>Un método simple que la empresa entiende.</h2>
+      <p class="sub">
+        Prisma BI trabaja por etapas para que el tablero sea usable por dirección y adoptado por el equipo:
+        primero se define qué mirar, luego se ordena la verdad y por último se instala la rutina de lectura.
+      </p>
 
-      <div class="steps">
-        <div class="step">
-          <div class="n">1</div>
-          <h4>Diagnóstico (20–40 min)</h4>
-          <p>Se alinean objetivos, decisiones clave y “puntos ciegos”. Se define el alcance para no construir de más ni de menos.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="cardBody">
+            <h3>1) Diagnóstico (20–40 min)</h3>
+            <p>Se identifica el objetivo, las decisiones clave y el “ruido” actual. Se define qué medir y qué dejar de seguir.</p>
+          </div>
         </div>
-        <div class="step">
-          <div class="n">2</div>
-          <h4>Criterio único (KPI + fuentes)</h4>
-          <p>Glosario + fórmulas + fuentes. Todos los sectores miran la misma verdad: menos debate, más foco.</p>
+        <div class="card">
+          <div class="cardBody">
+            <h3>2) Fuente de verdad</h3>
+            <p>Se ordenan datos y definiciones para que exista un criterio único: mismas reglas, mismos números.</p>
+          </div>
         </div>
-        <div class="step">
-          <div class="n">3</div>
-          <h4>Tablero + rutina semanal</h4>
-          <p>Tablero por área + responsables + QA. El tablero deja de “verse” y empieza a “usarse” para decidir.</p>
+        <div class="card">
+          <div class="cardBody">
+            <h3>3) Tablero + rutina</h3>
+            <p>Se entrega el tablero y la rutina semanal por área: responsables, lectura en minutos y acciones concretas.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICIOS -->
+  <!-- SERVICIOS (con imágenes como Overdata) -->
   <section id="servicios">
     <div class="container">
-      <div class="section-title">
-        <h2>Servicios</h2>
-        <p>
-          Servicios orientados a resultado (dirección, rentabilidad y control). La tecnología es el medio; la decisión es el fin.
-        </p>
-      </div>
+      <span class="kicker">SERVICIOS</span>
+      <h2>Servicios orientados a resultado, no a “herramientas”.</h2>
+      <p class="sub">Cada servicio está pensado para convertir datos dispersos en una lectura ejecutiva clara y accionable.</p>
 
-      <div class="services">
-        <article class="svc">
-          <div class="tag">Dirección</div>
-          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=70');"></div>
-          <div class="body">
-            <h4>Tablero ejecutivo (rentabilidad)</h4>
-            <p>Ventas, costos, margen, mix y drenajes silenciosos. Lectura clara para decidir rápido y sostener el criterio.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/svc-dashboards.jpg" alt="Dashboards Power BI">
+            <span class="iconBadge" aria-hidden="true"></span>
+          </div>
+          <div class="cardBody">
+            <h3>Dashboards (Power BI)</h3>
+            <p>Tableros claros por dirección y por área: ventas, costos, margen, rentabilidad y foco de acción.</p>
           </div>
         </article>
 
-        <article class="svc">
-          <div class="tag">Control</div>
-          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1600&q=70');"></div>
-          <div class="body">
-            <h4>QA de datos + gobierno</h4>
-            <p>Validaciones, reglas, alertas y consistencia. Se define quién es dueño de cada número y se elimina fricción.</p>
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/svc-modelo.jpg" alt="Modelo de datos">
+            <span class="iconBadge" aria-hidden="true"></span>
+          </div>
+          <div class="cardBody">
+            <h3>Modelo & fuente de verdad (SQL)</h3>
+            <p>Definiciones, reglas y estructura para que el reporte deje de variar según quién lo construye.</p>
           </div>
         </article>
 
-        <article class="svc">
-          <div class="tag">Automatización</div>
-          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=70');"></div>
-          <div class="body">
-            <h4>Integración y actualización</h4>
-            <p>Conexión a Excel/ERP/sistemas. Refresco automático y modelo listo para análisis sin “parches” manuales.</p>
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/svc-qa.jpg" alt="Calidad de datos">
+            <span class="iconBadge" aria-hidden="true"></span>
+          </div>
+          <div class="cardBody">
+            <h3>QA de datos & alertas</h3>
+            <p>Validaciones, consistencia y alertas para confiar en los números antes de tomar decisiones.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/svc-integraciones.jpg" alt="Integraciones con sistemas">
+            <span class="iconBadge" aria-hidden="true"></span>
+          </div>
+          <div class="cardBody">
+            <h3>Integraciones (ERP / sistemas)</h3>
+            <p>Conexión de fuentes y orden de datos: Excel, sistemas, ERP y procesos para lectura consolidada.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/svc-automatizacion.jpg" alt="Automatización">
+            <span class="iconBadge" aria-hidden="true"></span>
+          </div>
+          <div class="cardBody">
+            <h3>Automatización (Python / n8n)</h3>
+            <p>Refrescos, cargas y notificaciones para reducir fricción y sostener continuidad operativa.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/svc-capacitacion.jpg" alt="Capacitación">
+            <span class="iconBadge" aria-hidden="true"></span>
+          </div>
+          <div class="cardBody">
+            <h3>Adopción & capacitación</h3>
+            <p>Rutina de lectura y uso real del tablero: responsables, ritual semanal y decisiones repetibles.</p>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- EJEMPLOS -->
-  <section id="ejemplos" style="background: var(--soft2); border-top:1px solid rgba(15,23,42,.06); border-bottom:1px solid rgba(15,23,42,.06);">
+  <!-- EJEMPLOS (Dashboards) -->
+  <section id="ejemplos" style="background:linear-gradient(180deg,#ffffff,#f7fbff)">
     <div class="container">
-      <div class="section-title">
-        <h2>Ejemplos (dashboards)</h2>
-        <p>
-          Secciones típicas que “cierran” en dirección. Podés reemplazar las imágenes por tus demos reales (Power BI / Excel / Web).
-        </p>
-      </div>
+      <span class="kicker">EJEMPLOS</span>
+      <h2>Dashboards que se usan.</h2>
+      <p class="sub">Ejemplos de tableros para dirección y áreas: lectura rápida, foco y decisiones.</p>
 
-      <div class="examples">
-        <div class="ex" onclick="openLightbox('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=2000&q=70','Rentabilidad','Qué deja margen y qué lo drena')">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=70');"></div>
-          <div class="cap">
-            <strong>Rentabilidad</strong>
-            <span>Qué deja margen y qué lo drena.</span>
-          </div>
+      <div class="examplesGrid">
+        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
+          <div class="thumb"><img src="assets/ex-1.jpg" alt="Executive Overview"></div>
+          <div class="cap"><b>Executive Overview</b><small>KPIs + tendencia + foco</small></div>
         </div>
-
-        <div class="ex" onclick="openLightbox('https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=2000&q=70','Clientes','Top clientes, concentración y riesgo')">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=1200&q=70');"></div>
-          <div class="cap">
-            <strong>Clientes</strong>
-            <span>Concentración, repetición y riesgo.</span>
-          </div>
+        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
+          <div class="thumb"><img src="assets/ex-2.jpg" alt="Rentabilidad"></div>
+          <div class="cap"><b>Rentabilidad</b><small>margen, mix, drenajes</small></div>
         </div>
-
-        <div class="ex" onclick="openLightbox('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=2000&q=70','Productos','Mix, precio neto y descuentos')">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=70');"></div>
-          <div class="cap">
-            <strong>Productos</strong>
-            <span>Mix, precio neto y descuentos.</span>
-          </div>
+        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
+          <div class="thumb"><img src="assets/ex-3.jpg" alt="Operaciones"></div>
+          <div class="cap"><b>Operaciones</b><small>tiempos, calidad, alertas</small></div>
         </div>
-
-        <div class="ex" onclick="openLightbox('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=2000&q=70','Operaciones','Tiempos, cumplimiento y costos')">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=1200&q=70');"></div>
-          <div class="cap">
-            <strong>Operaciones</strong>
-            <span>Tiempos, cumplimiento y costos.</span>
-          </div>
+        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
+          <div class="thumb"><img src="assets/ex-4.jpg" alt="Ventas"></div>
+          <div class="cap"><b>Ventas</b><small>canales, clientes, producto</small></div>
         </div>
       </div>
     </div>
@@ -1001,90 +896,129 @@
   <!-- CLIENTES -->
   <section id="clientes">
     <div class="container">
-      <div class="section-title">
-        <h2>Clientes & marcas</h2>
-        <p>
-          Nuestra experiencia abarca diversos sectores, desde PyMEs hasta grandes corporaciones, y cada proyecto
-          contribuye al éxito del cliente a través de soluciones basadas en datos.
-        </p>
-      </div>
+      <span class="kicker">CLIENTES & MARCAS</span>
+      <h2>Experiencia aplicada a sectores reales.</h2>
+      <p class="clientsText">
+        Nuestra experiencia abarca diversos sectores, desde PyMEs hasta grandes corporaciones, y cada proyecto nos ha permitido contribuir al éxito
+        de nuestros clientes a través de soluciones basadas en datos.
+      </p>
 
-      <div class="marquee-wrap">
-        <!-- Duplicamos la lista para que el loop sea infinito y suave -->
-        <div class="marquee" id="marquee">
-          <div class="logo-chip"><span class="logo-dot"></span> Agro</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Retail</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Industria</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Servicios</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Logística</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Salud</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Energía</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Educación</div>
-
-          <div class="logo-chip"><span class="logo-dot"></span> Agro</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Retail</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Industria</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Servicios</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Logística</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Salud</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Energía</div>
-          <div class="logo-chip"><span class="logo-dot"></span> Educación</div>
-        </div>
-      </div>
-
-      <div style="margin-top:14px; text-align:center; color:rgba(11,18,32,.68); font-weight:800;">
-        Cuando quieras poner logos reales, se reemplazan por imágenes (con permiso del cliente).
+      <!-- ✅ Si todavía no querés logos reales: usá placeholders por categoría -->
+      <div class="logos" aria-label="Logos / categorías">
+        <div class="logoBox">Agro</div>
+        <div class="logoBox">Retail</div>
+        <div class="logoBox">Servicios</div>
+        <div class="logoBox">Industria</div>
+        <div class="logoBox">Energía</div>
+        <div class="logoBox">Salud</div>
       </div>
     </div>
   </section>
 
-  <!-- OPINIONES -->
-  <section id="opiniones" style="background: var(--soft2); border-top:1px solid rgba(15,23,42,.06); border-bottom:1px solid rgba(15,23,42,.06);">
+  <!-- OPINIONES (con Google + estrellas como tu ejemplo) -->
+  <section id="opiniones" style="padding-top:30px">
     <div class="container">
-      <div class="section-title">
-        <h2>Opiniones</h2>
-        <p>
-          Testimonios estilo “reseñas”. Si querés traer reseñas reales de Google, lo más seguro es embeber un widget oficial
-          (te dejo la guía debajo del código).
-        </p>
-      </div>
+      <div class="opinionsWrap">
+        <div class="opinionsHeader">
+          <h3>Opiniones sobre Prisma BI</h3>
+          <p class="sub" style="max-width:78ch;margin:0 auto">
+            Testimonios estilo “reseñas”. Si querés traer reseñas reales de Google, lo ideal es embeber el widget oficial.
+            (Este bloque replica el look & feel para tu web).
+          </p>
 
-      <div class="slider">
-        <div class="slides">
-          <div class="t">
-            <div class="who">
+          <div class="ratingLine">
+            <b style="letter-spacing:.3px">EXCELENTE</b>
+            <div class="starsRow" aria-label="5 estrellas">
+              <!-- ⭐ estrellas -->
+              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+            </div>
+            <small style="color:rgba(15,23,42,.60);font-weight:800">A base de reseñas</small>
+
+            <!-- ✅ Google logo (SVG simple) -->
+            <svg class="googleWordmark" viewBox="0 0 256 86" aria-label="Google">
+              <path fill="#4285F4" d="M115.8 44.2c0-2.9-.3-5.7-.8-8.3H64.7v15.7h28.8c-1.2 4.1-3.8 7.6-7.3 10v10.4h16.2c9.5-8.7 13.4-21.5 13.4-37.8z"/>
+              <path fill="#34A853" d="M64.7 86c13.6 0 25-4.5 33.3-12.2L81.8 63.4c-4.5 3-10.2 4.7-17.1 4.7-13.1 0-24.2-8.8-28.2-20.7H19.8v10.8C28 73.2 45.1 86 64.7 86z"/>
+              <path fill="#FBBC05" d="M36.5 47.4c-1-3-1.6-6.1-1.6-9.4s.6-6.4 1.6-9.4V17.8H19.8C16.5 24.4 14.7 31.8 14.7 38s1.8 13.6 5.1 20.2l16.7-10.8z"/>
+              <path fill="#EA4335" d="M64.7 17.9c7.4 0 14 2.5 19.2 7.3l14.3-14.3C89.7 3.9 78.3 0 64.7 0 45.1 0 28 12.8 19.8 27.8l16.7 10.8c4-11.9 15.1-20.7 28.2-20.7z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="carousel">
+          <div class="review">
+            <div class="revTop">
               <div class="avatar">A</div>
-              <div><strong>Ale J.</strong><div style="color:rgba(11,18,32,.60); font-weight:800; font-size:12px;">PyME • Dirección</div></div>
-              <div class="stars">★★★★★</div>
+              <div class="revMeta">
+                <b>Ale J.</b>
+                <small>Reseña</small>
+              </div>
             </div>
-            <p>“Se ordenó qué mirábamos y qué ignorábamos. Con criterio único, dejó de ser debate y pasó a ser decisión.”</p>
+            <div class="revStars">
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+            </div>
+            <div class="revText">“Se entendió rápido qué estaba drenando margen. El tablero ordenó la conversación y apareció el plan de acción.”</div>
           </div>
 
-          <div class="t">
-            <div class="who">
+          <div class="review">
+            <div class="revTop">
               <div class="avatar">G</div>
-              <div><strong>Gema D.</strong><div style="color:rgba(11,18,32,.60); font-weight:800; font-size:12px;">Comercial</div></div>
-              <div class="stars">★★★★★</div>
+              <div class="revMeta">
+                <b>Gema D.</b>
+                <small>Reseña</small>
+              </div>
             </div>
-            <p>“Por primera vez dirección y equipos miraron lo mismo. Menos discusiones internas, más foco.”</p>
+            <div class="revStars">
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+            </div>
+            <div class="revText">“Por primera vez dirección y equipo miraron lo mismo. Menos discusiones, más decisiones.”</div>
           </div>
 
-          <div class="t">
-            <div class="who">
+          <div class="review">
+            <div class="revTop">
               <div class="avatar">J</div>
-              <div><strong>Juan M.</strong><div style="color:rgba(11,18,32,.60); font-weight:800; font-size:12px;">Operaciones</div></div>
-              <div class="stars">★★★★★</div>
+              <div class="revMeta">
+                <b>Juan M.</b>
+                <small>Reseña</small>
+              </div>
             </div>
-            <p>“No quedó como ‘un tablero lindo’: se usa. La rutina semanal cambió la velocidad de respuesta.”</p>
+            <div class="revStars">
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+            </div>
+            <div class="revText">“La rutina semanal hizo la diferencia. El tablero no quedó ‘lindo’: se usa.”</div>
           </div>
 
-          <div class="t">
-            <div class="who">
+          <div class="review">
+            <div class="revTop">
               <div class="avatar">V</div>
-              <div><strong>Valentina R.</strong><div style="color:rgba(11,18,32,.60); font-weight:800; font-size:12px;">Finanzas</div></div>
-              <div class="stars">★★★★★</div>
+              <div class="revMeta">
+                <b>Valentina R.</b>
+                <small>Reseña</small>
+              </div>
             </div>
-            <p>“Quedó claro qué medía cada indicador y cuál era la acción. Eso era lo que faltaba.”</p>
+            <div class="revStars">
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
+            </div>
+            <div class="revText">“Quedó claro qué medir, quién lo mide y qué acción corresponde. Eso era lo que faltaba.”</div>
           </div>
         </div>
       </div>
@@ -1094,332 +1028,251 @@
   <!-- CONTACTO -->
   <section id="contacto">
     <div class="container">
-      <div class="section-title">
-        <h2>Contacto</h2>
-        <p>
-          Si querés ordenar la lectura del negocio, el primer paso es el diagnóstico. Se identifica qué información falta, qué sobra
-          y cuál es el tablero mínimo que habilita decisiones.
-        </p>
-      </div>
+      <span class="kicker">CONTACTO</span>
+      <h2>El primer paso es un diagnóstico corto.</h2>
+      <p class="sub">En 20 minutos se identifica el objetivo, el “ruido” actual y el próximo paso más rentable.</p>
 
-      <div class="contact">
-        <!-- Formulario (puede ser Netlify Forms / Formspree / Google Forms). Por defecto no envía nada. -->
-        <form onsubmit="return handleSubmit(event)">
-          <input required name="nombre" placeholder="Nombre" />
-          <input required name="empresa" placeholder="Empresa" />
-          <input required name="telefono" placeholder="Teléfono / WhatsApp" />
-          <textarea required name="mensaje" placeholder="¿Qué querés decidir mejor? (ventas, costos, margen, stock, cobranza, etc.)"></textarea>
-          <button class="btn primary" type="submit">Enviar y pedir diagnóstico</button>
-          <div style="color:rgba(11,18,32,.60); font-weight:800; font-size:12px;">
-            *Al enviar, se abre WhatsApp con tu mensaje listo (sin mail personal).
+      <div class="contactGrid">
+        <div class="form">
+          <div class="field">
+            <label>Nombre</label>
+            <input placeholder="Tu nombre" />
           </div>
-        </form>
-
-        <div class="contact-card">
-          <h4>Canales de contacto</h4>
-          <p>Respuesta por WhatsApp. Si ya tenés datos o un Excel, podés adjuntarlo en el chat.</p>
-
-          <ul class="contact-list">
-            <li>
-              <span class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3.7 17.8L3 21l3.3-.7A11 11 0 0 0 20.5 3.5Zm-8.4 17.3a9 9 0 0 1-4.6-1.2l-.3-.2-2.7.6.6-2.6-.2-.3A9 9 0 1 1 12.1 20.8Zm5.3-6.6c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5H6.3c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.1.2 1.6.1.5-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4 0-.2-.3-.3-.5-.4Z"/></svg>
-              </span>
-              <div><strong>WhatsApp</strong><div style="color:rgba(11,18,32,.64); font-weight:800; font-size:13px;">+54 299 60322676</div></div>
-            </li>
-
-            <li>
-              <span class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14Zm0 4.2-7 4.7-7-4.7V19h14V7.2Zm-14-2V5l7 4.7L19 5v.2l-7 4.7-7-4.7Z"/></svg>
-              </span>
-              <div><strong>LinkedIn</strong><div style="color:rgba(11,18,32,.64); font-weight:800; font-size:13px;">Perfil profesional</div></div>
-            </li>
-          </ul>
-
-          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" id="waCta" href="#">Abrir WhatsApp</a>
-            <a class="btn" href="#ejemplos">Ver dashboards</a>
+          <div class="field">
+            <label>Teléfono / WhatsApp</label>
+            <input placeholder="+54 ..." />
           </div>
+          <div class="field">
+            <label>Mensaje</label>
+            <textarea placeholder="Contame qué querés mejorar (ventas, costos, margen, control, reportes...)"></textarea>
+          </div>
+          <a class="btn primary" href="https://wa.me/5492996032267" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+        </div>
+
+        <div class="form">
+          <h3 style="margin:0 0 8px">Canales</h3>
+          <p class="hint">
+            WhatsApp: <b>+54 299 6 032 267</b><br/>
+            LinkedIn: <b>Daiana Beltrán</b><br/>
+            Sitio: <b>prisma-bi.github.io</b>
+          </p>
+          <div style="height:12px"></div>
+          <p class="hint">
+            Prisma BI trabaja remoto con empresas de Argentina y LATAM.
+            El objetivo es simple: <b>que cada métrica termine en una decisión</b>.
+          </p>
+          <div style="height:12px"></div>
+          <a class="btn" href="#ejemplos">Ver ejemplos</a>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container foot">
-      <div>© <span id="year"></span> Prisma BI — Dirección • Rentabilidad • Control</div>
-      <div>
-        <a href="#home">Volver arriba</a> ·
-        <a href="https://www.linkedin.com/in/daiana-beltran/?locale=es_ES" target="_blank" rel="noreferrer">LinkedIn</a>
+    <div class="container">
+      <div class="footGrid">
+        <div>
+          <h4>PRISMA BI</h4>
+          <div style="color:rgba(255,255,255,.65);font-weight:650;line-height:1.7">
+            Dirección • Rentabilidad • Control.<br/>
+            Menos discusiones. Más decisiones.
+          </div>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <a href="#servicios">Servicios</a>
+          <a href="#ejemplos">Ejemplos</a>
+          <a href="#opiniones">Opiniones</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <a href="https://wa.me/5492996032267" target="_blank" rel="noopener">WhatsApp: +54 299 6 032 267</a>
+          <a href="https://www.linkedin.com/in/daiana-beltran/?locale=es_ES" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
+      <div class="copy">© <span id="y"></span> Prisma BI. Todos los derechos reservados.</div>
     </div>
   </footer>
 
-  <!-- WhatsApp Floating Button -->
-  <a class="wa" id="waFloat" href="#" aria-label="Abrir WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3.7 17.8L3 21l3.3-.7A11 11 0 0 0 20.5 3.5Zm-8.4 17.3a9 9 0 0 1-4.6-1.2l-.3-.2-2.7.6.6-2.6-.2-.3A9 9 0 1 1 12.1 20.8Zm5.3-6.6c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5H6.3c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.1.2 1.6.1.5-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4 0-.2-.3-.3-.5-.4Z"/></svg>
+  <!-- WhatsApp -->
+  <a class="wa" href="https://wa.me/5492996032267" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M19.11 17.36c-.28-.14-1.65-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.09-.16.18-.32.21-.6.07-.28-.14-1.18-.43-2.25-1.38-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.04-.35-.02-.49-.07-.14-.62-1.5-.85-2.05-.22-.54-.45-.47-.62-.48l-.53-.01c-.18 0-.49.07-.75.35-.25.28-.98.96-.98 2.33 0 1.37 1 2.7 1.14 2.89.14.18 1.97 3.01 4.77 4.22.67.29 1.19.46 1.6.59.67.21 1.27.18 1.75.11.53-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.32-.07-.11-.25-.18-.53-.32zM16.02 3.2c-7.05 0-12.79 5.74-12.79 12.79 0 2.25.59 4.38 1.71 6.26L3.2 28.8l6.71-1.76a12.74 12.74 0 0 0 6.11 1.56h.01c7.05 0 12.79-5.74 12.79-12.79S23.07 3.2 16.02 3.2zm0 22.25h-.01c-1.93 0-3.82-.52-5.47-1.5l-.39-.23-3.98 1.04 1.06-3.88-.25-.4a10.6 10.6 0 0 1-1.64-5.68c0-5.86 4.77-10.63 10.64-10.63 2.84 0 5.51 1.11 7.52 3.12a10.58 10.58 0 0 1 3.11 7.51c0 5.86-4.77 10.64-10.59 10.64z"/>
+    </svg>
   </a>
 
-  <!-- Lightbox para ejemplos -->
-  <div id="lb" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.64); z-index:80; padding:18px;">
-    <div style="max-width:1100px; margin:0 auto; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,.35);">
-      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid rgba(15,23,42,.10);">
-        <div>
-          <strong id="lbT" style="font-weight:900;"></strong>
-          <div id="lbS" style="color:rgba(11,18,32,.66); font-weight:800; font-size:13px;"></div>
-        </div>
-        <button class="btn" onclick="closeLightbox()">Cerrar ✕</button>
-      </div>
-      <img id="lbImg" alt="" style="width:100%; height:auto; display:block;" />
-    </div>
-  </div>
-
   <script>
-    /* ===============================
-       CONFIG (editalo en 30 segundos)
-       =============================== */
-    const CONFIG = {
-      whatsappNumber: "54929960322676", // sin +, con código país y área
-      whatsappTextDefault: "Hola! Quiero agendar un diagnóstico (20 min). Necesito ordenar la lectura del negocio (ventas/costos/margen).",
-      youtubeId: "VIDEO_ID" // reemplazá por el ID real del video (solo el ID)
-    };
+    // Año footer
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Set year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Replace YouTube ID
-    const yt = document.getElementById("yt");
-    if (yt && CONFIG.youtubeId && CONFIG.youtubeId !== "VIDEO_ID") {
-      yt.src = `https://www.youtube.com/embed/${CONFIG.youtubeId}?rel=0&modestbranding=1`;
-    }
-
-    // WhatsApp links
-    const waLink = (text) => {
-      const msg = encodeURIComponent(text || CONFIG.whatsappTextDefault);
-      return `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
-    };
-    const waFloat = document.getElementById("waFloat");
-    const waCta = document.getElementById("waCta");
-    waFloat.href = waLink();
-    waCta.href = waLink();
-
-    // Mobile menu
-    const btnMenu = document.getElementById("btnMenu");
-    const mobilePanel = document.getElementById("mobilePanel");
-    btnMenu?.addEventListener("click", () => {
-      const open = mobilePanel.style.display === "block";
-      mobilePanel.style.display = open ? "none" : "block";
-      btnMenu.textContent = open ? "☰ Menú" : "✕ Cerrar";
+    // Menú mobile
+    const burger = document.getElementById("burger");
+    const panel = document.getElementById("panel");
+    burger?.addEventListener("click", () => {
+      const open = panel.classList.toggle("open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
     });
-    mobilePanel?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-      mobilePanel.style.display = "none";
-      btnMenu.textContent = "☰ Menú";
-    }));
+    panel?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => panel.classList.remove("open")));
 
-    // Form -> WhatsApp (sin mail)
-    function handleSubmit(e){
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const nombre = fd.get("nombre");
-      const empresa = fd.get("empresa");
-      const tel = fd.get("telefono");
-      const mensaje = fd.get("mensaje");
-
-      const txt =
-`Hola! Soy ${nombre} (${empresa}). Tel: ${tel}.
-Quiero agendar un diagnóstico.
-
-Contexto:
-${mensaje}`;
-
-      window.open(waLink(txt), "_blank");
-      e.target.reset();
-      return false;
+    // Slider
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const dots = Array.from(document.querySelectorAll(".dotBtn"));
+    let idx = 0;
+    function go(i){
+      idx = i;
+      slides.forEach(s => s.classList.remove("active"));
+      dots.forEach(d => d.classList.remove("active"));
+      slides[i].classList.add("active");
+      dots[i].classList.add("active");
     }
-    window.handleSubmit = handleSubmit;
+    dots.forEach(d => d.addEventListener("click", () => go(Number(d.dataset.go))));
+    setInterval(() => go((idx+1)%slides.length), 6500);
 
-    // Lightbox
-    function openLightbox(img, title, subtitle){
-      document.getElementById("lbImg").src = img;
-      document.getElementById("lbT").textContent = title;
-      document.getElementById("lbS").textContent = subtitle;
-      document.getElementById("lb").style.display = "block";
-    }
-    function closeLightbox(){
-      document.getElementById("lb").style.display = "none";
-      document.getElementById("lbImg").src = "";
-    }
-    window.openLightbox = openLightbox;
-    window.closeLightbox = closeLightbox;
-    document.getElementById("lb").addEventListener("click", (e)=>{
-      if(e.target.id === "lb") closeLightbox();
-    });
-
-    /* ===============================
-       NETWORK (Overdata-style)
-       - puntos que se unen y separan
-       - líneas brillantes tech
-       - más visibles que antes
-       =============================== */
-    const canvas = document.getElementById("network");
+    // ✅ RED NEURONAL PRO: se une / desune / brilla / destellos (Canvas)
+    const canvas = document.getElementById("net");
     const ctx = canvas.getContext("2d", { alpha: true });
+    let W=0,H=0, DPR=1;
+    let nodes = [];
+    let t = 0;
 
-    let W=0, H=0, DPR=1;
     function resize(){
-      DPR = Math.min(window.devicePixelRatio || 1, 2);
-      W = canvas.clientWidth = canvas.parentElement.clientWidth;
-      H = canvas.clientHeight = canvas.parentElement.clientHeight;
+      const parent = canvas.parentElement;
+      const rect = parent.getBoundingClientRect();
+      DPR = Math.min(2, window.devicePixelRatio || 1);
+      W = Math.floor(rect.width);
+      H = Math.floor(rect.height);
       canvas.width = Math.floor(W * DPR);
       canvas.height = Math.floor(H * DPR);
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
       ctx.setTransform(DPR,0,0,DPR,0,0);
-    }
-    window.addEventListener("resize", resize);
 
-    const points = [];
-    const MAX = 90;        // cantidad de nodos
-    const LINK = 150;      // distancia de conexión
-    const SPEED = 0.42;    // velocidad
-    const GLOW = 1.35;     // brillo
-
-    function rand(min,max){ return Math.random()*(max-min)+min; }
-
-    function init(){
-      points.length = 0;
-      const density = (W * H) / (1100*600);
-      const count = Math.max(70, Math.min(110, Math.floor(MAX * density)));
-
-      for(let i=0;i<count;i++){
-        const p = {
-          x: rand(0,W),
-          y: rand(0,H),
-          vx: rand(-SPEED, SPEED),
-          vy: rand(-SPEED, SPEED),
-          r: rand(1.2, 2.2),
-          phase: rand(0, Math.PI*2)
-        };
-        points.push(p);
-      }
+      // densidad según tamaño (performance mobile)
+      const base = (W < 520) ? 38 : (W < 900) ? 55 : 70;
+      const count = Math.floor(base + (W*H)/45000);
+      nodes = new Array(count).fill(0).map(() => ({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()*2-1) * 0.35,
+        vy: (Math.random()*2-1) * 0.35,
+        r: 1.1 + Math.random()*1.4,
+        tw: Math.random()*Math.PI*2, // twinkle phase
+      }));
     }
 
-    function draw(t){
+    function draw(){
+      t += 0.016;
       ctx.clearRect(0,0,W,H);
 
-      // fondo muy sutil para “tech”
-      const grad = ctx.createRadialGradient(W*0.2,H*0.3,0,W*0.2,H*0.3,Math.max(W,H));
-      grad.addColorStop(0, "rgba(31,111,235,0.08)");
-      grad.addColorStop(1, "rgba(255,255,255,0)");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0,0,W,H);
+      // parámetros “tech”
+      const linkDist = (W < 520) ? 105 : 130;
+      const glow = 18;
 
-      // líneas (unirse/desunirse)
-      for(let i=0;i<points.length;i++){
-        const a = points[i];
+      // fondo suave (muy leve)
+      ctx.save();
+      ctx.globalAlpha = 0.12;
+      ctx.fillStyle = "#00e5ff";
+      ctx.beginPath();
+      ctx.arc(W*0.18, H*0.20, 160, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 0.10;
+      ctx.fillStyle = "#3aa3ff";
+      ctx.beginPath();
+      ctx.arc(W*0.78, H*0.35, 200, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
 
-        for(let j=i+1;j<points.length;j++){
-          const b = points[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d2 = dx*dx + dy*dy;
-          if(d2 < LINK*LINK){
-            const d = Math.sqrt(d2);
-            const alpha = (1 - d/LINK);
+      // mover nodos
+      for(const n of nodes){
+        n.x += n.vx;
+        n.y += n.vy;
 
-            // “brillo” pulsante leve
-            const pulse = 0.65 + 0.35*Math.sin((t/900) + a.phase);
+        // rebote
+        if(n.x < 0 || n.x > W) n.vx *= -1;
+        if(n.y < 0 || n.y > H) n.vy *= -1;
 
-            // color tech blanco-azulado como overdata
-            ctx.strokeStyle = `rgba(90, 160, 255, ${alpha*0.30*pulse})`;
+        // micro-deriva (para “orgánico”)
+        n.vx += (Math.random()*2-1)*0.01;
+        n.vy += (Math.random()*2-1)*0.01;
+        n.vx = Math.max(-0.55, Math.min(0.55, n.vx));
+        n.vy = Math.max(-0.55, Math.min(0.55, n.vy));
+      }
+
+      // destellos (sparkles) ocasionales
+      const sparkle = Math.random() < 0.035 ? nodes[Math.floor(Math.random()*nodes.length)] : null;
+
+      // líneas
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x-b.x, dy = a.y-b.y;
+          const d = Math.hypot(dx,dy);
+          if(d < linkDist){
+            const alpha = (1 - d/linkDist);
+            const pulse = 0.55 + 0.45*Math.sin((t*1.3) + (i+j)*0.03);
+            const baseA = 0.18 * alpha * pulse;  // ✅ más visible
             ctx.lineWidth = 1;
+            ctx.strokeStyle = `rgba(160, 230, 255, ${baseA})`;
             ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+            ctx.moveTo(a.x,a.y);
+            ctx.lineTo(b.x,b.y);
             ctx.stroke();
 
-            // glow extra (más visible)
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha*0.18*pulse*GLOW})`;
-            ctx.lineWidth = 1.2;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+            // glow sutil
+            ctx.save();
+            ctx.globalAlpha = baseA * 0.65;
+            ctx.shadowBlur = glow;
+            ctx.shadowColor = "rgba(79, 241, 255, .9)";
+            ctx.strokeStyle = "rgba(79, 241, 255, .22)";
             ctx.stroke();
+            ctx.restore();
           }
         }
       }
 
       // puntos
-      for(const p of points){
-        // pequeño “halo”
-        const halo = 5 + 3*Math.sin((t/800) + p.phase);
+      for(const n of nodes){
+        const tw = 0.55 + 0.45*Math.sin(t*2 + n.tw);
+        const r = n.r * (0.85 + tw*0.45);
+
+        // punto base
         ctx.beginPath();
-        ctx.fillStyle = `rgba(31,111,235,0.10)`;
-        ctx.arc(p.x,p.y,halo,0,Math.PI*2);
+        ctx.fillStyle = `rgba(220, 248, 255, ${0.55 + tw*0.35})`;
+        ctx.arc(n.x, n.y, r, 0, Math.PI*2);
         ctx.fill();
 
-        // punto central brillante
+        // glow
+        ctx.save();
+        ctx.globalAlpha = 0.35 + tw*0.25;
+        ctx.shadowBlur = 22;
+        ctx.shadowColor = "rgba(79, 241, 255, .9)";
+        ctx.fillStyle = "rgba(79, 241, 255, .22)";
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255,255,255,0.90)`;
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.arc(n.x, n.y, r+0.2, 0, Math.PI*2);
         ctx.fill();
-
-        // borde azulado sutil
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(90,160,255,0.45)`;
-        ctx.lineWidth = 1;
-        ctx.arc(p.x,p.y,p.r+0.6,0,Math.PI*2);
-        ctx.stroke();
+        ctx.restore();
       }
 
-      // movimiento
-      for(const p of points){
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // rebote con margen suave
-        if(p.x < -30) p.x = W+30;
-        if(p.x > W+30) p.x = -30;
-        if(p.y < -30) p.y = H+30;
-        if(p.y > H+30) p.y = -30;
-
-        // micro variación para que “respire”
-        p.vx += rand(-0.01, 0.01);
-        p.vy += rand(-0.01, 0.01);
-        p.vx = Math.max(-SPEED, Math.min(SPEED, p.vx));
-        p.vy = Math.max(-SPEED, Math.min(SPEED, p.vy));
+      // sparkle extra (destello notorio)
+      if(sparkle){
+        ctx.save();
+        ctx.globalAlpha = 0.9;
+        ctx.shadowBlur = 28;
+        ctx.shadowColor = "rgba(125, 211, 255, 1)";
+        ctx.fillStyle = "rgba(125, 211, 255, .35)";
+        ctx.beginPath();
+        ctx.arc(sparkle.x, sparkle.y, 4.2, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
       }
 
       requestAnimationFrame(draw);
     }
 
-    // Start
+    window.addEventListener("resize", resize);
     resize();
-    init();
-    requestAnimationFrame(draw);
+    draw();
   </script>
-
-  <!--
-  ==========================================
-  GUIA RAPIDA: VIDEO + RESEÑAS DE GOOGLE
-  ==========================================
-
-  1) VIDEO (recomendado):
-     - Subí un video a YouTube (no listado).
-     - Copiá el ID (lo que está después de v=)
-     - En el código, arriba: CONFIG.youtubeId = "TU_ID"
-
-  2) VIDEO PROPIO MP4:
-     - Subí assets/prisma-video.mp4 a tu repo
-     - Descomentá el bloque <video> y comentá el <iframe>
-
-  3) RESEÑAS DE GOOGLE (lo más “legal/limpio”):
-     - Google no ofrece un “embed oficial” de reviews con slider nativo.
-       Para algo pro, se usa:
-       a) Capturas de reseñas con permiso (y las ponés como cards), o
-       b) Un proveedor de widgets (Elfsight / Trustindex / etc.)
-     - Si querés, te lo dejo armado con un contenedor listo y vos pegás el script del proveedor.
-
-  4) REEMPLAZAR IMÁGENES DE SERVICIOS / EJEMPLOS:
-     - En Servicios: cambiá las URLs de Unsplash por imágenes tuyas o mockups de dashboards.
-     - En Ejemplos: cambiá thumbs por capturas de tus dashboards.
-
-  -->
 </body>
 </html>
