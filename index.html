@@ -1,376 +1,805 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prisma BI | Dashboards que orientan decisiones</title>
-  <meta name="description" content="Consultoría en Data & Business Intelligence. SQL + Power BI + Excel para transformar datos dispersos en claridad ejecutiva." />
-  <meta name="theme-color" content="#0B1220" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Prisma BI — Consultora de Datos & BI</title>
+  <meta name="description" content="Dashboards ejecutivos para decidir mejor: ventas, costos y rentabilidad. De Excel/ERP a decisiones claras, sin tecnicismos."/>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Prisma BI | Dashboards que orientan decisiones" />
-  <meta property="og:description" content="SQL + Power BI + Excel para convertir datos dispersos en claridad ejecutiva." />
-  <meta property="og:type" content="website" />
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico"/>
 
-  <!-- Fonts (Google) -->
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Prisma BI — Claridad para decidir con datos">
+  <meta property="og:description" content="Dashboards ejecutivos para ventas, costos y rentabilidad. De Excel/ERP a decisiones claras, sin tecnicismos.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <!-- Reemplazá por tu imagen real 1200x630 -->
+  <meta property="og:image" content="assets/brand/og-prisma.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prisma BI — Claridad para decidir con datos">
+  <meta name="twitter:description" content="Dashboards ejecutivos para ventas, costos y rentabilidad.">
+  <meta name="twitter:image" content="assets/brand/og-prisma.jpg">
+
+  <meta name="theme-color" content="#040a18"/>
+
+  <!-- Preconnect + Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- (Opcional) Preload de la imagen de fondo del hero -->
+  <link rel="preload" as="image" href="assets/brand/hero-bg.webp?v=9">
 
   <style>
     :root{
-      /* ===== Prisma BI (Base azul premium + acento naranja) ===== */
-      --bg: #0B1220;
-      --bg2:#07101F;
-      --card:#0F1B34;
-      --card2:#0D1730;
-      --line: rgba(255,255,255,.10);
+      --bg0:#02050e;
+      --bg1:#040a18;
 
-      --txt:#EAF0FF;
-      --muted: rgba(234,240,255,.72);
+      --text:#F4F8FF;
+      --muted:rgba(244,248,255,.72);
 
-      --primary:#0B5FFF;    /* azul */
-      --cyan:#21D4FD;       /* cian tech */
-      --violet:#6A5BFF;     /* violeta sutil */
-      --cta:#FF7A00;        /* naranja CTA */
-      --cta2:#FF5A1F;       /* hover */
+      --fr:#1E7CFF;
+      --cyan:#2AD4FF;
+      --teal:#00E7B6;
 
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-      --r: 18px;
+      --shadow:0 24px 80px rgba(0,0,0,.55);
+      --shadow2:0 16px 50px rgba(0,0,0,.35);
+      --r:18px;
 
-      --max: 1100px;
-      --pad: clamp(18px, 3.2vw, 34px);
+      --h1: clamp(44px, 5.4vw, 82px);
+      --lead: clamp(16px, 1.2vw, 20px);
+      --h2: clamp(28px, 3vw, 46px);
+
+      --secPad: 84px;
     }
 
-    *{ box-sizing: border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
+    html,body{margin:0}
     body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--txt);
-      background: radial-gradient(1200px 700px at 15% 10%, rgba(33,212,253,.12), transparent 55%),
-                  radial-gradient(900px 600px at 90% 20%, rgba(106,91,255,.12), transparent 55%),
-                  linear-gradient(180deg, var(--bg), var(--bg2));
+      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 18% 12%, rgba(30,124,255,.22), transparent 62%),
+        radial-gradient(820px 520px at 78% 18%, rgba(0,231,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
       overflow-x:hidden;
     }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1180px;margin:0 auto;padding:0 28px}
 
-    a{ color: inherit; text-decoration:none; }
-    .container{ width: min(var(--max), calc(100% - 2*var(--pad))); margin: 0 auto; }
-
-    /* ===== Header ===== */
-    header{
-      position: sticky;
-      top:0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.65);
-      border-bottom: 1px solid var(--line);
+    /* Accesibilidad: foco visible */
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid rgba(42,212,255,.75);
+      outline-offset: 3px;
+      border-radius: 12px;
     }
+
+    /* Skip link */
+    .skip{
+      position:absolute;left:-999px;top:10px;
+      background:#0b1632;color:var(--text);
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      z-index:99999;
+    }
+    .skip:focus{left:10px;}
+
+    body:before{
+      content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
+      background:linear-gradient(90deg, transparent, rgba(30,124,255,.88), rgba(42,212,255,.88), rgba(0,231,182,.78), transparent);
+      pointer-events:none;
+      filter: blur(.2px);
+      opacity:.95;
+    }
+
+    /* NAV */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(2,5,14,.66);
+      backdrop-filter: blur(14px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      gap: 18px;
-      padding: 14px 0;
+      gap:16px;
+      padding:10px 0;
+      min-height:86px;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.2px;
+
+    /* BRAND */
+    .brandlock{
+      display:flex; align-items:center; gap:12px;
+      min-width: 360px;
     }
-    .logo{
-      width:34px; height:34px; border-radius:10px;
-      background: linear-gradient(135deg, var(--primary), var(--cyan));
-      box-shadow: 0 10px 30px rgba(11,95,255,.25);
+    .brandlock a{display:flex;align-items:center;gap:12px}
+
+    /* LOGO */
+    .brandlock img.brandTitle{
+      height:74px;
+      width:auto;
+      object-fit:contain;
+      filter: drop-shadow(0 18px 45px rgba(0,0,0,.38));
+      opacity:.98;
+      transform: translateY(1px);
+    }
+
+    /* MENU + CTA (faltaban estilos base) */
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{
+      font-weight:800;
+      color:rgba(244,248,255,.78);
+      padding:10px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
+      transition:filter .16s ease, transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .menu a:hover{
+      filter:brightness(1.12);
+      border-color:rgba(42,212,255,.18);
+      background:rgba(10,18,38,.30);
+      transform:translateY(-1px);
+    }
+    .menu a.active{
+      color:rgba(244,248,255,.92);
+      border-color:rgba(42,212,255,.22);
+      background:rgba(10,18,38,.36);
+    }
+
+    .navcta{
+      display:inline-flex;align-items:center;gap:10px;
+      font-weight:900;
+      padding:12px 14px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(10,18,38,.42);
+      box-shadow:0 16px 44px rgba(0,0,0,.24);
+      transition:transform .16s ease, filter .16s ease, border-color .16s ease;
+      white-space:nowrap;
+    }
+    .navcta:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(42,212,255,.26);}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .menu{display:none}
+      .brandlock{min-width:auto}
+    }
+    @media (max-width:520px){
+      .brandlock img.brandTitle{height:54px;}
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      min-height: calc(86vh - 72px);
+      display:flex;
+      align-items:center;
+      padding:44px 0 52px;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        linear-gradient(90deg, rgba(2,5,14,.95) 10%, rgba(2,5,14,.70) 52%, rgba(2,5,14,.20) 100%),
+        radial-gradient(900px 560px at 68% 20%, rgba(30,124,255,.22), transparent 60%),
+        radial-gradient(900px 560px at 76% 82%, rgba(0,231,182,.10), transparent 62%),
+        radial-gradient(720px 420px at 40% 38%, rgba(42,212,255,.12), transparent 65%),
+        url("assets/brand/hero-bg.webp?v=9");
+      background-size: cover;
+      background-position: center right;
+      filter: saturate(120%) contrast(108%);
+      transform: scale(1.02);
+      z-index:-3;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;inset:-60px;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.35), transparent 55%),
+        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.25), transparent 55%),
+        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.25), transparent 55%),
+        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.22), transparent 55%),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/90px 90px,
+        linear-gradient(180deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0/90px 90px,
+        radial-gradient(1200px 700px at 50% 28%, transparent 38%, rgba(0,0,0,.58) 78%);
+      opacity:.20;
+      pointer-events:none;
+      z-index:-2;
+      mask-image: radial-gradient(740px 460px at 30% 42%, black 55%, transparent 100%);
+    }
+    .heroWave{
+      position:absolute;left:-8%;right:-8%;bottom:-70px;height:260px;
+      background:
+        radial-gradient(900px 220px at 50% 10%, rgba(42,212,255,.20), transparent 70%),
+        radial-gradient(900px 220px at 55% 35%, rgba(0,231,182,.12), transparent 72%),
+        linear-gradient(90deg, rgba(30,124,255,.12), rgba(42,212,255,.10), rgba(0,231,182,.10));
+      opacity:.65;
+      transform: rotate(-2deg);
+      z-index:-1;
+      mask-image: radial-gradient(900px 240px at 50% 30%, black 55%, transparent 100%);
+    }
+
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:34px;
+      align-items:center;
+    }
+    @media (max-width:980px){
+      .hero{min-height:auto;padding:46px 0 44px}
+      .heroGrid{grid-template-columns:1fr;gap:26px}
+      .heroWave{display:none;}
+    }
+
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(6,12,26,.45);
+      box-shadow:0 14px 40px rgba(0,0,0,.34);
+      width:max-content;
+      margin:0 0 18px;
+      font-weight:900;
+      color:rgba(244,248,255,.92);
+    }
+    .pill i{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      box-shadow:0 0 22px rgba(42,212,255,.45);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:var(--h1);
+      line-height:1.02;
+      font-weight:900;
+      letter-spacing:-.03em;
+      text-shadow: 0 16px 44px rgba(0,0,0,.35);
+    }
+    .accent{
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .lede{
+      margin:0 0 18px;
+      font-size:var(--lead);
+      color:rgba(244,248,255,.78);
+      max-width:64ch;
+      line-height:1.72;
+      text-shadow: 0 12px 34px rgba(0,0,0,.22);
+    }
+
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
+    .btnPrimary{
+      position:relative;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 20px;border-radius:12px;
+      font-weight:900;color:#06101f;
+      background: linear-gradient(90deg, rgba(30,124,255,.98), rgba(42,212,255,.96), rgba(0,231,182,.92));
+      border:1px solid rgba(0,0,0,.14);
+      box-shadow:
+        0 22px 78px rgba(0,0,0,.35),
+        0 0 0 1px rgba(42,212,255,.12) inset,
+        0 0 48px rgba(30,124,255,.22);
+      overflow:hidden;
+      transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
+    }
+    .btnPrimary:before{
+      content:"";
+      position:absolute;top:-40%;left:-40%;
+      width:50%;height:180%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.68), transparent);
+      transform: rotate(18deg);
+      opacity:0;
+    }
+    .btnPrimary:hover{transform: translateY(-1px);filter: brightness(1.06);}
+    .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
+    @keyframes shine{
+      0%{left:-40%;opacity:0}
+      15%{opacity:.9}
+      100%{left:120%;opacity:0}
+    }
+    .btnPrimary svg{width:18px;height:18px}
+
+    .btnSecondary{
+      position:relative;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 20px;border-radius:12px;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.20);
+      background:
+        radial-gradient(140px 80px at 20% 30%, rgba(30,124,255,.18), transparent 70%),
+        radial-gradient(140px 80px at 80% 70%, rgba(0,231,182,.12), transparent 70%),
+        rgba(10,18,38,.42);
+      box-shadow: 0 18px 56px rgba(0,0,0,.28);
+      transition: transform .16s ease, filter .16s ease, box-shadow .16s ease, border-color .16s ease;
+      overflow:hidden;
+    }
+    .btnSecondary:hover{transform: translateY(-1px);filter: brightness(1.08);border-color: rgba(42,212,255,.28);}
+
+    .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:62ch}
+    .bullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86)}
+    .check{
+      width:22px;height:22px;border-radius:999px;
+      background: rgba(0,231,182,.16);
+      border:1px solid rgba(0,231,182,.30);
+      display:grid;place-items:center;flex:0 0 22px;margin-top:2px;
+      box-shadow:0 12px 28px rgba(0,0,0,.25);
+    }
+    .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
+
+    /* FOTO */
+    .portraitWrap{display:flex;justify-content:flex-end}
+    @media (max-width:980px){ .portraitWrap{justify-content:center} }
+    .portrait{
+      width:min(560px, 100%);
+      position:relative;
+      filter: drop-shadow(0 36px 78px rgba(0,0,0,.58));
+      padding-bottom: 18px;
+      overflow: visible;
+    }
+    .portrait img{
+      width:100%;
+      height:auto;
+      display:block;
+      transform: translateY(8px) scale(.99);
+      will-change: transform;
+
+      -webkit-mask-image: radial-gradient(120% 120% at 55% 45%, #000 62%, transparent 78%);
+      mask-image: radial-gradient(120% 120% at 55% 45%, #000 62%, transparent 78%);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+    .portrait:before{
+      content:"";
+      position:absolute;inset:-90px;
+      background:
+        radial-gradient(360px 280px at 55% 35%, rgba(30,124,255,.18), transparent 72%),
+        radial-gradient(380px 300px at 60% 72%, rgba(0,231,182,.10), transparent 74%);
+      z-index:-1;
+      filter: blur(2px);
+    }
+    .portrait:after{
+      content:"";
+      position:absolute;left:-10%;right:-10%;bottom:0;height:88px;
+      background: linear-gradient(180deg, rgba(2,5,14,0), rgba(2,5,14,.70));
+      opacity:.55;
+      pointer-events:none;
+      border-radius: 22px;
+    }
+
+    .sec{
+      position:relative;
+      padding: var(--secPad) 0;
+      overflow:hidden;
+    }
+    .sec:before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(900px 520px at 20% 20%, rgba(30,124,255,.14), transparent 62%),
+        radial-gradient(900px 520px at 78% 10%, rgba(42,212,255,.10), transparent 62%),
+        radial-gradient(900px 520px at 70% 85%, rgba(0,231,182,.08), transparent 60%),
+        linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
+      z-index:-3;
+    }
+    .sec:after{
+      content:"";
+      position:absolute;inset:-80px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/110px 110px,
+        linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0/110px 110px,
+        radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.0), rgba(0,0,0,.72));
+      opacity:.18;
+      z-index:-2;
+      pointer-events:none;
+      mask-image: radial-gradient(780px 520px at 50% 40%, black 55%, transparent 100%);
+    }
+
+    .sep{
+      height:1px;max-width:1050px;margin:0 auto;
+      background: linear-gradient(90deg, transparent, rgba(30,124,255,.26), rgba(42,212,255,.20), rgba(0,231,182,.16), transparent);
+    }
+
+    .sectionTitle{
+      text-align:center;margin:0 0 10px;
+      font-size:var(--h2);
+      font-weight:900;
+      letter-spacing:-.02em;
+      text-shadow: 0 18px 46px rgba(0,0,0,.30);
+    }
+    .sectionLead{
+      text-align:center;
+      color:rgba(244,248,255,.66);
+      max-width:92ch;margin:0 auto 34px;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
+
+    .card{
+      position:relative;
+      background:
+        radial-gradient(320px 180px at 18% 18%, rgba(30,124,255,.16), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius: var(--r);
+      padding:22px 18px;
+      box-shadow: 0 20px 64px rgba(0,0,0,.34);
+      transition: transform .18s ease, border-color .18s ease, filter .18s ease;
+      overflow:hidden;
+    }
+    .card:after{
+      content:"";
+      position:absolute;inset:-1px;border-radius: var(--r);
+      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.12), rgba(0,231,182,.12));
+      opacity:0;filter:blur(16px);
+      transition:opacity .2s ease;
+      pointer-events:none;
+    }
+    .card:hover{transform: translateY(-2px);border-color: rgba(42,212,255,.24);filter: brightness(1.06);}
+    .card:hover:after{opacity:.85}
+
+    .kicker{display:flex;align-items:center;gap:10px;font-weight:900;margin-bottom:10px}
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 18px rgba(42,212,255,.28);
+    }
+
+    .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
+
+    .miniBullets{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+    .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
+    .miniBullets .miniCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(42,212,255,.10);
+      border:1px solid rgba(42,212,255,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .miniBullets .miniCheck:before{content:"✓";font-weight:900;color:rgba(42,212,255,.95);font-size:12px}
+
+    /* PROCESO */
+    .steps{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px
+    }
+    @media (max-width:980px){ .steps{grid-template-columns:1fr} }
+    .step{
+      position:relative;
+      background: rgba(10,18,38,.52);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding:16px;
+      box-shadow: 0 18px 54px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .step:after{
+      content:"";position:absolute;inset:-1px;border-radius:16px;
+      background:linear-gradient(90deg, rgba(30,124,255,.14), rgba(42,212,255,.10), rgba(0,231,182,.10));
+      opacity:.18;filter:blur(16px);pointer-events:none;
+    }
+    .step .n{
+      font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:30px;height:30px;border-radius:10px;
+      background: rgba(0,231,182,.10);
+      border:1px solid rgba(0,231,182,.22);
+      margin-bottom:10px;
+    }
+    .step .t{margin:0 0 6px;font-weight:900}
+    .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
+
+    /* CONTACT */
+    .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
+    @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
+
+    .cBox{
+      position:relative;
+      background:
+        radial-gradient(220px 120px at 20% 20%, rgba(30,124,255,.14), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius: 16px;
+      padding:16px;
+      box-shadow: 0 20px 64px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .cBox:after{
+      content:"";
+      position:absolute;inset:-1px;border-radius:16px;
+      background:linear-gradient(90deg, rgba(30,124,255,.16), rgba(42,212,255,.12), rgba(0,231,182,.10));
+      opacity:.18;filter:blur(16px);
+      pointer-events:none;
+    }
+    .cBox .t{font-weight:900;margin:0 0 6px}
+    .cBox .v{margin:0;color:rgba(244,248,255,.74);font-size:14px}
+
+    footer{
+      padding:30px 0;
+      text-align:center;
+      color:rgba(244,248,255,.55);
+      font-size:13px;
       position:relative;
     }
-    .logo:after{
+    footer:before{
       content:"";
-      position:absolute; inset:8px;
-      border-radius:8px;
-      background: linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.02));
+      position:absolute;left:0;right:0;top:0;height:1px;
+      background: linear-gradient(90deg, transparent, rgba(30,124,255,.18), rgba(42,212,255,.14), rgba(0,231,182,.12), transparent);
+      opacity:.9;
     }
 
-    .menu{
-      display:flex; align-items:center; gap: 18px;
-      font-weight:600; color: var(--muted);
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important;animation:none!important}
     }
-    .menu a{ padding:10px 10px; border-radius: 12px; }
-    .menu a:hover{ background: rgba(255,255,255,.06); color: var(--txt); }
+  </style>
+</head>
 
-    .nav-right{ display:flex; align-items:center; gap: 10px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 11px 14px;
-      border-radius: 14px;
-      font-weight: 700;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      transition: transform .15s ease, background .15s ease, border .15s ease, box-shadow .15s ease;
-      white-space: nowrap;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
-    .btn-cta{
-      border: none;
-      background: linear-gradient(135deg, var(--cta), var(--cta2));
-      color: #111;
-      box-shadow: 0 18px 40px rgba(255,122,0,.20);
-    }
-    .btn-cta:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+<body>
 
-    .burger{ display:none; }
+  <a href="#home" class="skip">Saltar al contenido</a>
 
-    /* ===== Hero ===== */
-    .hero{
-      position: relative;
-      overflow: hidden;
-      padding: 60px 0 26px;
-    }
-    #net{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      z-index:2;
-    }
-    .heroOverlay{
-      position:absolute; inset:0; z-index:1;
-      background: radial-gradient(ellipse at center, rgba(0,0,0,.20) 0%, rgba(0,0,0,.55) 70%);
-    }
-    .heroGrid{
-      position:relative; z-index:3;
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 26px;
-      align-items:center;
-    }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      color: rgba(234,240,255,.85);
-      font-weight:700;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      width: fit-content;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:99px;
-      background: var(--cyan);
-      box-shadow: 0 0 18px rgba(33,212,253,.7);
-    }
-    h1{
-      margin: 16px 0 10px;
-      font-size: clamp(34px, 4.4vw, 56px);
-      line-height: 1.05;
-      letter-spacing: -0.8px;
-      text-shadow: 0 18px 40px rgba(0,0,0,.55);
-    }
-    .lead{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: clamp(15px, 1.4vw, 18px);
-      line-height: 1.6;
-      max-width: 56ch;
-    }
-    .heroActions{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 10px; }
-    .heroMini{
-      margin-top: 18px;
-      display:flex; gap: 14px; flex-wrap:wrap;
-      color: rgba(234,240,255,.78);
-      font-weight:600;
-      font-size: 13px;
-    }
-    .heroMini span{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.09);
-    }
-    .check{
-      width:18px; height:18px; border-radius:6px;
-      background: rgba(33,212,253,.18);
-      border: 1px solid rgba(33,212,253,.35);
-      display:inline-grid; place-items:center;
-      box-shadow: 0 0 16px rgba(33,212,253,.22);
-      font-size: 12px;
-    }
+  <header>
+    <div class="container nav">
+      <div class="brandlock">
+        <a href="#home" aria-label="Ir al inicio">
+          <img class="brandTitle" src="assets/brand/logo-con-titulo.png?v=9" alt="PRISMA BI — Claridad para decidir con datos.">
+        </a>
+      </div>
 
-    .heroCard{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .heroCard h3{ margin: 0 0 10px; font-size: 16px; }
-    .stack{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(11,95,255,.10);
-      border: 1px solid rgba(11,95,255,.22);
-      color: rgba(234,240,255,.9);
-      font-weight:700;
-      font-size: 13px;
-    }
-    .pill .mini{
-      width:10px; height:10px; border-radius:99px;
-      background: var(--primary);
-      box-shadow: 0 0 16px rgba(11,95,255,.5);
-    }
-    .pill.cyan{ background: rgba(33,212,253,.10); border-color: rgba(33,212,253,.25); }
-    .pill.cyan .mini{ background: var(--cyan); box-shadow: 0 0 16px rgba(33,212,253,.55); }
-    .pill.violet{ background: rgba(106,91,255,.10); border-color: rgba(106,91,255,.25); }
-    .pill.violet .mini{ background: var(--violet); box-shadow: 0 0 16px rgba(106,91,255,.55); }
+      <nav class="menu" aria-label="Navegación principal">
+        <a class="active" href="#home">Inicio</a>
+        <a href="#services">Servicios</a>
+        <a href="#packages">Paquetes</a>
+        <a href="#contact">Contacto</a>
+      </nav>
 
-    .heroCard p{
-      margin: 12px 0 0;
-      color: var(--muted);
-      line-height:1.6;
-      font-size: 13.5px;
-    }
+      <a class="navcta" href="#packages">Ver demo (2 min) →</a>
+    </div>
+  </header>
 
-    /* ===== Sections ===== */
-    section{ padding: 56px 0; }
-    .sectionTitle{
-      font-size: clamp(24px, 3vw, 36px);
-      letter-spacing: -0.5px;
-      margin: 0 0 12px;
-    }
-    .sectionDesc{
-      margin:0 0 24px;
-      color: var(--muted);
-      line-height:1.7;
-      max-width: 70ch;
-    }
+  <section id="home" class="hero">
+    <div class="heroWave" aria-hidden="true"></div>
 
-    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: var(--r);
-      padding: 18px;
-      box-shadow: 0 16px 46px rgba(0,0,0,.25);
-      min-height: 150px;
-    }
-    .icon{
-      width:44px; height:44px; border-radius:14px;
-      display:grid; place-items:center;
-      background: rgba(33,212,253,.10);
-      border: 1px solid rgba(33,212,253,.22);
-      box-shadow: 0 0 26px rgba(33,212,253,.12);
-      margin-bottom: 10px;
-      font-weight:900;
-    }
-    .card h4{ margin: 8px 0 8px; font-size: 16px; }
-    .card p{ margin:0; color: var(--muted); line-height:1.65; font-size: 13.5px; }
+    <div class="container heroGrid">
+      <div>
+        <div class="pill"><i></i> VENTAS · COSTOS · RENTABILIDAD</div>
 
-    /* ===== Process ===== */
-    .process{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .step{
-      border-radius: var(--r);
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-    }
-    .stepTop{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(11,95,255,.12);
-      border: 1px solid rgba(11,95,255,.26);
-      font-weight:800;
-      font-size: 12px;
-    }
-    .step h4{ margin: 10px 0 8px; }
-    .step ul{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.7; }
-    .step li{ margin: 6px 0; }
+        <h1>Claridad para decidir con <span class="accent">Datos</span>.</h1>
 
-    /* ===== Dashboards ===== */
-    .dashGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .dash{
-      border-radius: var(--r);
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      box-shadow: 0 16px 46px rgba(0,0,0,.25);
-    }
-    .dashHeader{
-      padding: 14px 14px 10px;
-      display:flex; justify-content:space-between; align-items:flex-start;
-      gap: 12px;
-    }
-    .dashHeader h4{ margin:0; font-size: 15px; }
-    .dashHeader p{ margin:6px 0 0; color: var(--muted); font-size: 13px; line-height:1.5; }
-    .tag{
-      font-size: 12px;
-      font-weight: 800;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,122,0,.12);
-      border: 1px solid rgba(255,122,0,.22);
-      color: rgba(255,255,255,.92);
-      white-space: nowrap;
-    }
-    iframe{
-      width:100%;
-      height: 360px;
-      border:0;
-      display:block;
-      background: #0a0f1b;
-    }
+        <p class="lede">
+          Si hoy tenés <strong>Excel</strong>, reportes o un sistema… pero las decisiones se toman “a ojo”,
+          es normal que pase esto: <strong>datos dispersos</strong>, <strong>métricas mezcladas</strong> y <strong>tiempo perdido</strong>.
+          Mi trabajo es convertir ese ruido en un tablero simple para leer el negocio y tomar decisiones con seguridad.
+        </p>
 
-    /* ===== CTA ===== */
-    .cta{
-      border-radius: calc(var(--r) + 6px);
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(600px 260px at 20% 30%, rgba(33,212,253,.18), transparent 55%),
-        radial-gradient(520px 280px at 85% 20%, rgba(255,122,0,.16), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .cta h3{ margin: 0 0 6px; }
-    .cta p{ margin:0; color: var(--muted); line-height:1.6; max-width: 70ch; }
-    .cta .btn{ padding: 12px 16px; }
+        <div class="ctaRow">
+          <a class="btnPrimary" id="cta-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Agendar diagnóstico por WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/>
+            </svg>
+            Agendar diagnóstico
+          </a>
 
-    /* ===== Footer ===== */
-    footer{
-      padding: 30px 0 40px;
-      border-top: 1px solid var(--line);
-      color: rgba(234,240,255,.65);
-      font-size: 13px;
-    }
-    .footerGrid{
-      display:flex; justify-content:space-between; gap: 18px; flex-wrap:wrap;
-      align-items:center;
-    }
-    .links{ display:flex; gap: 14px; flex-wrap:wrap; }
-    .links a:hover{ color: var(--txt); }
+          <a class="btnSecondary" href="#packages">Ver paquetes →</a>
+        </div>
 
-    /* ===== Responsive ===== */
-    @media (max-width: 940px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .process{ grid-template-columns: 1fr; }
-      .dashGrid{ grid-template-columns: 1fr
+        <ul class="bullets">
+          <li><span class="check"></span> <span><strong>Te llevás claridad</strong>: qué mirar, qué ignorar y por qué</span></li>
+          <li><span class="check"></span> <span><strong>KPIs bien definidos</strong> (sin confusión ni “métricas de vanidad”)</span></li>
+          <li><span class="check"></span> <span><strong>Un tablero listo</strong> para dirección (ventas/costos/rentabilidad)</span></li>
+        </ul>
+      </div>
+
+      <div class="portraitWrap">
+        <div class="portrait">
+          <img src="assets/brand/daiana.png?v=9" alt="Daiana Beltrán" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section id="services" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Servicios</h2>
+      <p class="sectionLead">
+        Servicios pensados para empresas que quieren decisiones claras, sin tecnicismos.
+        Trabajamos de punta a punta: desde el problema real hasta el tablero que se usa.
+      </p>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="kicker"><span class="dot"></span> 1) Diagnóstico & mapa de decisiones</div>
+          <p class="small">Aclaramos el problema, ordenamos la información y definimos qué medir.</p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Relevamiento ejecutivo: problema u oportunidad y decisiones clave.</span></li>
+            <li><span class="miniCheck"></span><span>Lista de <strong>KPIs clave</strong> (con definición simple y fórmula).</span></li>
+            <li><span class="miniCheck"></span><span>Plan de tablero: qué incluye, qué no, y por qué.</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="kicker"><span class="dot"></span> 2) Dashboards ejecutivos (Power BI)</div>
+          <p class="small">Un tablero claro para ventas, costos y rentabilidad. Hecho para decidir rápido.</p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Tablero ejecutivo con KPIs + tendencias + cortes por producto/cliente/zona.</span></li>
+            <li><span class="miniCheck"></span><span>Lectura simple: qué pasa, por qué pasa, qué hacer.</span></li>
+            <li><span class="miniCheck"></span><span>Iteración real: lo vemos, lo ajustamos y queda usable.</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="kicker"><span class="dot"></span> 3) Datos listos para decidir (orden + control)</div>
+          <p class="small">Tu ERP guarda datos. Nosotros los transformamos en indicadores consistentes para dirección (sin discusiones).</p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Conecto ERP / Excel / eCommerce en una sola “base”.</span></li>
+            <li><span class="miniCheck"></span><span>Reglas de negocio: mismos criterios para todos (ventas netas, margen, devoluciones, etc.).</span></li>
+            <li><span class="miniCheck"></span><span>Validaciones: duplicados, nulos, cortes por período, totales que “no cierran”.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Método Prisma</h2>
+      <p class="sectionLead">
+        Claridad primero. Tablero después. Resultados medibles.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <p class="t">Diagnóstico</p>
+          <p class="d">Identificamos dónde se pierde tiempo y margen hoy.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <p class="t">Marco de medición</p>
+          <p class="d">KPIs + reglas claras para que todos miren lo mismo.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <p class="t">Implementación</p>
+          <p class="d">Dashboard + estructura lista para crecer.</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <p class="t">Acompañamiento</p>
+          <p class="d">Te ayudo a convertir datos en decisiones semanales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section id="packages" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Paquetes</h2>
+      <p class="sectionLead">Tres opciones claras. Todas empiezan con diagnóstico, porque sin claridad se pierde plata.</p>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="kicker"><span class="dot"></span> 1) Diagnóstico</div>
+          <p class="small"><strong>Te llevás:</strong></p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Mapa de decisiones (qué mirar / qué ignorar).</span></li>
+            <li><span class="miniCheck"></span><span>KPIs definidos + “cómo se calculan”.</span></li>
+            <li><span class="miniCheck"></span><span>Plan del tablero (qué va, qué no y prioridades).</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="kicker"><span class="dot"></span> 2) Dashboard BI</div>
+          <p class="small"><strong>Incluye:</strong></p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Diagnóstico + KPIs.</span></li>
+            <li><span class="miniCheck"></span><span>Dashboard ejecutivo de ventas/costos/rentabilidad.</span></li>
+            <li><span class="miniCheck"></span><span><strong>Entrega:</strong> dashboard + modelo + definiciones de KPIs + mini capacitación.</span></li>
+            <li><span class="miniCheck"></span><span>1 ronda de ajustes para que quede “listo para dirección”.</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="kicker"><span class="dot"></span> 3) Sistema de decisión</div>
+          <p class="small"><strong>Para empresas que quieren consistencia:</strong></p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Orden y control de datos (unificación + reglas).</span></li>
+            <li><span class="miniCheck"></span><span>Dashboards por área (dirección / comercial / finanzas / ops).</span></li>
+            <li><span class="miniCheck"></span><span>Acompañamiento para lectura y decisiones (adopción real).</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- (Opcional) Micro-bloque de tiempos típicos -->
+      <p class="sectionLead" style="margin-top:26px;max-width:78ch">
+        <strong>Tiempos típicos:</strong> Diagnóstico 3–5 días · Dashboard 10–20 días · Sistema 4–8 semanas (según datos y accesos).
+      </p>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <section id="contact" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Contacto</h2>
+      <p class="sectionLead">
+        Escribime y agendamos un diagnóstico inicial. Sin presión. Con criterio y transparencia.
+      </p>
+
+      <div class="contactGrid">
+        <div class="cBox">
+          <p class="t">Ubicación</p>
+          <p class="v">Argentina (UTC-3) · Remoto LATAM</p>
+        </div>
+        <div class="cBox">
+          <p class="t">WhatsApp</p>
+          <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p>
+        </div>
+        <div class="cBox">
+          <p class="t">Email</p>
+          <p class="v"><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></p>
+        </div>
+        <div class="cBox">
+          <p class="t">LinkedIn</p>
+          <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">/in/daiana-beltran</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth scroll (incluye también navcta)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href = a.getAttribute('href');
+        if(!href || href.length < 2) return;
+        const id = href.slice(1);
+        const el = document.getElementById(id);
+        if(!el) return;
+        e.preventDefault();
+        window.scrollTo({top: el.getBoundingClientRect().top + scrollY - 78, behavior:'smooth'});
+      });
+    });
+
+    // WhatsApp (mensaje mejorado para conversión)
+    (function(){
+      const phone = "542996032267";
+      const msg =
+        "¡Hola Daiana! 👋 Vi Prisma BI y quiero agendar un diagnóstico.\n\n" +
+        "Mi negocio es: ____\n" +
+        "La decisión más importante hoy es: ____\n" +
+        "Qué no puedo ver con claridad: ____\n" +
+        "Fuentes de datos: (Excel / sistema / ERP / Mercado Libre / etc.) ____\n" +
+        "Plazo ideal: ____\n\n" +
+        "¿Qué horario te queda mejor?";
+      const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+      ["cta-whatsapp","wa-link"].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.href = url;
+      });
+    })();
+  </script>
+
+</body>
+</html>
+
 
