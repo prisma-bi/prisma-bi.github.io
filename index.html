@@ -1249,7 +1249,7 @@
       render(0);
     })();
 
-    /* ===== NET CANVAS (Overdata-like, brillante) ===== */
+    /* ===== NET CANVAS (más rápido + líneas más claras) ===== */
     (function(){
       const c = document.getElementById("net");
       if(!c) return;
@@ -1265,12 +1265,19 @@
         base: 54,
         density: 52000,
         maxDist: 150,
-        speed: 0.35,
+
+        // ✅ MÁS RÁPIDO (antes 0.35)
+        speed: 0.90,
+
         nodeRadius: 1.2,
         nodeAlpha: 0.95,
-        lineAlpha: 0.20,
+
+        // ✅ LÍNEAS MÁS CLARAS (antes 0.20)
+        lineAlpha: 0.30,
+
         glow: true,
         glowStrength: 18,
+
         attract: 0.020
       };
 
@@ -1318,11 +1325,13 @@
       function draw(){
         ctx.clearRect(0,0,W,H);
 
+        // Glow general (lo vamos a “apagar” para líneas para que se vean más nítidas)
         if(cfg.glow){
           ctx.shadowColor = "rgba(42,212,255,.35)";
           ctx.shadowBlur = cfg.glowStrength;
         } else ctx.shadowBlur = 0;
 
+        // Update nodes
         for(const n of nodes){
           if(pointer.active){
             const dx = pointer.x - n.x;
@@ -1340,6 +1349,7 @@
           n.y = Math.max(0, Math.min(H, n.y));
         }
 
+        // Buckets (performance)
         const cell = cfg.maxDist;
         const cols = Math.ceil(W/cell);
         const rows = Math.ceil(H/cell);
@@ -1351,7 +1361,10 @@
           buckets[cx + cy*cols].push(n);
         }
 
-        ctx.lineWidth = 1;
+        // ✅ LÍNEAS: sin glow para que se vean más claras/nítidas
+        ctx.shadowBlur = 0;
+        ctx.lineWidth = 1.15; // ✅ un toque más “visible”
+
         for(let cy=0;cy<rows;cy++){
           for(let cx=0;cx<cols;cx++){
             const b = buckets[cx + cy*cols];
@@ -1384,7 +1397,12 @@
           }
         }
 
-        ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
+        // ✅ PUNTOS: glow vuelve para dar “vida”
+        if(cfg.glow){
+          ctx.shadowColor = "rgba(42,212,255,.35)";
+          ctx.shadowBlur = cfg.glowStrength;
+        } else ctx.shadowBlur = 0;
+
         for(const n of nodes){
           ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
           ctx.beginPath();
