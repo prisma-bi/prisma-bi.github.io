@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Prisma BI — Dirección ejecutiva con datos</title>
-  <meta name="description" content="Prisma BI integra y ordena datos (Excel, ERP, eCommerce) para construir una lectura ejecutiva confiable: qué pasa, por qué pasa y dónde actuar primero."/>
+  <title>Prisma BI — Dirección ejecutiva con datos confiables</title>
+  <meta name="description" content="Prisma BI integra y ordena información de Excel, ERP y sistemas para construir una lectura ejecutiva única: qué está pasando, por qué está pasando y dónde actuar primero." />
 
-  <meta property="og:title" content="Prisma BI — Dirección ejecutiva con datos">
-  <meta property="og:description" content="Lectura ejecutiva confiable para decidir rápido, con control y criterio.">
+  <meta property="og:title" content="Prisma BI — Dirección ejecutiva con datos confiables">
+  <meta property="og:description" content="Lectura ejecutiva única para decidir con claridad: qué pasa, por qué pasa y dónde actuar primero.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
   <meta name="theme-color" content="#040a18"/>
@@ -36,11 +36,11 @@
       --shadow2:0 16px 55px rgba(0,0,0,.35);
       --r:18px;
 
-      --h1: clamp(40px, 5.2vw, 78px);
+      --h1: clamp(42px, 5.0vw, 78px);
       --lead: clamp(16px, 1.2vw, 20px);
       --h2: clamp(28px, 2.6vw, 44px);
-      --secPad: 86px;
 
+      --secPad: 86px;
       --container: 1180px;
     }
 
@@ -74,23 +74,17 @@
       filter: blur(.2px);
     }
 
-    /* ===== HEADER (ordenado) ===== */
-    header{
-      position:sticky; top:0; z-index:60;
-      background:rgba(2,5,14,.70);
+    /* ===== TOPBAR ===== */
+    .topbar{
+      position:sticky;top:0;z-index:70;
+      background:rgba(2,5,14,.55);
       backdrop-filter: blur(14px) saturate(170%);
       border-bottom:1px solid rgba(255,255,255,.06);
     }
-
-    .subbar{
-      border-bottom:1px solid rgba(255,255,255,.06);
-      background:rgba(2,5,14,.38);
-    }
-    .subbarInner{
+    .topbarInner{
       display:flex;align-items:center;justify-content:space-between;gap:14px;
       padding:10px 0;
     }
-
     .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .chip{
       display:inline-flex;align-items:center;gap:10px;
@@ -99,6 +93,7 @@
       background:rgba(10,18,38,.38);
       color:rgba(244,248,255,.85);
       font-weight:800;font-size:13px;
+      white-space:nowrap;
     }
     .chip b{color:rgba(244,248,255,.95)}
     .dot{
@@ -106,12 +101,24 @@
       background:linear-gradient(90deg,var(--cyan),var(--teal));
       box-shadow:0 0 18px rgba(42,212,255,.35);
     }
+    .topbarRight{
+      display:flex;align-items:center;gap:10px;
+      color:rgba(244,248,255,.70);
+      font-weight:800;font-size:13px;
+    }
 
+    /* ===== HEADER / NAV ===== */
+    header{
+      position:sticky; top:44px; z-index:65;
+      background:rgba(2,5,14,.72);
+      backdrop-filter: blur(14px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:16px;
       padding:12px 0;
-      min-height:76px;
+      min-height:78px;
     }
     .brand{
       display:flex;align-items:center;gap:12px;
@@ -123,13 +130,14 @@
       opacity:.98;
     }
 
-    .menu{display:flex;gap:18px;align-items:center}
+    .menu{display:flex;gap:10px;align-items:center}
     .menu a{
       font-weight:900;
       color:rgba(244,248,255,.78);
       padding:10px 12px;border-radius:12px;
       border:1px solid transparent;
       transition:transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
+      white-space:nowrap;
     }
     .menu a:hover{
       filter:brightness(1.12);
@@ -145,7 +153,7 @@
 
     .navRight{display:flex;gap:10px;align-items:center}
     .btn{
-      display:inline-flex;align-items:center;gap:10px;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
       padding:12px 14px;border-radius:14px;
       font-weight:900;
       border:1px solid rgba(255,255,255,.16);
@@ -153,6 +161,7 @@
       box-shadow:0 16px 44px rgba(0,0,0,.22);
       transition:transform .16s ease, filter .16s ease, border-color .16s ease;
       white-space:nowrap;
+      cursor:pointer;
     }
     .btn:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(42,212,255,.26)}
     .btnPrimary{
@@ -181,18 +190,20 @@
     }
 
     @media (max-width:980px){
-      .subbar{display:none}
+      header{top:0}
+      .chips{display:none}
       .menu{display:none}
       .brand{min-width:auto}
+      .topbarRight{display:none}
     }
 
-    /* ===== HERO (Overdata-like: centrado + menos texto) ===== */
+    /* ===== HERO (centrado, Overdata-like) ===== */
     .hero{
       position:relative;
-      min-height: calc(92vh - 90px);
+      min-height: calc(92vh - 140px);
       display:flex;
       align-items:center;
-      padding:54px 0 56px;
+      padding:64px 0 68px;
       overflow:hidden;
       isolation:isolate;
       text-align:center;
@@ -207,7 +218,7 @@
         linear-gradient(180deg, rgba(2,5,14,.96), rgba(2,5,14,.84));
     }
     .heroStars{
-      position:absolute;inset:-60px;z-index:-3;pointer-events:none;opacity:.33;
+      position:absolute;inset:-60px;z-index:-3;pointer-events:none;opacity:.35;
       background:
         radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.50), transparent 55%),
         radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.35), transparent 55%),
@@ -215,13 +226,13 @@
         radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.32), transparent 55%),
         radial-gradient(1px 1px at 72% 40%, rgba(255,255,255,.24), transparent 55%),
         radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.20), transparent 55%);
-      mask-image: radial-gradient(740px 520px at 50% 40%, black 62%, transparent 100%);
+      mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
     }
 
     .netCanvas{
       position:absolute;inset:0;z-index:-2;
       width:100%;height:100%;
-      opacity: 1;
+      opacity:1;
       mix-blend-mode: screen;
       filter: drop-shadow(0 0 18px rgba(42,212,255,.22));
       pointer-events:none;
@@ -230,13 +241,15 @@
     .heroVignette{
       position:absolute;inset:-80px;z-index:-1;pointer-events:none;
       background:
-        radial-gradient(980px 620px at 50% 40%, rgba(0,0,0,.00), rgba(0,0,0,.58) 74%);
+        radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.58) 74%),
+        linear-gradient(180deg, rgba(2,5,14,.86) 0%, rgba(2,5,14,.75) 40%, rgba(2,5,14,.55) 100%);
       opacity:.92;
     }
 
     .heroInner{
-      max-width: 920px;
-      margin: 0 auto;
+      max-width: 980px;
+      margin:0 auto;
+      padding:0 10px;
     }
 
     .pill{
@@ -269,51 +282,64 @@
       -webkit-background-clip:text;background-clip:text;color:transparent;
     }
     .lede{
-      margin:0 auto 18px;
+      margin:0 auto 20px;
       font-size:var(--lead);
       color:rgba(244,248,255,.78);
-      max-width:70ch;
+      max-width:78ch;
       line-height:1.72;
       text-shadow: 0 12px 34px rgba(0,0,0,.22);
     }
 
-    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0 14px}
+    .ctaRow{
+      display:flex;gap:12px;flex-wrap:wrap;
+      justify-content:center;
+      margin:18px 0 0;
+    }
 
-    .proofRow{
-      margin-top:18px;
+    /* Contexto + 3 cajas (más grandes, con aire) */
+    .heroContext{
+      margin:34px auto 0;
+      max-width: 980px;
+    }
+    .heroContextTitle{
+      margin:0 0 14px;
+      color:rgba(244,248,255,.82);
+      font-weight:950;
+      letter-spacing:-.01em;
+      font-size:14px;
+      text-transform:uppercase;
+      opacity:.95;
+    }
+    .heroCards{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
     }
-    .proof{
+    @media (max-width:980px){
+      .hero{min-height:auto;padding:64px 0 54px}
+      .heroCards{grid-template-columns:1fr;gap:12px}
+    }
+
+    .hCard{
       text-align:left;
-      background:rgba(10,18,38,.44);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      padding:14px 14px 12px;
-      box-shadow:0 18px 54px rgba(0,0,0,.24);
+      position:relative;
+      background:
+        radial-gradient(320px 180px at 18% 18%, rgba(30,124,255,.16), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius: 18px;
+      padding:18px 18px 16px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      overflow:hidden;
     }
-    .proof b{display:block;font-size:13px}
-    .proof span{
-      display:block;
-      color:rgba(244,248,255,.70);
-      font-size:12.5px;
-      line-height:1.45;
-      margin-top:4px;
-    }
-    .kDot{
-      display:inline-block;
+    .hCard b{display:block;font-weight:950;margin-bottom:6px}
+    .hCard p{margin:0;color:rgba(244,248,255,.72);line-height:1.65;font-size:14px}
+    .hDot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
       box-shadow:0 0 18px rgba(42,212,255,.28);
-      margin-right:8px;
-      transform: translateY(1px);
-    }
-
-    @media (max-width:980px){
-      .hero{min-height:auto;padding:54px 0 44px}
-      .proofRow{grid-template-columns:1fr}
-      .proof{text-align:left}
+      display:inline-block;margin-right:10px;transform:translateY(1px);
     }
 
     /* ===== SECTIONS ===== */
@@ -365,46 +391,6 @@
       font-size:15px;
     }
 
-    /* Who (video + texto) */
-    .whoGrid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      align-items:center;
-      max-width: 1060px;
-      margin: 0 auto;
-    }
-    @media (max-width:980px){ .whoGrid{grid-template-columns:1fr} }
-
-    .whoCopy{
-      background:rgba(10,18,38,.40);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:22px;
-      padding:18px 18px 16px;
-      box-shadow: 0 26px 90px rgba(0,0,0,.34);
-    }
-    .whoTitle{
-      margin:0 0 10px;
-      font-size: clamp(22px, 2.2vw, 30px);
-      font-weight:950;
-      letter-spacing:-.02em;
-    }
-    .whoP{
-      margin:0 0 12px;
-      color:rgba(244,248,255,.72);
-      line-height:1.7;
-      font-size:14.5px;
-    }
-    .miniBullets{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:8px}
-    .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
-    .miniBullets .miniCheck{
-      width:18px;height:18px;border-radius:999px;
-      background: rgba(42,212,255,.10);
-      border:1px solid rgba(42,212,255,.22);
-      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
-    }
-    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(42,212,255,.95);font-size:12px}
-
     /* Cards grid */
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
@@ -422,49 +408,131 @@
       transition: transform .18s ease, border-color .18s ease, filter .18s ease;
       overflow:hidden;
     }
-    .card:after{
-      content:"";
-      position:absolute;inset:-1px;border-radius: var(--r);
-      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.12), rgba(0,231,182,.12));
-      opacity:0;filter:blur(16px);
-      transition:opacity .2s ease;
-      pointer-events:none;
-    }
     .card:hover{transform: translateY(-2px);border-color: rgba(42,212,255,.24);filter: brightness(1.06);}
-    .card:hover:after{opacity:.85}
-
     .kicker{display:flex;align-items:center;gap:10px;font-weight:950;margin-bottom:10px}
+    .kDot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 18px rgba(42,212,255,.28);
+    }
     .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
+    .miniBullets{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+    .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
+    .miniBullets .miniCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(42,212,255,.10);
+      border:1px solid rgba(42,212,255,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(42,212,255,.95);font-size:12px}
 
-    /* Video block */
-    .videoWrap{
-      border-radius:22px;overflow:hidden;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.48);
-      box-shadow:0 26px 90px rgba(0,0,0,.45);
+    /* ===== SOLUCIONES (fondo blanco) ===== */
+    .secLight{
+      background:#ffffff;
+      color:#0a1022;
       position:relative;
     }
-    .videoWrap:before{
-      content:"";position:absolute;inset:-1px;border-radius:22px;
-      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.12), rgba(0,231,182,.12));
-      opacity:.18;filter:blur(18px);pointer-events:none;
+    .secLight:before,.secLight:after{display:none}
+    .secLight .sectionTitle{color:#0a1022;text-shadow:none}
+    .secLight .sectionLead{color:rgba(10,16,34,.70)}
+    .solutionsWrap{
+      max-width:1100px;margin:0 auto;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid rgba(10,16,34,.10);
+      box-shadow:0 18px 70px rgba(0,0,0,.08);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 320px 1fr;
     }
-    .video{
-      aspect-ratio:16/9;
+    @media (max-width:980px){
+      .solutionsWrap{grid-template-columns:1fr}
+    }
+    .solLeft{
+      background: #f6f8fc;
+      border-right:1px solid rgba(10,16,34,.08);
+      padding:18px;
+    }
+    .solTabs{display:grid;gap:10px}
+    .solTab{
+      text-align:left;
       width:100%;
-      display:block;
-      background: radial-gradient(800px 420px at 30% 30%, rgba(30,124,255,.16), transparent 65%),
-                  radial-gradient(700px 420px at 70% 70%, rgba(0,231,182,.12), transparent 65%),
-                  rgba(2,5,14,.55);
-      position:relative;
+      border-radius:14px;
+      padding:12px 12px;
+      border:1px solid rgba(10,16,34,.10);
+      background:#ffffff;
+      cursor:pointer;
+      font-weight:900;
+      color:#0a1022;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      transition:transform .12s ease, border-color .12s ease;
     }
-    .video iframe, .video video{
-      width:100%;height:100%;
-      border:0;display:block;
-      position:relative;z-index:1;
+    .solTab:hover{transform:translateY(-1px);border-color:rgba(30,124,255,.35)}
+    .solTab.active{
+      background: linear-gradient(90deg, rgba(30,124,255,.10), rgba(42,212,255,.08));
+      border-color: rgba(30,124,255,.35);
+    }
+    .solBadge{
+      font-size:12px;font-weight:900;
+      color:rgba(10,16,34,.62);
+      background:rgba(10,16,34,.06);
+      border:1px solid rgba(10,16,34,.10);
+      padding:6px 10px;border-radius:999px;
+      white-space:nowrap;
+    }
+    .solRight{
+      padding:26px 26px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:center;
+    }
+    @media (max-width:980px){
+      .solRight{grid-template-columns:1fr}
+    }
+    .solTitle{
+      margin:0 0 10px;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight:950;
+      letter-spacing:-.01em;
+      color:#0a1022;
+    }
+    .solBullets{
+      margin:0;padding:0;list-style:none;
+      display:grid;gap:10px;
+      color:rgba(10,16,34,.82);
+      line-height:1.55;
+      font-size:15px;
+    }
+    .solBullets li{display:flex;gap:10px;align-items:flex-start}
+    .solCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(30,124,255,.10);
+      border:1px solid rgba(30,124,255,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .solCheck:before{content:"✓";font-weight:950;color:rgba(30,124,255,.95);font-size:12px}
+    .solMedia{
+      border-radius:18px;
+      border:1px solid rgba(10,16,34,.10);
+      background:
+        radial-gradient(520px 260px at 25% 25%, rgba(30,124,255,.20), transparent 60%),
+        radial-gradient(520px 260px at 80% 70%, rgba(0,231,182,.14), transparent 60%),
+        linear-gradient(180deg, rgba(10,16,34,.06), rgba(10,16,34,.02));
+      min-height:240px;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .solMedia svg{width:110px;height:110px;opacity:.95}
+    .solNote{
+      margin-top:14px;
+      font-size:13px;
+      color:rgba(10,16,34,.65);
+      line-height:1.6;
     }
 
-    /* Steps */
+    /* ===== MÉTODO ===== */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
     @media (max-width:980px){ .steps{grid-template-columns:1fr} }
     .step{
@@ -475,11 +543,6 @@
       padding:16px;
       box-shadow: 0 18px 54px rgba(0,0,0,.26);
       overflow:hidden;
-    }
-    .step:after{
-      content:"";position:absolute;inset:-1px;border-radius:18px;
-      background:linear-gradient(90deg, rgba(30,124,255,.14), rgba(42,212,255,.10), rgba(0,231,182,.10));
-      opacity:.18;filter:blur(16px);pointer-events:none;
     }
     .step .n{
       font-weight:950;
@@ -492,34 +555,74 @@
     .step .t{margin:0 0 6px;font-weight:950}
     .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
 
-    /* Clientes (marcas visibles en móvil) */
-    .brandWall{
-      max-width: 980px;
-      margin: 0 auto;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
+    /* ===== CLIENTES (logos ficticios) ===== */
+    .marquee{
+      position:relative;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(10,18,38,.40);
+      box-shadow:0 22px 80px rgba(0,0,0,.28);
+      overflow:hidden;
+      padding:18px 0;
     }
-    .brandPill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
+    .track{
+      display:flex;gap:38px;align-items:center;
+      width:max-content;
+      animation: scroll 22s linear infinite;
+      padding-left:38px;
+    }
+    .marquee:hover .track{animation-play-state: paused}
+    @keyframes scroll{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+    .logoPill{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 14px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.38);
-      color:rgba(244,248,255,.86);
-      font-weight:900;
-      font-size:13px;
-      letter-spacing:.01em;
-      box-shadow:0 16px 44px rgba(0,0,0,.18);
-      transition:transform .16s ease, filter .16s ease, border-color .16s ease;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(2,5,14,.35);
+      color:rgba(244,248,255,.82);
+      font-weight:950;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      min-height:42px;
     }
-    .brandPill:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(42,212,255,.22)}
-    .brandPill .dot{width:7px;height:7px}
+    .logoMark{
+      width:22px;height:22px;border-radius:7px;
+      background: linear-gradient(90deg, rgba(42,212,255,.85), rgba(0,231,182,.80));
+      box-shadow:0 0 20px rgba(42,212,255,.20);
+      flex:0 0 22px;
+    }
+    .fadeL,.fadeR{
+      position:absolute;top:0;bottom:0;width:120px;pointer-events:none;z-index:2;
+    }
+    .fadeL{left:0;background:linear-gradient(90deg, rgba(2,5,14,.95), transparent)}
+    .fadeR{right:0;background:linear-gradient(270deg, rgba(2,5,14,.95), transparent)}
 
-    /* Testimonials slider */
+    /* ===== OPINIONES ===== */
+    .reviewsHeader{
+      display:flex;align-items:center;justify-content:center;gap:12px;
+      margin: 0 auto 10px;
+      color: rgba(244,248,255,.84);
+      font-weight:950;
+    }
+    .gBadge{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,18,38,.35);
+      font-weight:950;
+    }
+    .gIcon{
+      width:18px;height:18px;display:inline-block;
+    }
+    .stars{
+      color:rgba(42,212,255,.95);
+      letter-spacing:1px;
+      font-weight:950;
+    }
+
     .slider{
       display:flex;gap:14px;overflow:auto;
       scroll-snap-type:x mandatory;
@@ -536,20 +639,12 @@
       border:1px solid rgba(255,255,255,.10);
       padding:16px;
       box-shadow:0 18px 60px rgba(0,0,0,.26);
-      position:relative;
     }
-    .tMeta{
-      color:rgba(244,248,255,.55);
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:8px;
-    }
-    .tCard b{display:block;margin-bottom:6px}
+    .tCard b{display:block;margin:8px 0 6px;font-weight:950}
     .tCard p{margin:0;color:rgba(244,248,255,.74);line-height:1.7;font-size:14px}
-    .stars{color:rgba(42,212,255,.90);letter-spacing:1px;margin-bottom:10px}
     @media (max-width:420px){ .tCard{flex-basis: 88vw} }
 
-    /* Contact */
+    /* ===== CONTACT ===== */
     .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
     @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
@@ -603,42 +698,48 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none!important;animation:none!important}
       .netCanvas{display:none}
+      .track{animation:none!important}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="subbar">
-      <div class="container subbarInner">
-        <div class="chips" aria-label="Información rápida">
-          <span class="chip"><span class="dot"></span> Consultora en <b>Datos & BI</b></span>
-          <span class="chip">WhatsApp: <b id="chip-wa">+54 299 6 032 267</b></span>
-          <span class="chip">LinkedIn: <b>Daiana Beltrán</b></span>
-        </div>
-        <span class="chip" style="opacity:.92">Diagnóstico inicial · 20 min</span>
+  <!-- TOPBAR (sin CTA para evitar duplicación) -->
+  <div class="topbar">
+    <div class="container topbarInner">
+      <div class="chips" aria-label="Información rápida">
+        <span class="chip"><span class="dot"></span> Consultora en <b>Datos & BI</b></span>
+        <span class="chip">WhatsApp: <b id="chip-wa">+54 299 6 032 267</b></span>
+        <span class="chip">LinkedIn: <b>Daiana Beltrán</b></span>
+      </div>
+      <div class="topbarRight" aria-label="Nota">
+        <span class="chip"><span class="dot"></span> Diagnóstico inicial</span>
       </div>
     </div>
+  </div>
 
+  <!-- NAV -->
+  <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Ir al inicio">
-        <img src="assets/brand/logo-prisma.png" alt="PRISMA BI">
+        <!-- ✅ Tu ruta (con espacio codificado) -->
+        <img src="assets/brand/logo%20con%20titulo.png" alt="PRISMA BI">
       </a>
 
       <nav class="menu" aria-label="Navegación principal">
         <a class="active" href="#home">Inicio</a>
         <a href="#entregables">Entregables</a>
-        <a href="#metodo">Cómo se trabaja</a>
+        <a href="#metodo">Método</a>
+        <a href="#soluciones">Soluciones</a>
         <a href="#clientes">Clientes</a>
         <a href="#opiniones">Opiniones</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
       <div class="navRight">
-        <a class="btn" href="#entregables">Ver entregables</a>
-        <a class="btn btnPrimary" id="cta-nav" href="#" target="_blank" rel="noopener">Solicitar diagnóstico</a>
+        <!-- ✅ Un solo CTA principal -->
+        <a class="btn btnPrimary" id="cta-main" href="#" target="_blank" rel="noopener">Solicitar diagnóstico</a>
       </div>
     </div>
   </header>
@@ -647,81 +748,47 @@
   <section id="home" class="hero" aria-label="Portada Prisma BI">
     <div class="heroBg" aria-hidden="true"></div>
     <div class="heroStars" aria-hidden="true"></div>
+
     <canvas id="net" class="netCanvas" aria-hidden="true"></canvas>
     <div class="heroVignette" aria-hidden="true"></div>
 
-    <div class="container">
-      <div class="heroInner">
-        <div class="pill"><i></i> DIRECCIÓN · RENTABILIDAD · CONTROL</div>
+    <div class="container heroInner">
+      <div class="pill"><i></i> DIRECCIÓN · RENTABILIDAD · CONTROL</div>
 
-        <h1>
-          Dirección ejecutiva con <span class="accent">datos confiables</span>.
-        </h1>
+      <h1>
+        Dirección ejecutiva con<br>
+        <span class="accent">datos confiables</span>.
+      </h1>
 
-        <p class="lede">
-          Prisma BI integra y ordena información de Excel, ERP y sistemas para construir una lectura única:
-          <strong>qué está pasando</strong>, <strong>por qué</strong> y <strong>dónde actuar primero</strong>.
-        </p>
-
-        <div class="ctaRow">
-          <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener">Solicitar diagnóstico (20 min)</a>
-          <a class="btn" href="#entregables">Ver entregables →</a>
-        </div>
-
-        <div class="proofRow" aria-label="Prueba de valor">
-          <div class="proof">
-            <b><span class="kDot"></span>KPIs con definición única</b>
-            <span>Glosario + fórmula + fuente: todos miran la misma verdad.</span>
-          </div>
-          <div class="proof">
-            <b><span class="kDot"></span>Control y consistencia</b>
-            <span>Validaciones y señales para decidir con confianza.</span>
-          </div>
-          <div class="proof">
-            <b><span class="kDot"></span>Rutina ejecutiva</b>
-            <span>Lectura semanal por área: menos debate, más acción.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- QUIÉNES SOMOS (estilo Overdata: video + texto) -->
-  <section class="sec" aria-label="Quiénes somos">
-    <div class="container">
-      <h2 class="sectionTitle">Quiénes somos</h2>
-      <p class="sectionLead">
-        Una consultora orientada a dirección: primero se define el criterio de negocio, después se construye el tablero.
-        El objetivo es reducir incertidumbre y acelerar decisiones.
+      <p class="lede">
+        <strong>Prisma BI</strong> integra y ordena información de Excel, ERP y sistemas para construir una lectura ejecutiva única:
+        <strong>qué está pasando</strong>, <strong>por qué está pasando</strong> y <strong>dónde actuar primero</strong>.
       </p>
 
-      <div class="whoGrid">
-        <div class="videoWrap">
-          <div class="video">
-            <iframe
-              title="Video presentación Prisma BI"
-              src="https://www.youtube.com/embed/VIDEO_ID"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
+      <div class="ctaRow">
+        <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener">Solicitar diagnóstico</a>
+        <a class="btn" href="#entregables">Ver entregables →</a>
+      </div>
+
+      <!-- ✅ Más aire + contexto para las 3 cajas -->
+      <div class="heroContext" aria-label="Pilares del sistema">
+        <p class="heroContextTitle">Tres pilares que ordenan la decisión</p>
+        <div class="heroCards">
+          <div class="hCard">
+            <b><span class="hDot"></span>KPIs con definición única</b>
+            <p>Glosario + fórmula + fuente. La organización mira la misma verdad.</p>
+          </div>
+          <div class="hCard">
+            <b><span class="hDot"></span>Control y consistencia</b>
+            <p>Validaciones y señales que sostienen confianza (QA, alertas, coherencia).</p>
+          </div>
+          <div class="hCard">
+            <b><span class="hDot"></span>Rutina ejecutiva</b>
+            <p>Lectura semanal por área para transformar datos en acción priorizada.</p>
           </div>
         </div>
-
-        <div class="whoCopy">
-          <p class="whoTitle">Una sola lectura. Un solo mapa.</p>
-          <p class="whoP">
-            Prisma BI acompaña a equipos directivos y áreas clave a ordenar datos dispersos y transformarlos en control:
-            métricas comparables, consistentes y accionables.
-          </p>
-          <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span><strong>Se elimina la ambigüedad:</strong> misma definición para todos.</span></li>
-            <li><span class="miniCheck"></span><span><strong>Se reduce el riesgo:</strong> controles que evitan “cierres que no cierran”.</span></li>
-            <li><span class="miniCheck"></span><span><strong>Se instala adopción:</strong> rutina de lectura para que el tablero se use.</span></li>
-          </ul>
-        </div>
       </div>
+
     </div>
   </section>
 
@@ -732,38 +799,37 @@
     <div class="container">
       <h2 class="sectionTitle">Entregables</h2>
       <p class="sectionLead">
-        La empresa no recibe “un reporte bonito”.
-        Recibe un sistema para mirar lo mismo, detectar desvíos y tomar decisiones con criterio.
+        La entrega se diseña para dirección: lectura simple, definiciones claras y control para decidir sin discusión.
       </p>
 
       <div class="grid3">
         <div class="card">
           <div class="kicker"><span class="kDot"></span> Tablero ejecutivo (Dirección)</div>
-          <p class="small">Ventas · costos · rentabilidad, con lectura rápida para priorizar acciones.</p>
+          <p class="small">Ventas · costos · rentabilidad, con lectura rápida y foco en decisión.</p>
           <ul class="miniBullets">
             <li><span class="miniCheck"></span><span>KPIs + tendencias + cortes por producto/cliente/zona/tiempo.</span></li>
-            <li><span class="miniCheck"></span><span>Señales claras: qué crece, qué cae y dónde se pierde margen.</span></li>
-            <li><span class="miniCheck"></span><span>Diseño para dirección: simple, contundente, accionable.</span></li>
+            <li><span class="miniCheck"></span><span>Señales claras: qué sube, qué cae y dónde actuar primero.</span></li>
+            <li><span class="miniCheck"></span><span>UX para dirección: simple, contundente, accionable.</span></li>
           </ul>
         </div>
 
         <div class="card">
           <div class="kicker"><span class="kDot"></span> Definiciones (Glosario KPI)</div>
-          <p class="small">Cuando una métrica cambia según quién la calcule, se pierde control.</p>
+          <p class="small">Una métrica consistente evita que el negocio “discuta números” en lugar de decidir.</p>
           <ul class="miniBullets">
             <li><span class="miniCheck"></span><span>Definición + fórmula + fuente para cada KPI.</span></li>
             <li><span class="miniCheck"></span><span>Reglas de negocio: netos, devoluciones, descuentos, margen, etc.</span></li>
-            <li><span class="miniCheck"></span><span>Una sola verdad para dirección, finanzas y operación.</span></li>
+            <li><span class="miniCheck"></span><span>Marco común para equipos y dirección.</span></li>
           </ul>
         </div>
 
         <div class="card">
           <div class="kicker"><span class="kDot"></span> Control & QA (confianza)</div>
-          <p class="small">Sin control, todo “parece” correcto… hasta que no cierra.</p>
+          <p class="small">Sin control, todo parece correcto… hasta el cierre. Con QA, se sostiene la decisión.</p>
           <ul class="miniBullets">
             <li><span class="miniCheck"></span><span>Validaciones: duplicados, nulos, totales, cortes por período.</span></li>
-            <li><span class="miniCheck"></span><span>Señales y alertas: si algo se rompe, se ve.</span></li>
-            <li><span class="miniCheck"></span><span>Rutina de lectura: mirar, entender, decidir, ajustar.</span></li>
+            <li><span class="miniCheck"></span><span>Alertas: si algo se rompe, se ve.</span></li>
+            <li><span class="miniCheck"></span><span>Rutina: mirar, entender, decidir, ajustar.</span></li>
           </ul>
         </div>
       </div>
@@ -775,34 +841,70 @@
   <!-- MÉTODO -->
   <section id="metodo" class="sec">
     <div class="container">
-      <h2 class="sectionTitle">Cómo se trabaja</h2>
+      <h2 class="sectionTitle">Método</h2>
       <p class="sectionLead">
-        Claridad primero. Implementación después. Adopción real al final.
-        Lo que no se adopta, no aporta valor.
+        Primero se define la decisión y el marco de medición. Después se implementa. Por último, se asegura adopción real.
       </p>
 
       <div class="steps">
         <div class="step">
           <div class="n">1</div>
-          <p class="t">Diagnóstico (20–40 min)</p>
-          <p class="d">Se entiende la decisión prioritaria: margen, costos, ventas, stock o caja.</p>
+          <p class="t">Diagnóstico</p>
+          <p class="d">Se identifica la decisión que hoy impacta resultado: margen, costos, ventas, stock, caja.</p>
         </div>
         <div class="step">
           <div class="n">2</div>
           <p class="t">Marco de medición</p>
-          <p class="d">KPIs + definiciones + fuentes. Se elimina la discusión. Queda el criterio.</p>
+          <p class="d">KPIs + definiciones + fuentes. Se ordena el criterio. Se elimina la ambigüedad.</p>
         </div>
         <div class="step">
           <div class="n">3</div>
           <p class="t">Implementación</p>
-          <p class="d">Tablero + estructura de datos + controles para que los números sean confiables.</p>
+          <p class="d">Modelo + tablero + QA. La lectura se vuelve consistente y confiable.</p>
         </div>
         <div class="step">
           <div class="n">4</div>
           <p class="t">Rutina ejecutiva</p>
-          <p class="d">Acompañamiento para lectura semanal: qué mirar y qué mover primero.</p>
+          <p class="d">Lectura semanal: qué mirar y qué mover primero (con responsables por área).</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- SOLUCIONES (FONDO BLANCO) -->
+  <section id="soluciones" class="sec secLight" aria-label="Soluciones por operación">
+    <div class="container">
+      <h2 class="sectionTitle">Soluciones adaptables por operación</h2>
+      <p class="sectionLead">
+        Ejemplos de tableros por área (se adaptan a cualquier industria). El objetivo es el mismo:
+        lectura única, señales claras y decisión priorizada.
+      </p>
+
+      <div class="solutionsWrap">
+        <div class="solLeft">
+          <div class="solTabs" id="solTabs">
+            <!-- JS inyecta tabs -->
+          </div>
+          <div class="solNote">
+            Nota: estos bloques son “plantillas de decisión”. Se personalizan según objetivos, datos disponibles y rol (dirección, finanzas, operaciones, comercial).
+          </div>
+        </div>
+
+        <div class="solRight">
+          <div>
+            <h3 class="solTitle" id="solTitle">—</h3>
+            <ul class="solBullets" id="solBullets"></ul>
+            <p class="solNote" id="solNote"></p>
+          </div>
+
+          <div class="solMedia" aria-hidden="true" id="solMedia">
+            <!-- JS inyecta ícono -->
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -813,23 +915,34 @@
     <div class="container">
       <h2 class="sectionTitle">Clientes</h2>
       <p class="sectionLead">
-        Por confidencialidad, los logos de clientes se publican únicamente con autorización.
-        A modo de referencia, estas son plataformas y sistemas habituales con los que se integra el trabajo.
+        Logos demostrativos (ficticios) para presentación visual. Se reemplazan por marcas reales cuando existan autorizaciones.
       </p>
 
-      <div class="brandWall" aria-label="Marcas y plataformas">
-        <span class="brandPill"><span class="dot"></span>Excel</span>
-        <span class="brandPill"><span class="dot"></span>Google Sheets</span>
-        <span class="brandPill"><span class="dot"></span>Power BI</span>
-        <span class="brandPill"><span class="dot"></span>SQL Server</span>
-        <span class="brandPill"><span class="dot"></span>MySQL</span>
-        <span class="brandPill"><span class="dot"></span>PostgreSQL</span>
-        <span class="brandPill"><span class="dot"></span>SAP</span>
-        <span class="brandPill"><span class="dot"></span>Odoo</span>
-        <span class="brandPill"><span class="dot"></span>Tango</span>
-        <span class="brandPill"><span class="dot"></span>Oracle</span>
-        <span class="brandPill"><span class="dot"></span>Shopify</span>
-        <span class="brandPill"><span class="dot"></span>Mercado Libre</span>
+      <div class="marquee" aria-label="Logos en movimiento">
+        <div class="fadeL" aria-hidden="true"></div>
+        <div class="fadeR" aria-hidden="true"></div>
+
+        <div class="track" aria-hidden="false">
+          <!-- Bloque A -->
+          <div class="logoPill"><span class="logoMark"></span>Andes Retail</div>
+          <div class="logoPill"><span class="logoMark"></span>NorteLog</div>
+          <div class="logoPill"><span class="logoMark"></span>Patagonia Foods</div>
+          <div class="logoPill"><span class="logoMark"></span>Delta Services</div>
+          <div class="logoPill"><span class="logoMark"></span>BlueWave Energy</div>
+          <div class="logoPill"><span class="logoMark"></span>Solidez Finanzas</div>
+          <div class="logoPill"><span class="logoMark"></span>Arca Industria</div>
+          <div class="logoPill"><span class="logoMark"></span>Neuquén Partners</div>
+
+          <!-- Bloque B (duplicado para loop perfecto) -->
+          <div class="logoPill"><span class="logoMark"></span>Andes Retail</div>
+          <div class="logoPill"><span class="logoMark"></span>NorteLog</div>
+          <div class="logoPill"><span class="logoMark"></span>Patagonia Foods</div>
+          <div class="logoPill"><span class="logoMark"></span>Delta Services</div>
+          <div class="logoPill"><span class="logoMark"></span>BlueWave Energy</div>
+          <div class="logoPill"><span class="logoMark"></span>Solidez Finanzas</div>
+          <div class="logoPill"><span class="logoMark"></span>Arca Industria</div>
+          <div class="logoPill"><span class="logoMark"></span>Neuquén Partners</div>
+        </div>
       </div>
     </div>
   </section>
@@ -841,28 +954,49 @@
     <div class="container">
       <h2 class="sectionTitle">Opiniones</h2>
       <p class="sectionLead">
-        Este bloque puede cargarse con testimonios reales cuando existan autorizaciones.
-        Mientras tanto, se deja el formato listo para publicar feedback verificable.
+        Este bloque queda listo para publicar feedback verificable (cuando existan autorizaciones).
+        Mientras tanto, se muestra un formato demostrativo.
       </p>
+
+      <div class="reviewsHeader" aria-label="Badge Google">
+        <span class="gBadge">
+          <!-- Google "G" simple (demo) -->
+          <svg class="gIcon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#EA4335" d="M12 10.2v3.7h5.2c-.2 1.2-1.4 3.5-5.2 3.5A6.1 6.1 0 0 1 12 5.2c1.7 0 2.9.7 3.6 1.3l2.5-2.4A9.9 9.9 0 0 0 12 2 10 10 0 1 0 12 22c5.8 0 9.7-4.1 9.7-9.9 0-.7-.1-1.2-.2-1.7H12z"/>
+            <path fill="#34A853" d="M3.7 7.4l3 2.2A6.1 6.1 0 0 1 12 5.2c1.7 0 2.9.7 3.6 1.3l2.5-2.4A9.9 9.9 0 0 0 12 2c-3.8 0-7.1 2.1-8.3 5.4z"/>
+            <path fill="#FBBC05" d="M12 22c2.7 0 5-1 6.7-2.6l-3.1-2.4c-.9.6-2 .9-3.6.9A6.1 6.1 0 0 1 6.7 14l-3.1 2.4A10 10 0 0 0 12 22z"/>
+            <path fill="#4285F4" d="M21.7 12.1c0-.7-.1-1.2-.2-1.7H12v3.7h5.2c-.3 1.1-1.3 2.7-3.4 3.4l3.1 2.4c1.9-1.8 2.8-4.4 2.8-7.8z"/>
+          </svg>
+          Google (demo)
+        </span>
+        <span class="stars">★★★★★</span>
+      </div>
 
       <div class="slider" aria-label="Opiniones deslizables">
         <div class="tCard">
-          <div class="tMeta">Formato de testimonio</div>
           <div class="stars">★★★★★</div>
           <b>“La dirección dejó de discutir números.”</b>
-          <p>Se definió una sola métrica y una sola fuente. El foco volvió a ser la decisión, no el cálculo.</p>
+          <p>Se consolidó una sola definición de KPI y la lectura se volvió consistente por área y por semana.</p>
         </div>
         <div class="tCard">
-          <div class="tMeta">Formato de testimonio</div>
           <div class="stars">★★★★★</div>
-          <b>“Ahora se ve qué mover primero.”</b>
-          <p>El tablero dejó claro qué líneas sostienen el resultado y dónde se drena rentabilidad.</p>
+          <b>“Ahora se ve dónde actuar primero.”</b>
+          <p>Se ordenaron ventas, costos y márgenes por producto/cliente. La prioridad quedó evidente.</p>
         </div>
         <div class="tCard">
-          <div class="tMeta">Formato de testimonio</div>
           <div class="stars">★★★★★</div>
-          <b>“El control dio confianza.”</b>
-          <p>Con QA y validaciones se terminaron los cierres inconsistentes y los “números que cambian”.</p>
+          <b>“El control dio confianza al cierre.”</b>
+          <p>QA y alertas evitaron desvíos silenciosos. Los números pasaron a ser confiables.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“La lectura semanal cambió la conversación.”</b>
+          <p>De reportes sueltos a rutina ejecutiva: señales claras y decisiones con criterio.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“Se ganó tiempo en el equipo.”</b>
+          <p>Menos horas armando Excel, más foco en análisis y acciones que mueven resultado.</p>
         </div>
       </div>
     </div>
@@ -875,7 +1009,7 @@
     <div class="container">
       <h2 class="sectionTitle">Contacto</h2>
       <p class="sectionLead">
-        Diagnóstico inicial breve y sin presión: se confirma si hay encaje y qué impacto puede lograrse con datos.
+        Diagnóstico inicial para entender objetivo, contexto y datos disponibles. Si hay ajuste, Prisma BI lo propone con claridad.
       </p>
 
       <div class="contactGrid">
@@ -898,18 +1032,18 @@
       </div>
 
       <form class="form" action="#" method="post" aria-label="Formulario de contacto">
-        <input class="input" type="text" name="nombre" placeholder="Nombre" required>
+        <input class="input" type="text" name="nombre" placeholder="Nombre y apellido" required>
         <input class="input" type="text" name="empresa" placeholder="Empresa / Rubro" required>
         <input class="input" type="email" name="email" placeholder="Email" required>
         <input class="input" type="text" name="fuente" placeholder="Datos hoy: Excel / ERP / Sistema / eCommerce">
-        <textarea class="input" name="mensaje" placeholder="¿Qué decisión necesita claridad hoy? (margen, costos, ventas, stock, caja…)" required></textarea>
+        <textarea class="input" name="mensaje" placeholder="¿Qué decisión se está volviendo difícil hoy? (margen, costos, ventas, stock, caja…)" required></textarea>
         <div class="sendRow">
           <button class="btn btnPrimary" type="button" id="send-whatsapp">Enviar por WhatsApp</button>
         </div>
       </form>
 
       <p class="sectionLead" style="margin-top:18px">
-        Respuesta rápida por WhatsApp. También se responde por email.
+        Respuesta rápida por WhatsApp. También se puede coordinar por email.
       </p>
     </div>
   </section>
@@ -921,6 +1055,14 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     /* ===== Smooth scroll (offset dinámico) ===== */
+    function getHeaderOffset(){
+      const topbar = document.querySelector('.topbar');
+      const header = document.querySelector('header');
+      const tb = topbar ? topbar.getBoundingClientRect().height : 0;
+      const hd = header ? header.getBoundingClientRect().height : 0;
+      return Math.round(tb + hd + 18);
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{
         const href = a.getAttribute('href');
@@ -928,45 +1070,44 @@
         const el = document.querySelector(href);
         if(!el) return;
         e.preventDefault();
-
-        const header = document.querySelector("header");
-        const offset = (header ? header.offsetHeight : 90) + 18;
-
-        const top = el.getBoundingClientRect().top + scrollY - offset;
+        const top = el.getBoundingClientRect().top + scrollY - getHeaderOffset();
         window.scrollTo({top, behavior:'smooth'});
       });
     });
 
-    /* ===== WhatsApp links ===== */
+    /* ===== WhatsApp links (CTA único) ===== */
     (function(){
       const phone = "542996032267";
+
       const msg =
-        "¡Hola! 👋 Me gustaría coordinar un diagnóstico (20 min).\n\n" +
+        "Hola 👋 Quiero solicitar un diagnóstico.\n\n" +
         "Empresa/Rubro: ____\n" +
-        "Decisión prioritaria hoy: ____\n" +
-        "Qué no se ve con claridad: ____\n" +
-        "Datos actuales (Excel/ERP/sistema/eCommerce): ____\n" +
+        "Objetivo principal: ____\n" +
+        "Qué no se ve con claridad hoy: ____\n" +
+        "Datos disponibles (Excel/ERP/sistema/eCommerce): ____\n" +
         "Plazo ideal: ____\n\n" +
-        "¿Qué horario está disponible?";
+        "¿Qué día y horario conviene?";
+
       const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
 
-      ["cta-nav","cta-hero","wa-link"].forEach(id=>{
+      ["cta-main","cta-hero","wa-link"].forEach(id=>{
         const el = document.getElementById(id);
         if(el) el.href = url;
       });
 
       const sendBtn = document.getElementById("send-whatsapp");
       if(sendBtn){
-        sendBtn.addEventListener("click", ()=>{
-          window.open(url, "_blank", "noopener");
-        });
+        sendBtn.addEventListener("click", ()=> window.open(url, "_blank", "noopener"));
       }
     })();
 
     /* ===== Nav active state ===== */
     (function(){
       const links = Array.from(document.querySelectorAll('.menu a'));
-      const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const sections = links
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+
       if(!sections.length) return;
 
       const io = new IntersectionObserver((entries)=>{
@@ -981,6 +1122,132 @@
       }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.02 });
 
       sections.forEach(s=>io.observe(s));
+    })();
+
+    /* ===== SOLUCIONES (tabs) ===== */
+    (function(){
+      const data = [
+        {
+          tab: "Urgencias",
+          badge: "SLA / Tiempos",
+          title: "Controle flujos críticos y tiempos de respuesta en urgencias",
+          bullets: [
+            "Tiempo medio desde ingreso hasta atención médica",
+            "Porcentaje de derivaciones a internación",
+            "Tasa de ingresos por tipo de urgencia",
+            "Casos críticos atendidos por franja horaria",
+            "Nivel de saturación del área de emergencias"
+          ],
+          note: "Lectura para dirección: capacidad vs demanda, cuellos de botella y foco de intervención.",
+          icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1E7CFF" d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 11h3a1 1 0 0 1 0 2h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0Z"/></svg>`
+        },
+        {
+          tab: "Stock / Farmacia",
+          badge: "Control",
+          title: "Anticipe faltantes, mejore rotación y fortalezca control de stock",
+          bullets: [
+            "Tiempo medio de reposición por medicamento",
+            "Tasa de consumo por tipo de medicamento",
+            "Incidencias por faltante o quiebre de stock",
+            "Tiempo promedio de entrega a pacientes internos",
+            "Porcentaje de medicación vencida o descartada"
+          ],
+          note: "Señales para evitar quiebres, reducir desperdicio y sostener continuidad operativa.",
+          icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00E7B6" d="M20 8h-3V4a1 1 0 0 0-1-1H8A1 1 0 0 0 7 4v4H4a1 1 0 0 0-1 1v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1ZM9 5h6v3H9Zm11 14H4V10h3v2h2v-2h6v2h2v-2h3Z"/></svg>`
+        },
+        {
+          tab: "Administración",
+          badge: "Eficiencia",
+          title: "Analice rendimiento operativo y eficiencia en áreas administrativas",
+          bullets: [
+            "Costo promedio por paciente atendido",
+            "Tasa de ocupación de personal por unidad",
+            "Cumplimiento presupuestario mensual o por área",
+            "Tiempo medio de respuesta a incidentes internos",
+            "Indicadores de facturación, cobros o demoras por prestadora"
+          ],
+          note: "Lectura financiera-operativa: costos, capacidad y desvíos antes de que impacten caja.",
+          icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1E7CFF" d="M4 4h16v2H4zm0 5h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>`
+        },
+        {
+          tab: "Imágenes y Lab",
+          badge: "Calidad / Plazos",
+          title: "Demanda, capacidad operativa y tiempos de respuesta en laboratorio e imágenes",
+          bullets: [
+            "Tiempo entre solicitud y entrega de resultados",
+            "Porcentaje de estudios entregados fuera de plazo",
+            "Volumen de estudios por tipo y área clínica",
+            "Tasa de repetición de pruebas por error o fallo",
+            "Capacidad instalada vs uso real del equipamiento"
+          ],
+          note: "Señales de calidad y SLA para priorizar inversión, mantenimiento y turnos.",
+          icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00E7B6" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 16H5V5h14Zm-3-9h-2V8h-4v2H8v4h2v2h4v-2h2Z"/></svg>`
+        },
+        {
+          tab: "Ambulatorio",
+          badge: "Agenda / Demanda",
+          title: "Monitoree desempeño y gestión operativa de servicios ambulatorios",
+          bullets: [
+            "Tiempo promedio de espera para consulta externa",
+            "Tasa de ausentismo o cancelaciones sin aviso",
+            "Porcentaje de ocupación de agenda médica",
+            "Nivel de reprogramaciones por especialidad",
+            "Tiempo entre derivación y consulta efectiva"
+          ],
+          note: "Lectura para reducir esperas, optimizar agenda y sostener continuidad de atención.",
+          icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1E7CFF" d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3Zm14 8H3v10h18Z"/></svg>`
+        },
+        {
+          tab: "Internación",
+          badge: "Capacidad",
+          title: "Disponibilidad de camas e internación con lectura clara de capacidad",
+          bullets: [
+            "Porcentaje de internaciones",
+            "Tiempo medio de internación por tipo de paciente",
+            "Tiempo promedio desde alta médica hasta liberación de cama",
+            "Tasa de ocupación de camas por área",
+            "Porcentaje de rotación de camas"
+          ],
+          note: "Señales para optimizar rotación, liberar cuellos de botella y planificar dotación.",
+          icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00E7B6" d="M21 11a3 3 0 0 0-3-3H6.3A3.3 3.3 0 0 0 3 11v8h2v-2h14v2h2ZM5 11a1.3 1.3 0 0 1 1.3-1.3H18a1 1 0 0 1 1 1v4H5Z"/></svg>`
+        }
+      ];
+
+      const tabsEl = document.getElementById("solTabs");
+      const titleEl = document.getElementById("solTitle");
+      const bulletsEl = document.getElementById("solBullets");
+      const noteEl = document.getElementById("solNote");
+      const mediaEl = document.getElementById("solMedia");
+
+      if(!tabsEl || !titleEl || !bulletsEl || !noteEl || !mediaEl) return;
+
+      function render(idx){
+        const item = data[idx];
+
+        titleEl.textContent = item.title;
+        bulletsEl.innerHTML = item.bullets.map(b => `<li><span class="solCheck"></span><span>${b}</span></li>`).join("");
+        noteEl.textContent = item.note;
+        mediaEl.innerHTML = item.icon;
+
+        Array.from(tabsEl.querySelectorAll(".solTab")).forEach((t,i)=>{
+          t.classList.toggle("active", i === idx);
+        });
+      }
+
+      tabsEl.innerHTML = data.map((d,i)=>`
+        <button class="solTab ${i===0?'active':''}" type="button" data-i="${i}">
+          <span>${d.tab}</span>
+          <span class="solBadge">${d.badge}</span>
+        </button>
+      `).join("");
+
+      tabsEl.addEventListener("click", (e)=>{
+        const btn = e.target.closest(".solTab");
+        if(!btn) return;
+        render(parseInt(btn.dataset.i, 10));
+      });
+
+      render(0);
     })();
 
     /* ===== NET CANVAS (Overdata-like, brillante) ===== */
@@ -1055,9 +1322,7 @@
         if(cfg.glow){
           ctx.shadowColor = "rgba(42,212,255,.35)";
           ctx.shadowBlur = cfg.glowStrength;
-        } else {
-          ctx.shadowBlur = 0;
-        }
+        } else ctx.shadowBlur = 0;
 
         for(const n of nodes){
           if(pointer.active){
@@ -1069,13 +1334,9 @@
               n.vy += dy * cfg.attract / 220;
             }
           }
-
-          n.x += n.vx;
-          n.y += n.vy;
-
+          n.x += n.vx; n.y += n.vy;
           if(n.x < 0 || n.x > W) n.vx *= -1;
           if(n.y < 0 || n.y > H) n.vy *= -1;
-
           n.x = Math.max(0, Math.min(W, n.x));
           n.y = Math.max(0, Math.min(H, n.y));
         }
@@ -1135,8 +1396,7 @@
         raf = requestAnimationFrame(draw);
       }
 
-      resize();
-      draw();
+      resize(); draw();
       window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
     })();
   </script>
