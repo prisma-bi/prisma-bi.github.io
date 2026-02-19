@@ -2,49 +2,48 @@
 <html lang="es">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Prisma BI — Dirección · Rentabilidad · Control</title>
-  <meta name="description" content="Convertimos datos dispersos (Excel/ERP/sistemas) en lectura ejecutiva clara: qué pasa, por qué pasa y qué acción mueve el resultado."/>
-  <meta name="theme-color" content="#040a18"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Prisma BI — Dirección con datos</title>
+  <meta name="description" content="Prisma BI acompaña a PyMEs y empresas a ordenar datos y convertirlos en lectura ejecutiva clara: qué pasa, por qué pasa y qué acción mueve el resultado."/>
 
-  <!-- Open Graph (opcional) -->
-  <meta property="og:title" content="Prisma BI — Dirección · Rentabilidad · Control">
-  <meta property="og:description" content="Tableros ejecutivos y sistema de medición para decidir con criterio único.">
+  <meta property="og:title" content="Prisma BI — Dirección con datos">
+  <meta property="og:description" content="Orden, control y lectura ejecutiva clara para decidir con confianza.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
-  <meta property="og:image" content="assets/brand/og-prisma.jpg">
+  <meta name="theme-color" content="#040a18"/>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
+      /* Tu firma */
+      --ink:#050a18;
       --bg0:#02050e;
       --bg1:#040a18;
-      --panel:rgba(10,18,38,.52);
-      --panel2:rgba(10,18,38,.38);
-      --stroke:rgba(255,255,255,.10);
 
       --text:#F4F8FF;
-      --muted:rgba(244,248,255,.74);
-      --muted2:rgba(244,248,255,.62);
+      --muted:rgba(244,248,255,.72);
 
       --blue:#1E7CFF;
       --cyan:#2AD4FF;
       --teal:#00E7B6;
 
-      --shadow:0 24px 80px rgba(0,0,0,.55);
-      --shadow2:0 16px 50px rgba(0,0,0,.35);
+      --card:rgba(10,18,38,.58);
+      --card2:rgba(10,18,38,.46);
+      --stroke:rgba(255,255,255,.11);
+
+      --shadow:0 24px 90px rgba(0,0,0,.55);
+      --shadow2:0 16px 55px rgba(0,0,0,.35);
       --r:18px;
 
-      --h1: clamp(40px, 5.2vw, 78px);
-      --lead: clamp(16px, 1.25vw, 20px);
-      --h2: clamp(28px, 3vw, 46px);
-
+      --h1: clamp(42px, 5.0vw, 78px);
+      --lead: clamp(16px, 1.2vw, 20px);
+      --h2: clamp(28px, 2.6vw, 44px);
       --secPad: 86px;
-      --navH: 86px;
+
+      --container: 1180px;
     }
 
     *{box-sizing:border-box}
@@ -60,46 +59,53 @@
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    .container{max-width:1180px;margin:0 auto;padding:0 28px}
+    .container{max-width:var(--container);margin:0 auto;padding:0 28px}
+    .sr{position:absolute;left:-9999px}
 
-    /* Accesibilidad: foco visible */
-    a:focus-visible, button:focus-visible{
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
       outline: 2px solid rgba(42,212,255,.75);
       outline-offset: 3px;
       border-radius: 12px;
     }
 
-    /* Barra superior (contacto) */
-    .topbar{
-      height:44px;
-      display:flex;align-items:center;
-      background:rgba(2,5,14,.50);
-      border-bottom:1px solid rgba(255,255,255,.06);
-      backdrop-filter: blur(14px) saturate(170%);
-    }
-    .topbar .row{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      font-size:13px;
-      color:rgba(244,248,255,.72);
-    }
-    .chips{display:flex;gap:10px;flex-wrap:wrap}
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.32);
-      box-shadow:0 10px 28px rgba(0,0,0,.18);
-      white-space:nowrap;
-    }
-    .chip svg{width:14px;height:14px;opacity:.9}
-    .chip b{color:rgba(244,248,255,.90)}
-    @media (max-width:860px){
-      .topbar{display:none}
+    /* Top glow line */
+    body:before{
+      content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
+      background:linear-gradient(90deg, transparent, rgba(30,124,255,.90), rgba(42,212,255,.90), rgba(0,231,182,.82), transparent);
+      pointer-events:none;opacity:.95;
+      filter: blur(.2px);
     }
 
-    /* NAV */
+    /* ===== TOPBAR (chips) ===== */
+    .topbar{
+      position:sticky;top:0;z-index:60;
+      background:rgba(2,5,14,.52);
+      backdrop-filter: blur(14px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbarInner{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:10px 0;
+    }
+    .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .chip{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,18,38,.38);
+      color:rgba(244,248,255,.85);
+      font-weight:800;font-size:13px;
+    }
+    .chip b{color:rgba(244,248,255,.95)}
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      box-shadow:0 0 18px rgba(42,212,255,.35);
+    }
+
+    /* ===== NAV ===== */
     header{
-      position:sticky; top:0; z-index:50;
+      position:sticky; top:52px; z-index:55;
       background:rgba(2,5,14,.66);
       backdrop-filter: blur(14px) saturate(170%);
       border-bottom:1px solid rgba(255,255,255,.06);
@@ -107,31 +113,26 @@
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:16px;
-      min-height:var(--navH);
-      padding:10px 0;
+      padding:12px 0;
+      min-height:82px;
     }
-    .brandlock{
-      display:flex; align-items:center; gap:12px;
-      min-width: 320px;
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      min-width:260px;
     }
-    .brandlock a{display:flex;align-items:center;gap:12px}
-    .brandlock img.brandTitle{
-      height:72px;
-      width:auto;
-      object-fit:contain;
+    .brand img{
+      height:44px;width:auto;object-fit:contain;
       filter: drop-shadow(0 18px 45px rgba(0,0,0,.38));
       opacity:.98;
-      transform: translateY(1px);
     }
 
     .menu{display:flex;gap:18px;align-items:center}
     .menu a{
       font-weight:900;
-      color:rgba(244,248,255,.76);
-      padding:10px 10px;
-      border-radius:10px;
+      color:rgba(244,248,255,.78);
+      padding:10px 12px;border-radius:12px;
       border:1px solid transparent;
-      transition:filter .16s ease, transform .16s ease, border-color .16s ease, background .16s ease;
+      transition:transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
     }
     .menu a:hover{
       filter:brightness(1.12);
@@ -144,93 +145,114 @@
       border-color:rgba(42,212,255,.22);
       background:rgba(10,18,38,.36);
     }
-    .navRight{display:flex;align-items:center;gap:10px}
-    .navcta{
+
+    .navRight{display:flex;gap:10px;align-items:center}
+    .btn{
       display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:14px;
       font-weight:900;
-      padding:12px 14px;border-radius:999px;
       border:1px solid rgba(255,255,255,.16);
-      background:rgba(10,18,38,.42);
-      box-shadow:0 16px 44px rgba(0,0,0,.24);
+      background:rgba(10,18,38,.38);
+      box-shadow:0 16px 44px rgba(0,0,0,.22);
       transition:transform .16s ease, filter .16s ease, border-color .16s ease;
       white-space:nowrap;
     }
-    .navcta:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(42,212,255,.26);}
-    .navctaPrimary{
-      display:inline-flex;align-items:center;gap:10px;
-      font-weight:900;color:#06101f;
-      padding:12px 14px;border-radius:999px;
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(42,212,255,.26)}
+    .btnPrimary{
+      color:#06101f;
       background: linear-gradient(90deg, rgba(30,124,255,.98), rgba(42,212,255,.96), rgba(0,231,182,.92));
-      border:1px solid rgba(0,0,0,.14);
-      box-shadow:0 22px 78px rgba(0,0,0,.24), 0 0 48px rgba(30,124,255,.18);
-      transition:transform .16s ease, filter .16s ease;
-      white-space:nowrap;
+      border:1px solid rgba(0,0,0,.12);
+      box-shadow:
+        0 24px 78px rgba(0,0,0,.35),
+        0 0 0 1px rgba(42,212,255,.12) inset,
+        0 0 60px rgba(30,124,255,.20);
+      position:relative;overflow:hidden;
     }
-    .navctaPrimary:hover{transform:translateY(-1px);filter:brightness(1.05);}
-    @media (max-width:980px){
-      .menu{display:none}
-      .brandlock{min-width:auto}
+    .btnPrimary:before{
+      content:"";
+      position:absolute;top:-40%;left:-40%;
+      width:50%;height:180%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.70), transparent);
+      transform: rotate(18deg);
+      opacity:0;
     }
-    @media (max-width:520px){
-      .brandlock img.brandTitle{height:54px;}
-      .navRight .navcta{display:none}
+    .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
+    @keyframes shine{
+      0%{left:-40%;opacity:0}
+      15%{opacity:.9}
+      100%{left:120%;opacity:0}
     }
 
-    /* HERO con red neuronal (canvas) */
+    @media (max-width:980px){
+      header{top:0}
+      .chips{display:none}
+      .menu{display:none}
+      .brand{min-width:auto}
+    }
+
+    /* ===== HERO ===== */
     .hero{
       position:relative;
-      min-height: calc(88vh - var(--navH));
+      min-height: calc(92vh - 120px);
       display:flex;
       align-items:center;
-      padding:44px 0 56px;
+      padding:48px 0 56px;
       overflow:hidden;
+      isolation:isolate;
     }
+
+    /* Fondo base del hero (sin imagen; premium y limpio) */
     .heroBg{
-      position:absolute;inset:0;
-      z-index:-4;
+      position:absolute;inset:0;z-index:-4;
       background:
-        radial-gradient(900px 560px at 68% 20%, rgba(30,124,255,.20), transparent 60%),
-        radial-gradient(900px 560px at 76% 82%, rgba(0,231,182,.10), transparent 62%),
-        radial-gradient(720px 420px at 40% 38%, rgba(42,212,255,.10), transparent 65%),
-        linear-gradient(180deg, rgba(2,5,14,.92), rgba(2,5,14,.68));
+        radial-gradient(1000px 700px at 20% 20%, rgba(30,124,255,.16), transparent 64%),
+        radial-gradient(900px 650px at 78% 22%, rgba(0,231,182,.10), transparent 62%),
+        radial-gradient(900px 650px at 66% 86%, rgba(42,212,255,.08), transparent 62%),
+        linear-gradient(180deg, rgba(2,5,14,.96), rgba(2,5,14,.84));
     }
+
+    /* Estrellas sutiles */
+    .heroStars{
+      position:absolute;inset:-60px;z-index:-3;pointer-events:none;opacity:.35;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.50), transparent 55%),
+        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.35), transparent 55%),
+        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.35), transparent 55%),
+        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.32), transparent 55%),
+        radial-gradient(1px 1px at 72% 40%, rgba(255,255,255,.24), transparent 55%),
+        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.20), transparent 55%);
+      mask-image: radial-gradient(740px 520px at 35% 40%, black 62%, transparent 100%);
+    }
+
+    /* Canvas red (bien visible) */
     .netCanvas{
-      position:absolute;inset:0;
+      position:absolute;inset:0;z-index:-2;
       width:100%;height:100%;
-      z-index:-3;
+      opacity: 1; /* ✅ tu pedido */
+      mix-blend-mode: screen; /* brillo tipo “Overdata” */
+      filter: drop-shadow(0 0 18px rgba(42,212,255,.22));
+      pointer-events:none;
+    }
+
+    /* Viñeta / contraste para que el texto siempre se lea */
+    .heroVignette{
+      position:absolute;inset:-80px;z-index:-1;pointer-events:none;
+      background:
+        radial-gradient(980px 620px at 32% 40%, rgba(0,0,0,.00), rgba(0,0,0,.55) 72%),
+        linear-gradient(90deg, rgba(2,5,14,.92) 0%, rgba(2,5,14,.74) 48%, rgba(2,5,14,.22) 100%);
       opacity:.92;
-    }
-    .heroOverlay{
-      position:absolute;inset:0;
-      z-index:-2;
-      background:
-        linear-gradient(90deg, rgba(2,5,14,.92) 10%, rgba(2,5,14,.78) 52%, rgba(2,5,14,.40) 100%),
-        radial-gradient(1200px 700px at 50% 10%, transparent 38%, rgba(0,0,0,.58) 78%);
-      pointer-events:none;
-    }
-    .heroWave{
-      position:absolute;left:-8%;right:-8%;bottom:-80px;height:270px;
-      z-index:-1;
-      background:
-        radial-gradient(900px 220px at 50% 10%, rgba(42,212,255,.20), transparent 70%),
-        radial-gradient(900px 220px at 55% 35%, rgba(0,231,182,.12), transparent 72%),
-        linear-gradient(90deg, rgba(30,124,255,.12), rgba(42,212,255,.10), rgba(0,231,182,.10));
-      opacity:.62;
-      transform: rotate(-2deg);
-      mask-image: radial-gradient(900px 240px at 50% 30%, black 55%, transparent 100%);
-      pointer-events:none;
     }
 
     .heroGrid{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap:28px;
+      gap:34px;
       align-items:center;
     }
     @media (max-width:980px){
-      .hero{min-height:auto;padding:46px 0 44px}
-      .heroGrid{grid-template-columns:1fr;gap:18px}
-      .heroWave{display:none;}
+      .hero{min-height:auto;padding:54px 0 44px}
+      .heroGrid{grid-template-columns:1fr;gap:22px}
+      .heroVignette{background: radial-gradient(980px 620px at 50% 40%, rgba(0,0,0,.00), rgba(0,0,0,.58) 74%);}
     }
 
     .pill{
@@ -254,9 +276,9 @@
       margin:0 0 12px;
       font-size:var(--h1);
       line-height:1.02;
-      font-weight:900;
+      font-weight:950;
       letter-spacing:-.03em;
-      text-shadow: 0 16px 44px rgba(0,0,0,.35);
+      text-shadow: 0 18px 56px rgba(0,0,0,.42);
     }
     .accent{
       background:linear-gradient(90deg,var(--cyan),var(--teal));
@@ -272,48 +294,8 @@
     }
 
     .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
-    .btnPrimary{
-      position:relative;
-      display:inline-flex;align-items:center;gap:10px;
-      padding:14px 18px;border-radius:14px;
-      font-weight:900;color:#06101f;
-      background: linear-gradient(90deg, rgba(30,124,255,.98), rgba(42,212,255,.96), rgba(0,231,182,.92));
-      border:1px solid rgba(0,0,0,.14);
-      box-shadow:
-        0 22px 78px rgba(0,0,0,.35),
-        0 0 0 1px rgba(42,212,255,.12) inset,
-        0 0 48px rgba(30,124,255,.22);
-      overflow:hidden;
-      transition: transform .16s ease, filter .16s ease;
-    }
-    .btnPrimary:before{
-      content:"";
-      position:absolute;top:-40%;left:-40%;
-      width:50%;height:180%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
-      transform: rotate(18deg);
-      opacity:0;
-    }
-    .btnPrimary:hover{transform: translateY(-1px);filter: brightness(1.06);}
-    .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
-    @keyframes shine{0%{left:-40%;opacity:0}15%{opacity:.9}100%{left:120%;opacity:0}}
-    .btnPrimary svg{width:18px;height:18px}
 
-    .btnSecondary{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:14px 18px;border-radius:14px;
-      font-weight:900;
-      border:1px solid rgba(255,255,255,.20);
-      background:
-        radial-gradient(140px 80px at 20% 30%, rgba(30,124,255,.18), transparent 70%),
-        radial-gradient(140px 80px at 80% 70%, rgba(0,231,182,.12), transparent 70%),
-        rgba(10,18,38,.42);
-      box-shadow: 0 18px 56px rgba(0,0,0,.28);
-      transition: transform .16s ease, filter .16s ease, border-color .16s ease;
-    }
-    .btnSecondary:hover{transform: translateY(-1px);filter: brightness(1.08);border-color: rgba(42,212,255,.28);}
-
-    .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:66ch}
+    .bullets{display:grid;gap:10px;margin:0;padding:0;list-style:none;max-width:72ch}
     .bullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.88)}
     .check{
       width:22px;height:22px;border-radius:999px;
@@ -324,83 +306,73 @@
     }
     .check:before{content:"✓";font-weight:900;color:rgba(0,231,182,.96);font-size:14px}
 
-    /* Panel derecho (checklist pro, como tu imagen ejemplo) */
-    .heroPanelWrap{display:flex;justify-content:flex-end}
-    @media (max-width:980px){ .heroPanelWrap{justify-content:stretch} }
-    .heroPanel{
-      width:min(560px, 100%);
-      border-radius:24px;
+    /* “Checklist” card (mejor integrada, sin “no pega”) */
+    .glassCard{
+      position:relative;
       background:
-        radial-gradient(520px 240px at 22% 18%, rgba(30,124,255,.18), transparent 72%),
-        radial-gradient(520px 240px at 88% 82%, rgba(0,231,182,.10), transparent 72%),
-        rgba(6,12,26,.45);
+        radial-gradient(420px 220px at 18% 18%, rgba(30,124,255,.16), transparent 70%),
+        radial-gradient(380px 220px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
+        rgba(10,18,38,.46);
       border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 32px 96px rgba(0,0,0,.52);
+      border-radius: 22px;
+      padding:18px 18px 16px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.52);
       overflow:hidden;
-      position:relative;
-      padding:18px;
+      max-width:560px;
+      margin-left:auto;
+      transform: translateY(8px);
     }
-    .heroPanel:after{
-      content:"";
-      position:absolute;inset:-2px;
-      background:linear-gradient(90deg, rgba(30,124,255,.16), rgba(42,212,255,.12), rgba(0,231,182,.10));
-      opacity:.18;filter:blur(18px);
-      pointer-events:none;
+    .glassCard:before{
+      content:"";position:absolute;inset:-1px;border-radius:22px;
+      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.12), rgba(0,231,182,.12));
+      opacity:.25;filter:blur(18px);pointer-events:none;
     }
-    .panelHead{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      margin-bottom:12px;
-      position:relative;
-      z-index:1;
+    .glassTop{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      margin-bottom:14px;
     }
-    .panelHead h3{margin:0;font-size:14px;letter-spacing:.02em;font-weight:900;color:rgba(244,248,255,.92)}
-    .tag{
-      display:inline-flex;align-items:center;
-      padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(42,212,255,.22);
-      background: rgba(42,212,255,.08);
-      font-weight:900;
-      color: rgba(244,248,255,.86);
-      font-size:12px;
-      white-space:nowrap;
+    .glassTop b{font-size:14px}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(6,12,26,.40);
+      font-weight:900;font-size:12px;color:rgba(244,248,255,.88);
     }
-    .panelGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      position:relative;
-      z-index:1;
-    }
-    @media (max-width:520px){ .panelGrid{grid-template-columns:1fr} }
-
-    .miniCard{
-      border-radius:16px;
-      background: rgba(244,248,255,.06);
+    .badge .dot{width:7px;height:7px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .miniBox{
+      background:rgba(8,14,30,.42);
       border:1px solid rgba(255,255,255,.10);
-      padding:12px 12px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.25);
-    }
-    .miniCard .t{margin:0 0 6px;font-weight:900;font-size:13px}
-    .miniCard .d{margin:0;color:rgba(244,248,255,.72);font-size:13px;line-height:1.45}
-
-    .panelFoot{
-      margin-top:12px;
-      padding:12px 12px;
       border-radius:16px;
-      background: rgba(244,248,255,.05);
-      border:1px dashed rgba(255,255,255,.14);
-      color:rgba(244,248,255,.74);
+      padding:12px 12px 10px;
+      box-shadow:0 16px 44px rgba(0,0,0,.22);
+    }
+    .miniBox b{display:block;font-size:13px;margin-bottom:2px}
+    .miniBox span{display:block;color:rgba(244,248,255,.70);font-size:12.5px;line-height:1.45}
+    .resultStrip{
+      margin-top:12px;
+      border-radius:16px;
+      padding:12px 12px;
+      background:rgba(0,231,182,.08);
+      border:1px solid rgba(0,231,182,.18);
+      color:rgba(244,248,255,.82);
       font-weight:800;
       font-size:13px;
-      position:relative;
-      z-index:1;
+    }
+    @media (max-width:980px){
+      .glassCard{margin:0;max-width:100%}
+    }
+    @media (max-width:560px){
+      .grid2{grid-template-columns:1fr}
     }
 
-    /* Secciones */
+    /* ===== SECTIONS ===== */
     .sep{
       height:1px;max-width:1050px;margin:0 auto;
       background: linear-gradient(90deg, transparent, rgba(30,124,255,.26), rgba(42,212,255,.20), rgba(0,231,182,.16), transparent);
     }
+
     .sec{
       position:relative;
       padding: var(--secPad) 0;
@@ -411,8 +383,8 @@
       position:absolute;inset:0;
       background:
         radial-gradient(900px 520px at 20% 20%, rgba(30,124,255,.12), transparent 62%),
-        radial-gradient(900px 520px at 78% 10%, rgba(42,212,255,.08), transparent 62%),
-        radial-gradient(900px 520px at 70% 85%, rgba(0,231,182,.06), transparent 60%),
+        radial-gradient(900px 520px at 78% 10%, rgba(42,212,255,.10), transparent 62%),
+        radial-gradient(900px 520px at 70% 85%, rgba(0,231,182,.08), transparent 60%),
         linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
       z-index:-3;
     }
@@ -423,7 +395,7 @@
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/110px 110px,
         linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0/110px 110px,
         radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.0), rgba(0,0,0,.72));
-      opacity:.16;
+      opacity:.18;
       z-index:-2;
       pointer-events:none;
       mask-image: radial-gradient(780px 520px at 50% 40%, black 55%, transparent 100%);
@@ -432,32 +404,32 @@
     .sectionTitle{
       text-align:center;margin:0 0 10px;
       font-size:var(--h2);
-      font-weight:900;
+      font-weight:950;
       letter-spacing:-.02em;
       text-shadow: 0 18px 46px rgba(0,0,0,.30);
     }
     .sectionLead{
       text-align:center;
-      color:rgba(244,248,255,.66);
-      max-width:92ch;margin:0 auto 34px;
+      color:rgba(244,248,255,.68);
+      max-width:96ch;margin:0 auto 34px;
       line-height:1.7;
       font-size:15px;
     }
 
-    /* Cards */
+    /* Cards grid */
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
 
     .card{
       position:relative;
       background:
-        radial-gradient(320px 180px at 18% 18%, rgba(30,124,255,.14), transparent 70%),
+        radial-gradient(320px 180px at 18% 18%, rgba(30,124,255,.16), transparent 70%),
         radial-gradient(300px 180px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
-        rgba(10,18,38,.52);
+        rgba(10,18,38,.56);
       border:1px solid rgba(255,255,255,.11);
       border-radius: var(--r);
       padding:22px 18px;
-      box-shadow: 0 20px 64px rgba(0,0,0,.34);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
       transition: transform .18s ease, border-color .18s ease, filter .18s ease;
       overflow:hidden;
     }
@@ -472,8 +444,8 @@
     .card:hover{transform: translateY(-2px);border-color: rgba(42,212,255,.24);filter: brightness(1.06);}
     .card:hover:after{opacity:.85}
 
-    .kicker{display:flex;align-items:center;gap:10px;font-weight:900;margin-bottom:10px}
-    .dot{
+    .kicker{display:flex;align-items:center;gap:10px;font-weight:950;margin-bottom:10px}
+    .kDot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
       box-shadow:0 0 18px rgba(42,212,255,.28);
@@ -487,166 +459,170 @@
       border:1px solid rgba(42,212,255,.22);
       display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
     }
-    .miniBullets .miniCheck:before{content:"✓";font-weight:900;color:rgba(42,212,255,.95);font-size:12px}
+    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(42,212,255,.95);font-size:12px}
 
-    /* Proceso */
+    /* Video block */
+    .videoWrap{
+      max-width:960px;margin:0 auto;
+      border-radius:22px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,18,38,.48);
+      box-shadow:0 26px 90px rgba(0,0,0,.45);
+      position:relative;
+    }
+    .videoWrap:before{
+      content:"";position:absolute;inset:-1px;border-radius:22px;
+      background:linear-gradient(90deg, rgba(30,124,255,.18), rgba(42,212,255,.12), rgba(0,231,182,.12));
+      opacity:.18;filter:blur(18px);pointer-events:none;
+    }
+    .video{
+      aspect-ratio:16/9;
+      width:100%;
+      display:block;
+      background: radial-gradient(800px 420px at 30% 30%, rgba(30,124,255,.16), transparent 65%),
+                  radial-gradient(700px 420px at 70% 70%, rgba(0,231,182,.12), transparent 65%),
+                  rgba(2,5,14,.55);
+      position:relative;
+    }
+    .video iframe, .video video{
+      width:100%;height:100%;
+      border:0;display:block;
+      position:relative;z-index:1;
+    }
+    .videoHint{
+      padding:14px 16px;
+      color:rgba(244,248,255,.70);
+      font-size:13px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    /* Steps */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
     @media (max-width:980px){ .steps{grid-template-columns:1fr} }
     .step{
       position:relative;
-      background: rgba(10,18,38,.48);
+      background: rgba(10,18,38,.52);
       border:1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
+      border-radius: 18px;
       padding:16px;
       box-shadow: 0 18px 54px rgba(0,0,0,.26);
       overflow:hidden;
     }
     .step:after{
-      content:"";position:absolute;inset:-1px;border-radius:16px;
-      background:linear-gradient(90deg, rgba(30,124,255,.12), rgba(42,212,255,.10), rgba(0,231,182,.10));
+      content:"";position:absolute;inset:-1px;border-radius:18px;
+      background:linear-gradient(90deg, rgba(30,124,255,.14), rgba(42,212,255,.10), rgba(0,231,182,.10));
       opacity:.18;filter:blur(16px);pointer-events:none;
     }
     .step .n{
-      font-weight:900;
+      font-weight:950;
       display:inline-flex;align-items:center;justify-content:center;
-      width:30px;height:30px;border-radius:10px;
+      width:32px;height:32px;border-radius:12px;
       background: rgba(0,231,182,.10);
       border:1px solid rgba(0,231,182,.22);
       margin-bottom:10px;
     }
-    .step .t{margin:0 0 6px;font-weight:900}
+    .step .t{margin:0 0 6px;font-weight:950}
     .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
 
-    /* Ejemplos (galería) */
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-    @media (max-width:980px){ .gallery{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:560px){ .gallery{grid-template-columns:1fr} }
-    .shot{
-      border-radius:18px;
-      overflow:hidden;
+    /* Logos marquee */
+    .marquee{
+      position:relative;
+      border-radius:22px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(10,18,38,.40);
-      box-shadow:0 18px 54px rgba(0,0,0,.28);
-      position:relative;
-      transition: transform .18s ease, border-color .18s ease, filter .18s ease;
+      box-shadow:0 22px 80px rgba(0,0,0,.28);
+      overflow:hidden;
+      padding:18px 0;
     }
-    .shot:hover{transform:translateY(-2px);border-color:rgba(42,212,255,.22);filter:brightness(1.04);}
-    .shot img{width:100%;height:170px;object-fit:cover}
-    .shot .cap{
-      padding:12px 12px;
-      font-weight:900;
-      font-size:14px;
+    .track{
+      display:flex;gap:52px;align-items:center;
+      width:max-content;
+      animation: scroll 22s linear infinite;
+      padding-left:52px;
     }
-    .shot .sub{
-      margin-top:-6px;
-      padding:0 12px 12px;
-      color:rgba(244,248,255,.62);
-      font-size:13px;
-      font-weight:700;
+    .marquee:hover .track{animation-play-state: paused}
+    @keyframes scroll{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
     }
+    .logo{
+      height:32px; width:auto;
+      opacity:.78;
+      filter: grayscale(100%) brightness(1.25);
+      transition:opacity .16s ease, transform .16s ease, filter .16s ease;
+    }
+    .logo:hover{
+      opacity:.98;
+      transform:translateY(-1px);
+      filter: grayscale(0%) brightness(1.15);
+    }
+    .fadeL,.fadeR{
+      position:absolute;top:0;bottom:0;width:120px;pointer-events:none;z-index:2;
+    }
+    .fadeL{left:0;background:linear-gradient(90deg, rgba(2,5,14,.95), transparent)}
+    .fadeR{right:0;background:linear-gradient(270deg, rgba(2,5,14,.95), transparent)}
 
-    /* Clientes (logos) */
-    .logos{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:12px;
-      align-items:center;
-      opacity:.92;
+    /* Testimonials slider */
+    .slider{
+      display:flex;gap:14px;overflow:auto;
+      scroll-snap-type:x mandatory;
+      padding:4px 2px 10px;
+      -webkit-overflow-scrolling:touch;
     }
-    @media (max-width:980px){ .logos{grid-template-columns:repeat(3,1fr)} }
-    @media (max-width:560px){ .logos{grid-template-columns:repeat(2,1fr)} }
-    .logoTile{
-      display:grid;place-items:center;
-      min-height:72px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(10,18,38,.32);
-      box-shadow:0 14px 40px rgba(0,0,0,.18);
-      padding:12px;
-    }
-    .logoTile img{max-height:42px;object-fit:contain;filter:grayscale(100%) contrast(105%);opacity:.82}
-    .logoTile:hover img{filter:none;opacity:1}
-
-    /* Opiniones (Google + estrellas) */
-    .reviewsHead{
-      text-align:center;
-      margin: 8px 0 26px;
-      display:grid;
-      gap:10px;
-      justify-items:center;
-    }
-    .reviewsHead .badge{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.34);
-      box-shadow:0 14px 40px rgba(0,0,0,.20);
-      font-weight:900;
-      color:rgba(244,248,255,.88);
-    }
-    .stars{
-      display:inline-flex;gap:4px;align-items:center;
-      transform: translateY(1px);
-    }
-    .stars svg{width:18px;height:18px}
-    .gRow{
-      display:flex;align-items:center;gap:10px;justify-content:center;
-      color:rgba(244,248,255,.78);
-      font-weight:900;
-      letter-spacing:.02em;
-    }
-    .gLogo{
-      height:18px;width:auto;display:inline-block;
-      transform: translateY(2px);
-    }
-    .reviewGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    @media (max-width:980px){ .reviewGrid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:560px){ .reviewGrid{grid-template-columns:1fr} }
-    .review{
-      background:rgba(10,18,38,.44);
-      border:1px solid rgba(255,255,255,.10);
+    .slider::-webkit-scrollbar{height:10px}
+    .slider::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
+    .tCard{
+      flex:0 0 360px;
+      scroll-snap-align:start;
       border-radius:18px;
+      background:rgba(10,18,38,.52);
+      border:1px solid rgba(255,255,255,.10);
       padding:16px;
-      box-shadow:0 18px 54px rgba(0,0,0,.22);
-      min-height:170px;
+      box-shadow:0 18px 60px rgba(0,0,0,.26);
+      position:relative;
     }
-    .who{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-    .avatar{
-      width:38px;height:38px;border-radius:999px;
-      background:rgba(42,212,255,.10);
-      border:1px solid rgba(42,212,255,.22);
-      display:grid;place-items:center;
-      font-weight:900;
-      color:rgba(244,248,255,.92);
-    }
-    .who .name{font-weight:900}
-    .who .date{color:rgba(244,248,255,.60);font-size:12px;font-weight:800}
-    .review p{margin:0;color:rgba(244,248,255,.74);line-height:1.65;font-size:14px}
+    .tCard b{display:block;margin-bottom:6px}
+    .tCard p{margin:0;color:rgba(244,248,255,.74);line-height:1.7;font-size:14px}
+    .stars{color:rgba(42,212,255,.90);letter-spacing:1px;margin-bottom:10px}
+    @media (max-width:420px){ .tCard{flex-basis: 88vw} }
 
-    /* Contacto */
+    /* Contact */
     .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
     @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
+
     .cBox{
       position:relative;
       background:
-        radial-gradient(220px 120px at 20% 20%, rgba(30,124,255,.12), transparent 72%),
-        rgba(10,18,38,.50);
+        radial-gradient(220px 120px at 20% 20%, rgba(30,124,255,.14), transparent 72%),
+        rgba(10,18,38,.56);
       border:1px solid rgba(255,255,255,.11);
-      border-radius: 16px;
+      border-radius: 18px;
       padding:16px;
-      box-shadow: 0 20px 64px rgba(0,0,0,.22);
+      box-shadow: 0 20px 64px rgba(0,0,0,.26);
       overflow:hidden;
     }
-    .cBox .t{font-weight:900;margin:0 0 6px}
+    .cBox .t{font-weight:950;margin:0 0 6px}
     .cBox .v{margin:0;color:rgba(244,248,255,.74);font-size:14px}
-    .cBox a{color:rgba(244,248,255,.92);text-decoration:underline;text-decoration-color:rgba(42,212,255,.35);text-underline-offset:3px}
 
-    /* Footer */
+    .form{
+      margin-top:18px;
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+      max-width:980px;margin-left:auto;margin-right:auto;
+    }
+    .form textarea{grid-column:1/-1;min-height:120px;resize:vertical}
+    .input{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(8,14,30,.40);
+      color:rgba(244,248,255,.92);
+      padding:12px 12px;
+      font:inherit;
+      box-shadow:0 14px 42px rgba(0,0,0,.18) inset;
+    }
+    .sendRow{grid-column:1/-1;display:flex;justify-content:center;margin-top:6px}
+
     footer{
       padding:30px 0;
       text-align:center;
@@ -661,127 +637,114 @@
       opacity:.9;
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       *{transition:none!important;animation:none!important}
-      .netCanvas{display:none!important}
+      .netCanvas{display:none}
+      .track{animation:none!important}
     }
   </style>
 </head>
 
 <body>
-  <!-- TOPBAR (opcional) -->
-  <div class="topbar">
-    <div class="container row">
-      <div class="chips">
-        <span class="chip">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm1 5v6l4 2-.8 1.6L11 14V7h2Z"/></svg>
-          <b>Consultora en Datos & BI</b>
-        </span>
-        <a class="chip" id="top-wa" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/></svg>
-          WhatsApp: <b>+54 299 6 032 267</b>
-        </a>
-      </div>
 
-      <a class="chip" href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.5 24h4V7.98h-4V24Zm7 0h4v-8.7c0-2.33.44-4.59 3.33-4.59 2.85 0 2.89 2.67 2.89 4.74V24h4V14.6c0-4.62-.99-8.17-6.39-8.17-2.59 0-4.33 1.42-5.04 2.77h-.05V7.98h-3.74V24Z"/></svg>
-        LinkedIn: <b>Daiana Beltrán</b>
-      </a>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbarInner">
+      <div class="chips" aria-label="Información rápida">
+        <span class="chip"><span class="dot"></span> Consultora en <b>Datos & BI</b></span>
+        <span class="chip">WhatsApp: <b id="chip-wa">+54 299 6 032 267</b></span>
+        <span class="chip">LinkedIn: <b>Daiana Beltrán</b></span>
+      </div>
+      <a class="btn btnPrimary" id="cta-top" href="#" target="_blank" rel="noopener">Agendar diagnóstico</a>
     </div>
   </div>
 
+  <!-- NAV -->
   <header>
     <div class="container nav">
-      <div class="brandlock">
-        <a href="#home" aria-label="Ir al inicio">
-          <!-- Recomendado: logo con título -->
-          <img class="brandTitle" src="assets/brand/logo-con-titulo.png" alt="PRISMA BI — Dirección · Rentabilidad · Control">
-        </a>
-      </div>
+      <a class="brand" href="#home" aria-label="Ir al inicio">
+        <!-- Reemplazá por tu logo real -->
+        <img src="assets/brand/logo-prisma.png" alt="PRISMA BI">
+      </a>
 
       <nav class="menu" aria-label="Navegación principal">
         <a class="active" href="#home">Inicio</a>
-        <a href="#services">Servicios</a>
-        <a href="#method">Cómo se trabaja</a>
-        <a href="#examples">Ejemplos</a>
-        <a href="#clients">Clientes</a>
-        <a href="#reviews">Opiniones</a>
-        <a href="#contact">Contacto</a>
+        <a href="#entregables">Entregables</a>
+        <a href="#metodo">Cómo se trabaja</a>
+        <a href="#clientes">Clientes</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#contacto">Contacto</a>
       </nav>
 
       <div class="navRight">
-        <a class="navcta" href="#examples">Ver ejemplos</a>
-        <a class="navctaPrimary" id="nav-wa" href="#" target="_blank" rel="noopener">Agendar diagnóstico</a>
+        <a class="btn" href="#entregables">Ver entregables</a>
+        <a class="btn btnPrimary" id="cta-nav" href="#" target="_blank" rel="noopener">Agendar diagnóstico</a>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
-  <section id="home" class="hero">
+  <section id="home" class="hero" aria-label="Portada Prisma BI">
     <div class="heroBg" aria-hidden="true"></div>
+    <div class="heroStars" aria-hidden="true"></div>
+
     <canvas id="net" class="netCanvas" aria-hidden="true"></canvas>
-    <div class="heroOverlay" aria-hidden="true"></div>
-    <div class="heroWave" aria-hidden="true"></div>
+    <div class="heroVignette" aria-hidden="true"></div>
 
     <div class="container heroGrid">
-      <!-- Texto -->
       <div>
         <div class="pill"><i></i> CONTROL · GOBIERNO · CONFIANZA</div>
 
-        <h1>Cuando los números cambian según quién los mire, la empresa pierde <span class="accent">dirección</span>.</h1>
+        <h1>
+          Cuando los números cambian según quién los mire,<br>
+          la empresa pierde <span class="accent">dirección</span>.
+        </h1>
 
         <p class="lede">
-          Prisma BI acompaña a PyMEs y empresas a ordenar datos (Excel, ERP, sistemas, ventas, costos)
-          y convertirlos en una <strong>lectura ejecutiva clara</strong>: qué pasa, por qué pasa y qué acción mueve el resultado.
+          <strong>Prisma BI</strong> acompaña a PyMEs y empresas a ordenar datos (Excel, ERP, sistemas, ventas, costos)
+          y convertirlos en una lectura ejecutiva clara:
+          <strong>qué pasa</strong>, <strong>por qué pasa</strong> y <strong>qué acción mueve el resultado</strong>.
         </p>
 
         <div class="ctaRow">
-          <a class="btnPrimary" id="cta-wa" href="#" target="_blank" rel="noopener" aria-label="Agendar diagnóstico por WhatsApp">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M20.52 3.48A11.79 11.79 0 0 0 12.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L0 24l6.29-1.73a11.87 11.87 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.18-3.47-8.35ZM12.07 21.5h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.73 1.03 1-3.64-.23-.37a9.78 9.78 0 1 1 18.1-5.17c0 5.39-4.39 9.78-9.78 9.78Z"/>
-            </svg>
-            Agendar diagnóstico (20 min)
-          </a>
-
-          <a class="btnSecondary" href="#services">Ver servicios →</a>
+          <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener">Agendar diagnóstico (20 min)</a>
+          <a class="btn" href="#entregables">Ver entregables →</a>
         </div>
 
         <ul class="bullets">
-          <li><span class="check"></span> <span><strong>KPI con definición única</strong> (glosario + fórmula + fuente): todos miran la misma verdad.</span></li>
-          <li><span class="check"></span> <span><strong>Control (QA)</strong>: alertas, consistencia y validaciones para decidir con confianza.</span></li>
-          <li><span class="check"></span> <span><strong>Rutina ejecutiva</strong>: responsables por área, seguimiento semanal y decisiones consistentes.</span></li>
+          <li><span class="check"></span><span><strong>KPI con definición única</strong> (glosario + fórmula + fuente): todos miran la misma verdad.</span></li>
+          <li><span class="check"></span><span><strong>Control (QA)</strong>: alertas, consistencia y validaciones para decidir con confianza.</span></li>
+          <li><span class="check"></span><span><strong>Rutina ejecutiva</strong>: responsables por área, seguimiento semanal y decisiones consistentes.</span></li>
         </ul>
       </div>
 
-      <!-- Panel derecho (como tu ejemplo) -->
-      <div class="heroPanelWrap">
-        <div class="heroPanel" role="note" aria-label="Checklist de control (ejemplo)">
-          <div class="panelHead">
-            <h3>Checklist de control (ejemplo)</h3>
-            <span class="tag">Lectura en 5 minutos</span>
+      <div>
+        <div class="glassCard" role="note" aria-label="Checklist de control">
+          <div class="glassTop">
+            <b>Checklist de control (ejemplo)</b>
+            <span class="badge"><span class="dot"></span> Lectura en 5 minutos</span>
           </div>
 
-          <div class="panelGrid">
-            <div class="miniCard">
-              <p class="t">Definición KPI única</p>
-              <p class="d">OK • Glosario + fórmula</p>
+          <div class="grid2">
+            <div class="miniBox">
+              <b>Definición KPI única</b>
+              <span>OK · Glosario + fórmula</span>
             </div>
-            <div class="miniCard">
-              <p class="t">Fuente de verdad</p>
-              <p class="d">SQL / DW • Modelo claro</p>
+            <div class="miniBox">
+              <b>Fuente de verdad</b>
+              <span>SQL / DW · Modelo claro</span>
             </div>
-            <div class="miniCard">
-              <p class="t">Refresco & alertas</p>
-              <p class="d">Automatizado • QA</p>
+            <div class="miniBox">
+              <b>Refresco & alertas</b>
+              <span>Automatizado · QA</span>
             </div>
-            <div class="miniCard">
-              <p class="t">Rutina ejecutiva</p>
-              <p class="d">Semanal • Por área</p>
+            <div class="miniBox">
+              <b>Rutina ejecutiva</b>
+              <span>Semanal · Por área</span>
             </div>
           </div>
 
-          <div class="panelFoot">
+          <div class="resultStrip">
             Resultado: dirección decide con el mismo mapa. Menos discusiones. Más acciones.
           </div>
         </div>
@@ -791,42 +754,78 @@
 
   <div class="sep"></div>
 
-  <!-- SERVICIOS -->
-  <section id="services" class="sec">
+  <!-- VIDEO (centrado) -->
+  <section class="sec" aria-label="Presentación en video">
     <div class="container">
-      <h2 class="sectionTitle">Servicios</h2>
+      <h2 class="sectionTitle">No se entrega un dashboard. Se entrega dirección.</h2>
       <p class="sectionLead">
-        No vendo “un tablero”. Instalo <strong>criterio</strong>: un sistema de medición para que la empresa deje de discutir números y empiece a decidir.
+        El tablero es el “envase”. Lo valioso es lo que desbloquea:
+        <strong>orden</strong>, <strong>control</strong> y una lectura simple para decidir sin adivinar.
+      </p>
+
+      <div class="videoWrap">
+        <div class="video">
+          <!-- Opción A: YouTube/Vimeo (recomendado) -->
+          <!-- Reemplazá VIDEO_ID por el tuyo cuando lo tengas -->
+          <iframe
+            title="Video presentación Prisma BI"
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+
+          <!-- Opción B: Video local (si lo subís a assets/brand/presentacion.mp4)
+          <video controls playsinline poster="assets/brand/video-poster.jpg">
+            <source src="assets/brand/presentacion.mp4" type="video/mp4"/>
+          </video>
+          -->
+        </div>
+        <div class="videoHint">
+          Tip: un video de 40–60s convierte muchísimo. Abajo te dejo el guion listo.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- ENTREGABLES -->
+  <section id="entregables" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Entregables</h2>
+      <p class="sectionLead">
+        Lo que recibe la empresa no es “un reporte bonito”.
+        Recibe un sistema para mirar lo mismo, detectar desvíos y tomar decisiones con criterio.
       </p>
 
       <div class="grid3">
         <div class="card">
-          <div class="kicker"><span class="dot"></span> Diagnóstico ejecutivo</div>
-          <p class="small">Aterrizamos el problema real y definimos qué mirar (y qué ignorar).</p>
+          <div class="kicker"><span class="kDot"></span> Tablero ejecutivo (Dirección)</div>
+          <p class="small">Ventas · costos · rentabilidad, con lectura rápida para decidir.</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Decisiones clave (dirección, comercial, finanzas).</span></li>
-            <li><span class="miniCheck"></span><span>KPIs con definición simple + fórmula.</span></li>
-            <li><span class="miniCheck"></span><span>Plan de tablero por prioridad (impacto vs esfuerzo).</span></li>
+            <li><span class="miniCheck"></span><span>KPIs + tendencias + cortes por producto/cliente/zona/tiempo.</span></li>
+            <li><span class="miniCheck"></span><span>Señales claras: qué sube, qué cae y dónde actuar primero.</span></li>
+            <li><span class="miniCheck"></span><span>Diseño “para dirección”: simple, contundente, accionable.</span></li>
           </ul>
         </div>
 
         <div class="card">
-          <div class="kicker"><span class="dot"></span> Dashboards ejecutivos (Power BI)</div>
-          <p class="small">Lectura rápida: qué pasa, por qué pasa y qué acción mueve el resultado.</p>
+          <div class="kicker"><span class="kDot"></span> Definiciones (Glosario KPI)</div>
+          <p class="small">Cuando una métrica cambia según quién la calcule, la empresa pierde control.</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Ventas, costos, margen y rentabilidad.</span></li>
-            <li><span class="miniCheck"></span><span>Cortes por producto / cliente / zona / período.</span></li>
-            <li><span class="miniCheck"></span><span>Ronda de ajustes: queda “listo para dirección”.</span></li>
+            <li><span class="miniCheck"></span><span>Definición + fórmula + fuente para cada KPI.</span></li>
+            <li><span class="miniCheck"></span><span>Reglas de negocio: netos, devoluciones, descuentos, margen, etc.</span></li>
+            <li><span class="miniCheck"></span><span>Una sola verdad para todos los equipos.</span></li>
           </ul>
         </div>
 
         <div class="card">
-          <div class="kicker"><span class="dot"></span> Orden + Control de datos (QA)</div>
-          <p class="small">Tu ERP guarda datos. Nosotros los volvemos consistentes para que todos midan igual.</p>
+          <div class="kicker"><span class="kDot"></span> Control & QA (confianza)</div>
+          <p class="small">Sin control, todo “parece” correcto… hasta que no cierra.</p>
           <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Unificación de fuentes (Excel / sistema / eCommerce).</span></li>
-            <li><span class="miniCheck"></span><span>Reglas de negocio (mismo criterio siempre).</span></li>
-            <li><span class="miniCheck"></span><span>Validaciones: duplicados, nulos, totales que no cierran.</span></li>
+            <li><span class="miniCheck"></span><span>Validaciones: duplicados, nulos, totales, cortes por período.</span></li>
+            <li><span class="miniCheck"></span><span>Alertas (si algo se rompe, se ve).</span></li>
+            <li><span class="miniCheck"></span><span>Rutina semanal: mirar, entender, decidir, ajustar.</span></li>
           </ul>
         </div>
       </div>
@@ -836,65 +835,34 @@
   <div class="sep"></div>
 
   <!-- MÉTODO -->
-  <section id="method" class="sec">
+  <section id="metodo" class="sec">
     <div class="container">
       <h2 class="sectionTitle">Cómo se trabaja</h2>
-      <p class="sectionLead">Primero claridad. Después tablero. Al final: rutina de decisión que se sostiene.</p>
+      <p class="sectionLead">
+        Claridad primero. Implementación después. Adopción real al final.
+        Lo que no se usa, no sirve.
+      </p>
 
       <div class="steps">
         <div class="step">
           <div class="n">1</div>
-          <p class="t">Diagnóstico</p>
-          <p class="d">Qué decisión está trabada y dónde se pierde margen/tiempo hoy.</p>
+          <p class="t">Diagnóstico (20–40 min)</p>
+          <p class="d">Se entiende la decisión que duele hoy: margen, costos, ventas, stock, caja.</p>
         </div>
         <div class="step">
           <div class="n">2</div>
-          <p class="t">KPIs con criterio único</p>
-          <p class="d">Definición + fórmula + fuente. Se termina el “cada uno lo calcula distinto”.</p>
+          <p class="t">Marco de medición</p>
+          <p class="d">KPIs + definiciones + fuentes. Se elimina la discusión. Queda el criterio.</p>
         </div>
         <div class="step">
           <div class="n">3</div>
-          <p class="t">Tablero ejecutivo</p>
-          <p class="d">Diseñado para leer en minutos: tendencia, drivers y foco de acción.</p>
+          <p class="t">Implementación</p>
+          <p class="d">Tablero + estructura de datos + controles para que los números sean confiables.</p>
         </div>
         <div class="step">
           <div class="n">4</div>
-          <p class="t">Rutina</p>
-          <p class="d">Seguimiento semanal por área y decisiones consistentes (adopción real).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- EJEMPLOS -->
-  <section id="examples" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Ejemplos</h2>
-      <p class="sectionLead">Demos para mostrar el estilo de lectura (y el nivel de terminación).</p>
-
-      <!-- Cambiá las imágenes por las tuyas (o screenshots de Power BI exportados) -->
-      <div class="gallery">
-        <div class="shot">
-          <img src="assets/examples/executive-1.jpg" alt="Dashboard ejecutivo — overview">
-          <div class="cap">Executive Overview</div>
-          <div class="sub">KPIs + tendencia + drivers</div>
-        </div>
-        <div class="shot">
-          <img src="assets/examples/time-1.jpg" alt="Dashboard — tendencias">
-          <div class="cap">Time Trends</div>
-          <div class="sub">MoM / YoY / estacionalidad</div>
-        </div>
-        <div class="shot">
-          <img src="assets/examples/shipping-1.jpg" alt="Dashboard — operaciones">
-          <div class="cap">Operaciones</div>
-          <div class="sub">Lead time, servicio, costos</div>
-        </div>
-        <div class="shot">
-          <img src="assets/examples/marketing-1.jpg" alt="Dashboard — marketing">
-          <div class="cap">Marketing</div>
-          <div class="sub">Spend vs conversión vs margen</div>
+          <p class="t">Rutina ejecutiva</p>
+          <p class="d">Acompañamiento para lectura semanal: qué mirar y qué acción mover primero.</p>
         </div>
       </div>
     </div>
@@ -903,114 +871,88 @@
   <div class="sep"></div>
 
   <!-- CLIENTES -->
-  <section id="clients" class="sec">
+  <section id="clientes" class="sec">
     <div class="container">
       <h2 class="sectionTitle">Clientes</h2>
-      <p class="sectionLead">Experiencia con PyMEs y equipos que necesitan lectura ejecutiva consistente.</p>
+      <p class="sectionLead">
+        Si todavía no tenés logos propios, podés dejar esta sección como
+        “Empresas con las que se trabajó / sectores” y reemplazar cuando tengas permisos.
+      </p>
 
-      <!-- Reemplazá por logos reales -->
-      <div class="logos">
-        <div class="logoTile"><img src="assets/clients/logo1.png" alt="Cliente 1"></div>
-        <div class="logoTile"><img src="assets/clients/logo2.png" alt="Cliente 2"></div>
-        <div class="logoTile"><img src="assets/clients/logo3.png" alt="Cliente 3"></div>
-        <div class="logoTile"><img src="assets/clients/logo4.png" alt="Cliente 4"></div>
-        <div class="logoTile"><img src="assets/clients/logo5.png" alt="Cliente 5"></div>
+      <div class="marquee" aria-label="Logos en movimiento">
+        <div class="fadeL" aria-hidden="true"></div>
+        <div class="fadeR" aria-hidden="true"></div>
+
+        <!-- Duplicamos la lista para loop perfecto -->
+        <div class="track">
+          <!-- Reemplazá por tus logos reales en assets/logos/ -->
+          <img class="logo" src="assets/logos/logo1.png" alt="Cliente 1">
+          <img class="logo" src="assets/logos/logo2.png" alt="Cliente 2">
+          <img class="logo" src="assets/logos/logo3.png" alt="Cliente 3">
+          <img class="logo" src="assets/logos/logo4.png" alt="Cliente 4">
+          <img class="logo" src="assets/logos/logo5.png" alt="Cliente 5">
+          <img class="logo" src="assets/logos/logo6.png" alt="Cliente 6">
+
+          <img class="logo" src="assets/logos/logo1.png" alt="Cliente 1">
+          <img class="logo" src="assets/logos/logo2.png" alt="Cliente 2">
+          <img class="logo" src="assets/logos/logo3.png" alt="Cliente 3">
+          <img class="logo" src="assets/logos/logo4.png" alt="Cliente 4">
+          <img class="logo" src="assets/logos/logo5.png" alt="Cliente 5">
+          <img class="logo" src="assets/logos/logo6.png" alt="Cliente 6">
+        </div>
       </div>
     </div>
   </section>
 
   <div class="sep"></div>
 
-  <!-- OPINIONES (Google + estrellas como tu ejemplo) -->
-  <section id="reviews" class="sec">
+  <!-- OPINIONES -->
+  <section id="opiniones" class="sec">
     <div class="container">
       <h2 class="sectionTitle">Opiniones</h2>
-      <p class="sectionLead">Confianza no se declara: se prueba.</p>
+      <p class="sectionLead">
+        Si no tenés reseñas en Google, no lo nombremos.
+        Poné “Opiniones” como testimonios reales (cuando existan) o feedback de proyectos.
+      </p>
 
-      <div class="reviewsHead">
-        <div class="badge">
-          <span style="letter-spacing:.08em;">EXCELENTE</span>
-          <span class="stars" aria-label="5 estrellas">
-            <!-- 5 estrellas -->
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFD54A" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFD54A" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFD54A" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFD54A" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFD54A" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-          </span>
+      <div class="slider" aria-label="Opiniones deslizables">
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“Ahora discutimos menos y decidimos más.”</b>
+          <p>La dirección dejó de pelear por números. Quedó una sola definición y se ve el margen real por producto.</p>
         </div>
-
-        <div class="gRow">
-          <span>A base de <span id="reviews-count">112</span> reseñas</span>
-          <!-- Logo Google (SVG simple, sin archivos externos) -->
-          <svg class="gLogo" viewBox="0 0 256 262" aria-label="Google">
-            <path fill="#4285F4" d="M255.9 133.5c0-10.9-.9-18.9-2.9-27.3H130.6v51.6h71.9c-1.5 12.9-9.6 32.3-27.5 45.4l-.3 1.7 38.7 30 2.7.3c24.7-22.8 39-56.4 39-101.7"/>
-            <path fill="#34A853" d="M130.6 261.1c35.2 0 64.8-11.6 86.4-31.5l-41.1-31.9c-11 7.7-25.8 13.1-45.3 13.1-34.5 0-63.8-22.8-74.2-54.4l-1.6.1-40.4 31.1-.6 1.5c21.4 42.4 65.3 72 116.8 72"/>
-            <path fill="#FBBC05" d="M56.4 156.4c-2.7-8-4.3-16.6-4.3-25.5s1.6-17.5 4.2-25.5l-.1-1.7-41-31.6-1.3.6C5.2 90.1 0 109.7 0 130.9s5.2 40.8 13.9 58.2l42.5-32.7"/>
-            <path fill="#EA4335" d="M130.6 50.9c24.6 0 41.2 10.6 50.7 19.5l37-35.9C195.3 12.8 165.8 0 130.6 0 79.2 0 35.3 29.6 13.9 73l42.4 32.4c10.5-31.6 39.8-54.5 74.3-54.5"/>
-          </svg>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“Por fin sabemos qué mover primero.”</b>
+          <p>Antes era intuición. Ahora el tablero muestra qué línea sostiene el resultado y dónde se está yendo la rentabilidad.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“El control nos dio confianza.”</b>
+          <p>Con QA y alertas se terminaron los cierres “que no cierran”. Los números empezaron a ser confiables.</p>
         </div>
       </div>
 
-      <div class="reviewGrid">
-        <div class="review">
-          <div class="who">
-            <div class="avatar">S</div>
-            <div>
-              <div class="name">Sofía Morales</div>
-              <div class="date">31/08/2025</div>
-            </div>
-          </div>
-          <p>Orden y claridad. Calidez y profesionalismo. Bajó el ruido y pude accionar.</p>
-        </div>
-        <div class="review">
-          <div class="who">
-            <div class="avatar">L</div>
-            <div>
-              <div class="name">Lucas R.</div>
-              <div class="date">12/09/2025</div>
-            </div>
-          </div>
-          <p>Herramientas prácticas y avances desde el inicio. Se entiende qué mirar y por qué.</p>
-        </div>
-        <div class="review">
-          <div class="who">
-            <div class="avatar">C</div>
-            <div>
-              <div class="name">Carla P.</div>
-              <div class="date">22/08/2025</div>
-            </div>
-          </div>
-          <p>Acompañamiento cálido y profesional. Se nota el criterio detrás de cada KPI.</p>
-        </div>
-        <div class="review">
-          <div class="who">
-            <div class="avatar">A</div>
-            <div>
-              <div class="name">Ale Jerez</div>
-              <div class="date">29/06/2024</div>
-            </div>
-          </div>
-          <p>Muy buena escucha y seguimiento. Me ayudó a ordenar y actuar con claridad.</p>
-        </div>
-      </div>
+      <p class="sectionLead" style="margin-top:18px;max-width:86ch">
+        Consejo pro: cuando tengas reseñas reales, sumamos “Google Business Profile” y un bloque con rating real (sin inventar).
+      </p>
     </div>
   </section>
 
   <div class="sep"></div>
 
   <!-- CONTACTO -->
-  <section id="contact" class="sec">
+  <section id="contacto" class="sec">
     <div class="container">
       <h2 class="sectionTitle">Contacto</h2>
       <p class="sectionLead">
-        Si querés, lo vemos en 20 minutos: qué estás midiendo hoy, dónde se te mezcla todo y qué KPI te falta para decidir mejor.
+        Diagnóstico inicial, sin presión. Si hay ajuste, Prisma BI lo dice. Si no lo hay, también.
       </p>
 
       <div class="contactGrid">
         <div class="cBox">
           <p class="t">Ubicación</p>
-          <p class="v">Neuquén, Argentina (UTC-3) · Trabajo remoto LATAM</p>
+          <p class="v">Argentina (UTC-3) · Remoto LATAM</p>
         </div>
         <div class="cBox">
           <p class="t">WhatsApp</p>
@@ -1025,244 +967,284 @@
           <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">/in/daiana-beltran</a></p>
         </div>
       </div>
+
+      <!-- Form (sin backend: podés conectar Formspree o similar) -->
+      <form class="form" action="#" method="post" aria-label="Formulario de contacto">
+        <input class="input" type="text" name="nombre" placeholder="Nombre" required>
+        <input class="input" type="text" name="empresa" placeholder="Empresa / Rubro" required>
+        <input class="input" type="email" name="email" placeholder="Email" required>
+        <input class="input" type="text" name="fuente" placeholder="Datos hoy: Excel / ERP / Sistema / eCommerce">
+        <textarea class="input" name="mensaje" placeholder="¿Qué decisión te está costando hoy? (margen, costos, ventas, stock, caja…)" required></textarea>
+        <div class="sendRow">
+          <button class="btn btnPrimary" type="button" id="send-whatsapp">Enviar por WhatsApp</button>
+        </div>
+      </form>
+
+      <p class="sectionLead" style="margin-top:18px">
+        Respuesta rápida por WhatsApp. Si preferís, también podés escribir por email.
+      </p>
     </div>
   </section>
 
   <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
 
   <script>
-    // Año
+    /* ===== Año ===== */
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Smooth scroll
+    /* ===== Smooth scroll ===== */
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{
         const href = a.getAttribute('href');
         if(!href || href.length < 2) return;
-        const id = href.slice(1);
-        const el = document.getElementById(id);
+        const el = document.querySelector(href);
         if(!el) return;
         e.preventDefault();
-        const offset = 78;
-        window.scrollTo({top: el.getBoundingClientRect().top + scrollY - offset, behavior:'smooth'});
+        const top = el.getBoundingClientRect().top + scrollY - 110;
+        window.scrollTo({top, behavior:'smooth'});
       });
     });
 
-    // WhatsApp (tel correcto + mensaje pro)
+    /* ===== WhatsApp links ===== */
     (function(){
-      const phone = "542996032267"; // +54 299 6 032 267
+      const phone = "542996032267";
       const msg =
-        "¡Hola Daiana! 👋 Vi Prisma BI y quiero agendar un diagnóstico (20 min).\n\n" +
-        "1) Mi negocio / rubro: ____\n" +
-        "2) Decisión más importante hoy: ____\n" +
-        "3) Qué no puedo ver con claridad: ____\n" +
-        "4) Fuentes de datos: (Excel / sistema / ERP / eCommerce / etc.) ____\n" +
-        "5) Plazo ideal: ____\n\n" +
+        "¡Hola Daiana! 👋 Quiero agendar un diagnóstico (20 min).\n\n" +
+        "Empresa/Rubro: ____\n" +
+        "Decisión más importante hoy: ____\n" +
+        "Qué no se ve con claridad: ____\n" +
+        "Datos hoy (Excel/ERP/sistema/eCommerce): ____\n" +
+        "Plazo ideal: ____\n\n" +
         "¿Qué horario te queda mejor?";
       const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
 
-      ["cta-wa","wa-link","nav-wa","top-wa"].forEach(id=>{
+      ["cta-top","cta-nav","cta-hero","wa-link"].forEach(id=>{
         const el = document.getElementById(id);
         if(el) el.href = url;
       });
+
+      const sendBtn = document.getElementById("send-whatsapp");
+      if(sendBtn){
+        sendBtn.addEventListener("click", ()=>{
+          window.open(url, "_blank", "noopener");
+        });
+      }
     })();
 
-    // RED NEURONAL / PARTICLES (hover + brillo + líneas)
+    /* ===== Nav active state (pro) ===== */
     (function(){
-      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduceMotion) return;
+      const links = Array.from(document.querySelectorAll('.menu a'));
+      const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      if(!sections.length) return;
 
-      const canvas = document.getElementById("net");
-      const ctx = canvas.getContext("2d", { alpha:true });
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            links.forEach(l=>l.classList.remove('active'));
+            const id = '#'+entry.target.id;
+            const active = links.find(l=>l.getAttribute('href')===id);
+            if(active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.02 });
 
-      let W=0,H=0,DPR=1;
-      let nodes = [];
-      let mouse = { x:-9999, y:-9999, down:false };
-      let t = 0;
+      sections.forEach(s=>io.observe(s));
+    })();
 
+    /* ===== NET CANVAS (Overdata-like, brillante) ===== */
+    (function(){
+      const c = document.getElementById("net");
+      if(!c) return;
+      const ctx = c.getContext("2d", { alpha: true });
+
+      const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(prefersReduce) return;
+
+      let W=0,H=0,DPR=1, nodes=[], raf=0;
+      const pointer = { x: 0, y: 0, active: false };
+
+      /* ✅ Config: más visible la red (tu pedido) */
       const cfg = {
-        density: 52000,            // menor = más nodos
-        maxDPR: 2,
-        nodeMin: 60,               // base mínima
-        nodeMax: 140,              // techo
-        linkDist: 140,
-        mouseDist: 190,
-        speed: 0.35,
-        sparkleChance: 0.020,
-        lineAlpha: 0.16,
-        nodeAlpha: 0.55
+        base: 54,                 // densidad base
+        density: 52000,           // menor => más nodos
+        maxDist: 150,             // distancia de conexión
+        speed: 0.35,              // movimiento
+        nodeRadius: 1.2,
+        nodeAlpha: 0.95,
+        lineAlpha: 0.20,          // ✅ tu pedido
+        glow: true,
+        glowStrength: 18,         // brillo
+        attract: 0.020            // interacción con mouse
       };
 
-      function clamp(n,a,b){ return Math.max(a, Math.min(b,n)); }
-      function rnd(a,b){ return a + Math.random()*(b-a); }
-
       function resize(){
-        const rect = canvas.getBoundingClientRect();
-        DPR = Math.min(cfg.maxDPR, window.devicePixelRatio || 1);
-        W = Math.floor(rect.width);
-        H = Math.floor(rect.height);
-        canvas.width = Math.floor(W * DPR);
-        canvas.height = Math.floor(H * DPR);
+        const r = c.parentElement.getBoundingClientRect();
+        DPR = Math.min(2, window.devicePixelRatio || 1);
+        W = Math.max(1, Math.floor(r.width));
+        H = Math.max(1, Math.floor(r.height));
+        c.width = Math.floor(W*DPR);
+        c.height = Math.floor(H*DPR);
+        c.style.width = W+"px";
+        c.style.height = H+"px";
         ctx.setTransform(DPR,0,0,DPR,0,0);
 
-        const count = clamp(Math.floor(cfg.nodeMin + (W*H)/cfg.density), cfg.nodeMin, cfg.nodeMax);
-        nodes = new Array(count).fill(0).map(() => ({
+        const count = Math.floor(cfg.base + (W*H)/cfg.density);
+        nodes = new Array(count).fill(0).map(()=>({
           x: Math.random()*W,
           y: Math.random()*H,
-          vx: rnd(-cfg.speed, cfg.speed),
-          vy: rnd(-cfg.speed, cfg.speed),
-          r: rnd(1.2, 2.1),
-          tw: rnd(0.6, 1.0),   // twinkle
-          sp: 0               // sparkle power
+          vx: (Math.random()*2-1)*cfg.speed,
+          vy: (Math.random()*2-1)*cfg.speed
         }));
       }
 
-      function onMove(e){
-        const r = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - r.left;
-        mouse.y = e.clientY - r.top;
+      function onPointerMove(e){
+        const rect = c.getBoundingClientRect();
+        pointer.x = e.clientX - rect.left;
+        pointer.y = e.clientY - rect.top;
+        pointer.active = true;
       }
+      function onPointerLeave(){ pointer.active = false; }
 
-      function onLeave(){
-        mouse.x = -9999; mouse.y = -9999;
-      }
+      window.addEventListener("resize", resize, { passive:true });
+      window.addEventListener("mousemove", onPointerMove, { passive:true });
+      window.addEventListener("mouseleave", onPointerLeave, { passive:true });
+      window.addEventListener("touchstart", (e)=>{
+        if(!e.touches || !e.touches[0]) return;
+        onPointerMove(e.touches[0]);
+      }, { passive:true });
+      window.addEventListener("touchmove", (e)=>{
+        if(!e.touches || !e.touches[0]) return;
+        onPointerMove(e.touches[0]);
+      }, { passive:true });
+      window.addEventListener("touchend", onPointerLeave, { passive:true });
 
-      window.addEventListener("resize", resize, {passive:true});
-      canvas.addEventListener("mousemove", onMove, {passive:true});
-      canvas.addEventListener("mouseleave", onLeave, {passive:true});
-      canvas.addEventListener("mousedown", ()=> mouse.down=true, {passive:true});
-      window.addEventListener("mouseup", ()=> mouse.down=false, {passive:true});
-
+      // Spatial hash (performance)
       function draw(){
-        t += 0.016;
-
-        // fondo transparente (el overlay lo hace el CSS)
         ctx.clearRect(0,0,W,H);
 
-        // mover nodos
-        for(const n of nodes){
-          // leve ruido/respiración
-          n.x += n.vx + Math.sin(t*0.7 + n.tw*10)*0.03;
-          n.y += n.vy + Math.cos(t*0.6 + n.tw*12)*0.03;
-
-          // rebote
-          if(n.x < -10) n.x = W + 10;
-          if(n.x > W + 10) n.x = -10;
-          if(n.y < -10) n.y = H + 10;
-          if(n.y > H + 10) n.y = -10;
-
-          // sparkle aleatorio
-          if(Math.random() < cfg.sparkleChance) n.sp = 1;
-          n.sp *= 0.92;
+        // glow
+        if(cfg.glow){
+          ctx.shadowColor = "rgba(42,212,255,.35)";
+          ctx.shadowBlur = cfg.glowStrength;
+        } else {
+          ctx.shadowBlur = 0;
         }
 
-        // líneas (pares cercanos)
+        // update nodes
+        for(const n of nodes){
+          if(pointer.active){
+            const dx = pointer.x - n.x;
+            const dy = pointer.y - n.y;
+            const d2 = dx*dx + dy*dy;
+            if(d2 < 220*220){
+              n.vx += dx * cfg.attract / 220;
+              n.vy += dy * cfg.attract / 220;
+            }
+          }
+
+          n.x += n.vx;
+          n.y += n.vy;
+
+          if(n.x < 0 || n.x > W) n.vx *= -1;
+          if(n.y < 0 || n.y > H) n.vy *= -1;
+
+          // keep inside
+          n.x = Math.max(0, Math.min(W, n.x));
+          n.y = Math.max(0, Math.min(H, n.y));
+        }
+
+        // grid buckets
+        const cell = cfg.maxDist;
+        const cols = Math.ceil(W/cell);
+        const rows = Math.ceil(H/cell);
+        const buckets = new Array(cols*rows);
+        for(let i=0;i<buckets.length;i++) buckets[i]=[];
+        for(const n of nodes){
+          const cx = Math.floor(n.x/cell);
+          const cy = Math.floor(n.y/cell);
+          buckets[cx + cy*cols].push(n);
+        }
+
+        // lines
         ctx.lineWidth = 1;
-
-        for(let i=0;i<nodes.length;i++){
-          const a = nodes[i];
-
-          // distancia al mouse (para “armar/desarmar”)
-          const dxm = a.x - mouse.x;
-          const dym = a.y - mouse.y;
-          const dm = Math.hypot(dxm, dym);
-
-          for(let j=i+1;j<nodes.length;j++){
-            const b = nodes[j];
-            const dx = a.x - b.x;
-            const dy = a.y - b.y;
-            const d = Math.hypot(dx, dy);
-
-            const base = cfg.linkDist;
-            // cerca del mouse se “activa” más
-            const boost = (dm < cfg.mouseDist || Math.hypot(b.x-mouse.x,b.y-mouse.y) < cfg.mouseDist) ? 1.35 : 1.0;
-            const limit = base * boost;
-
-            if(d < limit){
-              const p = 1 - (d/limit);
-
-              // color gradiente sutil (azul->cian->teal)
-              // (sin hardcodear colores en cada segmento, usamos rgba con mezcla)
-              const aMix = 0.55 + 0.45*Math.sin((a.x/W)*Math.PI);
-              const alpha = (cfg.lineAlpha * p) * (0.7 + 0.3*(a.sp + b.sp));
-
-              // mezcla aproximada entre azul/cian/teal
-              const r = Math.floor(30 + 12*aMix);
-              const g = Math.floor(124 + 70*(1-aMix));
-              const bl = Math.floor(255 - 10*aMix);
-
-              ctx.strokeStyle = `rgba(${r},${g},${bl},${alpha})`;
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.stroke();
-
-              // destello puntual en intersecciones cercanas al mouse
-              if(mouse.down && dm < 140 && Math.random() < 0.03){
-                ctx.fillStyle = `rgba(42,212,255,${0.35*p})`;
-                ctx.beginPath();
-                ctx.arc((a.x+b.x)/2, (a.y+b.y)/2, 1.6 + 2.6*p, 0, Math.PI*2);
-                ctx.fill();
+        for(let cy=0;cy<rows;cy++){
+          for(let cx=0;cx<cols;cx++){
+            const b = buckets[cx + cy*cols];
+            for(const n of b){
+              for(let oy=-1;oy<=1;oy++){
+                for(let ox=-1;ox<=1;ox++){
+                  const nx = cx+ox, ny = cy+oy;
+                  if(nx<0||ny<0||nx>=cols||ny>=rows) continue;
+                  const b2 = buckets[nx + ny*cols];
+                  for(const m of b2){
+                    if(m===n) continue;
+                    const dx = n.x - m.x;
+                    const dy = n.y - m.y;
+                    const d = Math.sqrt(dx*dx + dy*dy);
+                    if(d < cfg.maxDist){
+                      const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
+                      // gradiente suave entre cyan y teal
+                      const g = ctx.createLinearGradient(n.x,n.y,m.x,m.y);
+                      g.addColorStop(0, `rgba(42,212,255,${a})`);
+                      g.addColorStop(1, `rgba(0,231,182,${a})`);
+                      ctx.strokeStyle = g;
+                      ctx.beginPath();
+                      ctx.moveTo(n.x,n.y);
+                      ctx.lineTo(m.x,m.y);
+                      ctx.stroke();
+                    }
+                  }
+                }
               }
             }
           }
         }
 
-        // nodos
+        // nodes
+        ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
         for(const n of nodes){
-          const dxm = n.x - mouse.x;
-          const dym = n.y - mouse.y;
-          const dm = Math.hypot(dxm, dym);
-
-          let a = cfg.nodeAlpha;
-          let rr = n.r;
-
-          // “se encienden” cerca del mouse
-          if(dm < cfg.mouseDist){
-            const p = 1 - dm/cfg.mouseDist;
-            a += 0.25*p;
-            rr += 1.2*p;
-          }
-
-          // sparkle
-          if(n.sp > 0.01){
-            a += 0.35*n.sp;
-            rr += 2.2*n.sp;
-          }
-
-          // color: blanco azulado suave
-          ctx.fillStyle = `rgba(244,248,255,${a})`;
+          ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
           ctx.beginPath();
-          ctx.arc(n.x, n.y, rr, 0, Math.PI*2);
+          ctx.arc(n.x,n.y,cfg.nodeRadius,0,Math.PI*2);
           ctx.fill();
-
-          // halo sutil en sparkle
-          if(n.sp > 0.1){
-            ctx.fillStyle = `rgba(42,212,255,${0.12*n.sp})`;
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, rr*3.2, 0, Math.PI*2);
-            ctx.fill();
-          }
         }
 
-        requestAnimationFrame(draw);
+        raf = requestAnimationFrame(draw);
       }
 
-      // Canvas necesita tamaño real (se basa en su caja)
-      // Lo hacemos con un micro-timeout para asegurar layout listo
-      setTimeout(()=>{
-        // Forzamos que el canvas ocupe el hero completo
-        const hero = document.querySelector('.hero');
-        const r = hero.getBoundingClientRect();
-        canvas.style.width = r.width + "px";
-        canvas.style.height = r.height + "px";
-        resize();
-        draw();
-      }, 0);
+      resize();
+      draw();
+
+      // safety
+      window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
     })();
   </script>
+
+  <!-- ====== GUION DE VIDEO (para Canva/CapCut) ======
+    Duración ideal: 45–60s. Música minimal + voz.
+    Estilo: plano, ejecutivo, sin humo.
+
+    [0–5s] (pantalla negra + red suave)
+    Texto: "Cuando los números cambian según quién los mire…"
+    Voz: "Cuando los números cambian según quién los mire, la empresa pierde dirección."
+
+    [5–18s] (grabación de pantalla: dashboard / KPIs)
+    Texto: "Una sola verdad. Un mapa claro."
+    Voz: "Prisma BI ordena datos de Excel, ERP y sistemas para convertirlos en lectura ejecutiva clara: qué pasa, por qué pasa y qué acción mueve el resultado."
+
+    [18–35s] (3 íconos / 3 bullets)
+    Texto:
+      1) "KPI único (definición + fórmula + fuente)"
+      2) "Control (QA) + alertas"
+      3) "Rutina semanal por área"
+    Voz: "Se definen KPIs con una sola fórmula y una sola fuente. Se agrega control y alertas. Y se instala una rutina semanal: responsables, seguimiento y decisiones consistentes."
+
+    [35–55s] (CTA)
+    Texto grande: "Orden. Control. Rentabilidad."
+    Sub: "Diagnóstico 20 min"
+    Voz: "No se entrega un dashboard: se entrega dirección. Si querés, agendemos un diagnóstico de 20 minutos."
+  =================================================== -->
+
 </body>
 </html>
-
-
 
