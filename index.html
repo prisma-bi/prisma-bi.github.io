@@ -1,1278 +1,376 @@
-<!-- ✅ PRISMA BI — Landing (1 archivo) con: red neuronal animada PRO + mejor contraste + Opiniones con Google -->
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Prisma BI — Dirección • Rentabilidad • Control</title>
-  <meta name="description" content="Prisma BI instala un sistema de lectura ejecutiva: KPIs con definición única, control de datos (QA) y rutina semanal por área para decidir con criterio y sin discusiones." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prisma BI | Dashboards que orientan decisiones</title>
+  <meta name="description" content="Consultoría en Data & Business Intelligence. SQL + Power BI + Excel para transformar datos dispersos en claridad ejecutiva." />
+  <meta name="theme-color" content="#0B1220" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Prisma BI | Dashboards que orientan decisiones" />
+  <meta property="og:description" content="SQL + Power BI + Excel para convertir datos dispersos en claridad ejecutiva." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts (Google) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b1220;
-      --ink:#0b1220;
-      --text:#0f172a;
-      --muted:#5b6475;
+      /* ===== Prisma BI (Base azul premium + acento naranja) ===== */
+      --bg: #0B1220;
+      --bg2:#07101F;
+      --card:#0F1B34;
+      --card2:#0D1730;
+      --line: rgba(255,255,255,.10);
 
-      --card:#ffffff;
-      --line:rgba(15,23,42,.10);
+      --txt:#EAF0FF;
+      --muted: rgba(234,240,255,.72);
 
-      --brand:#1d7dff;
-      --brand2:#15c7d2;
-      --shadow: 0 18px 50px rgba(2,6,23,.10);
+      --primary:#0B5FFF;    /* azul */
+      --cyan:#21D4FD;       /* cian tech */
+      --violet:#6A5BFF;     /* violeta sutil */
+      --cta:#FF7A00;        /* naranja CTA */
+      --cta2:#FF5A1F;       /* hover */
 
-      --r:18px;
-      --r2:24px;
-      --max:1160px;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --r: 18px;
+
+      --max: 1100px;
+      --pad: clamp(18px, 3.2vw, 34px);
     }
 
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:#fff}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
-
-    /* Top bar */
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      background:linear-gradient(90deg, rgba(29,125,255,.10), rgba(21,199,210,.10));
-      border-bottom:1px solid rgba(2,6,23,.06);
-      backdrop-filter: blur(10px);
-    }
-    .topbar .row{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:14px;padding:10px 0;
-    }
-    .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;
-      background:#fff;border:1px solid rgba(2,6,23,.08);
-      color:rgba(15,23,42,.78);font-size:13px
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--brand2);box-shadow:0 0 14px rgba(21,199,210,.65)}
-    .ctaTop{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
-      color:#fff;font-weight:800;border:0;cursor:pointer;
-      box-shadow: 0 14px 30px rgba(29,125,255,.22);
-      white-space:nowrap;
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--txt);
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(33,212,253,.12), transparent 55%),
+                  radial-gradient(900px 600px at 90% 20%, rgba(106,91,255,.12), transparent 55%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
     }
 
-    /* Header nav */
+    a{ color: inherit; text-decoration:none; }
+    .container{ width: min(var(--max), calc(100% - 2*var(--pad))); margin: 0 auto; }
+
+    /* ===== Header ===== */
     header{
-      background:#fff;
-      border-bottom:1px solid rgba(2,6,23,.06);
+      position: sticky;
+      top:0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.65);
+      border-bottom: 1px solid var(--line);
     }
     .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:14px;padding:14px 0;
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 18px;
+      padding: 14px 0;
     }
     .brand{
-      display:flex;align-items:center;gap:12px;min-width:220px
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
     }
     .logo{
-      width:42px;height:42px;border-radius:14px;
-      background: radial-gradient(circle at 30% 30%, rgba(21,199,210,.95), rgba(29,125,255,.95));
-      box-shadow: 0 16px 35px rgba(29,125,255,.22);
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      box-shadow: 0 10px 30px rgba(11,95,255,.25);
+      position:relative;
     }
-    .brand b{display:block;font-size:15px;letter-spacing:.3px}
-    .brand small{display:block;color:rgba(15,23,42,.6);font-weight:700;margin-top:2px}
+    .logo:after{
+      content:"";
+      position:absolute; inset:8px;
+      border-radius:8px;
+      background: linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.02));
+    }
 
-    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
-    nav a{font-weight:700;color:rgba(15,23,42,.78);font-size:14px}
-    nav a:hover{color:rgba(15,23,42,1)}
-    .navRight{display:flex;gap:10px;align-items:center}
+    .menu{
+      display:flex; align-items:center; gap: 18px;
+      font-weight:600; color: var(--muted);
+    }
+    .menu a{ padding:10px 10px; border-radius: 12px; }
+    .menu a:hover{ background: rgba(255,255,255,.06); color: var(--txt); }
+
+    .nav-right{ display:flex; align-items:center; gap: 10px; }
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:999px;
-      font-weight:800;font-size:14px;border:1px solid rgba(2,6,23,.10);
-      background:#fff;cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      transition: transform .15s ease, background .15s ease, border .15s ease, box-shadow .15s ease;
+      white-space: nowrap;
     }
-    .btn.primary{
-      border:0;color:#fff;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
-      box-shadow: 0 14px 30px rgba(29,125,255,.20);
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
+    .btn-cta{
+      border: none;
+      background: linear-gradient(135deg, var(--cta), var(--cta2));
+      color: #111;
+      box-shadow: 0 18px 40px rgba(255,122,0,.20);
     }
-    .burger{
-      display:none; width:42px;height:42px;border-radius:12px;
-      border:1px solid rgba(2,6,23,.10); background:#fff; cursor:pointer;
-      align-items:center;justify-content:center; flex-direction:column; gap:5px;
-    }
-    .burger span{width:18px;height:2px;background:rgba(15,23,42,.75);border-radius:2px}
+    .btn-cta:hover{ transform: translateY(-1px); filter: brightness(1.02); }
 
-    /* Mobile panel */
-    .panel{
-      display:none;
-      border-top:1px solid rgba(2,6,23,.06);
-      padding:12px 0;
-    }
-    .panel a{
-      display:block;padding:10px 0;font-weight:800;color:rgba(15,23,42,.82)
-    }
+    .burger{ display:none; }
 
-    /* HERO with animated network */
+    /* ===== Hero ===== */
     .hero{
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(1100px 520px at 20% 15%, rgba(29,125,255,.18), transparent 55%),
-        radial-gradient(900px 480px at 85% 35%, rgba(21,199,210,.18), transparent 55%),
-        linear-gradient(180deg, #f7fbff 0%, #ffffff 60%);
-      border-bottom:1px solid rgba(2,6,23,.06);
+      position: relative;
+      overflow: hidden;
+      padding: 60px 0 26px;
     }
-    .heroInner{
-      position:relative;
-      padding:34px 0 34px;
+    #net{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:2;
+    }
+    .heroOverlay{
+      position:absolute; inset:0; z-index:1;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,.20) 0%, rgba(0,0,0,.55) 70%);
     }
     .heroGrid{
+      position:relative; z-index:3;
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      align-items:stretch;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 26px;
+      align-items:center;
     }
-
-    /* Slider */
-    .slider{
-      position:relative;
-      min-height:380px;
-      border-radius:var(--r2);
-      box-shadow: var(--shadow);
-      background:#0b1220;
-      overflow:hidden;
-      border:1px solid rgba(2,6,23,.10);
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      color: rgba(234,240,255,.85);
+      font-weight:700;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      width: fit-content;
     }
-    .slide{
-      position:absolute; inset:0;
-      opacity:0; transform:translateX(10px);
-      transition: opacity .45s ease, transform .45s ease;
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: var(--cyan);
+      box-shadow: 0 0 18px rgba(33,212,253,.7);
     }
-    .slide.active{opacity:1; transform:translateX(0)}
-    .bg{
-      position:absolute; inset:0;
-      background-size:cover;background-position:center;
-      filter: saturate(1.05) contrast(1.05);
-      transform:scale(1.03);
-    }
-
-    /* ✅ Overlay para que NO quede gris y se LEA bien */
-    .overlay{
-      position:absolute; inset:0;
-      background:
-        radial-gradient(850px 520px at 20% 20%, rgba(255,255,255,.12), transparent 55%),
-        radial-gradient(700px 520px at 80% 35%, rgba(21,199,210,.10), transparent 60%),
-        linear-gradient(90deg, rgba(2,6,23,.80) 0%, rgba(2,6,23,.55) 55%, rgba(2,6,23,.35) 100%);
-    }
-
-    /* Neural network canvas */
-    #net{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      opacity:1;
-      mix-blend-mode: screen;
-      pointer-events:none;
-    }
-
-    .slideContent{
-      position:relative;
-      height:100%;
-      display:flex;
-      padding:26px;
-    }
-    .leftCol{
-      width:min(560px, 100%);
-      display:flex; flex-direction:column; gap:14px;
-      justify-content:center;
-    }
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 12px;border-radius:999px;
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.12);
-      color:rgba(255,255,255,.92);
-      font-weight:800;font-size:12px;letter-spacing:.4px;
-      width:max-content;
-    }
-    .h1{
-      margin:0;
-      font-size: clamp(30px, 3.8vw, 48px);
-      line-height:1.03;
-      color:#fff;
-      letter-spacing:-.6px;
-      text-shadow: 0 10px 30px rgba(0,0,0,.45);
-    }
-    .h1 .accent{
-      background: linear-gradient(135deg, #7dd3ff, #4ff1ff);
-      -webkit-background-clip:text;background-clip:text;
-      color:transparent;
-      text-shadow:none;
+    h1{
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 4.4vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      text-shadow: 0 18px 40px rgba(0,0,0,.55);
     }
     .lead{
-      margin:0;
-      color:rgba(255,255,255,.86);
-      font-size:15.5px;
-      line-height:1.55;
-      max-width:55ch;
-      text-shadow: 0 10px 30px rgba(0,0,0,.35);
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.4vw, 18px);
+      line-height: 1.6;
+      max-width: 56ch;
+    }
+    .heroActions{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 10px; }
+    .heroMini{
+      margin-top: 18px;
+      display:flex; gap: 14px; flex-wrap:wrap;
+      color: rgba(234,240,255,.78);
       font-weight:600;
+      font-size: 13px;
     }
-    .heroBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
-    .btnGhost{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:11px 14px;border-radius:999px;
-      font-weight:900;font-size:14px;border:1px solid rgba(255,255,255,.20);
-      background:rgba(255,255,255,.08);
-      color:#fff; cursor:pointer;
-      backdrop-filter: blur(8px);
-    }
-    .btnGhost:hover{background:rgba(255,255,255,.12)}
-    .heroProof{
-      margin-top:10px;
-      display:grid; gap:10px;
-    }
-    .proof{
-      display:flex;gap:10px;align-items:flex-start;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:16px;
-      padding:11px 12px;
-      backdrop-filter: blur(10px);
+    .heroMini span{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.09);
     }
     .check{
-      width:18px;height:18px;border-radius:6px;
-      background:rgba(34,197,94,.18);
-      border:1px solid rgba(34,197,94,.35);
-      box-shadow:0 0 18px rgba(34,197,94,.20);
-      position:relative; flex:0 0 auto; margin-top:2px;
+      width:18px; height:18px; border-radius:6px;
+      background: rgba(33,212,253,.18);
+      border: 1px solid rgba(33,212,253,.35);
+      display:inline-grid; place-items:center;
+      box-shadow: 0 0 16px rgba(33,212,253,.22);
+      font-size: 12px;
     }
-    .check:after{
-      content:""; position:absolute; inset:0;
-      background: radial-gradient(circle at 30% 30%, rgba(34,197,94,.85), transparent 60%);
-      opacity:.55;
-      border-radius:6px;
-    }
-    .proof b{display:block;color:#fff;font-size:13.5px}
-    .proof span{display:block;color:rgba(255,255,255,.80);font-size:13px;margin-top:2px;font-weight:600}
 
-    /* ✅ Checklist card: menos aglutinado */
     .heroCard{
-      position:relative;
-      background:rgba(255,255,255,.94);
-      border:1px solid rgba(255,255,255,.28);
-      border-radius:24px;
-      padding:18px;
-      box-shadow: 0 28px 70px rgba(2,6,23,.18);
-      overflow:hidden;
-      height:100%;
-      display:flex;flex-direction:column;gap:12px;
-      justify-content:center;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: 18px;
     }
-    .heroCard:before{
-      content:"";position:absolute;inset:-2px;
-      background:
-        radial-gradient(500px 280px at 20% 20%, rgba(29,125,255,.14), transparent 55%),
-        radial-gradient(460px 280px at 80% 40%, rgba(21,199,210,.14), transparent 55%);
-      pointer-events:none;
+    .heroCard h3{ margin: 0 0 10px; font-size: 16px; }
+    .stack{
+      display:flex; gap:10px; flex-wrap:wrap;
     }
-    .heroCardHeader{
-      position:relative;
-      display:flex;justify-content:space-between;align-items:center;gap:12px;
-      margin-bottom:2px;
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(11,95,255,.10);
+      border: 1px solid rgba(11,95,255,.22);
+      color: rgba(234,240,255,.9);
+      font-weight:700;
+      font-size: 13px;
     }
-    .heroCardHeader b{font-size:14px}
-    .miniPill{
-      background:rgba(29,125,255,.08);
-      border:1px solid rgba(29,125,255,.20);
-      color:rgba(15,23,42,.80);
-      padding:7px 10px;border-radius:999px;font-weight:900;font-size:12px;
-      white-space:nowrap;
+    .pill .mini{
+      width:10px; height:10px; border-radius:99px;
+      background: var(--primary);
+      box-shadow: 0 0 16px rgba(11,95,255,.5);
     }
-    .grid2{
-      position:relative;
+    .pill.cyan{ background: rgba(33,212,253,.10); border-color: rgba(33,212,253,.25); }
+    .pill.cyan .mini{ background: var(--cyan); box-shadow: 0 0 16px rgba(33,212,253,.55); }
+    .pill.violet{ background: rgba(106,91,255,.10); border-color: rgba(106,91,255,.25); }
+    .pill.violet .mini{ background: var(--violet); box-shadow: 0 0 16px rgba(106,91,255,.55); }
+
+    .heroCard p{
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height:1.6;
+      font-size: 13.5px;
+    }
+
+    /* ===== Sections ===== */
+    section{ padding: 56px 0; }
+    .sectionTitle{
+      font-size: clamp(24px, 3vw, 36px);
+      letter-spacing: -0.5px;
+      margin: 0 0 12px;
+    }
+    .sectionDesc{
+      margin:0 0 24px;
+      color: var(--muted);
+      line-height:1.7;
+      max-width: 70ch;
+    }
+
+    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--r);
+      padding: 18px;
+      box-shadow: 0 16px 46px rgba(0,0,0,.25);
+      min-height: 150px;
+    }
+    .icon{
+      width:44px; height:44px; border-radius:14px;
+      display:grid; place-items:center;
+      background: rgba(33,212,253,.10);
+      border: 1px solid rgba(33,212,253,.22);
+      box-shadow: 0 0 26px rgba(33,212,253,.12);
+      margin-bottom: 10px;
+      font-weight:900;
+    }
+    .card h4{ margin: 8px 0 8px; font-size: 16px; }
+    .card p{ margin:0; color: var(--muted); line-height:1.65; font-size: 13.5px; }
+
+    /* ===== Process ===== */
+    .process{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:12px; /* ✅ más aire */
+      gap: 14px;
     }
-    .miniCard{
-      background:#fff;
-      border:1px solid rgba(2,6,23,.10);
-      border-radius:16px;
-      padding:12px;
-      min-height:72px; /* ✅ evita apretado */
-      display:flex;flex-direction:column;justify-content:center;
+    .step{
+      border-radius: var(--r);
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
     }
-    .miniCard b{font-size:13px}
-    .miniCard span{color:rgba(15,23,42,.68);font-weight:800;font-size:12.5px;margin-top:4px}
-    .result{
-      position:relative;
-      background:rgba(15,23,42,.03);
-      border:1px dashed rgba(15,23,42,.18);
-      border-radius:16px;
-      padding:12px;
-      color:rgba(15,23,42,.78);
+    .stepTop{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(11,95,255,.12);
+      border: 1px solid rgba(11,95,255,.26);
       font-weight:800;
-      font-size:13px;
-      margin-top:2px;
+      font-size: 12px;
     }
+    .step h4{ margin: 10px 0 8px; }
+    .step ul{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.7; }
+    .step li{ margin: 6px 0; }
 
-    .dots{
-      position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
-      display:flex; gap:8px; z-index:3;
-    }
-    .dotBtn{
-      width:9px;height:9px;border-radius:99px;
-      border:1px solid rgba(255,255,255,.35);
-      background:rgba(255,255,255,.18);
-      cursor:pointer;
-    }
-    .dotBtn.active{background:rgba(255,255,255,.85)}
-
-    /* Sections */
-    section{padding:64px 0}
-    .kicker{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 12px;border-radius:999px;
-      background:rgba(29,125,255,.08);
-      border:1px solid rgba(29,125,255,.14);
-      color:rgba(15,23,42,.70);
-      font-weight:900;font-size:12px;letter-spacing:.4px;
-    }
-    h2{margin:12px 0 8px;font-size:34px;letter-spacing:-.6px}
-    .sub{margin:0;color:rgba(15,23,42,.68);font-weight:650;line-height:1.6;max-width:70ch}
-    .grid{
-      margin-top:22px;
+    /* ===== Dashboards ===== */
+    .dashGrid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
-    .card{
-      background:var(--card);
-      border:1px solid rgba(2,6,23,.08);
-      border-radius:22px;
-      box-shadow: 0 16px 40px rgba(2,6,23,.06);
+    .dash{
+      border-radius: var(--r);
       overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 16px 46px rgba(0,0,0,.25);
     }
-    .cardBody{padding:16px}
-    .card h3{margin:0 0 6px;font-size:18px}
-    .card p{margin:0;color:rgba(15,23,42,.66);font-weight:650;line-height:1.55}
-    .thumb{height:160px;background:#eaf2ff;border-bottom:1px solid rgba(2,6,23,.06);position:relative;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit:cover}
-    .iconBadge{
-      position:absolute; left:14px; bottom:-18px;
-      width:48px;height:48px;border-radius:16px;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
-      border:4px solid #fff;
-      box-shadow: 0 14px 30px rgba(29,125,255,.20);
+    .dashHeader{
+      padding: 14px 14px 10px;
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap: 12px;
     }
-
-    /* Examples */
-    .examplesGrid{
-      margin-top:22px;
-      display:grid; grid-template-columns: repeat(4, 1fr);
-      gap:14px;
+    .dashHeader h4{ margin:0; font-size: 15px; }
+    .dashHeader p{ margin:6px 0 0; color: var(--muted); font-size: 13px; line-height:1.5; }
+    .tag{
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,122,0,.12);
+      border: 1px solid rgba(255,122,0,.22);
+      color: rgba(255,255,255,.92);
+      white-space: nowrap;
     }
-    .ex{
-      border-radius:18px; overflow:hidden;
-      border:1px solid rgba(2,6,23,.08);
-      background:#fff;
-      box-shadow: 0 16px 40px rgba(2,6,23,.06);
-      cursor:pointer;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .ex:hover{transform: translateY(-3px); box-shadow: 0 22px 60px rgba(2,6,23,.10)}
-    .ex .cap{padding:12px}
-    .ex b{display:block}
-    .ex small{display:block;color:rgba(15,23,42,.60);font-weight:800;margin-top:3px}
-
-    /* Clients */
-    .clientsText{margin-top:10px;color:rgba(15,23,42,.68);font-weight:650;line-height:1.7;max-width:85ch}
-    .logos{
-      margin-top:18px;
-      display:grid; grid-template-columns: repeat(6, 1fr);
-      gap:10px;
-    }
-    .logoBox{
-      height:54px;border-radius:16px;
-      border:1px solid rgba(2,6,23,.08);
-      background:linear-gradient(180deg,#fff,#f8fbff);
-      display:flex;align-items:center;justify-content:center;
-      color:rgba(15,23,42,.55);
-      font-weight:900;font-size:12px;
+    iframe{
+      width:100%;
+      height: 360px;
+      border:0;
+      display:block;
+      background: #0a0f1b;
     }
 
-    /* Opinions (Google style) */
-    .opinionsWrap{
-      margin-top:20px;
-      border-radius:26px;
-      background: #f7f2df;
-      border:1px solid rgba(2,6,23,.08);
-      padding:26px;
-      position:relative;
-      overflow:hidden;
+    /* ===== CTA ===== */
+    .cta{
+      border-radius: calc(var(--r) + 6px);
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(600px 260px at 20% 30%, rgba(33,212,253,.18), transparent 55%),
+        radial-gradient(520px 280px at 85% 20%, rgba(255,122,0,.16), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 18px;
+      flex-wrap: wrap;
     }
-    .opinionsHeader{
-      display:flex;flex-direction:column;align-items:center;gap:8px;
-      text-align:center;
-    }
-    .opinionsHeader h3{margin:0;font-size:26px}
-    .ratingLine{display:flex;flex-direction:column;align-items:center;gap:6px}
-    .starsRow{display:flex;gap:4px;align-items:center}
-    .star{width:18px;height:18px}
-    .googleWordmark{width:84px;height:auto;margin-top:4px}
+    .cta h3{ margin: 0 0 6px; }
+    .cta p{ margin:0; color: var(--muted); line-height:1.6; max-width: 70ch; }
+    .cta .btn{ padding: 12px 16px; }
 
-    .carousel{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .review{
-      background:#fff;
-      border:1px solid rgba(2,6,23,.08);
-      border-radius:20px;
-      padding:14px;
-      min-height:170px;
-      display:flex;flex-direction:column;gap:10px;
-      box-shadow: 0 16px 40px rgba(2,6,23,.06);
-    }
-    .revTop{display:flex;align-items:center;gap:10px}
-    .avatar{
-      width:38px;height:38px;border-radius:14px;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;
-      background:#e8f2ff;
-      border:1px solid rgba(2,6,23,.06);
-      color:rgba(15,23,42,.70);
-    }
-    .revMeta b{display:block}
-    .revMeta small{display:block;color:rgba(15,23,42,.55);font-weight:800;margin-top:2px}
-    .revStars{display:flex;gap:3px}
-    .revText{color:rgba(15,23,42,.70);font-weight:650;line-height:1.6}
-
-    /* Contact */
-    .contactGrid{
-      margin-top:22px;
-      display:grid; grid-template-columns: 1fr 1fr;
-      gap:16px;
-    }
-    .form{
-      background:#fff;border:1px solid rgba(2,6,23,.08);
-      border-radius:22px;padding:16px;
-      box-shadow: 0 16px 40px rgba(2,6,23,.06);
-    }
-    .field{display:grid;gap:8px;margin-bottom:10px}
-    label{font-weight:900;font-size:13px;color:rgba(15,23,42,.74)}
-    input,textarea{
-      font:inherit;
-      padding:12px 12px;border-radius:14px;
-      border:1px solid rgba(2,6,23,.10);
-      outline:none;
-    }
-    textarea{min-height:140px;resize:vertical}
-    .hint{color:rgba(15,23,42,.60);font-weight:650;line-height:1.6}
-
-    /* WhatsApp floating */
-    .wa{
-      position:fixed; right:18px; bottom:18px; z-index:70;
-      width:54px;height:54px;border-radius:18px;
-      background:#25D366;
-      box-shadow: 0 18px 50px rgba(0,0,0,.18);
-      display:flex;align-items:center;justify-content:center;
-    }
-    .wa svg{width:26px;height:26px;fill:#fff}
-
-    /* Footer */
+    /* ===== Footer ===== */
     footer{
-      background:#0b1220;color:rgba(255,255,255,.78);
-      padding:34px 0;
-      margin-top:40px;
+      padding: 30px 0 40px;
+      border-top: 1px solid var(--line);
+      color: rgba(234,240,255,.65);
+      font-size: 13px;
     }
-    .footGrid{
-      display:grid; grid-template-columns: 1.2fr 1fr 1fr;
-      gap:18px;
+    .footerGrid{
+      display:flex; justify-content:space-between; gap: 18px; flex-wrap:wrap;
+      align-items:center;
     }
-    .footGrid h4{margin:0 0 10px;color:#fff}
-    .footGrid a{display:block;color:rgba(255,255,255,.78);margin:8px 0;font-weight:700}
-    .copy{margin-top:18px;color:rgba(255,255,255,.55);font-weight:650}
+    .links{ display:flex; gap: 14px; flex-wrap:wrap; }
+    .links a:hover{ color: var(--txt); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 940px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .process{ grid-template-columns: 1fr; }
+      .dashGrid{ grid-template-columns: 1fr
 
-    /* Responsive */
-    @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr;gap:14px}
-      .slider{min-height:420px}
-      .grid{grid-template-columns:1fr;gap:14px}
-      .examplesGrid{grid-template-columns:1fr 1fr}
-      .logos{grid-template-columns:1fr 1fr 1fr}
-      .carousel{grid-template-columns:1fr 1fr}
-      .contactGrid{grid-template-columns:1fr}
-      nav ul{display:none}
-      .burger{display:flex}
-      .panel.open{display:block}
-    }
-    @media (max-width: 520px){
-      .examplesGrid{grid-template-columns:1fr}
-      .carousel{grid-template-columns:1fr}
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="container">
-      <div class="row">
-        <div class="chips">
-          <span class="chip"><span class="dot"></span> Consultora en Datos & BI</span>
-          <a class="chip" href="https://wa.me/5492996032267" target="_blank" rel="noopener">
-            WhatsApp: <b>+54 299 6 032 267</b>
-          </a>
-          <a class="chip" href="https://www.linkedin.com/in/daiana-beltran/?locale=es_ES" target="_blank" rel="noopener">
-            LinkedIn: <b>Daiana Beltrán</b>
-          </a>
-        </div>
-        <a class="ctaTop" href="#contacto">Agendar diagnóstico</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header>
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="#home">
-          <span class="logo" aria-hidden="true"></span>
-          <span>
-            <b>PRISMA BI</b>
-            <small>Dirección • Rentabilidad • Control</small>
-          </span>
-        </a>
-
-        <nav aria-label="Navegación principal">
-          <ul>
-            <li><a href="#quienes">Quiénes somos</a></li>
-            <li><a href="#como">Cómo se trabaja</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#ejemplos">Ejemplos</a></li>
-            <li><a href="#clientes">Clientes</a></li>
-            <li><a href="#opiniones">Opiniones</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </nav>
-
-        <div class="navRight">
-          <a class="btn" href="#ejemplos">Ver ejemplos</a>
-          <a class="btn primary" href="#contacto">Agendar diagnóstico</a>
-          <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-      </div>
-
-      <div class="panel" id="panel">
-        <a href="#quienes">Quiénes somos</a>
-        <a href="#como">Cómo se trabaja</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#ejemplos">Ejemplos</a>
-        <a href="#clientes">Clientes</a>
-        <a href="#opiniones">Opiniones</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <main id="home" class="hero">
-    <div class="container heroInner">
-      <div class="heroGrid">
-
-        <!-- Slider -->
-        <div class="slider" aria-label="Hero slider">
-          <!-- Canvas de red neuronal (se une / desune / destella) -->
-          <canvas id="net"></canvas>
-
-          <div class="slide active" data-i="0">
-            <div class="bg" style="background-image:url('assets/hero-1.jpg')"></div>
-            <div class="overlay"></div>
-            <div class="slideContent">
-              <div class="leftCol">
-                <span class="pill">CONTROL • GOBIERNO • CONFIANZA</span>
-                <h1 class="h1">
-                  Cuando los números cambian según quién los mire, la empresa pierde <span class="accent">dirección</span>.
-                </h1>
-                <p class="lead">
-                  Prisma BI acompaña a PyMEs y empresas a ordenar datos (Excel, ERP, sistemas, ventas, costos) y convertirlos en una lectura ejecutiva clara:
-                  <b>qué pasa</b>, <b>por qué pasa</b> y <b>qué acción mueve el resultado</b>.
-                </p>
-                <div class="heroBtns">
-                  <a class="btn primary" href="#contacto">Agendar diagnóstico (20 min)</a>
-                  <a class="btnGhost" href="#servicios">Ver servicios</a>
-                  <a class="btnGhost" href="#opiniones">Ver opiniones</a>
-                </div>
-
-                <div class="heroProof">
-                  <div class="proof">
-                    <span class="check" aria-hidden="true"></span>
-                    <div>
-                      <b>KPI con definición única</b>
-                      <span>Glosario + fórmula + fuente: todos miran la misma verdad.</span>
-                    </div>
-                  </div>
-                  <div class="proof">
-                    <span class="check" aria-hidden="true"></span>
-                    <div>
-                      <b>Control (QA)</b>
-                      <span>Alertas, consistencia y validaciones para decidir con confianza.</span>
-                    </div>
-                  </div>
-                  <div class="proof">
-                    <span class="check" aria-hidden="true"></span>
-                    <div>
-                      <b>Rutina semanal</b>
-                      <span>Responsables por área, seguimiento y decisiones consistentes.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide" data-i="1">
-            <div class="bg" style="background-image:url('assets/hero-2.jpg')"></div>
-            <div class="overlay"></div>
-            <div class="slideContent">
-              <div class="leftCol">
-                <span class="pill">MENOS DISCUSIONES • MÁS ACCIÓN</span>
-                <h2 class="h1">Un tablero útil no informa: <span class="accent">orienta</span>.</h2>
-                <p class="lead">
-                  Dirección y áreas dejan de “pelear reportes” cuando existe una fuente de verdad. Prisma BI instala un mapa único de lectura
-                  para priorizar, ejecutar y sostener resultados.
-                </p>
-                <div class="heroBtns">
-                  <a class="btn primary" href="#ejemplos">Ver dashboards</a>
-                  <a class="btnGhost" href="#como">Cómo se trabaja</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide" data-i="2">
-            <div class="bg" style="background-image:url('assets/hero-3.jpg')"></div>
-            <div class="overlay"></div>
-            <div class="slideContent">
-              <div class="leftCol">
-                <span class="pill">DIRECCIÓN • RENTABILIDAD • CONTROL</span>
-                <h2 class="h1">De datos dispersos a decisiones <span class="accent">consistentes</span>.</h2>
-                <p class="lead">
-                  El objetivo no es “hacer gráficos”. Es lograr que la empresa lea igual, mida igual y actúe igual. Con métricas claras, control de datos
-                  y una rutina ejecutiva, el tablero se usa y produce decisiones.
-                </p>
-                <div class="heroBtns">
-                  <a class="btn primary" href="#contacto">Pedir diagnóstico</a>
-                  <a class="btnGhost" href="#clientes">Ver clientes</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Checklist card -->
-          <div class="heroCard" aria-label="Checklist de control">
-            <div class="heroCardHeader">
-              <b>Checklist de control (ejemplo)</b>
-              <span class="miniPill">Lectura en 5 minutos</span>
-            </div>
-
-            <div class="grid2">
-              <div class="miniCard">
-                <b>Definición KPI única</b>
-                <span>OK • Glosario + fórmula</span>
-              </div>
-              <div class="miniCard">
-                <b>Fuente de verdad</b>
-                <span>SQL / DW • Modelo claro</span>
-              </div>
-              <div class="miniCard">
-                <b>Refresco & alertas</b>
-                <span>Automatizado • QA</span>
-              </div>
-              <div class="miniCard">
-                <b>Rutina ejecutiva</b>
-                <span>Semanal • Por área</span>
-              </div>
-            </div>
-
-            <div class="result">
-              Resultado: la dirección decide con el mismo mapa. Menos discusiones. Más acciones.
-            </div>
-          </div>
-
-          <div class="dots" aria-label="Controles del slider">
-            <button class="dotBtn active" data-go="0" aria-label="Slide 1"></button>
-            <button class="dotBtn" data-go="1" aria-label="Slide 2"></button>
-            <button class="dotBtn" data-go="2" aria-label="Slide 3"></button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- QUIÉNES -->
-  <section id="quienes">
-    <div class="container">
-      <span class="kicker">QUIÉNES SOMOS</span>
-      <h2>De “reportes” a decisiones consistentes.</h2>
-      <p class="sub">
-        Prisma BI es una consultora de datos y Business Intelligence orientada a dirección.
-        Su foco es instalar un sistema de lectura ejecutiva para decidir rápido y con criterio único:
-        <b>definiciones claras</b>, <b>control de datos</b> y <b>rutina de seguimiento</b>.
-      </p>
-
-      <div class="grid">
-        <div class="card">
-          <div class="cardBody">
-            <h3>Claridad</h3>
-            <p>KPIs con definición única (glosario + fórmula + fuente) para que cada área hable el mismo idioma.</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="cardBody">
-            <h3>Control</h3>
-            <p>Validaciones, QA y alertas para confiar en los números antes de discutirlos.</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="cardBody">
-            <h3>Acción</h3>
-            <p>Rutina semanal por área: responsables, prioridades y decisiones sostenidas en el tiempo.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CÓMO SE TRABAJA (sin “NO…”) -->
-  <section id="como" style="background:linear-gradient(180deg,#f7fbff, #ffffff)">
-    <div class="container">
-      <span class="kicker">CÓMO SE TRABAJA</span>
-      <h2>Un método simple que la empresa entiende.</h2>
-      <p class="sub">
-        Prisma BI trabaja por etapas para que el tablero sea usable por dirección y adoptado por el equipo:
-        primero se define qué mirar, luego se ordena la verdad y por último se instala la rutina de lectura.
-      </p>
-
-      <div class="grid">
-        <div class="card">
-          <div class="cardBody">
-            <h3>1) Diagnóstico (20–40 min)</h3>
-            <p>Se identifica el objetivo, las decisiones clave y el “ruido” actual. Se define qué medir y qué dejar de seguir.</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="cardBody">
-            <h3>2) Fuente de verdad</h3>
-            <p>Se ordenan datos y definiciones para que exista un criterio único: mismas reglas, mismos números.</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="cardBody">
-            <h3>3) Tablero + rutina</h3>
-            <p>Se entrega el tablero y la rutina semanal por área: responsables, lectura en minutos y acciones concretas.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICIOS (con imágenes como Overdata) -->
-  <section id="servicios">
-    <div class="container">
-      <span class="kicker">SERVICIOS</span>
-      <h2>Servicios orientados a resultado, no a “herramientas”.</h2>
-      <p class="sub">Cada servicio está pensado para convertir datos dispersos en una lectura ejecutiva clara y accionable.</p>
-
-      <div class="grid">
-        <article class="card">
-          <div class="thumb">
-            <img src="assets/svc-dashboards.jpg" alt="Dashboards Power BI">
-            <span class="iconBadge" aria-hidden="true"></span>
-          </div>
-          <div class="cardBody">
-            <h3>Dashboards (Power BI)</h3>
-            <p>Tableros claros por dirección y por área: ventas, costos, margen, rentabilidad y foco de acción.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="thumb">
-            <img src="assets/svc-modelo.jpg" alt="Modelo de datos">
-            <span class="iconBadge" aria-hidden="true"></span>
-          </div>
-          <div class="cardBody">
-            <h3>Modelo & fuente de verdad (SQL)</h3>
-            <p>Definiciones, reglas y estructura para que el reporte deje de variar según quién lo construye.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="thumb">
-            <img src="assets/svc-qa.jpg" alt="Calidad de datos">
-            <span class="iconBadge" aria-hidden="true"></span>
-          </div>
-          <div class="cardBody">
-            <h3>QA de datos & alertas</h3>
-            <p>Validaciones, consistencia y alertas para confiar en los números antes de tomar decisiones.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="thumb">
-            <img src="assets/svc-integraciones.jpg" alt="Integraciones con sistemas">
-            <span class="iconBadge" aria-hidden="true"></span>
-          </div>
-          <div class="cardBody">
-            <h3>Integraciones (ERP / sistemas)</h3>
-            <p>Conexión de fuentes y orden de datos: Excel, sistemas, ERP y procesos para lectura consolidada.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="thumb">
-            <img src="assets/svc-automatizacion.jpg" alt="Automatización">
-            <span class="iconBadge" aria-hidden="true"></span>
-          </div>
-          <div class="cardBody">
-            <h3>Automatización (Python / n8n)</h3>
-            <p>Refrescos, cargas y notificaciones para reducir fricción y sostener continuidad operativa.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="thumb">
-            <img src="assets/svc-capacitacion.jpg" alt="Capacitación">
-            <span class="iconBadge" aria-hidden="true"></span>
-          </div>
-          <div class="cardBody">
-            <h3>Adopción & capacitación</h3>
-            <p>Rutina de lectura y uso real del tablero: responsables, ritual semanal y decisiones repetibles.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- EJEMPLOS (Dashboards) -->
-  <section id="ejemplos" style="background:linear-gradient(180deg,#ffffff,#f7fbff)">
-    <div class="container">
-      <span class="kicker">EJEMPLOS</span>
-      <h2>Dashboards que se usan.</h2>
-      <p class="sub">Ejemplos de tableros para dirección y áreas: lectura rápida, foco y decisiones.</p>
-
-      <div class="examplesGrid">
-        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
-          <div class="thumb"><img src="assets/ex-1.jpg" alt="Executive Overview"></div>
-          <div class="cap"><b>Executive Overview</b><small>KPIs + tendencia + foco</small></div>
-        </div>
-        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
-          <div class="thumb"><img src="assets/ex-2.jpg" alt="Rentabilidad"></div>
-          <div class="cap"><b>Rentabilidad</b><small>margen, mix, drenajes</small></div>
-        </div>
-        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
-          <div class="thumb"><img src="assets/ex-3.jpg" alt="Operaciones"></div>
-          <div class="cap"><b>Operaciones</b><small>tiempos, calidad, alertas</small></div>
-        </div>
-        <div class="ex" onclick="alert('Reemplazá este click por un modal o link al demo.')">
-          <div class="thumb"><img src="assets/ex-4.jpg" alt="Ventas"></div>
-          <div class="cap"><b>Ventas</b><small>canales, clientes, producto</small></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLIENTES -->
-  <section id="clientes">
-    <div class="container">
-      <span class="kicker">CLIENTES & MARCAS</span>
-      <h2>Experiencia aplicada a sectores reales.</h2>
-      <p class="clientsText">
-        Nuestra experiencia abarca diversos sectores, desde PyMEs hasta grandes corporaciones, y cada proyecto nos ha permitido contribuir al éxito
-        de nuestros clientes a través de soluciones basadas en datos.
-      </p>
-
-      <!-- ✅ Si todavía no querés logos reales: usá placeholders por categoría -->
-      <div class="logos" aria-label="Logos / categorías">
-        <div class="logoBox">Agro</div>
-        <div class="logoBox">Retail</div>
-        <div class="logoBox">Servicios</div>
-        <div class="logoBox">Industria</div>
-        <div class="logoBox">Energía</div>
-        <div class="logoBox">Salud</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPINIONES (con Google + estrellas como tu ejemplo) -->
-  <section id="opiniones" style="padding-top:30px">
-    <div class="container">
-      <div class="opinionsWrap">
-        <div class="opinionsHeader">
-          <h3>Opiniones sobre Prisma BI</h3>
-          <p class="sub" style="max-width:78ch;margin:0 auto">
-            Testimonios estilo “reseñas”. Si querés traer reseñas reales de Google, lo ideal es embeber el widget oficial.
-            (Este bloque replica el look & feel para tu web).
-          </p>
-
-          <div class="ratingLine">
-            <b style="letter-spacing:.3px">EXCELENTE</b>
-            <div class="starsRow" aria-label="5 estrellas">
-              <!-- ⭐ estrellas -->
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            </div>
-            <small style="color:rgba(15,23,42,.60);font-weight:800">A base de reseñas</small>
-
-            <!-- ✅ Google logo (SVG simple) -->
-            <svg class="googleWordmark" viewBox="0 0 256 86" aria-label="Google">
-              <path fill="#4285F4" d="M115.8 44.2c0-2.9-.3-5.7-.8-8.3H64.7v15.7h28.8c-1.2 4.1-3.8 7.6-7.3 10v10.4h16.2c9.5-8.7 13.4-21.5 13.4-37.8z"/>
-              <path fill="#34A853" d="M64.7 86c13.6 0 25-4.5 33.3-12.2L81.8 63.4c-4.5 3-10.2 4.7-17.1 4.7-13.1 0-24.2-8.8-28.2-20.7H19.8v10.8C28 73.2 45.1 86 64.7 86z"/>
-              <path fill="#FBBC05" d="M36.5 47.4c-1-3-1.6-6.1-1.6-9.4s.6-6.4 1.6-9.4V17.8H19.8C16.5 24.4 14.7 31.8 14.7 38s1.8 13.6 5.1 20.2l16.7-10.8z"/>
-              <path fill="#EA4335" d="M64.7 17.9c7.4 0 14 2.5 19.2 7.3l14.3-14.3C89.7 3.9 78.3 0 64.7 0 45.1 0 28 12.8 19.8 27.8l16.7 10.8c4-11.9 15.1-20.7 28.2-20.7z"/>
-            </svg>
-          </div>
-        </div>
-
-        <div class="carousel">
-          <div class="review">
-            <div class="revTop">
-              <div class="avatar">A</div>
-              <div class="revMeta">
-                <b>Ale J.</b>
-                <small>Reseña</small>
-              </div>
-            </div>
-            <div class="revStars">
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            </div>
-            <div class="revText">“Se entendió rápido qué estaba drenando margen. El tablero ordenó la conversación y apareció el plan de acción.”</div>
-          </div>
-
-          <div class="review">
-            <div class="revTop">
-              <div class="avatar">G</div>
-              <div class="revMeta">
-                <b>Gema D.</b>
-                <small>Reseña</small>
-              </div>
-            </div>
-            <div class="revStars">
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            </div>
-            <div class="revText">“Por primera vez dirección y equipo miraron lo mismo. Menos discusiones, más decisiones.”</div>
-          </div>
-
-          <div class="review">
-            <div class="revTop">
-              <div class="avatar">J</div>
-              <div class="revMeta">
-                <b>Juan M.</b>
-                <small>Reseña</small>
-              </div>
-            </div>
-            <div class="revStars">
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            </div>
-            <div class="revText">“La rutina semanal hizo la diferencia. El tablero no quedó ‘lindo’: se usa.”</div>
-          </div>
-
-          <div class="review">
-            <div class="revTop">
-              <div class="avatar">V</div>
-              <div class="revMeta">
-                <b>Valentina R.</b>
-                <small>Reseña</small>
-              </div>
-            </div>
-            <div class="revStars">
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-              <svg class="star" viewBox="0 0 24 24"><path fill="#f4b400" d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>
-            </div>
-            <div class="revText">“Quedó claro qué medir, quién lo mide y qué acción corresponde. Eso era lo que faltaba.”</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <div class="container">
-      <span class="kicker">CONTACTO</span>
-      <h2>El primer paso es un diagnóstico corto.</h2>
-      <p class="sub">En 20 minutos se identifica el objetivo, el “ruido” actual y el próximo paso más rentable.</p>
-
-      <div class="contactGrid">
-        <div class="form">
-          <div class="field">
-            <label>Nombre</label>
-            <input placeholder="Tu nombre" />
-          </div>
-          <div class="field">
-            <label>Teléfono / WhatsApp</label>
-            <input placeholder="+54 ..." />
-          </div>
-          <div class="field">
-            <label>Mensaje</label>
-            <textarea placeholder="Contame qué querés mejorar (ventas, costos, margen, control, reportes...)"></textarea>
-          </div>
-          <a class="btn primary" href="https://wa.me/5492996032267" target="_blank" rel="noopener">Enviar por WhatsApp</a>
-        </div>
-
-        <div class="form">
-          <h3 style="margin:0 0 8px">Canales</h3>
-          <p class="hint">
-            WhatsApp: <b>+54 299 6 032 267</b><br/>
-            LinkedIn: <b>Daiana Beltrán</b><br/>
-            Sitio: <b>prisma-bi.github.io</b>
-          </p>
-          <div style="height:12px"></div>
-          <p class="hint">
-            Prisma BI trabaja remoto con empresas de Argentina y LATAM.
-            El objetivo es simple: <b>que cada métrica termine en una decisión</b>.
-          </p>
-          <div style="height:12px"></div>
-          <a class="btn" href="#ejemplos">Ver ejemplos</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footGrid">
-        <div>
-          <h4>PRISMA BI</h4>
-          <div style="color:rgba(255,255,255,.65);font-weight:650;line-height:1.7">
-            Dirección • Rentabilidad • Control.<br/>
-            Menos discusiones. Más decisiones.
-          </div>
-        </div>
-        <div>
-          <h4>Links</h4>
-          <a href="#servicios">Servicios</a>
-          <a href="#ejemplos">Ejemplos</a>
-          <a href="#opiniones">Opiniones</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-        <div>
-          <h4>Contacto</h4>
-          <a href="https://wa.me/5492996032267" target="_blank" rel="noopener">WhatsApp: +54 299 6 032 267</a>
-          <a href="https://www.linkedin.com/in/daiana-beltran/?locale=es_ES" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-      <div class="copy">© <span id="y"></span> Prisma BI. Todos los derechos reservados.</div>
-    </div>
-  </footer>
-
-  <!-- WhatsApp -->
-  <a class="wa" href="https://wa.me/5492996032267" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M19.11 17.36c-.28-.14-1.65-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.09-.16.18-.32.21-.6.07-.28-.14-1.18-.43-2.25-1.38-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.04-.35-.02-.49-.07-.14-.62-1.5-.85-2.05-.22-.54-.45-.47-.62-.48l-.53-.01c-.18 0-.49.07-.75.35-.25.28-.98.96-.98 2.33 0 1.37 1 2.7 1.14 2.89.14.18 1.97 3.01 4.77 4.22.67.29 1.19.46 1.6.59.67.21 1.27.18 1.75.11.53-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.32-.07-.11-.25-.18-.53-.32zM16.02 3.2c-7.05 0-12.79 5.74-12.79 12.79 0 2.25.59 4.38 1.71 6.26L3.2 28.8l6.71-1.76a12.74 12.74 0 0 0 6.11 1.56h.01c7.05 0 12.79-5.74 12.79-12.79S23.07 3.2 16.02 3.2zm0 22.25h-.01c-1.93 0-3.82-.52-5.47-1.5l-.39-.23-3.98 1.04 1.06-3.88-.25-.4a10.6 10.6 0 0 1-1.64-5.68c0-5.86 4.77-10.63 10.64-10.63 2.84 0 5.51 1.11 7.52 3.12a10.58 10.58 0 0 1 3.11 7.51c0 5.86-4.77 10.64-10.59 10.64z"/>
-    </svg>
-  </a>
-
-  <script>
-    // Año footer
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    // Menú mobile
-    const burger = document.getElementById("burger");
-    const panel = document.getElementById("panel");
-    burger?.addEventListener("click", () => {
-      const open = panel.classList.toggle("open");
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    panel?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => panel.classList.remove("open")));
-
-    // Slider
-    const slides = Array.from(document.querySelectorAll(".slide"));
-    const dots = Array.from(document.querySelectorAll(".dotBtn"));
-    let idx = 0;
-    function go(i){
-      idx = i;
-      slides.forEach(s => s.classList.remove("active"));
-      dots.forEach(d => d.classList.remove("active"));
-      slides[i].classList.add("active");
-      dots[i].classList.add("active");
-    }
-    dots.forEach(d => d.addEventListener("click", () => go(Number(d.dataset.go))));
-    setInterval(() => go((idx+1)%slides.length), 6500);
-
-    // ✅ RED NEURONAL PRO: se une / desune / brilla / destellos (Canvas)
-    const canvas = document.getElementById("net");
-    const ctx = canvas.getContext("2d", { alpha: true });
-    let W=0,H=0, DPR=1;
-    let nodes = [];
-    let t = 0;
-
-    function resize(){
-      const parent = canvas.parentElement;
-      const rect = parent.getBoundingClientRect();
-      DPR = Math.min(2, window.devicePixelRatio || 1);
-      W = Math.floor(rect.width);
-      H = Math.floor(rect.height);
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      canvas.style.width = W + "px";
-      canvas.style.height = H + "px";
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-
-      // densidad según tamaño (performance mobile)
-      const base = (W < 520) ? 38 : (W < 900) ? 55 : 70;
-      const count = Math.floor(base + (W*H)/45000);
-      nodes = new Array(count).fill(0).map(() => ({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        vx: (Math.random()*2-1) * 0.35,
-        vy: (Math.random()*2-1) * 0.35,
-        r: 1.1 + Math.random()*1.4,
-        tw: Math.random()*Math.PI*2, // twinkle phase
-      }));
-    }
-
-    function draw(){
-      t += 0.016;
-      ctx.clearRect(0,0,W,H);
-
-      // parámetros “tech”
-      const linkDist = (W < 520) ? 105 : 130;
-      const glow = 18;
-
-      // fondo suave (muy leve)
-      ctx.save();
-      ctx.globalAlpha = 0.12;
-      ctx.fillStyle = "#00e5ff";
-      ctx.beginPath();
-      ctx.arc(W*0.18, H*0.20, 160, 0, Math.PI*2);
-      ctx.fill();
-      ctx.globalAlpha = 0.10;
-      ctx.fillStyle = "#3aa3ff";
-      ctx.beginPath();
-      ctx.arc(W*0.78, H*0.35, 200, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-
-      // mover nodos
-      for(const n of nodes){
-        n.x += n.vx;
-        n.y += n.vy;
-
-        // rebote
-        if(n.x < 0 || n.x > W) n.vx *= -1;
-        if(n.y < 0 || n.y > H) n.vy *= -1;
-
-        // micro-deriva (para “orgánico”)
-        n.vx += (Math.random()*2-1)*0.01;
-        n.vy += (Math.random()*2-1)*0.01;
-        n.vx = Math.max(-0.55, Math.min(0.55, n.vx));
-        n.vy = Math.max(-0.55, Math.min(0.55, n.vy));
-      }
-
-      // destellos (sparkles) ocasionales
-      const sparkle = Math.random() < 0.035 ? nodes[Math.floor(Math.random()*nodes.length)] : null;
-
-      // líneas
-      for(let i=0;i<nodes.length;i++){
-        for(let j=i+1;j<nodes.length;j++){
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x-b.x, dy = a.y-b.y;
-          const d = Math.hypot(dx,dy);
-          if(d < linkDist){
-            const alpha = (1 - d/linkDist);
-            const pulse = 0.55 + 0.45*Math.sin((t*1.3) + (i+j)*0.03);
-            const baseA = 0.18 * alpha * pulse;  // ✅ más visible
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = `rgba(160, 230, 255, ${baseA})`;
-            ctx.beginPath();
-            ctx.moveTo(a.x,a.y);
-            ctx.lineTo(b.x,b.y);
-            ctx.stroke();
-
-            // glow sutil
-            ctx.save();
-            ctx.globalAlpha = baseA * 0.65;
-            ctx.shadowBlur = glow;
-            ctx.shadowColor = "rgba(79, 241, 255, .9)";
-            ctx.strokeStyle = "rgba(79, 241, 255, .22)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        }
-      }
-
-      // puntos
-      for(const n of nodes){
-        const tw = 0.55 + 0.45*Math.sin(t*2 + n.tw);
-        const r = n.r * (0.85 + tw*0.45);
-
-        // punto base
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(220, 248, 255, ${0.55 + tw*0.35})`;
-        ctx.arc(n.x, n.y, r, 0, Math.PI*2);
-        ctx.fill();
-
-        // glow
-        ctx.save();
-        ctx.globalAlpha = 0.35 + tw*0.25;
-        ctx.shadowBlur = 22;
-        ctx.shadowColor = "rgba(79, 241, 255, .9)";
-        ctx.fillStyle = "rgba(79, 241, 255, .22)";
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, r+0.2, 0, Math.PI*2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      // sparkle extra (destello notorio)
-      if(sparkle){
-        ctx.save();
-        ctx.globalAlpha = 0.9;
-        ctx.shadowBlur = 28;
-        ctx.shadowColor = "rgba(125, 211, 255, 1)";
-        ctx.fillStyle = "rgba(125, 211, 255, .35)";
-        ctx.beginPath();
-        ctx.arc(sparkle.x, sparkle.y, 4.2, 0, Math.PI*2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      requestAnimationFrame(draw);
-    }
-
-    window.addEventListener("resize", resize);
-    resize();
-    draw();
-  </script>
-</body>
-</html>
