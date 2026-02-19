@@ -25,11 +25,11 @@
       --text:#F4F8FF;
       --muted:rgba(244,248,255,.72);
 
-      /* ✅ Azul más oscuro (no eléctrico) */
-      --blue:#0B2F56;      /* azul oscuro */
-      --blue2:#0E3B6B;     /* variante */
-      --cyan:#2AD4FF;
-      --teal:#00E7B6;
+      /* ✅ Azul oscuro (no eléctrico) + acentos tech */
+      --blue:#0B2F56;
+      --blue2:#0E3B6B;
+      --cyan:#22D3EE;     /* un poco menos “eléctrico” */
+      --teal:#11D6B4;
 
       --card:rgba(10,18,38,.58);
       --stroke:rgba(255,255,255,.11);
@@ -52,8 +52,8 @@
       font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 520px at 18% 12%, rgba(42,212,255,.16), transparent 62%),
-        radial-gradient(820px 520px at 78% 18%, rgba(0,231,182,.10), transparent 60%),
+        radial-gradient(900px 520px at 18% 12%, rgba(34,211,238,.14), transparent 62%),
+        radial-gradient(820px 520px at 78% 18%, rgba(17,214,180,.10), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg0));
       overflow-x:hidden;
     }
@@ -63,7 +63,7 @@
     .sr{position:absolute;left:-9999px}
 
     a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-      outline: 2px solid rgba(42,212,255,.75);
+      outline: 2px solid rgba(34,211,238,.70);
       outline-offset: 3px;
       border-radius: 12px;
     }
@@ -71,8 +71,8 @@
     /* Top glow line */
     body:before{
       content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
-      background:linear-gradient(90deg, transparent, rgba(42,212,255,.85), rgba(0,231,182,.75), transparent);
-      pointer-events:none;opacity:.95;
+      background:linear-gradient(90deg, transparent, rgba(34,211,238,.78), rgba(17,214,180,.72), transparent);
+      pointer-events:none;opacity:.92;
       filter: blur(.2px);
     }
 
@@ -101,7 +101,7 @@
     .dot{
       width:8px;height:8px;border-radius:999px;
       background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 18px rgba(42,212,255,.35);
+      box-shadow:0 0 18px rgba(34,211,238,.28);
     }
     .topbarRight{
       display:flex;align-items:center;gap:10px;
@@ -123,21 +123,13 @@
       min-height:86px;
     }
 
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      min-width:260px;
-    }
-
-    /* ✅ LOGO MÁS GRANDE: cambia height acá */
+    .brand{display:flex;align-items:center;gap:12px;min-width:260px;}
     .brand img{
-      height:56px; /* ← antes 44px */
-      width:auto;object-fit:contain;
+      height:56px; width:auto;object-fit:contain;
       filter: drop-shadow(0 18px 45px rgba(0,0,0,.38));
       opacity:.98;
     }
-    @media (max-width:980px){
-      .brand img{height:46px;}
-    }
+    @media (max-width:980px){ .brand img{height:46px;} }
 
     .menu{display:flex;gap:10px;align-items:center}
     .menu a{
@@ -150,13 +142,13 @@
     }
     .menu a:hover{
       filter:brightness(1.12);
-      border-color:rgba(42,212,255,.18);
+      border-color:rgba(34,211,238,.18);
       background:rgba(10,18,38,.30);
       transform:translateY(-1px);
     }
     .menu a.active{
       color:rgba(244,248,255,.92);
-      border-color:rgba(42,212,255,.22);
+      border-color:rgba(34,211,238,.22);
       background:rgba(10,18,38,.36);
     }
 
@@ -172,15 +164,15 @@
       white-space:nowrap;
       cursor:pointer;
     }
-    .btn:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(42,212,255,.26)}
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(34,211,238,.26)}
     .btnPrimary{
       color:#06101f;
-      background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(42,212,255,.92), rgba(0,231,182,.88));
+      background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.92), rgba(17,214,180,.88));
       border:1px solid rgba(0,0,0,.12);
       box-shadow:
         0 24px 78px rgba(0,0,0,.35),
-        0 0 0 1px rgba(42,212,255,.12) inset,
-        0 0 60px rgba(42,212,255,.12);
+        0 0 0 1px rgba(34,211,238,.12) inset,
+        0 0 60px rgba(34,211,238,.10);
       position:relative;overflow:hidden;
     }
     .btnPrimary:before{
@@ -221,9 +213,9 @@
     .heroBg{
       position:absolute;inset:0;z-index:-4;
       background:
-        radial-gradient(1000px 700px at 20% 20%, rgba(42,212,255,.14), transparent 64%),
-        radial-gradient(900px 650px at 78% 22%, rgba(0,231,182,.10), transparent 62%),
-        radial-gradient(900px 650px at 66% 86%, rgba(42,212,255,.08), transparent 62%),
+        radial-gradient(1000px 700px at 20% 20%, rgba(34,211,238,.12), transparent 64%),
+        radial-gradient(900px 650px at 78% 22%, rgba(17,214,180,.10), transparent 62%),
+        radial-gradient(900px 650px at 66% 86%, rgba(34,211,238,.07), transparent 62%),
         linear-gradient(180deg, rgba(2,5,14,.96), rgba(2,5,14,.84));
     }
     .heroStars{
@@ -243,7 +235,7 @@
       width:100%;height:100%;
       opacity:1;
       mix-blend-mode: screen;
-      filter: drop-shadow(0 0 18px rgba(42,212,255,.22));
+      filter: drop-shadow(0 0 18px rgba(34,211,238,.18));
       pointer-events:none;
     }
 
@@ -255,11 +247,7 @@
       opacity:.92;
     }
 
-    .heroInner{
-      max-width: 980px;
-      margin:0 auto;
-      padding:0 10px;
-    }
+    .heroInner{max-width: 980px;margin:0 auto;padding:0 10px;}
 
     .pill{
       display:inline-flex;align-items:center;gap:10px;
@@ -275,7 +263,7 @@
     .pill i{
       width:10px;height:10px;border-radius:999px;
       background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 22px rgba(42,212,255,.45);
+      box-shadow:0 0 22px rgba(34,211,238,.35);
     }
 
     h1{
@@ -305,10 +293,7 @@
       margin:18px 0 0;
     }
 
-    .heroContext{
-      margin:34px auto 0;
-      max-width: 980px;
-    }
+    .heroContext{margin:34px auto 0;max-width: 980px;}
     .heroContextTitle{
       margin:0 0 14px;
       color:rgba(244,248,255,.82);
@@ -318,11 +303,7 @@
       text-transform:uppercase;
       opacity:.95;
     }
-    .heroCards{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
-    }
+    .heroCards{display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;}
     @media (max-width:980px){
       .hero{min-height:auto;padding:64px 0 54px}
       .heroCards{grid-template-columns:1fr;gap:12px}
@@ -332,8 +313,8 @@
       text-align:left;
       position:relative;
       background:
-        radial-gradient(320px 180px at 18% 18%, rgba(42,212,255,.14), transparent 70%),
-        radial-gradient(300px 180px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
+        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
         rgba(10,18,38,.56);
       border:1px solid rgba(255,255,255,.11);
       border-radius: 18px;
@@ -346,28 +327,23 @@
     .hDot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
-      box-shadow:0 0 18px rgba(42,212,255,.28);
+      box-shadow:0 0 18px rgba(34,211,238,.22);
       display:inline-block;margin-right:10px;transform:translateY(1px);
     }
 
     /* ===== SECTIONS ===== */
     .sep{
       height:1px;max-width:1050px;margin:0 auto;
-      background: linear-gradient(90deg, transparent, rgba(42,212,255,.22), rgba(0,231,182,.14), transparent);
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,.18), rgba(17,214,180,.14), transparent);
     }
 
-    .sec{
-      position:relative;
-      padding: var(--secPad) 0;
-      overflow:hidden;
-    }
+    .sec{position:relative;padding: var(--secPad) 0;overflow:hidden;}
     .sec:before{
-      content:"";
-      position:absolute;inset:0;
+      content:"";position:absolute;inset:0;
       background:
-        radial-gradient(900px 520px at 20% 20%, rgba(42,212,255,.10), transparent 62%),
-        radial-gradient(900px 520px at 78% 10%, rgba(0,231,182,.08), transparent 62%),
-        radial-gradient(900px 520px at 70% 85%, rgba(42,212,255,.06), transparent 60%),
+        radial-gradient(900px 520px at 20% 20%, rgba(34,211,238,.08), transparent 62%),
+        radial-gradient(900px 520px at 78% 10%, rgba(17,214,180,.07), transparent 62%),
+        radial-gradient(900px 520px at 70% 85%, rgba(34,211,238,.05), transparent 60%),
         linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
       z-index:-3;
     }
@@ -399,15 +375,74 @@
       font-size:15px;
     }
 
-    /* ✅ ENTREGABLES: 3 cards verticales (grid), no “bloques horizontales” */
+    /* ===== QUIÉNES SOMOS (video + bullets) ===== */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top: 18px;
+    }
+    @media (max-width:980px){ .aboutGrid{grid-template-columns:1fr;} }
+
+    .videoCard{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(10,18,38,.56);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      overflow:hidden;
+      min-height: 340px;
+      position:relative;
+    }
+    .videoRatio{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      background:#0a1022;
+    }
+    .videoRatio iframe,
+    .videoRatio video{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+    .aboutCard{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(380px 220px at 18% 18%, rgba(34,211,238,.11), transparent 70%),
+        radial-gradient(360px 220px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      padding: 18px 18px 16px;
+      overflow:hidden;
+    }
+    .aboutCard h3{
+      margin:0 0 8px;
+      font-size: clamp(22px, 2.2vw, 30px);
+      font-weight:950;
+      letter-spacing:-.02em;
+    }
+    .aboutCard p{margin:0 0 12px;color:rgba(244,248,255,.74);line-height:1.7;font-size:14.5px}
+    .aboutBullets{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+    .aboutBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
+    .aboutCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(34,211,238,.10);
+      border:1px solid rgba(34,211,238,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .aboutCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
+
+    /* ===== ENTREGABLES ===== */
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
 
     .card{
       position:relative;
       background:
-        radial-gradient(320px 180px at 18% 18%, rgba(42,212,255,.14), transparent 70%),
-        radial-gradient(300px 180px at 82% 82%, rgba(0,231,182,.10), transparent 72%),
+        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
         rgba(10,18,38,.56);
       border:1px solid rgba(255,255,255,.11);
       border-radius: var(--r);
@@ -417,29 +452,29 @@
       overflow:hidden;
       min-height: 220px;
     }
-    .card:hover{transform: translateY(-2px);border-color: rgba(42,212,255,.24);filter: brightness(1.06);}
+    .card:hover{transform: translateY(-2px);border-color: rgba(34,211,238,.22);filter: brightness(1.06);}
     .kicker{display:flex;align-items:center;gap:10px;font-weight:950;margin-bottom:10px}
     .kDot{
       width:10px;height:10px;border-radius:999px;
       background: linear-gradient(90deg, var(--cyan), var(--teal));
-      box-shadow:0 0 18px rgba(42,212,255,.28);
+      box-shadow:0 0 18px rgba(34,211,238,.22);
     }
     .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
     .miniBullets{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
     .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
     .miniBullets .miniCheck{
       width:18px;height:18px;border-radius:999px;
-      background: rgba(42,212,255,.10);
-      border:1px solid rgba(42,212,255,.22);
+      background: rgba(34,211,238,.10);
+      border:1px solid rgba(34,211,238,.22);
       display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
     }
-    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(42,212,255,.95);font-size:12px}
+    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-    /* ===== SOLUCIONES (estilo similar a referencia + imagen a la derecha) ===== */
+    /* ===== SOLUCIONES ===== */
     .secLight{
       background:
         radial-gradient(900px 520px at 20% 10%, rgba(11,47,86,.10), transparent 55%),
-        radial-gradient(900px 520px at 80% 20%, rgba(0,231,182,.08), transparent 60%),
+        radial-gradient(900px 520px at 80% 20%, rgba(17,214,180,.08), transparent 60%),
         #f5f7fb;
       color:#0a1022;
       position:relative;
@@ -458,9 +493,7 @@
       display:grid;
       grid-template-columns: 360px 1fr;
     }
-    @media (max-width:980px){
-      .solutionsWrap{grid-template-columns:1fr}
-    }
+    @media (max-width:980px){ .solutionsWrap{grid-template-columns:1fr} }
 
     .solLeft{
       background:#f1f4f8;
@@ -469,6 +502,7 @@
     }
     .solTabs{display:grid;gap:12px}
 
+    /* ✅ Tabs sin “azul eléctrico” */
     .solTab{
       width:100%;
       border-radius:18px;
@@ -477,14 +511,21 @@
       background:#ffffff;
       cursor:pointer;
       display:flex;align-items:center;gap:12px;
-      transition:transform .14s ease, border-color .14s ease, background .14s ease;
+      transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease;
       text-align:left;
+      position:relative;
     }
-    .solTab:hover{transform:translateY(-1px);border-color:rgba(11,47,86,.30)}
+    .solTab:hover{transform:translateY(-1px);border-color:rgba(11,47,86,.28)}
     .solTab.active{
-      background: linear-gradient(90deg, rgba(11,47,86,.10), rgba(42,212,255,.08));
+      background: rgba(11,47,86,.06);
       border-color: rgba(11,47,86,.26);
       box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    .solTab.active:before{
+      content:"";
+      position:absolute;left:10px;top:10px;bottom:10px;width:4px;border-radius:999px;
+      background: linear-gradient(180deg, rgba(34,211,238,.90), rgba(17,214,180,.85));
+      opacity:.9;
     }
 
     .solIcon{
@@ -513,9 +554,7 @@
       gap:22px;
       align-items:center;
     }
-    @media (max-width:980px){
-      .solRight{grid-template-columns:1fr; padding:22px}
-    }
+    @media (max-width:980px){ .solRight{grid-template-columns:1fr; padding:22px} }
 
     .solTitle{
       margin:0 0 8px;
@@ -555,13 +594,13 @@
       padding:12px 16px;border-radius:14px;
       font-weight:950;
       border:1px solid rgba(11,47,86,.18);
-      background: linear-gradient(180deg, rgba(11,47,86,.98), rgba(14,59,107,.96));
-      color:#ffffff;
+      background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.88), rgba(17,214,180,.86));
+      color:#06101f;
       box-shadow:0 16px 40px rgba(0,0,0,.12);
       cursor:pointer;
       transition:transform .16s ease, filter .16s ease;
     }
-    .btnSol:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    .btnSol:hover{transform:translateY(-1px);filter:brightness(1.03)}
     .btnSolGhost{
       background:#ffffff;
       color:rgba(11,47,86,.92);
@@ -569,13 +608,12 @@
       box-shadow:none;
     }
 
-    /* “Imagen” (ilustración) a la derecha */
     .solMedia{
       border-radius:22px;
       border:1px solid rgba(10,16,34,.10);
       background:
-        radial-gradient(520px 260px at 25% 25%, rgba(42,212,255,.22), transparent 60%),
-        radial-gradient(520px 260px at 80% 70%, rgba(0,231,182,.18), transparent 60%),
+        radial-gradient(520px 260px at 25% 25%, rgba(34,211,238,.20), transparent 60%),
+        radial-gradient(520px 260px at 80% 70%, rgba(17,214,180,.16), transparent 60%),
         linear-gradient(180deg, rgba(10,16,34,.06), rgba(10,16,34,.02));
       min-height:320px;
       display:flex;align-items:center;justify-content:center;
@@ -592,14 +630,20 @@
       padding:14px;
       box-shadow: 0 18px 50px rgba(0,0,0,.10);
     }
-    .solMedia svg{width:100%;height:auto;display:block}
-
-    .solNote{
-      margin-top:14px;
-      font-size:13px;
-      color:rgba(10,16,34,.62);
-      line-height:1.6;
+    .solMedia .imgFrame{
+      width: min(420px, 92%);
+      border-radius:18px;
+      border:1px solid rgba(10,16,34,.10);
+      overflow:hidden;
+      box-shadow: 0 18px 50px rgba(0,0,0,.10);
+      background:#fff;
     }
+    .solMedia .imgFrame img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .solNote{margin-top:14px;font-size:13px;color:rgba(10,16,34,.62);line-height:1.6;}
 
     /* ===== MÉTODO ===== */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
@@ -617,8 +661,8 @@
       font-weight:950;
       display:inline-flex;align-items:center;justify-content:center;
       width:32px;height:32px;border-radius:12px;
-      background: rgba(0,231,182,.10);
-      border:1px solid rgba(0,231,182,.22);
+      background: rgba(17,214,180,.10);
+      border:1px solid rgba(17,214,180,.22);
       margin-bottom:10px;
     }
     .step .t{margin:0 0 6px;font-weight:950}
@@ -659,13 +703,11 @@
     }
     .logoMark{
       width:22px;height:22px;border-radius:7px;
-      background: linear-gradient(90deg, rgba(42,212,255,.85), rgba(0,231,182,.80));
-      box-shadow:0 0 20px rgba(42,212,255,.20);
+      background: linear-gradient(90deg, rgba(34,211,238,.85), rgba(17,214,180,.80));
+      box-shadow:0 0 20px rgba(34,211,238,.18);
       flex:0 0 22px;
     }
-    .fadeL,.fadeR{
-      position:absolute;top:0;bottom:0;width:120px;pointer-events:none;z-index:2;
-    }
+    .fadeL,.fadeR{position:absolute;top:0;bottom:0;width:120px;pointer-events:none;z-index:2;}
     .fadeL{left:0;background:linear-gradient(90deg, rgba(2,5,14,.95), transparent)}
     .fadeR{right:0;background:linear-gradient(270deg, rgba(2,5,14,.95), transparent)}
 
@@ -684,7 +726,7 @@
       font-weight:950;
     }
     .gIcon{width:18px;height:18px;display:inline-block}
-    .stars{color:rgba(42,212,255,.95);letter-spacing:1px;font-weight:950}
+    .stars{color:rgba(34,211,238,.95);letter-spacing:1px;font-weight:950}
 
     .slider{
       display:flex;gap:14px;overflow:auto;
@@ -715,7 +757,7 @@
     .cBox{
       position:relative;
       background:
-        radial-gradient(220px 120px at 20% 20%, rgba(42,212,255,.12), transparent 72%),
+        radial-gradient(220px 120px at 20% 20%, rgba(34,211,238,.10), transparent 72%),
         rgba(10,18,38,.56);
       border:1px solid rgba(255,255,255,.11);
       border-radius: 18px;
@@ -754,7 +796,7 @@
     footer:before{
       content:"";
       position:absolute;left:0;right:0;top:0;height:1px;
-      background: linear-gradient(90deg, transparent, rgba(42,212,255,.16), rgba(0,231,182,.12), transparent);
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,.14), rgba(17,214,180,.12), transparent);
       opacity:.9;
     }
 
@@ -786,11 +828,13 @@
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Ir al inicio">
+        <!-- Ajustá la ruta si tu logo está en otro lugar -->
         <img src="assets/brand/logo%20con%20titulo.png" alt="PRISMA BI">
       </a>
 
       <nav class="menu" aria-label="Navegación principal">
         <a class="active" href="#home">Inicio</a>
+        <a href="#quienes">Quiénes somos</a>
         <a href="#entregables">Entregables</a>
         <a href="#metodo">Método</a>
         <a href="#soluciones">Soluciones</a>
@@ -800,7 +844,7 @@
       </nav>
 
       <div class="navRight">
-        <a class="btn btnPrimary" id="cta-main" href="#" target="_blank" rel="noopener">Solicitar diagnóstico</a>
+        <a class="btn btnPrimary" id="cta-main" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
       </div>
     </div>
   </header>
@@ -827,7 +871,7 @@
       </p>
 
       <div class="ctaRow">
-        <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener">Solicitar diagnóstico</a>
+        <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
         <a class="btn" href="#entregables">Ver entregables →</a>
       </div>
 
@@ -849,6 +893,53 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- QUIÉNES SOMOS -->
+  <section id="quienes" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Quiénes somos</h2>
+      <p class="sectionLead">
+        Una consultora orientada a dirección: primero se define el criterio de negocio, después se construye el tablero.
+        El objetivo es reducir incertidumbre y acelerar decisiones.
+      </p>
+
+      <div class="aboutGrid">
+        <div class="videoCard" aria-label="Video presentación Prisma BI">
+          <div class="videoRatio">
+            <!-- OPCIÓN A: YouTube/Vimeo (recomendado por peso y velocidad en GitHub Pages)
+                 Reemplazá el src con tu link (podés ponerlo “no listado”). -->
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
+              title="Presentación Prisma BI"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+
+            <!-- OPCIÓN B: Video local (si realmente querés mp4 en tu repo)
+                 Comentá el iframe y descomentá esto.
+            <video controls poster="assets/media/video-poster.jpg">
+              <source src="assets/media/prisma-intro.mp4" type="video/mp4">
+            </video>
+            -->
+          </div>
+        </div>
+
+        <div class="aboutCard">
+          <h3>Una sola lectura. Un solo mapa.</h3>
+          <p>
+            Prisma BI acompaña a equipos directivos y áreas clave a ordenar datos dispersos y transformarlos en control:
+            métricas comparables, consistentes y accionables.
+          </p>
+          <ul class="aboutBullets">
+            <li><span class="aboutCheck"></span><span><b>Se elimina la ambigüedad:</b> misma definición para todos.</span></li>
+            <li><span class="aboutCheck"></span><span><b>Se reduce el riesgo:</b> controles que evitan “cierres que no cierran”.</span></li>
+            <li><span class="aboutCheck"></span><span><b>Se instala adopción:</b> rutina de lectura para que el tablero se use.</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1076,7 +1167,7 @@
         </div>
         <div class="cBox">
           <p class="t">WhatsApp</p>
-          <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener">Abrir chat</a></p>
+          <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener noreferrer">Abrir chat</a></p>
         </div>
         <div class="cBox">
           <p class="t">Email</p>
@@ -1084,11 +1175,11 @@
         </div>
         <div class="cBox">
           <p class="t">LinkedIn</p>
-          <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">/in/daiana-beltran</a></p>
+          <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener noreferrer">/in/daiana-beltran</a></p>
         </div>
       </div>
 
-      <form class="form" action="#" method="post" aria-label="Formulario de contacto">
+      <form class="form" id="contactForm" action="#" method="post" aria-label="Formulario de contacto">
         <input class="input" type="text" name="nombre" placeholder="Nombre y apellido" required>
         <input class="input" type="text" name="empresa" placeholder="Empresa / Rubro" required>
         <input class="input" type="email" name="email" placeholder="Email" required>
@@ -1133,9 +1224,13 @@
     });
 
     /* ===== WhatsApp links (CTA único) ===== */
-    (function(){
-      const phone = "542996032267";
+    const WA_PHONE = "542996032267";
 
+    function waUrl(text){
+      return "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(text);
+    }
+
+    (function(){
       const msg =
         "Hola 👋 Quiero solicitar un diagnóstico.\n\n" +
         "Empresa/Rubro: ____\n" +
@@ -1145,22 +1240,44 @@
         "Plazo ideal: ____\n\n" +
         "¿Qué día y horario conviene?";
 
-      const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+      const url = waUrl(msg);
 
       ["cta-main","cta-hero","wa-link"].forEach(id=>{
         const el = document.getElementById(id);
         if(el) el.href = url;
       });
 
-      const sendBtn = document.getElementById("send-whatsapp");
-      if(sendBtn){
-        sendBtn.addEventListener("click", ()=> window.open(url, "_blank", "noopener"));
-      }
-
       const solCta = document.getElementById("solCta");
       if(solCta){
         solCta.addEventListener("click", ()=> window.open(url, "_blank", "noopener"));
       }
+    })();
+
+    /* ===== Botón del formulario: arma mensaje con tus inputs ===== */
+    (function(){
+      const form = document.getElementById("contactForm");
+      const sendBtn = document.getElementById("send-whatsapp");
+      if(!form || !sendBtn) return;
+
+      sendBtn.addEventListener("click", ()=>{
+        const fd = new FormData(form);
+        const nombre  = (fd.get("nombre")  || "").toString().trim();
+        const empresa = (fd.get("empresa") || "").toString().trim();
+        const email   = (fd.get("email")   || "").toString().trim();
+        const fuente  = (fd.get("fuente")  || "").toString().trim();
+        const mensaje = (fd.get("mensaje") || "").toString().trim();
+
+        const text =
+          "Hola 👋 Quiero solicitar un diagnóstico.\n\n" +
+          "Nombre: " + (nombre || "—") + "\n" +
+          "Empresa/Rubro: " + (empresa || "—") + "\n" +
+          "Email: " + (email || "—") + "\n" +
+          "Datos hoy: " + (fuente || "—") + "\n\n" +
+          "Situación / decisión a destrabar:\n" + (mensaje || "—") + "\n\n" +
+          "¿Qué día y horario conviene?";
+
+        window.open(waUrl(text), "_blank", "noopener");
+      });
     })();
 
     /* ===== Nav active state ===== */
@@ -1186,8 +1303,9 @@
       sections.forEach(s=>io.observe(s));
     })();
 
-    /* ===== SOLUCIONES (tabs + “imagen” a la derecha) ===== */
+    /* ===== SOLUCIONES (tabs + media) ===== */
     (function(){
+      // ✅ Si querés usar imágenes reales: subilas a /assets/sol/ y poné img:"assets/sol/xxx.jpg"
       const data = [
         {
           tab: "PyMEs",
@@ -1201,8 +1319,9 @@
             "Rutina semanal: qué mirar y qué mover primero"
           ],
           note: "Ideal para empezar: se arma rápido, se entiende fácil y ordena la decisión.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 4h16v16H4z"/><path fill="rgba(42,212,255,.95)" d="M7 15h2V9H7zm4 0h2V6h-2zm4 0h2V11h-2z"/></svg>`,
-          media: dashboardFrame()
+          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 4h16v16H4z"/><path fill="rgba(34,211,238,.95)" d="M7 15h2V9H7zm4 0h2V6h-2zm4 0h2V11h-2z"/></svg>`,
+          media: dashboardFrame(),
+          img: "" // ej: "assets/sol/pymes.jpg"
         },
         {
           tab: "Petróleo & Energía",
@@ -1216,8 +1335,9 @@
             "Indicadores HSE (seguridad) y cumplimiento"
           ],
           note: "En Neuquén esto es clave: sin lectura única, se pierde plata en silencios.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path fill="rgba(0,231,182,.95)" d="M10 14h4v2h-4z"/></svg>`,
-          media: oilFrame()
+          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path fill="rgba(17,214,180,.95)" d="M10 14h4v2h-4z"/></svg>`,
+          media: oilFrame(),
+          img: ""
         },
         {
           tab: "Finanzas",
@@ -1231,8 +1351,9 @@
             "Centralización contable desde múltiples fuentes"
           ],
           note: "La dirección necesita señales: no un Excel eterno.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2l7 4v12l-7 4-7-4V6z"/><path fill="rgba(42,212,255,.95)" d="M10 8h4v2h-4zm0 4h4v2h-4z"/></svg>`,
-          media: financeFrame()
+          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2l7 4v12l-7 4-7-4V6z"/><path fill="rgba(34,211,238,.95)" d="M10 8h4v2h-4zm0 4h4v2h-4z"/></svg>`,
+          media: financeFrame(),
+          img: ""
         },
         {
           tab: "Comercial",
@@ -1247,7 +1368,8 @@
           ],
           note: "La venta sin margen es trabajo sin resultado.",
           icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 18V6h2v12zm4 0V9h2v9zm4 0V4h2v14zm4 0v-7h2v7z"/></svg>`,
-          media: salesFrame()
+          media: salesFrame(),
+          img: ""
         },
         {
           tab: "Operaciones",
@@ -1261,8 +1383,9 @@
             "Calidad y reprocesos"
           ],
           note: "Más velocidad sin perder control.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M7 2h10v4H7z"/><path fill="rgba(0,231,182,.95)" d="M6 8h12v14H6z"/><path fill="rgba(11,47,86,.95)" d="M9 11h6v2H9zm0 4h6v2H9z"/></svg>`,
-          media: opsFrame()
+          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M7 2h10v4H7z"/><path fill="rgba(17,214,180,.95)" d="M6 8h12v14H6z"/><path fill="rgba(11,47,86,.95)" d="M9 11h6v2H9zm0 4h6v2H9z"/></svg>`,
+          media: opsFrame(),
+          img: ""
         },
         {
           tab: "RRHH",
@@ -1276,8 +1399,9 @@
             "Comparación entre equipos/áreas/sedes"
           ],
           note: "Una estructura sana se mide: lo que no se ve, se deteriora.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M16 11a4 4 0 1 0-8 0c0 2.2 1.8 4 4 4s4-1.8 4-4z"/><path fill="rgba(42,212,255,.95)" d="M4 22c0-4 4-6 8-6s8 2 8 6z"/></svg>`,
-          media: hrFrame()
+          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M16 11a4 4 0 1 0-8 0c0 2.2 1.8 4 4 4s4-1.8 4-4z"/><path fill="rgba(34,211,238,.95)" d="M4 22c0-4 4-6 8-6s8 2 8 6z"/></svg>`,
+          media: hrFrame(),
+          img: ""
         }
       ];
 
@@ -1297,7 +1421,12 @@
         descEl.textContent = item.desc;
         bulletsEl.innerHTML = item.bullets.map(b => `<li><span class="solCheck"></span><span>${b}</span></li>`).join("");
         noteEl.textContent = item.note;
-        mediaEl.innerHTML = `<div class="frame">${item.media}</div>`;
+
+        if(item.img && item.img.trim().length){
+          mediaEl.innerHTML = `<div class="imgFrame"><img src="${item.img}" alt="" loading="lazy"></div>`;
+        } else {
+          mediaEl.innerHTML = `<div class="frame">${item.media}</div>`;
+        }
 
         Array.from(tabsEl.querySelectorAll(".solTab")).forEach((t,i)=>{
           t.classList.toggle("active", i === idx);
@@ -1322,28 +1451,26 @@
 
       render(0);
 
-      /* ===== “Frames” (ilustraciones inline, para que siempre haya imagen a la derecha) ===== */
+      /* ===== SVG frames (fallback, si no subís imágenes) ===== */
       function dashboardFrame(){
         return `
           <svg viewBox="0 0 520 320" aria-hidden="true">
             <defs>
               <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(42,212,255,.95)"/>
-                <stop offset="1" stop-color="rgba(0,231,182,.90)"/>
+                <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+                <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
               </linearGradient>
             </defs>
             <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
             <rect x="40" y="44" width="190" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="240" y="44" width="120" height="24" rx="12" fill="rgba(0,231,182,.12)"/>
-            <rect x="368" y="44" width="110" height="24" rx="12" fill="rgba(42,212,255,.12)"/>
-
+            <rect x="240" y="44" width="120" height="24" rx="12" fill="rgba(17,214,180,.12)"/>
+            <rect x="368" y="44" width="110" height="24" rx="12" fill="rgba(34,211,238,.12)"/>
             <rect x="40" y="92" width="200" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
             <rect x="254" y="92" width="224" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
-
             <rect x="40" y="198" width="438" height="84" rx="14" fill="rgba(11,47,86,.06)"/>
             <path d="M68 254 C120 220, 170 268, 220 236 C270 204, 320 264, 364 226 C404 194, 440 214, 466 206" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="220" cy="236" r="6" fill="rgba(42,212,255,.95)"/>
-            <circle cx="364" cy="226" r="6" fill="rgba(0,231,182,.95)"/>
+            <circle cx="220" cy="236" r="6" fill="rgba(34,211,238,.95)"/>
+            <circle cx="364" cy="226" r="6" fill="rgba(17,214,180,.95)"/>
           </svg>`;
       }
       function oilFrame(){
@@ -1352,7 +1479,7 @@
             <defs>
               <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
-                <stop offset="1" stop-color="rgba(0,231,182,.90)"/>
+                <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
               </linearGradient>
             </defs>
             <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
@@ -1363,8 +1490,8 @@
             <path d="M96 258 V196 h18 v62" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
             <path d="M136 258 V178 h18 v80" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
             <path d="M176 258 V212 h18 v46" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M320 226 C350 196, 386 256, 430 210" fill="none" stroke="rgba(42,212,255,.90)" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="430" cy="210" r="6" fill="rgba(42,212,255,.95)"/>
+            <path d="M320 226 C350 196, 386 256, 430 210" fill="none" stroke="rgba(34,211,238,.90)" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="430" cy="210" r="6" fill="rgba(34,211,238,.95)"/>
           </svg>`;
       }
       function financeFrame(){
@@ -1372,7 +1499,7 @@
           <svg viewBox="0 0 520 320" aria-hidden="true">
             <defs>
               <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(42,212,255,.95)"/>
+                <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
                 <stop offset="1" stop-color="rgba(11,47,86,.95)"/>
               </linearGradient>
             </defs>
@@ -1381,7 +1508,7 @@
             <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
             <path d="M70 248 L130 210 L190 228 L250 176 L310 208 L370 150 L450 178" fill="none" stroke="url(#g3)" stroke-width="6" stroke-linecap="round"/>
             <path d="M70 248 L450 248" stroke="rgba(10,16,34,.14)" stroke-width="2"/>
-            <circle cx="370" cy="150" r="6" fill="rgba(0,231,182,.95)"/>
+            <circle cx="370" cy="150" r="6" fill="rgba(17,214,180,.95)"/>
           </svg>`;
       }
       function salesFrame(){
@@ -1389,8 +1516,8 @@
           <svg viewBox="0 0 520 320" aria-hidden="true">
             <defs>
               <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(0,231,182,.95)"/>
-                <stop offset="1" stop-color="rgba(42,212,255,.95)"/>
+                <stop offset="0" stop-color="rgba(17,214,180,.95)"/>
+                <stop offset="1" stop-color="rgba(34,211,238,.95)"/>
               </linearGradient>
             </defs>
             <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
@@ -1410,7 +1537,7 @@
             <defs>
               <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
-                <stop offset="1" stop-color="rgba(42,212,255,.90)"/>
+                <stop offset="1" stop-color="rgba(34,211,238,.90)"/>
               </linearGradient>
             </defs>
             <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
@@ -1418,9 +1545,9 @@
             <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
             <rect x="40" y="160" width="438" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
             <path d="M74 222 h120" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M74 252 h220" stroke="rgba(0,231,182,.90)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M74 252 h220" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
             <path d="M320 222 h130" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M320 252 h90" stroke="rgba(0,231,182,.90)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M320 252 h90" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
           </svg>`;
       }
       function hrFrame(){
@@ -1428,8 +1555,8 @@
           <svg viewBox="0 0 520 320" aria-hidden="true">
             <defs>
               <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(42,212,255,.95)"/>
-                <stop offset="1" stop-color="rgba(0,231,182,.90)"/>
+                <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+                <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
               </linearGradient>
             </defs>
             <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
@@ -1444,7 +1571,7 @@
       }
     })();
 
-    /* ===== NET CANVAS (✅ más rápido + líneas más claras + más dinámico) ===== */
+    /* ===== NET CANVAS (más dinámico) ===== */
     (function(){
       const c = document.getElementById("net");
       if(!c) return;
@@ -1460,12 +1587,12 @@
         base: 56,
         density: 50000,
         maxDist: 165,
-        speed: 0.70,       // ✅ más rápido (antes 0.35)
+        speed: 0.70,
         nodeRadius: 1.35,
         nodeAlpha: 0.92,
-        lineAlpha: 0.28,   // ✅ líneas más visibles (antes 0.20)
+        lineAlpha: 0.26,
         glow: true,
-        glowStrength: 20,
+        glowStrength: 18,
         attract: 0.030
       };
 
@@ -1500,21 +1627,12 @@
       window.addEventListener("resize", resize, { passive:true });
       window.addEventListener("mousemove", onPointerMove, { passive:true });
       window.addEventListener("mouseleave", onPointerLeave, { passive:true });
-      window.addEventListener("touchstart", (e)=>{
-        if(!e.touches || !e.touches[0]) return;
-        onPointerMove(e.touches[0]);
-      }, { passive:true });
-      window.addEventListener("touchmove", (e)=>{
-        if(!e.touches || !e.touches[0]) return;
-        onPointerMove(e.touches[0]);
-      }, { passive:true });
-      window.addEventListener("touchend", onPointerLeave, { passive:true });
 
       function draw(){
         ctx.clearRect(0,0,W,H);
 
         if(cfg.glow){
-          ctx.shadowColor = "rgba(42,212,255,.35)";
+          ctx.shadowColor = "rgba(34,211,238,.30)";
           ctx.shadowBlur = cfg.glowStrength;
         } else ctx.shadowBlur = 0;
 
@@ -1529,7 +1647,6 @@
             }
           }
 
-          /* limiter suave */
           n.vx = Math.max(-1.4, Math.min(1.4, n.vx));
           n.vy = Math.max(-1.4, Math.min(1.4, n.vy));
 
@@ -1567,14 +1684,12 @@
                     const d = Math.sqrt(dx*dx + dy*dy);
                     if(d < cfg.maxDist){
                       const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
-
-                      /* ✅ más “dinámico”: líneas más gruesas cuando están cerca */
-                      const w = 0.6 + (1 - d/cfg.maxDist) * 1.2;
+                      const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
                       ctx.lineWidth = w;
 
                       const g = ctx.createLinearGradient(n.x,n.y,m.x,m.y);
-                      g.addColorStop(0, `rgba(42,212,255,${a})`);
-                      g.addColorStop(1, `rgba(0,231,182,${a})`);
+                      g.addColorStop(0, `rgba(34,211,238,${a})`);
+                      g.addColorStop(1, `rgba(17,214,180,${a})`);
                       ctx.strokeStyle = g;
                       ctx.beginPath();
                       ctx.moveTo(n.x,n.y);
@@ -1606,3 +1721,4 @@
 
 </body>
 </html>
+
