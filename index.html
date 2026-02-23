@@ -472,16 +472,27 @@
 
     /* ===== SOLUCIONES ===== */
     .secLight{
-      background:
-        radial-gradient(900px 520px at 20% 10%, rgba(11,47,86,.10), transparent 55%),
-        radial-gradient(900px 520px at 80% 20%, rgba(17,214,180,.08), transparent 60%),
-        #f5f7fb;
-      color:#0a1022;
-      position:relative;
-    }
-    .secLight:before,.secLight:after{display:none}
-    .secLight .sectionTitle{color:#0a1022;text-shadow:none}
-    .secLight .sectionLead{color:rgba(10,16,34,.70)}
+  background:
+    radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
+    radial-gradient(900px 520px at 78% 22%, rgba(17,214,180,.08), transparent 62%),
+    linear-gradient(180deg, rgba(4,10,24,.92), rgba(2,5,14,.98));
+  color: var(--text);
+  position: relative;
+}
+
+.secLight:before,
+.secLight:after{
+  display:block;
+}
+
+.secLight .sectionTitle{
+  color: var(--text);
+  text-shadow: 0 18px 46px rgba(0,0,0,.30);
+}
+
+.secLight .sectionLead{
+  color: rgba(244,248,255,.68);
+}
 
     .solutionsWrap{
       max-width:1160px;margin:0 auto;
@@ -1587,7 +1598,7 @@
         base: 56,
         density: 50000,
         maxDist: 165,
-        speed: 0.70,
+        speed: 2.6,
         nodeRadius: 1.35,
         nodeAlpha: 0.92,
         lineAlpha: 0.26,
