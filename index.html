@@ -883,7 +883,6 @@
       </a>
 
       <nav class="menu" aria-label="Navegación principal">
-        <a class="active" href="#home">Inicio</a>
         <a href="#quienes">Quiénes somos</a>
         <a href="#entregables">Entregables</a>
         <a href="#metodo">Método</a>
@@ -1621,154 +1620,191 @@
       }
     })();
 
-    /* ===== NET CANVAS (más dinámico) ===== */
-    (function(){
-      const c = document.getElementById("net");
-      if(!c) return;
-      const ctx = c.getContext("2d", { alpha: true });
+  <!-- ===== NET CANVAS (más dinámico + más brillo + destellos) ===== -->
+<script>
+(function(){
+  const c = document.getElementById("net");
+  if(!c) return;
+  const ctx = c.getContext("2d", { alpha: true });
 
-      const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if(prefersReduce) return;
+  const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(prefersReduce) return;
 
-      let W=0,H=0,DPR=1, nodes=[], raf=0;
-      const pointer = { x: 0, y: 0, active: false };
+  let W=0,H=0,DPR=1, nodes=[], raf=0;
+  const pointer = { x: 0, y: 0, active: false };
 
-      const cfg = {
-        base: 56,
-        density: 50000,
-        maxDist: 165,
-        speed: 2.6,
-        nodeRadius: 1.35,
-        nodeAlpha: 0.92,
-        lineAlpha: 0.26,
-        glow: true,
-        glowStrength: 18,
-        attract: 0.030
-      };
+  const cfg = {
+    base: 56,
+    density: 50000,
+    maxDist: 185,        // más conexiones
+    speed: 2.6,
+    nodeRadius: 1.45,
+    nodeAlpha: 1.00,     // más brillante
+    lineAlpha: 0.42,     // líneas más visibles
+    glow: true,
+    glowStrength: 28,    // más glow
+    attract: 0.030,
 
-      function resize(){
-        const r = c.parentElement.getBoundingClientRect();
-        DPR = Math.min(2, window.devicePixelRatio || 1);
-        W = Math.max(1, Math.floor(r.width));
-        H = Math.max(1, Math.floor(r.height));
-        c.width = Math.floor(W*DPR);
-        c.height = Math.floor(H*DPR);
-        c.style.width = W+"px";
-        c.style.height = H+"px";
-        ctx.setTransform(DPR,0,0,DPR,0,0);
+    // ✨ Destellos (premium)
+    sparkChance: 0.08,   // probabilidad por frame (ajustá 0.05–0.12)
+    sparksPerFrame: 2,   // cantidad de intentos por frame
+    sparkMinR: 2.2,
+    sparkMaxR: 3.6,
+    sparkBlur: 26
+  };
 
-        const count = Math.floor(cfg.base + (W*H)/cfg.density);
-        nodes = new Array(count).fill(0).map(()=>({
-          x: Math.random()*W,
-          y: Math.random()*H,
-          vx: (Math.random()*2-1)*cfg.speed,
-          vy: (Math.random()*2-1)*cfg.speed
-        }));
+  let t0 = performance.now();
+
+  function resize(){
+    const r = c.parentElement.getBoundingClientRect();
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = Math.max(1, Math.floor(r.width));
+    H = Math.max(1, Math.floor(r.height));
+    c.width = Math.floor(W*DPR);
+    c.height = Math.floor(H*DPR);
+    c.style.width = W+"px";
+    c.style.height = H+"px";
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+
+    const count = Math.floor(cfg.base + (W*H)/cfg.density);
+    nodes = new Array(count).fill(0).map(()=>({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      vx: (Math.random()*2-1)*cfg.speed,
+      vy: (Math.random()*2-1)*cfg.speed
+    }));
+  }
+
+  function onPointerMove(e){
+    const rect = c.getBoundingClientRect();
+    pointer.x = e.clientX - rect.left;
+    pointer.y = e.clientY - rect.top;
+    pointer.active = true;
+  }
+  function onPointerLeave(){ pointer.active = false; }
+
+  window.addEventListener("resize", resize, { passive:true });
+  window.addEventListener("mousemove", onPointerMove, { passive:true });
+  window.addEventListener("mouseleave", onPointerLeave, { passive:true });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    const t = (performance.now() - t0) / 1000;
+
+    if(cfg.glow){
+      ctx.shadowColor = "rgba(34,211,238,.42)"; // más fuerte que antes
+      ctx.shadowBlur = cfg.glowStrength;
+    } else ctx.shadowBlur = 0;
+
+    // mover nodos
+    for(const n of nodes){
+      if(pointer.active){
+        const dx = pointer.x - n.x;
+        const dy = pointer.y - n.y;
+        const d2 = dx*dx + dy*dy;
+        if(d2 < 240*240){
+          n.vx += dx * cfg.attract / 240;
+          n.vy += dy * cfg.attract / 240;
+        }
       }
 
-      function onPointerMove(e){
-        const rect = c.getBoundingClientRect();
-        pointer.x = e.clientX - rect.left;
-        pointer.y = e.clientY - rect.top;
-        pointer.active = true;
-      }
-      function onPointerLeave(){ pointer.active = false; }
+      n.vx = Math.max(-1.4, Math.min(1.4, n.vx));
+      n.vy = Math.max(-1.4, Math.min(1.4, n.vy));
 
-      window.addEventListener("resize", resize, { passive:true });
-      window.addEventListener("mousemove", onPointerMove, { passive:true });
-      window.addEventListener("mouseleave", onPointerLeave, { passive:true });
+      n.x += n.vx; n.y += n.vy;
+      if(n.x < 0 || n.x > W) n.vx *= -1;
+      if(n.y < 0 || n.y > H) n.vy *= -1;
+      n.x = Math.max(0, Math.min(W, n.x));
+      n.y = Math.max(0, Math.min(H, n.y));
+    }
 
-      function draw(){
-        ctx.clearRect(0,0,W,H);
+    // buckets
+    const cell = cfg.maxDist;
+    const cols = Math.ceil(W/cell);
+    const rows = Math.ceil(H/cell);
+    const buckets = new Array(cols*rows);
+    for(let i=0;i<buckets.length;i++) buckets[i]=[];
+    for(const n of nodes){
+      const cx = Math.floor(n.x/cell);
+      const cy = Math.floor(n.y/cell);
+      buckets[cx + cy*cols].push(n);
+    }
 
-        if(cfg.glow){
-          ctx.shadowColor = "rgba(34,211,238,.30)";
-          ctx.shadowBlur = cfg.glowStrength;
-        } else ctx.shadowBlur = 0;
+    // líneas
+    for(let cy=0;cy<rows;cy++){
+      for(let cx=0;cx<cols;cx++){
+        const b = buckets[cx + cy*cols];
+        for(const n of b){
+          for(let oy=-1;oy<=1;oy++){
+            for(let ox=-1;ox<=1;ox++){
+              const nx = cx+ox, ny = cy+oy;
+              if(nx<0||ny<0||nx>=cols||ny>=rows) continue;
+              const b2 = buckets[nx + ny*cols];
+              for(const m of b2){
+                if(m===n) continue;
+                const dx = n.x - m.x;
+                const dy = n.y - m.y;
+                const d = Math.sqrt(dx*dx + dy*dy);
+                if(d < cfg.maxDist){
+                  const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
+                  const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
+                  ctx.lineWidth = w;
 
-        for(const n of nodes){
-          if(pointer.active){
-            const dx = pointer.x - n.x;
-            const dy = pointer.y - n.y;
-            const d2 = dx*dx + dy*dy;
-            if(d2 < 240*240){
-              n.vx += dx * cfg.attract / 240;
-              n.vy += dy * cfg.attract / 240;
-            }
-          }
+                  const g = ctx.createLinearGradient(n.x,n.y,m.x,m.y);
+                  g.addColorStop(0, `rgba(34,211,238,${a})`);
+                  g.addColorStop(1, `rgba(17,214,180,${a})`);
+                  ctx.strokeStyle = g;
 
-          n.vx = Math.max(-1.4, Math.min(1.4, n.vx));
-          n.vy = Math.max(-1.4, Math.min(1.4, n.vy));
-
-          n.x += n.vx; n.y += n.vy;
-          if(n.x < 0 || n.x > W) n.vx *= -1;
-          if(n.y < 0 || n.y > H) n.vy *= -1;
-          n.x = Math.max(0, Math.min(W, n.x));
-          n.y = Math.max(0, Math.min(H, n.y));
-        }
-
-        const cell = cfg.maxDist;
-        const cols = Math.ceil(W/cell);
-        const rows = Math.ceil(H/cell);
-        const buckets = new Array(cols*rows);
-        for(let i=0;i<buckets.length;i++) buckets[i]=[];
-        for(const n of nodes){
-          const cx = Math.floor(n.x/cell);
-          const cy = Math.floor(n.y/cell);
-          buckets[cx + cy*cols].push(n);
-        }
-
-        for(let cy=0;cy<rows;cy++){
-          for(let cx=0;cx<cols;cx++){
-            const b = buckets[cx + cy*cols];
-            for(const n of b){
-              for(let oy=-1;oy<=1;oy++){
-                for(let ox=-1;ox<=1;ox++){
-                  const nx = cx+ox, ny = cy+oy;
-                  if(nx<0||ny<0||nx>=cols||ny>=rows) continue;
-                  const b2 = buckets[nx + ny*cols];
-                  for(const m of b2){
-                    if(m===n) continue;
-                    const dx = n.x - m.x;
-                    const dy = n.y - m.y;
-                    const d = Math.sqrt(dx*dx + dy*dy);
-                    if(d < cfg.maxDist){
-                      const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
-                      const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
-                      ctx.lineWidth = w;
-
-                      const g = ctx.createLinearGradient(n.x,n.y,m.x,m.y);
-                      g.addColorStop(0, `rgba(34,211,238,${a})`);
-                      g.addColorStop(1, `rgba(17,214,180,${a})`);
-                      ctx.strokeStyle = g;
-                      ctx.beginPath();
-                      ctx.moveTo(n.x,n.y);
-                      ctx.lineTo(m.x,m.y);
-                      ctx.stroke();
-                    }
-                  }
+                  ctx.beginPath();
+                  ctx.moveTo(n.x,n.y);
+                  ctx.lineTo(m.x,m.y);
+                  ctx.stroke();
                 }
               }
             }
           }
         }
-
-        ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
-        for(const n of nodes){
-          ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
-          ctx.beginPath();
-          ctx.arc(n.x,n.y,cfg.nodeRadius,0,Math.PI*2);
-          ctx.fill();
-        }
-
-        raf = requestAnimationFrame(draw);
       }
+    }
 
-      resize(); draw();
-      window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
-    })();
-  </script>
+    // nodos
+    ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
+    for(const n of nodes){
+      ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,cfg.nodeRadius,0,Math.PI*2);
+      ctx.fill();
+    }
 
-</body>
-</html>
+    // ✨ Destellos / chispas
+    for(let i=0;i<cfg.sparksPerFrame;i++){
+      if(Math.random() < cfg.sparkChance){
+        const n = nodes[(Math.random()*nodes.length)|0];
+        const pulse = 0.55 + 0.45*Math.sin(t*10 + Math.random()*6.283);
+
+        ctx.save();
+        ctx.globalCompositeOperation = "lighter";
+        ctx.shadowColor = "rgba(34,211,238,.75)";
+        ctx.shadowBlur = cfg.sparkBlur;
+
+        const r = cfg.sparkMinR + (cfg.sparkMaxR - cfg.sparkMinR)*pulse;
+        ctx.fillStyle = `rgba(34,211,238,${0.35 + 0.25*pulse})`;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize(); draw();
+  window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
+})();
+</script>
+  </body> 
+  </html>
 
