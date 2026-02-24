@@ -636,7 +636,7 @@
 .solRight{
   padding:34px 34px;
   display:grid;
-  grid-template-columns: 1.05fr .95fr;
+  grid-template-columns: 1fr 1.1fr;
   gap:28px;
   align-items:center;
 }
@@ -724,7 +724,7 @@
     radial-gradient(520px 260px at 25% 25%, rgba(34,211,238,.14), transparent 60%),
     radial-gradient(520px 260px at 80% 70%, rgba(17,214,180,.10), transparent 60%),
     rgba(10,18,38,.42);
-  min-height:340px;
+  min-height:420px;
   padding:16px;
   display:flex;align-items:center;justify-content:center;
   position:relative;
@@ -734,7 +734,7 @@
 
 /* Frame interno también oscuro para que “no corte” */
 .solMedia .frame{
-  width:min(340px, 92%);
+  width:min(520px, 96%);
   border-radius:20px;
   background: rgba(8,14,30,.40);
   border:1px solid rgba(255,255,255,.10);
@@ -745,7 +745,7 @@
 
 /* Si usás imágenes reales */
 .solMedia .imgFrame{
-  width: min(460px, 92%);
+  width: min(560px, 96%);
   border-radius:20px;
   border:1px solid rgba(255,255,255,.10);
   overflow:hidden;
@@ -1188,8 +1188,6 @@
             <p class="solDesc" id="solDesc"></p>
             <ul class="solBullets" id="solBullets"></ul>
             <div class="solActions">
-              <button class="btnSol" type="button" id="solCta">Descubrir solución</button>
-              <a class="btnSol btnSolGhost" href="#contacto">Hablar por WhatsApp</a>
             </div>
             <p class="solNote" id="solNote"></p>
           </div>
