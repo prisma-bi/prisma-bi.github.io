@@ -1352,275 +1352,269 @@
       sections.forEach(s=>io.observe(s));
     })();
 
-    /* ===== SOLUCIONES (tabs + media) ===== */
-    (function(){
-      // ✅ Si querés usar imágenes reales: subilas a /assets/sol/ y poné img:"assets/sol/xxx.jpg"
-      const data = [
-        {
-          tab: "PyMEs",
-          sub: "Orden & control",
-          title: "Lleve el control de su PyME con claridad y foco en resultados",
-          desc: "Centralice datos sueltos (Excel / sistema / facturación) para ver margen, costos, ventas y caja en un tablero simple.",
-          bullets: [
-            "Ventas, costos y margen por producto/cliente/canal",
-            "Desvíos y “fugas” (descuentos, costos ocultos, desperdicio)",
-            "Top pérdidas y prioridades de acción",
-            "Rutina semanal: qué mirar y qué mover primero"
-          ],
-          note: "Ideal para empezar: se arma rápido, se entiende fácil y ordena la decisión.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 4h16v16H4z"/><path fill="rgba(34,211,238,.95)" d="M7 15h2V9H7zm4 0h2V6h-2zm4 0h2V11h-2z"/></svg>`,
-          media: dashboardFrame(),
-          img: "" // ej: "assets/sol/pymes.jpg"
-        },
-        {
-          tab: "Petróleo & Energía",
-          sub: "Operación & costos",
-          title: "Visibilidad ejecutiva para operación, costos y performance (Oil & Gas)",
-          desc: "Tableros para gerencia: producción, costos operativos, mantenimiento, seguridad y cumplimiento en una lectura única.",
-          bullets: [
-            "Costos por unidad / frente / contratista (y desvíos)",
-            "Disponibilidad de equipos (uptime) y paradas",
-            "Mantenimiento: preventivo vs correctivo",
-            "Indicadores HSE (seguridad) y cumplimiento"
-          ],
-          note: "En Neuquén esto es clave: sin lectura única, se pierde plata en silencios.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path fill="rgba(17,214,180,.95)" d="M10 14h4v2h-4z"/></svg>`,
-          media: oilFrame(),
-          img: ""
-        },
-        {
-          tab: "Finanzas",
-          sub: "Cashflow & proyección",
-          title: "Controle finanzas con información precisa y proyecciones claras",
-          desc: "FP&A práctico: caja, cobranza, pagos, escenarios y señales tempranas para decidir antes de que apriete.",
-          bullets: [
-            "Cashflow y liquidez continua",
-            "Forecast con escenarios ajustables",
-            "Rentabilidad por unidad / proyecto / período",
-            "Centralización contable desde múltiples fuentes"
-          ],
-          note: "La dirección necesita señales: no un Excel eterno.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2l7 4v12l-7 4-7-4V6z"/><path fill="rgba(34,211,238,.95)" d="M10 8h4v2h-4zm0 4h4v2h-4z"/></svg>`,
-          media: financeFrame(),
-          img: ""
-        },
-        {
-          tab: "Comercial",
-          sub: "Ventas & rentabilidad",
-          title: "Ventas con lectura real: qué deja margen y qué lo consume",
-          desc: "De “facturar más” a “ganar mejor”: mix, descuentos, margen por cliente y producto, y foco de acción.",
-          bullets: [
-            "Margen por producto/cliente/canal",
-            "Descuento efectivo y erosión de rentabilidad",
-            "Cohortes: retención, recurrencia y ticket",
-            "Objetivos y señales por semana"
-          ],
-          note: "La venta sin margen es trabajo sin resultado.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 18V6h2v12zm4 0V9h2v9zm4 0V4h2v14zm4 0v-7h2v7z"/></svg>`,
-          media: salesFrame(),
-          img: ""
-        },
-        {
-          tab: "Operaciones",
-          sub: "Productividad & SLA",
-          title: "Operaciones con control: capacidad, cuellos de botella y tiempos",
-          desc: "Indicadores de proceso para ver saturación, retrasos y eficiencia sin discusión de números.",
-          bullets: [
-            "Lead time / tiempos por etapa",
-            "Capacidad vs demanda (y saturación)",
-            "Cuellos de botella por turno / zona",
-            "Calidad y reprocesos"
-          ],
-          note: "Más velocidad sin perder control.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M7 2h10v4H7z"/><path fill="rgba(17,214,180,.95)" d="M6 8h12v14H6z"/><path fill="rgba(11,47,86,.95)" d="M9 11h6v2H9zm0 4h6v2H9z"/></svg>`,
-          media: opsFrame(),
-          img: ""
-        },
-        {
-          tab: "RRHH",
-          sub: "Talento & desempeño",
-          title: "Analítica de RRHH para estructura, rotación y desempeño",
-          desc: "Visualice indicadores para entender dinámica interna, optimizar procesos y fortalecer decisiones.",
-          bullets: [
-            "Ausentismo y causas asociadas",
-            "Rotación, permanencia y engagement",
-            "Eficiencia en selección, desarrollo y retención",
-            "Comparación entre equipos/áreas/sedes"
-          ],
-          note: "Una estructura sana se mide: lo que no se ve, se deteriora.",
-          icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M16 11a4 4 0 1 0-8 0c0 2.2 1.8 4 4 4s4-1.8 4-4z"/><path fill="rgba(34,211,238,.95)" d="M4 22c0-4 4-6 8-6s8 2 8 6z"/></svg>`,
-          media: hrFrame(),
-          img: ""
-        }
-      ];
+   <!-- ===== SOLUCIONES (tabs + media) ===== -->
+<script>
+(function(){
+  // ✅ Si querés usar imágenes reales: subilas a /assets/sol/ y poné img:"assets/sol/xxx.jpg"
+  const data = [
+    {
+      tab: "PyMEs",
+      sub: "Orden & control",
+      title: "Lleve el control de su PyME con claridad y foco en resultados",
+      desc: "Centralice datos sueltos (Excel / sistema / facturación) para ver margen, costos, ventas y caja en un tablero simple.",
+      bullets: [
+        "Ventas, costos y margen por producto/cliente/canal",
+        "Desvíos y “fugas” (descuentos, costos ocultos, desperdicio)",
+        "Top pérdidas y prioridades de acción",
+        "Rutina semanal: qué mirar y qué mover primero"
+      ],
+      note: "Ideal para empezar: se arma rápido, se entiende fácil y ordena la decisión.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 4h16v16H4z"/><path fill="rgba(34,211,238,.95)" d="M7 15h2V9H7zm4 0h2V6h-2zm4 0h2V11h-2z"/></svg>`,
+      media: dashboardFrame(),
+      img: ""
+    },
+    {
+      tab: "Petróleo & Energía",
+      sub: "Operación & costos",
+      title: "Visibilidad ejecutiva para operación, costos y performance (Oil & Gas)",
+      desc: "Tableros para gerencia: producción, costos operativos, mantenimiento, seguridad y cumplimiento en una lectura única.",
+      bullets: [
+        "Costos por unidad / frente / contratista (y desvíos)",
+        "Disponibilidad de equipos (uptime) y paradas",
+        "Mantenimiento: preventivo vs correctivo",
+        "Indicadores HSE (seguridad) y cumplimiento"
+      ],
+      note: "En Neuquén esto es clave: sin lectura única, se pierde plata en silencios.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path fill="rgba(17,214,180,.95)" d="M10 14h4v2h-4z"/></svg>`,
+      media: oilFrame(),
+      img: ""
+    },
+    {
+      tab: "Finanzas",
+      sub: "Cashflow & proyección",
+      title: "Controle finanzas con información precisa y proyecciones claras",
+      desc: "FP&A práctico: caja, cobranza, pagos, escenarios y señales tempranas para decidir antes de que apriete.",
+      bullets: [
+        "Cashflow y liquidez continua",
+        "Forecast con escenarios ajustables",
+        "Rentabilidad por unidad / proyecto / período",
+        "Centralización contable desde múltiples fuentes"
+      ],
+      note: "La dirección necesita señales: no un Excel eterno.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2l7 4v12l-7 4-7-4V6z"/><path fill="rgba(34,211,238,.95)" d="M10 8h4v2h-4zm0 4h4v2h-4z"/></svg>`,
+      media: financeFrame(),
+      img: ""
+    },
+    {
+      tab: "Comercial",
+      sub: "Ventas & rentabilidad",
+      title: "Ventas con lectura real: qué deja margen y qué lo consume",
+      desc: "De “facturar más” a “ganar mejor”: mix, descuentos, margen por cliente y producto, y foco de acción.",
+      bullets: [
+        "Margen por producto/cliente/canal",
+        "Descuento efectivo y erosión de rentabilidad",
+        "Cohortes: retención, recurrencia y ticket",
+        "Objetivos y señales por semana"
+      ],
+      note: "La venta sin margen es trabajo sin resultado.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 18V6h2v12zm4 0V9h2v9zm4 0V4h2v14zm4 0v-7h2v7z"/></svg>`,
+      media: salesFrame(),
+      img: ""
+    },
+    {
+      tab: "Operaciones",
+      sub: "Productividad & SLA",
+      title: "Operaciones con control: capacidad, cuellos de botella y tiempos",
+      desc: "Indicadores de proceso para ver saturación, retrasos y eficiencia sin discusión de números.",
+      bullets: [
+        "Lead time / tiempos por etapa",
+        "Capacidad vs demanda (y saturación)",
+        "Cuellos de botella por turno / zona",
+        "Calidad y reprocesos"
+      ],
+      note: "Más velocidad sin perder control.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M7 2h10v4H7z"/><path fill="rgba(17,214,180,.95)" d="M6 8h12v14H6z"/><path fill="rgba(11,47,86,.95)" d="M9 11h6v2H9zm0 4h6v2H9z"/></svg>`,
+      media: opsFrame(),
+      img: ""
+    },
+    {
+      tab: "RRHH",
+      sub: "Talento & desempeño",
+      title: "Analítica de RRHH para estructura, rotación y desempeño",
+      desc: "Visualice indicadores para entender dinámica interna, optimizar procesos y fortalecer decisiones.",
+      bullets: [
+        "Ausentismo y causas asociadas",
+        "Rotación, permanencia y engagement",
+        "Eficiencia en selección, desarrollo y retención",
+        "Comparación entre equipos/áreas/sedes"
+      ],
+      note: "Una estructura sana se mide: lo que no se ve, se deteriora.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M16 11a4 4 0 1 0-8 0c0 2.2 1.8 4 4 4s4-1.8 4-4z"/><path fill="rgba(34,211,238,.95)" d="M4 22c0-4 4-6 8-6s8 2 8 6z"/></svg>`,
+      media: hrFrame(),
+      img: ""
+    }
+  ];
 
-      const tabsEl = document.getElementById("solTabs");
-      const titleEl = document.getElementById("solTitle");
-      const descEl = document.getElementById("solDesc");
-      const bulletsEl = document.getElementById("solBullets");
-      const noteEl = document.getElementById("solNote");
-      const mediaEl = document.getElementById("solMedia");
+  const tabsEl = document.getElementById("solTabs");
+  const titleEl = document.getElementById("solTitle");
+  const descEl = document.getElementById("solDesc");
+  const bulletsEl = document.getElementById("solBullets");
+  const noteEl = document.getElementById("solNote");
+  const mediaEl = document.getElementById("solMedia");
 
-      if(!tabsEl || !titleEl || !bulletsEl || !noteEl || !mediaEl || !descEl) return;
+  if(!tabsEl || !titleEl || !bulletsEl || !noteEl || !mediaEl || !descEl) return;
 
-      function render(idx){
-        const item = data[idx];
+  function render(idx){
+    const item = data[idx];
+    titleEl.textContent = item.title;
+    descEl.textContent = item.desc;
+    bulletsEl.innerHTML = item.bullets.map(b => `<li><span class="solCheck"></span><span>${b}</span></li>`).join("");
+    noteEl.textContent = item.note;
 
-        titleEl.textContent = item.title;
-        descEl.textContent = item.desc;
-        bulletsEl.innerHTML = item.bullets.map(b => `<li><span class="solCheck"></span><span>${b}</span></li>`).join("");
-        noteEl.textContent = item.note;
+    if(item.img && item.img.trim().length){
+      mediaEl.innerHTML = `<div class="imgFrame"><img src="${item.img}" alt="" loading="lazy"></div>`;
+    } else {
+      mediaEl.innerHTML = `<div class="frame">${item.media}</div>`;
+    }
 
-        if(item.img && item.img.trim().length){
-          mediaEl.innerHTML = `<div class="imgFrame"><img src="${item.img}" alt="" loading="lazy"></div>`;
-        } else {
-          mediaEl.innerHTML = `<div class="frame">${item.media}</div>`;
-        }
+    Array.from(tabsEl.querySelectorAll(".solTab")).forEach((t,i)=>{
+      t.classList.toggle("active", i === idx);
+    });
+  }
 
-        Array.from(tabsEl.querySelectorAll(".solTab")).forEach((t,i)=>{
-          t.classList.toggle("active", i === idx);
-        });
-      }
+  tabsEl.innerHTML = data.map((d,i)=>`
+    <button class="solTab ${i===0?'active':''}" type="button" data-i="${i}">
+      <span class="solIcon">${d.icon}</span>
+      <span class="solText">
+        <b>${d.tab}</b>
+        <small>${d.sub}</small>
+      </span>
+    </button>
+  `).join("");
 
-      tabsEl.innerHTML = data.map((d,i)=>`
-        <button class="solTab ${i===0?'active':''}" type="button" data-i="${i}">
-          <span class="solIcon">${d.icon}</span>
-          <span class="solText">
-            <b>${d.tab}</b>
-            <small>${d.sub}</small>
-          </span>
-        </button>
-      `).join("");
+  tabsEl.addEventListener("click", (e)=>{
+    const btn = e.target.closest(".solTab");
+    if(!btn) return;
+    render(parseInt(btn.dataset.i, 10));
+  });
 
-      tabsEl.addEventListener("click", (e)=>{
-        const btn = e.target.closest(".solTab");
-        if(!btn) return;
-        render(parseInt(btn.dataset.i, 10));
-      });
+  render(0);
 
-      render(0);
+  /* ===== SVG frames (fallback, si no subís imágenes) ===== */
+  function dashboardFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+          <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="190" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="240" y="44" width="120" height="24" rx="12" fill="rgba(17,214,180,.12)"/>
+      <rect x="368" y="44" width="110" height="24" rx="12" fill="rgba(34,211,238,.12)"/>
+      <rect x="40" y="92" width="200" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="254" y="92" width="224" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="40" y="198" width="438" height="84" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M68 254 C120 220, 170 268, 220 236 C270 204, 320 264, 364 226 C404 194, 440 214, 466 206" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="220" cy="236" r="6" fill="rgba(34,211,238,.95)"/>
+      <circle cx="364" cy="226" r="6" fill="rgba(17,214,180,.95)"/>
+    </svg>`; }
 
-      /* ===== SVG frames (fallback, si no subís imágenes) ===== */
-      function dashboardFrame(){
-        return `
-          <svg viewBox="0 0 520 320" aria-hidden="true">
-            <defs>
-              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
-                <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
-              </linearGradient>
-            </defs>
-            <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
-            <rect x="40" y="44" width="190" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="240" y="44" width="120" height="24" rx="12" fill="rgba(17,214,180,.12)"/>
-            <rect x="368" y="44" width="110" height="24" rx="12" fill="rgba(34,211,238,.12)"/>
-            <rect x="40" y="92" width="200" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
-            <rect x="254" y="92" width="224" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
-            <rect x="40" y="198" width="438" height="84" rx="14" fill="rgba(11,47,86,.06)"/>
-            <path d="M68 254 C120 220, 170 268, 220 236 C270 204, 320 264, 364 226 C404 194, 440 214, 466 206" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="220" cy="236" r="6" fill="rgba(34,211,238,.95)"/>
-            <circle cx="364" cy="226" r="6" fill="rgba(17,214,180,.95)"/>
-          </svg>`;
-      }
-      function oilFrame(){
-        return `
-          <svg viewBox="0 0 520 320" aria-hidden="true">
-            <defs>
-              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
-                <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
-              </linearGradient>
-            </defs>
-            <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
-            <rect x="40" y="44" width="220" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
-            <rect x="40" y="160" width="210" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
-            <rect x="268" y="160" width="210" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
-            <path d="M96 258 V196 h18 v62" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M136 258 V178 h18 v80" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M176 258 V212 h18 v46" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M320 226 C350 196, 386 256, 430 210" fill="none" stroke="rgba(34,211,238,.90)" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="430" cy="210" r="6" fill="rgba(34,211,238,.95)"/>
-          </svg>`;
-      }
-      function financeFrame(){
-        return `
-          <svg viewBox="0 0 520 320" aria-hidden="true">
-            <defs>
-              <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
-                <stop offset="1" stop-color="rgba(11,47,86,.95)"/>
-              </linearGradient>
-            </defs>
-            <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
-            <rect x="40" y="44" width="200" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
-            <path d="M70 248 L130 210 L190 228 L250 176 L310 208 L370 150 L450 178" fill="none" stroke="url(#g3)" stroke-width="6" stroke-linecap="round"/>
-            <path d="M70 248 L450 248" stroke="rgba(10,16,34,.14)" stroke-width="2"/>
-            <circle cx="370" cy="150" r="6" fill="rgba(17,214,180,.95)"/>
-          </svg>`;
-      }
-      function salesFrame(){
-        return `
-          <svg viewBox="0 0 520 320" aria-hidden="true">
-            <defs>
-              <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(17,214,180,.95)"/>
-                <stop offset="1" stop-color="rgba(34,211,238,.95)"/>
-              </linearGradient>
-            </defs>
-            <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
-            <rect x="40" y="44" width="170" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
-            <rect x="80" y="208" width="40" height="48" rx="10" fill="url(#g4)"/>
-            <rect x="140" y="188" width="40" height="68" rx="10" fill="url(#g4)"/>
-            <rect x="200" y="160" width="40" height="96" rx="10" fill="url(#g4)"/>
-            <rect x="260" y="182" width="40" height="74" rx="10" fill="url(#g4)"/>
-            <rect x="320" y="146" width="40" height="110" rx="10" fill="url(#g4)"/>
-            <rect x="380" y="172" width="40" height="84" rx="10" fill="url(#g4)"/>
-          </svg>`;
-      }
-      function opsFrame(){
-        return `
-          <svg viewBox="0 0 520 320" aria-hidden="true">
-            <defs>
-              <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
-                <stop offset="1" stop-color="rgba(34,211,238,.90)"/>
-              </linearGradient>
-            </defs>
-            <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
-            <rect x="40" y="44" width="230" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
-            <rect x="40" y="160" width="438" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
-            <path d="M74 222 h120" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M74 252 h220" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M320 222 h130" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
-            <path d="M320 252 h90" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
-          </svg>`;
-      }
-      function hrFrame(){
-        return `
-          <svg viewBox="0 0 520 320" aria-hidden="true">
-            <defs>
-              <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
-                <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
-              </linearGradient>
-            </defs>
-            <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
-            <rect x="40" y="44" width="220" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
-            <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
-            <circle cx="170" cy="170" r="34" fill="url(#g6)" opacity=".85"/>
-            <circle cx="260" cy="156" r="28" fill="rgba(11,47,86,.90)" opacity=".20"/>
-            <circle cx="335" cy="178" r="30" fill="url(#g6)" opacity=".75"/>
-            <path d="M130 238c18-24 70-24 88 0" fill="none" stroke="rgba(11,47,86,.25)" stroke-width="6" stroke-linecap="round"/>
-            <path d="M304 238c16-22 62-22 78 0" fill="none" stroke="rgba(11,47,86,.25)" stroke-width="6" stroke-linecap="round"/>
-          </svg>`;
-      }
-    })();
+  function oilFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
+          <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="220" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="40" y="160" width="210" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="268" y="160" width="210" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M96 258 V196 h18 v62" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M136 258 V178 h18 v80" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M176 258 V212 h18 v46" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 226 C350 196, 386 256, 430 210" fill="none" stroke="rgba(34,211,238,.90)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="430" cy="210" r="6" fill="rgba(34,211,238,.95)"/>
+    </svg>`; }
 
-  <!-- ===== NET CANVAS (más dinámico + más brillo + destellos) ===== -->
+  function financeFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+          <stop offset="1" stop-color="rgba(11,47,86,.95)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="200" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M70 248 L130 210 L190 228 L250 176 L310 208 L370 150 L450 178" fill="none" stroke="url(#g3)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M70 248 L450 248" stroke="rgba(10,16,34,.14)" stroke-width="2"/>
+      <circle cx="370" cy="150" r="6" fill="rgba(17,214,180,.95)"/>
+    </svg>`; }
+
+  function salesFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(17,214,180,.95)"/>
+          <stop offset="1" stop-color="rgba(34,211,238,.95)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="170" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="80" y="208" width="40" height="48" rx="10" fill="url(#g4)"/>
+      <rect x="140" y="188" width="40" height="68" rx="10" fill="url(#g4)"/>
+      <rect x="200" y="160" width="40" height="96" rx="10" fill="url(#g4)"/>
+      <rect x="260" y="182" width="40" height="74" rx="10" fill="url(#g4)"/>
+      <rect x="320" y="146" width="40" height="110" rx="10" fill="url(#g4)"/>
+      <rect x="380" y="172" width="40" height="84" rx="10" fill="url(#g4)"/>
+    </svg>`; }
+
+  function opsFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
+          <stop offset="1" stop-color="rgba(34,211,238,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="230" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="40" y="160" width="438" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M74 222 h120" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M74 252 h220" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 222 h130" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 252 h90" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
+    </svg>`; }
+
+  function hrFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+          <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="220" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
+      <circle cx="170" cy="170" r="34" fill="url(#g6)" opacity=".85"/>
+      <circle cx="260" cy="156" r="28" fill="rgba(11,47,86,.90)" opacity=".20"/>
+      <circle cx="335" cy="178" r="30" fill="url(#g6)" opacity=".75"/>
+      <path d="M130 238c18-24 70-24 88 0" fill="none" stroke="rgba(11,47,86,.25)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M304 238c16-22 62-22 78 0" fill="none" stroke="rgba(11,47,86,.25)" stroke-width="6" stroke-linecap="round"/>
+    </svg>`; }
+})();
+</script>
+
+<!-- ===== NET CANVAS (más dinámico + más brillo + destellos) ===== -->
 <script>
 (function(){
   const c = document.getElementById("net");
@@ -1636,18 +1630,18 @@
   const cfg = {
     base: 56,
     density: 50000,
-    maxDist: 185,        // más conexiones
+    maxDist: 185,
     speed: 2.6,
     nodeRadius: 1.45,
-    nodeAlpha: 1.00,     // más brillante
-    lineAlpha: 0.42,     // líneas más visibles
+    nodeAlpha: 1.00,
+    lineAlpha: 0.42,
     glow: true,
-    glowStrength: 28,    // más glow
+    glowStrength: 28,
     attract: 0.030,
 
     // ✨ Destellos (premium)
-    sparkChance: 0.08,   // probabilidad por frame (ajustá 0.05–0.12)
-    sparksPerFrame: 2,   // cantidad de intentos por frame
+    sparkChance: 0.08,
+    sparksPerFrame: 2,
     sparkMinR: 2.2,
     sparkMaxR: 3.6,
     sparkBlur: 26
@@ -1689,15 +1683,13 @@
 
   function draw(){
     ctx.clearRect(0,0,W,H);
-
     const t = (performance.now() - t0) / 1000;
 
     if(cfg.glow){
-      ctx.shadowColor = "rgba(34,211,238,.42)"; // más fuerte que antes
+      ctx.shadowColor = "rgba(34,211,238,.42)";
       ctx.shadowBlur = cfg.glowStrength;
     } else ctx.shadowBlur = 0;
 
-    // mover nodos
     for(const n of nodes){
       if(pointer.active){
         const dx = pointer.x - n.x;
@@ -1708,7 +1700,6 @@
           n.vy += dy * cfg.attract / 240;
         }
       }
-
       n.vx = Math.max(-1.4, Math.min(1.4, n.vx));
       n.vy = Math.max(-1.4, Math.min(1.4, n.vy));
 
@@ -1719,7 +1710,6 @@
       n.y = Math.max(0, Math.min(H, n.y));
     }
 
-    // buckets
     const cell = cfg.maxDist;
     const cols = Math.ceil(W/cell);
     const rows = Math.ceil(H/cell);
@@ -1731,7 +1721,6 @@
       buckets[cx + cy*cols].push(n);
     }
 
-    // líneas
     for(let cy=0;cy<rows;cy++){
       for(let cx=0;cx<cols;cx++){
         const b = buckets[cx + cy*cols];
@@ -1768,7 +1757,6 @@
       }
     }
 
-    // nodos
     ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
     for(const n of nodes){
       ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
@@ -1777,7 +1765,6 @@
       ctx.fill();
     }
 
-    // ✨ Destellos / chispas
     for(let i=0;i<cfg.sparksPerFrame;i++){
       if(Math.random() < cfg.sparkChance){
         const n = nodes[(Math.random()*nodes.length)|0];
@@ -1805,6 +1792,6 @@
   window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
 })();
 </script>
-  </body> 
-  </html>
+</body>
+</html>
 
