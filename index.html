@@ -108,21 +108,55 @@
       color:rgba(244,248,255,.70);
       font-weight:800;font-size:13px;
     }
-    /* TOPBAR: links + iconos */
-.chipLink{ 
-  cursor:pointer; 
-  transition: transform .16s ease, filter .16s ease, border-color .16s ease;
+/* TOPBAR: links + iconos */
+.chipLink{
+  cursor:pointer;
+  transition: transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
 }
+
 .chipLink:hover{
   border-color: rgba(34,211,238,.22);
   filter: brightness(1.08);
   transform: translateY(-1px);
+  background: rgba(10,18,38,.48);
 }
+
 .chipIco{
-  width:16px;height:16px;
+  width:16px;
+  height:16px;
   opacity:.92;
 }
 
+/* WhatsApp chip (verde) */
+.chipWA{
+  background: rgba(16,185,129,.14);
+  border-color: rgba(16,185,129,.30);
+  color: rgba(244,248,255,.92);
+}
+.chipWA .dot{
+  background: linear-gradient(90deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
+  box-shadow: 0 0 18px rgba(34,197,94,.22);
+}
+.chipWA:hover{
+  border-color: rgba(34,197,94,.45);
+  background: rgba(16,185,129,.18);
+}
+
+/* LinkedIn chip (azul) */
+.chipLI{
+  background: rgba(59,130,246,.14);
+  border-color: rgba(59,130,246,.30);
+  color: rgba(244,248,255,.92);
+}
+.chipLI .dot{
+  background: linear-gradient(90deg, rgba(59,130,246,.95), rgba(34,211,238,.92));
+  box-shadow: 0 0 18px rgba(59,130,246,.20);
+}
+.chipLI:hover{
+  border-color: rgba(59,130,246,.45);
+  background: rgba(59,130,246,.18);
+}
+    
     /* ===== HEADER / NAV ===== */
     header{
       position:sticky; top:44px; z-index:65;
@@ -874,32 +908,41 @@
 
 <body>
 
-  <!-- TOPBAR (pro: iconos + confianza) -->
+<!-- TOPBAR (solo botones: WhatsApp + LinkedIn) -->
 <div class="topbar">
   <div class="container topbarInner">
     <div class="chips" aria-label="Contacto rápido">
-      <a class="chip chipLink" href="https://wa.me/542996032267" target="_blank" rel="noopener" aria-label="WhatsApp Prisma BI">
+
+      <!-- WhatsApp (verde, sin teléfono visible) -->
+      <a class="chip chipLink chipWA"
+         href="https://wa.me/542996032267"
+         target="_blank" rel="noopener"
+         aria-label="WhatsApp Prisma BI">
         <span class="dot"></span>
-        <!-- WhatsApp icon -->
         <svg class="chipIco" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M20.52 3.48A11.86 11.86 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.11.55 4.17 1.6 5.99L0 24l6.2-1.63A11.9 11.9 0 0 0 12.02 24C18.63 24 24 18.62 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12.02 22.02c-1.86 0-3.69-.5-5.29-1.45l-.38-.23-3.68.97.98-3.59-.25-.37A9.95 9.95 0 0 1 2.02 12c0-5.51 4.48-9.99 10-9.99 2.67 0 5.18 1.04 7.07 2.93A9.92 9.92 0 0 1 22.01 12c0 5.51-4.48 10.02-9.99 10.02Zm5.8-7.48c-.32-.16-1.9-.94-2.19-1.05-.29-.11-.5-.16-.71.16-.21.32-.82 1.05-1 1.26-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.54-.71-.55h-.61c-.21 0-.55.08-.84.4-.29.32-1.1 1.07-1.1 2.61 0 1.54 1.13 3.03 1.29 3.24.16.21 2.22 3.39 5.38 4.76.75.32 1.33.51 1.79.66.75.24 1.43.21 1.97.13.6-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.61-.37Z"/>
         </svg>
-        WhatsApp: <b id="chip-wa">+54 299 6 032 267</b>
+        WhatsApp
       </a>
 
-      <a class="chip chipLink" href="https://www.linkedin.com/in/TU-USUARIO/" target="_blank" rel="noopener" aria-label="LinkedIn Prisma BI">
-        <!-- LinkedIn icon -->
+      <!-- LinkedIn (azul) -->
+      <a class="chip chipLink chipLI"
+         href="https://www.linkedin.com/in/daiana-beltran/"
+         target="_blank" rel="noopener"
+         aria-label="LinkedIn Daiana Beltrán">
+        <span class="dot"></span>
         <svg class="chipIco" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.35-1.86 3.58 0 4.24 2.36 4.24 5.43v6.32ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/>
         </svg>
         LinkedIn
       </a>
+
     </div>
 
-    <div class="topbarRight" aria-label="Nota">
-      <span class="chip"><span class="dot"></span> Respuesta en el día</span>
-    </div>
+    <!-- derecha vacía para no sumar más cosas -->
+    <div class="topbarRight" aria-label="Nota"></div>
   </div>
+</div>
 </div>
 
   <!-- NAV -->
