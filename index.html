@@ -533,7 +533,7 @@
     }
     .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-   /* ===== SOLUCIONES (Premium Dark / Corporate) ===== */
+/* ===== SOLUCIONES (Premium Dark / Corporate) — OPTIMIZADO (más aire) ===== */
 .secLight{
   background:
     radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
@@ -555,7 +555,8 @@
 
 /* Wrap oscuro (sin blanco) */
 .solutionsWrap{
-  max-width:1160px;margin:0 auto;
+  max-width:1160px;
+  margin:0 auto;
   border-radius:26px;
   background:
     radial-gradient(520px 260px at 18% 18%, rgba(34,211,238,.10), transparent 62%),
@@ -618,11 +619,11 @@
 }
 .solIcon svg{width:22px;height:22px;opacity:.95}
 
-.solText{display:flex;flex-direction:column;gap:2px;min-width:0}
+.solText{display:flex;flex-direction:column;gap:3px;min-width:0}
 .solText b{
   font-weight:950;
   color: rgba(244,248,255,.92);
-  font-size:14px;line-height:1.2;
+  font-size:14px;line-height:1.25;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .solText small{
@@ -631,53 +632,70 @@
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
-/* Columna derecha en tonos del sitio */
+/* ===== Columna derecha (MÁS AIRE) ===== */
 .solRight{
-  padding:30px 30px;
+  padding:34px 34px;
   display:grid;
   grid-template-columns: 1.05fr .95fr;
-  gap:22px;
+  gap:28px;
   align-items:center;
 }
-@media (max-width:980px){ .solRight{grid-template-columns:1fr; padding:22px} }
+@media (max-width:980px){
+  .solRight{
+    grid-template-columns:1fr;
+    padding:24px;
+    gap:18px;
+  }
+}
 
+/* Títulos y texto con mejor respiro */
 .solTitle{
-  margin:0 0 8px;
+  margin:0 0 10px;
   font-size: clamp(22px, 2.3vw, 34px);
   font-weight:950;
   letter-spacing:-.02em;
   color: rgba(244,248,255,.96);
-  line-height:1.12;
+  line-height:1.08;
 }
 .solDesc{
-  margin:0 0 16px;
+  margin:0 0 18px;
   color: rgba(244,248,255,.70);
-  line-height:1.65;
+  line-height:1.75;
   font-size:15px;
-  max-width:60ch;
+  max-width:62ch;
 }
 
+/* Bullets con separación */
 .solBullets{
-  margin:0;padding:0;list-style:none;
-  display:grid;gap:10px;
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:12px;
   color: rgba(244,248,255,.84);
-  line-height:1.55;
+  line-height:1.65;
   font-size:15px;
 }
-.solBullets li{display:flex;gap:10px;align-items:flex-start}
+.solBullets li{display:flex;gap:12px;align-items:flex-start}
 .solCheck{
   width:18px;height:18px;border-radius:999px;
   background: rgba(34,211,238,.10);
   border:1px solid rgba(34,211,238,.22);
-  display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+  display:grid;place-items:center;flex:0 0 18px;margin-top:3px;
 }
 .solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-/* Botones */
-.solActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+/* Botones con más padding */
+.solActions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
 .btnSol{
   display:inline-flex;align-items:center;justify-content:center;
-  padding:12px 16px;border-radius:14px;
+  padding:13px 18px;
+  border-radius:16px;
   font-weight:950;
   border:1px solid rgba(255,255,255,.10);
   background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.88), rgba(17,214,180,.86));
@@ -689,6 +707,8 @@
 .btnSol:hover{transform:translateY(-1px);filter:brightness(1.03)}
 
 .btnSolGhost{
+  padding:13px 18px;
+  border-radius:16px;
   background: rgba(10,18,38,.36);
   color: rgba(244,248,255,.88);
   border:1px solid rgba(255,255,255,.12);
@@ -696,7 +716,7 @@
 }
 .btnSolGhost:hover{filter:brightness(1.08)}
 
-/* Media dark (sin blanco) */
+/* Media dark (más aire, más alto) */
 .solMedia{
   border-radius:22px;
   border:1px solid rgba(255,255,255,.10);
@@ -704,7 +724,8 @@
     radial-gradient(520px 260px at 25% 25%, rgba(34,211,238,.14), transparent 60%),
     radial-gradient(520px 260px at 80% 70%, rgba(17,214,180,.10), transparent 60%),
     rgba(10,18,38,.42);
-  min-height:320px;
+  min-height:340px;
+  padding:16px;
   display:flex;align-items:center;justify-content:center;
   position:relative;
   overflow:hidden;
@@ -714,7 +735,7 @@
 /* Frame interno también oscuro para que “no corte” */
 .solMedia .frame{
   width:min(340px, 92%);
-  border-radius:18px;
+  border-radius:20px;
   background: rgba(8,14,30,.40);
   border:1px solid rgba(255,255,255,.10);
   backdrop-filter: blur(10px);
@@ -724,8 +745,8 @@
 
 /* Si usás imágenes reales */
 .solMedia .imgFrame{
-  width: min(420px, 92%);
-  border-radius:18px;
+  width: min(460px, 92%);
+  border-radius:20px;
   border:1px solid rgba(255,255,255,.10);
   overflow:hidden;
   box-shadow: 0 18px 50px rgba(0,0,0,.25);
@@ -737,11 +758,12 @@
   display:block;
 }
 
+/* Nota */
 .solNote{
-  margin-top:14px;
+  margin-top:16px;
   font-size:13px;
   color: rgba(244,248,255,.58);
-  line-height:1.6;
+  line-height:1.65;
 }
     /* ===== MÉTODO ===== */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
