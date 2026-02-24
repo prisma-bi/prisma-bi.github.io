@@ -485,8 +485,8 @@
     }
     .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-    /* ===== SOLUCIONES ===== */
-    .secLight{
+   /* ===== SOLUCIONES (Premium Dark / Corporate) ===== */
+.secLight{
   background:
     radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
     radial-gradient(900px 520px at 78% 22%, rgba(17,214,180,.08), transparent 62%),
@@ -496,181 +496,205 @@
 }
 
 .secLight:before,
-.secLight:after{
-  display:block;
-}
+.secLight:after{ display:block; }
 
 .secLight .sectionTitle{
   color: var(--text);
   text-shadow: 0 18px 46px rgba(0,0,0,.30);
 }
 
-.secLight .sectionLead{
-  color: rgba(244,248,255,.68);
+.secLight .sectionLead{ color: rgba(244,248,255,.68); }
+
+/* Wrap oscuro (sin blanco) */
+.solutionsWrap{
+  max-width:1160px;margin:0 auto;
+  border-radius:26px;
+  background:
+    radial-gradient(520px 260px at 18% 18%, rgba(34,211,238,.10), transparent 62%),
+    radial-gradient(520px 260px at 82% 82%, rgba(17,214,180,.08), transparent 62%),
+    rgba(10,18,38,.56);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: 0 22px 80px rgba(0,0,0,.32);
+  overflow:hidden;
+  display:grid;
+  grid-template-columns: 360px 1fr;
+}
+@media (max-width:980px){ .solutionsWrap{grid-template-columns:1fr} }
+
+/* Columna izquierda dark */
+.solLeft{
+  background: rgba(8,14,30,.38);
+  border-right:1px solid rgba(255,255,255,.08);
+  padding:18px;
+}
+.solTabs{display:grid;gap:12px}
+
+/* Tabs dark premium */
+.solTab{
+  width:100%;
+  border-radius:18px;
+  padding:14px 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(10,18,38,.42);
+  cursor:pointer;
+  display:flex;align-items:center;gap:12px;
+  transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease, filter .14s ease;
+  text-align:left;
+  position:relative;
+  color: rgba(244,248,255,.90);
+}
+.solTab:hover{
+  transform:translateY(-1px);
+  border-color:rgba(34,211,238,.22);
+  filter:brightness(1.06);
+}
+.solTab.active{
+  background: rgba(10,18,38,.62);
+  border-color: rgba(34,211,238,.22);
+  box-shadow: 0 10px 30px rgba(0,0,0,.20);
+}
+.solTab.active:before{
+  content:"";
+  position:absolute;left:10px;top:10px;bottom:10px;width:4px;border-radius:999px;
+  background: linear-gradient(180deg, rgba(34,211,238,.92), rgba(17,214,180,.88));
+  opacity:.95;
 }
 
-    .solutionsWrap{
-      max-width:1160px;margin:0 auto;
-      border-radius:26px;
-      background:#ffffff;
-      border:1px solid rgba(10,16,34,.10);
-      box-shadow:0 18px 70px rgba(0,0,0,.10);
-      overflow:hidden;
-      display:grid;
-      grid-template-columns: 360px 1fr;
-    }
-    @media (max-width:980px){ .solutionsWrap{grid-template-columns:1fr} }
+/* Icono queda igual, pero más “glass” */
+.solIcon{
+  width:44px;height:44px;border-radius:14px;
+  background: linear-gradient(180deg, rgba(244,248,255,.06), rgba(244,248,255,.02));
+  border:1px solid rgba(255,255,255,.10);
+  display:grid;place-items:center;
+  flex:0 0 44px;
+}
+.solIcon svg{width:22px;height:22px;opacity:.95}
 
-    .solLeft{
-      background:#f1f4f8;
-      border-right:1px solid rgba(10,16,34,.08);
-      padding:18px;
-    }
-    .solTabs{display:grid;gap:12px}
+.solText{display:flex;flex-direction:column;gap:2px;min-width:0}
+.solText b{
+  font-weight:950;
+  color: rgba(244,248,255,.92);
+  font-size:14px;line-height:1.2;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.solText small{
+  color: rgba(244,248,255,.62);
+  font-weight:800;font-size:12px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
 
-    /* ✅ Tabs sin “azul eléctrico” */
-    .solTab{
-      width:100%;
-      border-radius:18px;
-      padding:14px 14px;
-      border:1px solid rgba(10,16,34,.10);
-      background:#ffffff;
-      cursor:pointer;
-      display:flex;align-items:center;gap:12px;
-      transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease;
-      text-align:left;
-      position:relative;
-    }
-    .solTab:hover{transform:translateY(-1px);border-color:rgba(11,47,86,.28)}
-    .solTab.active{
-      background: rgba(11,47,86,.06);
-      border-color: rgba(11,47,86,.26);
-      box-shadow: 0 10px 30px rgba(0,0,0,.06);
-    }
-    .solTab.active:before{
-      content:"";
-      position:absolute;left:10px;top:10px;bottom:10px;width:4px;border-radius:999px;
-      background: linear-gradient(180deg, rgba(34,211,238,.90), rgba(17,214,180,.85));
-      opacity:.9;
-    }
+/* Columna derecha en tonos del sitio */
+.solRight{
+  padding:30px 30px;
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:22px;
+  align-items:center;
+}
+@media (max-width:980px){ .solRight{grid-template-columns:1fr; padding:22px} }
 
-    .solIcon{
-      width:44px;height:44px;border-radius:14px;
-      background: linear-gradient(180deg, rgba(11,47,86,.10), rgba(11,47,86,.04));
-      border:1px solid rgba(11,47,86,.14);
-      display:grid;place-items:center;
-      flex:0 0 44px;
-    }
-    .solIcon svg{width:22px;height:22px;opacity:.95}
+.solTitle{
+  margin:0 0 8px;
+  font-size: clamp(22px, 2.3vw, 34px);
+  font-weight:950;
+  letter-spacing:-.02em;
+  color: rgba(244,248,255,.96);
+  line-height:1.12;
+}
+.solDesc{
+  margin:0 0 16px;
+  color: rgba(244,248,255,.70);
+  line-height:1.65;
+  font-size:15px;
+  max-width:60ch;
+}
 
-    .solText{display:flex;flex-direction:column;gap:2px;min-width:0}
-    .solText b{
-      font-weight:950;color:#0a1022;font-size:14px;line-height:1.2;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-    .solText small{
-      color:rgba(10,16,34,.62);font-weight:800;font-size:12px;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
+.solBullets{
+  margin:0;padding:0;list-style:none;
+  display:grid;gap:10px;
+  color: rgba(244,248,255,.84);
+  line-height:1.55;
+  font-size:15px;
+}
+.solBullets li{display:flex;gap:10px;align-items:flex-start}
+.solCheck{
+  width:18px;height:18px;border-radius:999px;
+  background: rgba(34,211,238,.10);
+  border:1px solid rgba(34,211,238,.22);
+  display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+}
+.solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-    .solRight{
-      padding:30px 30px;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:22px;
-      align-items:center;
-    }
-    @media (max-width:980px){ .solRight{grid-template-columns:1fr; padding:22px} }
+/* Botones */
+.solActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btnSol{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 16px;border-radius:14px;
+  font-weight:950;
+  border:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.88), rgba(17,214,180,.86));
+  color:#06101f;
+  box-shadow:0 16px 40px rgba(0,0,0,.18);
+  cursor:pointer;
+  transition:transform .16s ease, filter .16s ease;
+}
+.btnSol:hover{transform:translateY(-1px);filter:brightness(1.03)}
 
-    .solTitle{
-      margin:0 0 8px;
-      font-size: clamp(22px, 2.3vw, 34px);
-      font-weight:950;
-      letter-spacing:-.02em;
-      color:#0a1022;
-      line-height:1.12;
-    }
-    .solDesc{
-      margin:0 0 16px;
-      color:rgba(10,16,34,.72);
-      line-height:1.65;
-      font-size:15px;
-      max-width:60ch;
-    }
+.btnSolGhost{
+  background: rgba(10,18,38,.36);
+  color: rgba(244,248,255,.88);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:none;
+}
+.btnSolGhost:hover{filter:brightness(1.08)}
 
-    .solBullets{
-      margin:0;padding:0;list-style:none;
-      display:grid;gap:10px;
-      color:rgba(10,16,34,.82);
-      line-height:1.55;
-      font-size:15px;
-    }
-    .solBullets li{display:flex;gap:10px;align-items:flex-start}
-    .solCheck{
-      width:18px;height:18px;border-radius:999px;
-      background: rgba(11,47,86,.08);
-      border:1px solid rgba(11,47,86,.20);
-      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
-    }
-    .solCheck:before{content:"✓";font-weight:950;color:rgba(11,47,86,.95);font-size:12px}
+/* Media dark (sin blanco) */
+.solMedia{
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(520px 260px at 25% 25%, rgba(34,211,238,.14), transparent 60%),
+    radial-gradient(520px 260px at 80% 70%, rgba(17,214,180,.10), transparent 60%),
+    rgba(10,18,38,.42);
+  min-height:320px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow: 0 16px 50px rgba(0,0,0,.22);
+}
 
-    .solActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .btnSol{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 16px;border-radius:14px;
-      font-weight:950;
-      border:1px solid rgba(11,47,86,.18);
-      background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.88), rgba(17,214,180,.86));
-      color:#06101f;
-      box-shadow:0 16px 40px rgba(0,0,0,.12);
-      cursor:pointer;
-      transition:transform .16s ease, filter .16s ease;
-    }
-    .btnSol:hover{transform:translateY(-1px);filter:brightness(1.03)}
-    .btnSolGhost{
-      background:#ffffff;
-      color:rgba(11,47,86,.92);
-      border:1px solid rgba(11,47,86,.18);
-      box-shadow:none;
-    }
+/* Frame interno también oscuro para que “no corte” */
+.solMedia .frame{
+  width:min(340px, 92%);
+  border-radius:18px;
+  background: rgba(8,14,30,.40);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
+  padding:14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.25);
+}
 
-    .solMedia{
-      border-radius:22px;
-      border:1px solid rgba(10,16,34,.10);
-      background:
-        radial-gradient(520px 260px at 25% 25%, rgba(34,211,238,.20), transparent 60%),
-        radial-gradient(520px 260px at 80% 70%, rgba(17,214,180,.16), transparent 60%),
-        linear-gradient(180deg, rgba(10,16,34,.06), rgba(10,16,34,.02));
-      min-height:320px;
-      display:flex;align-items:center;justify-content:center;
-      position:relative;
-      overflow:hidden;
-      box-shadow: 0 16px 50px rgba(0,0,0,.08);
-    }
-    .solMedia .frame{
-      width:min(340px, 92%);
-      border-radius:18px;
-      background: rgba(255,255,255,.72);
-      border:1px solid rgba(10,16,34,.10);
-      backdrop-filter: blur(10px);
-      padding:14px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.10);
-    }
-    .solMedia .imgFrame{
-      width: min(420px, 92%);
-      border-radius:18px;
-      border:1px solid rgba(10,16,34,.10);
-      overflow:hidden;
-      box-shadow: 0 18px 50px rgba(0,0,0,.10);
-      background:#fff;
-    }
-    .solMedia .imgFrame img{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-    .solNote{margin-top:14px;font-size:13px;color:rgba(10,16,34,.62);line-height:1.6;}
+/* Si usás imágenes reales */
+.solMedia .imgFrame{
+  width: min(420px, 92%);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  overflow:hidden;
+  box-shadow: 0 18px 50px rgba(0,0,0,.25);
+  background: rgba(10,18,38,.42);
+}
+.solMedia .imgFrame img{
+  width:100%;
+  height:auto;
+  display:block;
+}
 
+.solNote{
+  margin-top:14px;
+  font-size:13px;
+  color: rgba(244,248,255,.58);
+  line-height:1.6;
+}
     /* ===== MÉTODO ===== */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
     @media (max-width:980px){ .steps{grid-template-columns:1fr} }
