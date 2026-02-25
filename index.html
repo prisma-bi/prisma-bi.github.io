@@ -963,6 +963,30 @@
     gap: 16px !important;
   }
 }
+/* ===== PATCH: Tabs (Soluciones) texto más grande y legible ===== */
+.solTab{
+  padding: 16px 16px !important;     /* más aire */
+  padding-left: 28px !important;     /* mantiene look del activo */
+  border-radius: 16px !important;
+}
+
+.solText b{
+  font-size: 15.5px !important;      /* antes 13.5 */
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.solText small{
+  font-size: 12.5px !important;      /* antes 11.5 */
+  line-height: 1.25 !important;
+  margin-top: 2px !important;
+  opacity: .85 !important;
+}
+
+/* opcional: que el activo se note más */
+.solTab.active .solText b{
+  color: rgba(244,248,255,.98) !important;
+}
   </style>
 </head>
 
