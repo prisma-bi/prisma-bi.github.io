@@ -532,7 +532,6 @@
       display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
     }
     .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
-
 /* =========================================================
    ===== SOLUCIONES (Premium Dark / Corporate) — LIMPIO =====
    Reemplazar TODO tu bloque de SOLUCIONES por este
@@ -570,7 +569,7 @@
   overflow:hidden;
   display:grid;
   grid-template-columns: 340px 1fr;   /* un poquito más angosto a la izquierda */
-  align-items: stretch;
+  align-items: stretch;               /* ✅ importante */
 }
 @media (max-width:980px){
   .solutionsWrap{grid-template-columns:1fr}
@@ -581,20 +580,25 @@
   background: rgba(8,14,30,.34);
   border-right:1px solid rgba(255,255,255,.06);
   padding:16px;
-  display: flex;
-flex-direction: column;
+
+  display:flex;               /* ✅ */
+  flex-direction:column;      /* ✅ */
 }
+
+/* Tabs: ocupar todo el alto (como el ejemplo blanco) */
 .solTabs{
-  display:grid;
-  gap:10px;
-  flex:1;               /* ✅ agrega */
-  align-content:start;  /* ✅ agrega */
+  display:flex;               /* ✅ antes era grid */
+  flex-direction:column;
+  gap:12px;
+  height:100%;
+  justify-content:space-between;  /* ✅ reparte hasta abajo */
 }
-    
+
 /* TAB (sin íconos) */
 .solTab{
   width:100%;
-  min-height:56px;
+  min-height:72px;            /* ✅ más alto */
+  flex:1;                     /* ✅ cada tab crece para llenar */
   border-radius:14px;
   padding:12px 14px;
   padding-left:24px;                 /* aire al ocultar iconos */
@@ -609,6 +613,7 @@ flex-direction: column;
   position:relative;
   color: rgba(244,248,255,.90);
 }
+
 .solTab:hover{
   transform:translateY(-1px);
   border-color:rgba(34,211,238,.20);
@@ -674,7 +679,7 @@ flex-direction: column;
   letter-spacing:-.02em;
   color: rgba(244,248,255,.96);
   line-height:1.02;
-  max-width:28ch;                 /* evita bloque ancho (look premium) */
+  max-width:28ch;                 /* ✅ más ancho */
 }
 .solDesc{
   margin:0 0 22px;
@@ -754,6 +759,7 @@ flex-direction: column;
   height:auto;
   display:block;
 }
+
     /* ===== MÉTODO ===== */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
     @media (max-width:980px){ .steps{grid-template-columns:1fr} }
