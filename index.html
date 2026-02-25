@@ -812,109 +812,6 @@
     .fadeL{left:0;background:linear-gradient(90deg, rgba(2,5,14,.95), transparent)}
     .fadeR{right:0;background:linear-gradient(270deg, rgba(2,5,14,.95), transparent)}
 
-    /* =========================================================
-   PATCH SOLUCIONES — PREMIUM LIMPIO (como el modelo blanco)
-   (Pegar al FINAL del <style>)
-========================================================= */
-
-/* A) Tabs izquierda: SIN iconos + más cortos */
-.solIcon{ display:none !important; } /* oculta iconos */
-
-.solTab{
-  padding: 10px 12px !important;     /* más corto */
-  border-radius: 16px !important;
-  gap: 10px !important;              /* menos espacio interno */
-}
-
-.solTabs{ gap: 10px !important; }    /* menos separación entre tabs */
-
-.solText{ gap: 2px !important; }
-.solText b{ font-size: 13.5px !important; }
-.solText small{ font-size: 11.5px !important; }
-
-/* B) Sacar notas (izq y der) */
-.solLeft .solNote{ display:none !important; }
-.solRight .solNote{ display:none !important; }
-
-/* C) Des-aglutinar: más aire + mejor jerarquía */
-.solRight{
-  padding: 44px 44px !important;     /* mucho aire */
-  gap: 40px !important;              /* separa texto de imagen */
-  grid-template-columns: 1fr 1.05fr !important;
-  align-items: start !important;     /* evita “apilar” raro */
-}
-
-.solTitle{
-  margin: 0 0 14px !important;
-  line-height: 1.02 !important;
-  max-width: 22ch !important;        /* líneas más cortas, más premium */
-}
-
-.solDesc{
-  margin: 0 0 22px !important;
-  font-size: 15.5px !important;
-  line-height: 1.85 !important;
-  max-width: 56ch !important;
-}
-
-/* D) Bullets: solo 3 visibles + más separación */
-.solBullets{
-  gap: 14px !important;
-  font-size: 15px !important;
-  line-height: 1.75 !important;
-  max-width: 56ch !important;
-}
-.solBullets li:nth-child(n+4){ display:none !important; } /* SOLO 3 bullets */
-
-/* E) Foto SIN cuadro gigante (solo imagen) */
-.solMedia{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  min-height: unset !important;
-  padding: 0 !important;
-  overflow: visible !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-}
-
-/* Si el JS mete el frame SVG, lo ocultamos */
-/* Mostrar fallback (SVG) hasta que subas imágenes reales */
-.solMedia .frame{
-  display:block !important;
-  width: min(560px, 100%) !important;
-  border-radius: 22px !important;
-  overflow:hidden !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
-  background: rgba(10,18,38,.15) !important;
-}
-
-/* Imagen real: queda premium */
-.solMedia .imgFrame{
-  width: min(560px, 100%) !important;
-  border-radius: 22px !important;
-  overflow:hidden !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
-  background: rgba(10,18,38,.15) !important;
-}
-.solMedia .imgFrame img{
-  width:100% !important;
-  height:auto !important;
-  display:block !important;
-}
-
-/* Responsive */
-@media (max-width:980px){
-  .solRight{
-    padding: 26px !important;
-    gap: 18px !important;
-  }
-  .solTitle{ max-width: 28ch !important; }
-}
-
     /* ===== OPINIONES ===== */
     .reviewsHeader{
       display:flex;align-items:center;justify-content:center;gap:12px;
@@ -1009,6 +906,49 @@
       .netCanvas{display:none}
       .track{animation:none!important}
     }
+      /* ================================
+   SOLUCIONES — FOTO ABAJO DEL TEXTO
+   (pegar al FINAL del <style>)
+================================ */
+
+/* Columna derecha: 1 columna (texto arriba, media abajo) */
+.solRight{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 22px !important;           /* aire entre texto e imagen */
+  padding: 46px 52px !important;  /* look “blanco” (limpio) */
+  align-items: start !important;
+}
+
+/* Media abajo */
+.solMedia{
+  order: 2 !important;
+  margin-top: 6px !important;
+}
+
+/* Caja imagen: prolija, sin “cuadro gigante” extra */
+.solMedia .imgFrame{
+  width: min(760px, 100%) !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
+  background: rgba(10,18,38,.12) !important;
+}
+
+.solMedia .imgFrame img{
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+/* Responsive */
+@media (max-width:980px){
+  .solRight{
+    padding: 26px !important;
+    gap: 16px !important;
+  }
+}
   </style>
 </head>
 
@@ -1541,7 +1481,7 @@
       note: "Ideal para empezar: se arma rápido, se entiende fácil y ordena la decisión.",
       icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 4h16v16H4z"/><path fill="rgba(34,211,238,.95)" d="M7 15h2V9H7zm4 0h2V6h-2zm4 0h2V11h-2z"/></svg>`,
       media: dashboardFrame(),
-      img: ""
+      img: "assets/brand/pyme.png"
     },
     {
       tab: "Petróleo & Energía",
@@ -1557,7 +1497,7 @@
       note: "En Neuquén esto es clave: sin lectura única, se pierde plata en silencios.",
       icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path fill="rgba(17,214,180,.95)" d="M10 14h4v2h-4z"/></svg>`,
       media: oilFrame(),
-      img: ""
+      img: "assets/brand/petroleo.png"
     },
     {
       tab: "Finanzas",
@@ -1573,7 +1513,7 @@
       note: "La dirección necesita señales: no un Excel eterno.",
       icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2l7 4v12l-7 4-7-4V6z"/><path fill="rgba(34,211,238,.95)" d="M10 8h4v2h-4zm0 4h4v2h-4z"/></svg>`,
       media: financeFrame(),
-      img: ""
+      img: "assets/brand/finanzas.png"
     },
     {
       tab: "Comercial",
@@ -1589,7 +1529,7 @@
       note: "La venta sin margen es trabajo sin resultado.",
       icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 18V6h2v12zm4 0V9h2v9zm4 0V4h2v14zm4 0v-7h2v7z"/></svg>`,
       media: salesFrame(),
-      img: ""
+      img: "assets/brand/comercial.png"
     },
     {
       tab: "Operaciones",
@@ -1605,7 +1545,7 @@
       note: "Más velocidad sin perder control.",
       icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M7 2h10v4H7z"/><path fill="rgba(17,214,180,.95)" d="M6 8h12v14H6z"/><path fill="rgba(11,47,86,.95)" d="M9 11h6v2H9zm0 4h6v2H9z"/></svg>`,
       media: opsFrame(),
-      img: ""
+      img: "assets/brand/operaciones.png"
     },
     {
       tab: "RRHH",
@@ -1621,7 +1561,7 @@
       note: "Una estructura sana se mide: lo que no se ve, se deteriora.",
       icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M16 11a4 4 0 1 0-8 0c0 2.2 1.8 4 4 4s4-1.8 4-4z"/><path fill="rgba(34,211,238,.95)" d="M4 22c0-4 4-6 8-6s8 2 8 6z"/></svg>`,
       media: hrFrame(),
-      img: ""
+      img: "assets/brand/recursos-humanos.png"
     }
   ];
 
