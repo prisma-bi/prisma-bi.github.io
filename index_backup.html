@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Prisma BI — Dirección ejecutiva con datos confiables</title>
+  <meta name="description" content="Prisma BI integra y ordena información de Excel, ERP y sistemas para construir una lectura ejecutiva única: qué está pasando, por qué está pasando y dónde actuar primero." />
+
+  <meta property="og:title" content="Prisma BI — Dirección ejecutiva con datos confiables">
+  <meta property="og:description" content="Lectura ejecutiva única para decidir con claridad: qué pasa, por qué pasa y dónde actuar primero.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta name="theme-color" content="#040a18"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#050a18;
+      --bg0:#02050e;
+      --bg1:#040a18;
+
+      --text:#F4F8FF;
+      --muted:rgba(244,248,255,.72);
+
+      /* ✅ Azul oscuro (no eléctrico) + acentos tech */
+      --blue:#0B2F56;
+      --blue2:#0E3B6B;
+      --cyan:#22D3EE;     /* un poco menos “eléctrico” */
+      --teal:#11D6B4;
+
+      --card:rgba(10,18,38,.58);
+      --stroke:rgba(255,255,255,.11);
+
+      --shadow:0 24px 90px rgba(0,0,0,.55);
+      --shadow2:0 16px 55px rgba(0,0,0,.35);
+      --r:18px;
+
+      --h1: clamp(42px, 5.0vw, 78px);
+      --lead: clamp(16px, 1.2vw, 20px);
+      --h2: clamp(28px, 2.6vw, 44px);
+
+      --secPad: 86px;
+      --container: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 18% 12%, rgba(34,211,238,.14), transparent 62%),
+        radial-gradient(820px 520px at 78% 18%, rgba(17,214,180,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--container);margin:0 auto;padding:0 28px}
+    .sr{position:absolute;left:-9999px}
+
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+      outline: 2px solid rgba(34,211,238,.70);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+
+    /* Top glow line */
+    body:before{
+      content:"";position:fixed;left:0;right:0;top:0;height:4px;z-index:9999;
+      background:linear-gradient(90deg, transparent, rgba(34,211,238,.78), rgba(17,214,180,.72), transparent);
+      pointer-events:none;opacity:.92;
+      filter: blur(.2px);
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar{
+      position:sticky;top:0;z-index:70;
+      background:rgba(2,5,14,.55);
+      backdrop-filter: blur(14px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbarInner{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:10px 0;
+    }
+    .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .chip{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,18,38,.38);
+      color:rgba(244,248,255,.85);
+      font-weight:800;font-size:13px;
+      white-space:nowrap;
+    }
+    .chip b{color:rgba(244,248,255,.95)}
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      box-shadow:0 0 18px rgba(34,211,238,.28);
+    }
+    .topbarRight{
+      display:flex;align-items:center;gap:10px;
+      color:rgba(244,248,255,.70);
+      font-weight:800;font-size:13px;
+    }
+/* TOPBAR: links + iconos */
+.chipLink{
+  cursor:pointer;
+  transition: transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.chipLink:hover{
+  border-color: rgba(34,211,238,.22);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  background: rgba(10,18,38,.48);
+}
+
+.chipIco{
+  width:16px;
+  height:16px;
+  opacity:.92;
+}
+
+/* WhatsApp chip (verde) */
+.chipWA{
+  background: rgba(16,185,129,.14);
+  border-color: rgba(16,185,129,.30);
+  color: rgba(244,248,255,.92);
+}
+.chipWA .dot{
+  background: linear-gradient(90deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
+  box-shadow: 0 0 18px rgba(34,197,94,.22);
+}
+.chipWA:hover{
+  border-color: rgba(34,197,94,.45);
+  background: rgba(16,185,129,.18);
+}
+
+/* LinkedIn chip (azul) */
+.chipLI{
+  background: rgba(59,130,246,.14);
+  border-color: rgba(59,130,246,.30);
+  color: rgba(244,248,255,.92);
+}
+.chipLI .dot{
+  background: linear-gradient(90deg, rgba(59,130,246,.95), rgba(34,211,238,.92));
+  box-shadow: 0 0 18px rgba(59,130,246,.20);
+}
+.chipLI:hover{
+  border-color: rgba(59,130,246,.45);
+  background: rgba(59,130,246,.18);
+}
+    
+    /* ===== HEADER / NAV ===== */
+    header{
+      position:sticky; top:44px; z-index:65;
+      background:rgba(2,5,14,.72);
+      backdrop-filter: blur(14px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+      padding:12px 0;
+      min-height:98px;
+    }
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex:0 0 auto;
+}
+
+.brand img{
+  width: 240px;        /* 👈 SUBÍ/BAJÁ: 180–280 */
+  height: auto;
+  max-height: 88px;    /* alto máximo dentro del header */
+  object-fit: contain;
+  display:block;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,.45)) brightness(1.08);
+}
+
+@media (max-width:980px){
+  .brand img{
+    width: 185px;
+    max-height: 72px;
+  }
+}
+
+    .menu{display:flex;gap:10px;align-items:center}
+    .menu a{
+      font-weight:900;
+      color:rgba(244,248,255,.78);
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+      transition:transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
+      white-space:nowrap;
+    }
+    .menu a:hover{
+      filter:brightness(1.12);
+      border-color:rgba(34,211,238,.18);
+      background:rgba(10,18,38,.30);
+      transform:translateY(-1px);
+    }
+    .menu a.active{
+      color:rgba(244,248,255,.92);
+      border-color:rgba(34,211,238,.22);
+      background:rgba(10,18,38,.36);
+    }
+
+    .navRight{display:flex;gap:10px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:14px;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(10,18,38,.38);
+      box-shadow:0 16px 44px rgba(0,0,0,.22);
+      transition:transform .16s ease, filter .16s ease, border-color .16s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(34,211,238,.26)}
+    .btnPrimary{
+      color:#06101f;
+      background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.92), rgba(17,214,180,.88));
+      border:1px solid rgba(0,0,0,.12);
+      box-shadow:
+        0 24px 78px rgba(0,0,0,.35),
+        0 0 0 1px rgba(34,211,238,.12) inset,
+        0 0 60px rgba(34,211,238,.10);
+      position:relative;overflow:hidden;
+    }
+    .btnPrimary:before{
+      content:"";
+      position:absolute;top:-40%;left:-40%;
+      width:50%;height:180%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.70), transparent);
+      transform: rotate(18deg);
+      opacity:0;
+    }
+    .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
+    @keyframes shine{
+      0%{left:-40%;opacity:0}
+      15%{opacity:.9}
+      100%{left:120%;opacity:0}
+    }
+
+    @media (max-width:980px){
+      header{top:0}
+      .chips{display:none}
+      .menu{display:none}
+      .brand{min-width:auto}
+      .topbarRight{display:none}
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      position:relative;
+      min-height: calc(92vh - 140px);
+      display:flex;
+      align-items:center;
+      padding:64px 0 68px;
+      overflow:hidden;
+      isolation:isolate;
+      text-align:center;
+    }
+
+    .heroBg{
+      position:absolute;inset:0;z-index:-4;
+      background:
+        radial-gradient(1000px 700px at 20% 20%, rgba(34,211,238,.12), transparent 64%),
+        radial-gradient(900px 650px at 78% 22%, rgba(17,214,180,.10), transparent 62%),
+        radial-gradient(900px 650px at 66% 86%, rgba(34,211,238,.07), transparent 62%),
+        linear-gradient(180deg, rgba(2,5,14,.96), rgba(2,5,14,.84));
+    }
+    .heroStars{
+      position:absolute;inset:-60px;z-index:-3;pointer-events:none;opacity:.35;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.50), transparent 55%),
+        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.35), transparent 55%),
+        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.35), transparent 55%),
+        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.32), transparent 55%),
+        radial-gradient(1px 1px at 72% 40%, rgba(255,255,255,.24), transparent 55%),
+        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.20), transparent 55%);
+      mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
+    }
+
+    .netCanvas{
+      position:absolute;inset:0;z-index:-2;
+      width:100%;height:100%;
+      opacity:1;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 18px rgba(34,211,238,.18));
+      pointer-events:none;
+    }
+
+    .heroVignette{
+      position:absolute;inset:-80px;z-index:-1;pointer-events:none;
+      background:
+        radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.58) 74%),
+        linear-gradient(180deg, rgba(2,5,14,.86) 0%, rgba(2,5,14,.75) 40%, rgba(2,5,14,.55) 100%);
+      opacity:.92;
+    }
+
+    .heroInner{max-width: 980px;margin:0 auto;padding:0 10px;}
+
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(6,12,26,.45);
+      box-shadow:0 14px 40px rgba(0,0,0,.34);
+      width:max-content;
+      margin:0 auto 18px;
+      font-weight:900;
+      color:rgba(244,248,255,.92);
+    }
+    .pill i{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      box-shadow:0 0 22px rgba(34,211,238,.35);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:var(--h1);
+      line-height:1.02;
+      font-weight:950;
+      letter-spacing:-.03em;
+      text-shadow: 0 18px 56px rgba(0,0,0,.42);
+    }
+    .accent{
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .lede{
+      margin:0 auto 20px;
+      font-size:var(--lead);
+      color:rgba(244,248,255,.78);
+      max-width:78ch;
+      line-height:1.72;
+      text-shadow: 0 12px 34px rgba(0,0,0,.22);
+    }
+
+    .ctaRow{
+      display:flex;gap:12px;flex-wrap:wrap;
+      justify-content:center;
+      margin:18px 0 0;
+    }
+
+    .heroContext{margin:34px auto 0;max-width: 980px;}
+    .heroContextTitle{
+      margin:0 0 14px;
+      color:rgba(244,248,255,.82);
+      font-weight:950;
+      letter-spacing:-.01em;
+      font-size:14px;
+      text-transform:uppercase;
+      opacity:.95;
+    }
+    .heroCards{display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;}
+    @media (max-width:980px){
+      .hero{min-height:auto;padding:64px 0 54px}
+      .heroCards{grid-template-columns:1fr;gap:12px}
+    }
+
+    .hCard{
+      text-align:left;
+      position:relative;
+      background:
+        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius: 18px;
+      padding:18px 18px 16px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      overflow:hidden;
+    }
+    .hCard b{display:block;font-weight:950;margin-bottom:6px}
+    .hCard p{margin:0;color:rgba(244,248,255,.72);line-height:1.65;font-size:14px}
+    .hDot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 18px rgba(34,211,238,.22);
+      display:inline-block;margin-right:10px;transform:translateY(1px);
+    }
+
+    /* ===== SECTIONS ===== */
+    .sep{
+      height:1px;max-width:1050px;margin:0 auto;
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,.18), rgba(17,214,180,.14), transparent);
+    }
+
+    .sec{position:relative;padding: var(--secPad) 0;overflow:hidden;}
+    .sec:before{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(900px 520px at 20% 20%, rgba(34,211,238,.08), transparent 62%),
+        radial-gradient(900px 520px at 78% 10%, rgba(17,214,180,.07), transparent 62%),
+        radial-gradient(900px 520px at 70% 85%, rgba(34,211,238,.05), transparent 60%),
+        linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
+      z-index:-3;
+    }
+    .sec:after{
+      content:"";
+      position:absolute;inset:-80px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/110px 110px,
+        linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0/110px 110px,
+        radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.0), rgba(0,0,0,.72));
+      opacity:.18;
+      z-index:-2;
+      pointer-events:none;
+      mask-image: radial-gradient(780px 520px at 50% 40%, black 55%, transparent 100%);
+    }
+
+    .sectionTitle{
+      text-align:center;margin:0 0 10px;
+      font-size:var(--h2);
+      font-weight:950;
+      letter-spacing:-.02em;
+      text-shadow: 0 18px 46px rgba(0,0,0,.30);
+    }
+    .sectionLead{
+      text-align:center;
+      color:rgba(244,248,255,.68);
+      max-width:96ch;margin:0 auto 34px;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    /* ===== QUIÉNES SOMOS (video + bullets) ===== */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top: 18px;
+    }
+    @media (max-width:980px){ .aboutGrid{grid-template-columns:1fr;} }
+
+    .videoCard{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(10,18,38,.56);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      overflow:hidden;
+      min-height: 340px;
+      position:relative;
+    }
+    .videoRatio{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      background:#0a1022;
+    }
+    .videoRatio iframe,
+    .videoRatio video{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+    .aboutCard{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(380px 220px at 18% 18%, rgba(34,211,238,.11), transparent 70%),
+        radial-gradient(360px 220px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      padding: 18px 18px 16px;
+      overflow:hidden;
+    }
+    .aboutCard h3{
+      margin:0 0 8px;
+      font-size: clamp(22px, 2.2vw, 30px);
+      font-weight:950;
+      letter-spacing:-.02em;
+    }
+    .aboutCard p{margin:0 0 12px;color:rgba(244,248,255,.74);line-height:1.7;font-size:14.5px}
+    .aboutBullets{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+    .aboutBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
+    .aboutCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(34,211,238,.10);
+      border:1px solid rgba(34,211,238,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .aboutCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
+
+    /* ===== ENTREGABLES ===== */
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
+
+    .card{
+      position:relative;
+      background:
+        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
+        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius: var(--r);
+      padding:22px 18px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
+      transition: transform .18s ease, border-color .18s ease, filter .18s ease;
+      overflow:hidden;
+      min-height: 220px;
+    }
+    .card:hover{transform: translateY(-2px);border-color: rgba(34,211,238,.22);filter: brightness(1.06);}
+    .kicker{display:flex;align-items:center;gap:10px;font-weight:950;margin-bottom:10px}
+    .kDot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 18px rgba(34,211,238,.22);
+    }
+    .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
+    .miniBullets{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+    .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
+    .miniBullets .miniCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(34,211,238,.10);
+      border:1px solid rgba(34,211,238,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+    }
+    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
+/* =========================================================
+   ===== SOLUCIONES (Premium Dark / Corporate) — LIMPIO =====
+   Reemplazar TODO tu bloque de SOLUCIONES por este
+========================================================= */
+
+/* Sección (fondo) */
+.secLight{
+  background:
+    radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
+    radial-gradient(900px 520px at 78% 22%, rgba(17,214,180,.08), transparent 62%),
+    linear-gradient(180deg, rgba(4,10,24,.92), rgba(2,5,14,.98));
+  color: var(--text);
+  position: relative;
+}
+.secLight:before,
+.secLight:after{ display:block; }
+
+.secLight .sectionTitle{
+  color: var(--text);
+  text-shadow: 0 18px 46px rgba(0,0,0,.30);
+}
+.secLight .sectionLead{ color: rgba(244,248,255,.68); }
+
+/* Contenedor principal */
+.solutionsWrap{
+  max-width:1160px;
+  margin:0 auto;
+  border-radius:26px;
+  background:
+    radial-gradient(520px 260px at 18% 18%, rgba(34,211,238,.10), transparent 62%),
+    radial-gradient(520px 260px at 82% 82%, rgba(17,214,180,.08), transparent 62%),
+    rgba(10,18,38,.56);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: 0 22px 80px rgba(0,0,0,.32);
+  overflow:hidden;
+  display:grid;
+  grid-template-columns: 340px 1fr;   /* un poquito más angosto a la izquierda */
+  align-items: stretch;               /* ✅ importante */
+}
+@media (max-width:980px){
+  .solutionsWrap{grid-template-columns:1fr}
+}
+
+/* Columna izquierda */
+.solLeft{
+  background: rgba(8,14,30,.34);
+  border-right:1px solid rgba(255,255,255,.06);
+  padding:16px;
+
+  display:flex;               /* ✅ */
+  flex-direction:column;      /* ✅ */
+}
+
+/* Tabs: ocupar todo el alto (como el ejemplo blanco) */
+.solTabs{
+  display:flex;               /* ✅ antes era grid */
+  flex-direction:column;
+  gap:12px;
+  height:100%;
+  justify-content:space-between;  /* ✅ reparte hasta abajo */
+}
+
+/* TAB (sin íconos) */
+.solTab{
+  width:100%;
+  min-height:72px;            /* ✅ más alto */
+  flex:1;                     /* ✅ cada tab crece para llenar */
+  border-radius:14px;
+  padding:12px 14px;
+  padding-left:24px;                 /* aire al ocultar iconos */
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(10,18,38,.40);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease, filter .14s ease;
+  text-align:left;
+  position:relative;
+  color: rgba(244,248,255,.90);
+}
+
+.solTab:hover{
+  transform:translateY(-1px);
+  border-color:rgba(34,211,238,.20);
+  filter:brightness(1.06);
+}
+.solTab.active{
+  background: rgba(10,18,38,.58);
+  border-color: rgba(34,211,238,.22);
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  padding-left:28px;                 /* un poco más al activo */
+}
+.solTab.active:before{
+  content:"";
+  position:absolute;
+  left:12px; top:12px; bottom:12px;
+  width:3px;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(34,211,238,.92), rgba(17,214,180,.88));
+  opacity:.95;
+}
+
+/* Iconos: ocultos */
+.solIcon{ display:none !important; }
+
+/* Texto del tab */
+.solText{display:flex;flex-direction:column;gap:2px;min-width:0}
+.solText b{
+  font-weight:950;
+  color: rgba(244,248,255,.92);
+  font-size:13.5px;
+  line-height:1.15;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.solText small{
+  color: rgba(244,248,255,.62);
+  font-weight:800;
+  font-size:11.5px;
+  line-height:1.2;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* ===== Columna derecha (estilo “modelo blanco”: aire + orden) ===== */
+.solRight{
+  padding: 46px 52px;
+  display:grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 34px;
+  align-items:start;
+}
+@media (max-width:980px){
+  .solRight{
+    grid-template-columns:1fr;
+    padding:24px;
+    gap:18px;
+  }
+}
+
+/* Título / descripción */
+.solTitle{
+  margin:0 0 14px;
+  font-size: clamp(24px, 2.6vw, 38px);
+  font-weight:950;
+  letter-spacing:-.02em;
+  color: rgba(244,248,255,.96);
+  line-height:1.02;
+  max-width:28ch;                 /* ✅ más ancho */
+}
+.solDesc{
+  margin:0 0 22px;
+  color: rgba(244,248,255,.72);
+  line-height:1.85;
+  font-size:15.5px;
+  max-width:56ch;
+}
+
+/* Bullets: solo 3 visibles para NO aglutinar */
+.solBullets{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:16px;
+  color: rgba(244,248,255,.84);
+  line-height:1.75;
+  font-size:15px;
+  max-width:56ch;
+}
+.solBullets li{display:flex;gap:12px;align-items:flex-start}
+.solBullets li:nth-child(n+4){ display:none; }  /* SOLO 3 bullets */
+
+.solCheck{
+  width:18px;height:18px;border-radius:999px;
+  background: rgba(34,211,238,.10);
+  border:1px solid rgba(34,211,238,.22);
+  display:grid;place-items:center;flex:0 0 18px;margin-top:4px;
+}
+.solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
+
+/* Acciones / nota: ocultas (no las usás) */
+.solActions{ display:none !important; }
+.solLeft .solNote,
+.solRight .solNote{ display:none !important; }
+
+/* ===== Media: sin cuadro gigante. Muestra imagen o fallback prolijo ===== */
+.solMedia{
+  background: transparent;
+  border:0;
+  box-shadow:none;
+  min-height:unset;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Fallback (SVG) visible hasta que subas imágenes reales */
+.solMedia .frame{
+  display:block;
+  width: min(560px, 100%);
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: 0 22px 70px rgba(0,0,0,.30);
+  background: rgba(10,18,38,.15);
+}
+.solMedia .frame svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* Imagen real */
+.solMedia .imgFrame{
+  width: min(560px, 100%);
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: 0 22px 70px rgba(0,0,0,.30);
+  background: rgba(10,18,38,.15);
+}
+.solMedia .imgFrame img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+    /* ===== MÉTODO ===== */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+    @media (max-width:980px){ .steps{grid-template-columns:1fr} }
+    .step{
+      position:relative;
+      background: rgba(10,18,38,.52);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding:16px;
+      box-shadow: 0 18px 54px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .step .n{
+      font-weight:950;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:32px;height:32px;border-radius:12px;
+      background: rgba(17,214,180,.10);
+      border:1px solid rgba(17,214,180,.22);
+      margin-bottom:10px;
+    }
+    .step .t{margin:0 0 6px;font-weight:950}
+    .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
+
+    /* ===== CLIENTES ===== */
+    .marquee{
+      position:relative;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(10,18,38,.40);
+      box-shadow:0 22px 80px rgba(0,0,0,.28);
+      overflow:hidden;
+      padding:18px 0;
+    }
+    .track{
+      display:flex;gap:38px;align-items:center;
+      width:max-content;
+      animation: scroll 22s linear infinite;
+      padding-left:38px;
+    }
+    .marquee:hover .track{animation-play-state: paused}
+    @keyframes scroll{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+    .logoPill{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(2,5,14,.35);
+      color:rgba(244,248,255,.82);
+      font-weight:950;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      min-height:42px;
+    }
+    .logoMark{
+      width:22px;height:22px;border-radius:7px;
+      background: linear-gradient(90deg, rgba(34,211,238,.85), rgba(17,214,180,.80));
+      box-shadow:0 0 20px rgba(34,211,238,.18);
+      flex:0 0 22px;
+    }
+    .fadeL,.fadeR{position:absolute;top:0;bottom:0;width:120px;pointer-events:none;z-index:2;}
+    .fadeL{left:0;background:linear-gradient(90deg, rgba(2,5,14,.95), transparent)}
+    .fadeR{right:0;background:linear-gradient(270deg, rgba(2,5,14,.95), transparent)}
+
+    /* ===== OPINIONES ===== */
+    .reviewsHeader{
+      display:flex;align-items:center;justify-content:center;gap:12px;
+      margin: 0 auto 10px;
+      color: rgba(244,248,255,.84);
+      font-weight:950;
+    }
+    .gBadge{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,18,38,.35);
+      font-weight:950;
+    }
+    .gIcon{width:18px;height:18px;display:inline-block}
+    .stars{color:rgba(34,211,238,.95);letter-spacing:1px;font-weight:950}
+
+    .slider{
+      display:flex;gap:14px;overflow:auto;
+      scroll-snap-type:x mandatory;
+      padding:4px 2px 10px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .slider::-webkit-scrollbar{height:10px}
+    .slider::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
+    .tCard{
+      flex:0 0 360px;
+      scroll-snap-align:start;
+      border-radius:18px;
+      background:rgba(10,18,38,.52);
+      border:1px solid rgba(255,255,255,.10);
+      padding:16px;
+      box-shadow:0 18px 60px rgba(0,0,0,.26);
+    }
+    .tCard b{display:block;margin:8px 0 6px;font-weight:950}
+    .tCard p{margin:0;color:rgba(244,248,255,.74);line-height:1.7;font-size:14px}
+    @media (max-width:420px){ .tCard{flex-basis: 88vw} }
+
+    /* ===== CONTACT ===== */
+    .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
+    @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
+
+    .cBox{
+      position:relative;
+      background:
+        radial-gradient(220px 120px at 20% 20%, rgba(34,211,238,.10), transparent 72%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius: 18px;
+      padding:16px;
+      box-shadow: 0 20px 64px rgba(0,0,0,.26);
+      overflow:hidden;
+    }
+    .cBox .t{font-weight:950;margin:0 0 6px}
+    .cBox .v{margin:0;color:rgba(244,248,255,.74);font-size:14px}
+
+    .form{
+      margin-top:18px;
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+      max-width:980px;margin-left:auto;margin-right:auto;
+    }
+    .form textarea{grid-column:1/-1;min-height:120px;resize:vertical}
+    .input{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(8,14,30,.40);
+      color:rgba(244,248,255,.92);
+      padding:12px 12px;
+      font:inherit;
+      box-shadow:0 14px 42px rgba(0,0,0,.18) inset;
+    }
+    .sendRow{grid-column:1/-1;display:flex;justify-content:center;margin-top:6px}
+
+    footer{
+      padding:30px 0;
+      text-align:center;
+      color:rgba(244,248,255,.55);
+      font-size:13px;
+      position:relative;
+    }
+    footer:before{
+      content:"";
+      position:absolute;left:0;right:0;top:0;height:1px;
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,.14), rgba(17,214,180,.12), transparent);
+      opacity:.9;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important;animation:none!important}
+      .netCanvas{display:none}
+      .track{animation:none!important}
+    }
+      /* ================================
+   SOLUCIONES — FOTO ABAJO DEL TEXTO
+   (pegar al FINAL del <style>)
+================================ */
+
+/* Columna derecha: 1 columna (texto arriba, media abajo) */
+.solRight{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 22px !important;           /* aire entre texto e imagen */
+  padding: 46px 52px !important;  /* look “blanco” (limpio) */
+  align-items: start !important;
+}
+
+/* Media abajo */
+.solMedia{
+  order: 2 !important;
+  margin-top: 6px !important;
+}
+
+/* Caja imagen: prolija, sin “cuadro gigante” extra */
+.solMedia .imgFrame{
+  width: min(760px, 100%) !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
+  background: rgba(10,18,38,.12) !important;
+}
+
+.solMedia .imgFrame img{
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+/* Responsive */
+@media (max-width:980px){
+  .solRight{
+    padding: 26px !important;
+    gap: 16px !important;
+  }
+}
+/* ===== PATCH: Tabs (Soluciones) texto más grande y legible ===== */
+.solTab{
+  padding: 16px 16px !important;     /* más aire */
+  padding-left: 28px !important;     /* mantiene look del activo */
+  border-radius: 16px !important;
+}
+
+.solText b{
+  font-size: 15.5px !important;      /* antes 13.5 */
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.solText small{
+  font-size: 12.5px !important;      /* antes 11.5 */
+  line-height: 1.25 !important;
+  margin-top: 2px !important;
+  opacity: .85 !important;
+}
+
+/* opcional: que el activo se note más */
+.solTab.active .solText b{
+  color: rgba(244,248,255,.98) !important;
+}
+  </style>
+</head>
+
+<body>
+
+<!-- TOPBAR (solo botones: WhatsApp + LinkedIn) -->
+<div class="topbar">
+  <div class="container topbarInner">
+    <div class="chips" aria-label="Contacto rápido">
+
+      <!-- WhatsApp (verde, sin teléfono visible) -->
+      <a class="chip chipLink chipWA"
+         href="https://wa.me/542996032267"
+         target="_blank" rel="noopener"
+         aria-label="WhatsApp Prisma BI">
+        <span class="dot"></span>
+        <svg class="chipIco" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M20.52 3.48A11.86 11.86 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.11.55 4.17 1.6 5.99L0 24l6.2-1.63A11.9 11.9 0 0 0 12.02 24C18.63 24 24 18.62 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12.02 22.02c-1.86 0-3.69-.5-5.29-1.45l-.38-.23-3.68.97.98-3.59-.25-.37A9.95 9.95 0 0 1 2.02 12c0-5.51 4.48-9.99 10-9.99 2.67 0 5.18 1.04 7.07 2.93A9.92 9.92 0 0 1 22.01 12c0 5.51-4.48 10.02-9.99 10.02Zm5.8-7.48c-.32-.16-1.9-.94-2.19-1.05-.29-.11-.5-.16-.71.16-.21.32-.82 1.05-1 1.26-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.54-.71-.55h-.61c-.21 0-.55.08-.84.4-.29.32-1.1 1.07-1.1 2.61 0 1.54 1.13 3.03 1.29 3.24.16.21 2.22 3.39 5.38 4.76.75.32 1.33.51 1.79.66.75.24 1.43.21 1.97.13.6-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.61-.37Z"/>
+        </svg>
+        WhatsApp
+      </a>
+
+      <!-- LinkedIn (azul) -->
+      <a class="chip chipLink chipLI"
+         href="https://www.linkedin.com/in/daiana-beltran/"
+         target="_blank" rel="noopener"
+         aria-label="LinkedIn Daiana Beltrán">
+        <span class="dot"></span>
+        <svg class="chipIco" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.35-1.86 3.58 0 4.24 2.36 4.24 5.43v6.32ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/>
+        </svg>
+        LinkedIn
+      </a>
+
+    </div>
+
+    <!-- derecha vacía para no sumar más cosas -->
+    <div class="topbarRight" aria-label="Nota"></div>
+  </div>
+</div>
+</div>
+
+  <!-- NAV -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Ir al inicio">
+        <!-- Ajustá la ruta si tu logo está en otro lugar -->
+        <img src="assets/brand/logo-prisma-bi.webp" alt="PRISMA BI">
+      </a>
+
+      <nav class="menu" aria-label="Navegación principal">
+        <a href="#quienes">Quiénes somos</a>
+        <a href="#entregables">Entregables</a>
+        <a href="#metodo">Método</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#clientes">Clientes</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="navRight">
+        <a class="btn btnPrimary" id="cta-main" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero" aria-label="Portada Prisma BI">
+    <div class="heroBg" aria-hidden="true"></div>
+    <div class="heroStars" aria-hidden="true"></div>
+
+    <canvas id="net" class="netCanvas" aria-hidden="true"></canvas>
+    <div class="heroVignette" aria-hidden="true"></div>
+
+    <div class="container heroInner">
+      <div class="pill"><i></i> DIRECCIÓN · RENTABILIDAD · CONTROL</div>
+
+      <h1>
+        Dirección ejecutiva con<br>
+        <span class="accent">datos confiables</span>.
+      </h1>
+
+      <p class="lede">
+        <strong>Prisma BI</strong> integra y ordena información de Excel, ERP y sistemas para construir una lectura ejecutiva única:
+        <strong>qué está pasando</strong>, <strong>por qué está pasando</strong> y <strong>dónde actuar primero</strong>.
+      </p>
+
+      <div class="ctaRow">
+        <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+        <a class="btn" href="#entregables">Ver entregables →</a>
+      </div>
+
+      <div class="heroContext" aria-label="Pilares del sistema">
+        <p class="heroContextTitle">Tres pilares que ordenan la decisión</p>
+        <div class="heroCards">
+          <div class="hCard">
+            <b><span class="hDot"></span>KPIs con definición única</b>
+            <p>Glosario + fórmula + fuente. La organización mira la misma verdad.</p>
+          </div>
+          <div class="hCard">
+            <b><span class="hDot"></span>Control y consistencia</b>
+            <p>Validaciones y señales que sostienen confianza (QA, alertas, coherencia).</p>
+          </div>
+          <div class="hCard">
+            <b><span class="hDot"></span>Rutina ejecutiva</b>
+            <p>Lectura semanal por área para transformar datos en acción priorizada.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- QUIÉNES SOMOS -->
+  <section id="quienes" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Quiénes somos</h2>
+      <p class="sectionLead">
+        Una consultora orientada a dirección: primero se define el criterio de negocio, después se construye el tablero.
+        El objetivo es reducir incertidumbre y acelerar decisiones.
+      </p>
+
+      <div class="aboutGrid">
+        <div class="videoCard" aria-label="Video presentación Prisma BI">
+          <div class="videoRatio">
+            <!-- OPCIÓN A: YouTube/Vimeo (recomendado por peso y velocidad en GitHub Pages)
+                 Reemplazá el src con tu link (podés ponerlo “no listado”). -->
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
+              title="Presentación Prisma BI"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+
+            <!-- OPCIÓN B: Video local (si realmente querés mp4 en tu repo)
+                 Comentá el iframe y descomentá esto.
+            <video controls poster="assets/media/video-poster.jpg">
+              <source src="assets/media/prisma-intro.mp4" type="video/mp4">
+            </video>
+            -->
+          </div>
+        </div>
+
+        <div class="aboutCard">
+          <h3>Una sola lectura. Un solo mapa.</h3>
+          <p>
+            Prisma BI acompaña a equipos directivos y áreas clave a ordenar datos dispersos y transformarlos en control:
+            métricas comparables, consistentes y accionables.
+          </p>
+          <ul class="aboutBullets">
+            <li><span class="aboutCheck"></span><span><b>Se elimina la ambigüedad:</b> misma definición para todos.</span></li>
+            <li><span class="aboutCheck"></span><span><b>Se reduce el riesgo:</b> controles que evitan “cierres que no cierran”.</span></li>
+            <li><span class="aboutCheck"></span><span><b>Se instala adopción:</b> rutina de lectura para que el tablero se use.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- ENTREGABLES -->
+  <section id="entregables" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Entregables</h2>
+      <p class="sectionLead">
+        La entrega se diseña para dirección: lectura simple, definiciones claras y control para decidir sin discusión.
+      </p>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="kicker"><span class="kDot"></span> Tablero ejecutivo (Dirección)</div>
+          <p class="small">Ventas · costos · rentabilidad, con lectura rápida y foco en decisión.</p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>KPIs + tendencias + cortes por producto/cliente/zona/tiempo.</span></li>
+            <li><span class="miniCheck"></span><span>Señales claras: qué sube, qué cae y dónde actuar primero.</span></li>
+            <li><span class="miniCheck"></span><span>UX para dirección: simple, contundente, accionable.</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="kicker"><span class="kDot"></span> Definiciones (Glosario KPI)</div>
+          <p class="small">Una métrica consistente evita que el negocio “discuta números” en lugar de decidir.</p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Definición + fórmula + fuente para cada KPI.</span></li>
+            <li><span class="miniCheck"></span><span>Reglas de negocio: netos, devoluciones, descuentos, margen, etc.</span></li>
+            <li><span class="miniCheck"></span><span>Marco común para equipos y dirección.</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="kicker"><span class="kDot"></span> Control & QA (confianza)</div>
+          <p class="small">Sin control, todo parece correcto… hasta el cierre. Con QA, se sostiene la decisión.</p>
+          <ul class="miniBullets">
+            <li><span class="miniCheck"></span><span>Validaciones: duplicados, nulos, totales, cortes por período.</span></li>
+            <li><span class="miniCheck"></span><span>Alertas: si algo se rompe, se ve.</span></li>
+            <li><span class="miniCheck"></span><span>Rutina: mirar, entender, decidir, ajustar.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- MÉTODO -->
+  <section id="metodo" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Método</h2>
+      <p class="sectionLead">
+        Primero se define la decisión y el marco de medición. Después se implementa. Por último, se asegura adopción real.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <p class="t">Diagnóstico</p>
+          <p class="d">Se identifica la decisión que hoy impacta resultado: margen, costos, ventas, stock, caja.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <p class="t">Marco de medición</p>
+          <p class="d">KPIs + definiciones + fuentes. Se ordena el criterio. Se elimina la ambigüedad.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <p class="t">Implementación</p>
+          <p class="d">Modelo + tablero + QA. La lectura se vuelve consistente y confiable.</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <p class="t">Rutina ejecutiva</p>
+          <p class="d">Lectura semanal: qué mirar y qué mover primero (con responsables por área).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- SOLUCIONES -->
+  <section id="soluciones" class="sec secLight" aria-label="Soluciones por operación">
+    <div class="container">
+      <h2 class="sectionTitle">Soluciones adaptables por operación</h2>
+      <p class="sectionLead">
+        Ejemplos por industria/área. Se adaptan a tus datos y a la decisión que querés destrabar: margen, costos, servicio, productividad o caja.
+      </p>
+
+      <div class="solutionsWrap">
+        <div class="solLeft">
+          <div class="solTabs" id="solTabs"></div>
+        </div>
+
+        <div class="solRight">
+          <div>
+            <h3 class="solTitle" id="solTitle">—</h3>
+            <p class="solDesc" id="solDesc"></p>
+            <ul class="solBullets" id="solBullets"></ul>
+            <div class="solActions">
+            </div>
+            <p class="solNote" id="solNote"></p>
+          </div>
+
+          <div class="solMedia" aria-hidden="true" id="solMedia"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- CLIENTES -->
+  <section id="clientes" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Clientes</h2>
+      <p class="sectionLead">
+        Logos demostrativos (ficticios) para presentación visual. Se reemplazan por marcas reales cuando existan autorizaciones.
+      </p>
+
+      <div class="marquee" aria-label="Logos en movimiento">
+        <div class="fadeL" aria-hidden="true"></div>
+        <div class="fadeR" aria-hidden="true"></div>
+
+        <div class="track" aria-hidden="false">
+          <div class="logoPill"><span class="logoMark"></span>Andes Retail</div>
+          <div class="logoPill"><span class="logoMark"></span>NorteLog</div>
+          <div class="logoPill"><span class="logoMark"></span>Patagonia Foods</div>
+          <div class="logoPill"><span class="logoMark"></span>Delta Services</div>
+          <div class="logoPill"><span class="logoMark"></span>BlueWave Energy</div>
+          <div class="logoPill"><span class="logoMark"></span>Solidez Finanzas</div>
+          <div class="logoPill"><span class="logoMark"></span>Arca Industria</div>
+          <div class="logoPill"><span class="logoMark"></span>Neuquén Partners</div>
+
+          <div class="logoPill"><span class="logoMark"></span>Andes Retail</div>
+          <div class="logoPill"><span class="logoMark"></span>NorteLog</div>
+          <div class="logoPill"><span class="logoMark"></span>Patagonia Foods</div>
+          <div class="logoPill"><span class="logoMark"></span>Delta Services</div>
+          <div class="logoPill"><span class="logoMark"></span>BlueWave Energy</div>
+          <div class="logoPill"><span class="logoMark"></span>Solidez Finanzas</div>
+          <div class="logoPill"><span class="logoMark"></span>Arca Industria</div>
+          <div class="logoPill"><span class="logoMark"></span>Neuquén Partners</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- OPINIONES -->
+  <section id="opiniones" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Opiniones</h2>
+      <p class="sectionLead">
+        Este bloque queda listo para publicar feedback verificable (cuando existan autorizaciones).
+        Mientras tanto, se muestra un formato demostrativo.
+      </p>
+
+      <div class="reviewsHeader" aria-label="Badge Google">
+        <span class="gBadge">
+          <svg class="gIcon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#EA4335" d="M12 10.2v3.7h5.2c-.2 1.2-1.4 3.5-5.2 3.5A6.1 6.1 0 0 1 12 5.2c1.7 0 2.9.7 3.6 1.3l2.5-2.4A9.9 9.9 0 0 0 12 2 10 10 0 1 0 12 22c5.8 0 9.7-4.1 9.7-9.9 0-.7-.1-1.2-.2-1.7H12z"/>
+            <path fill="#34A853" d="M3.7 7.4l3 2.2A6.1 6.1 0 0 1 12 5.2c1.7 0 2.9.7 3.6 1.3l2.5-2.4A9.9 9.9 0 0 0 12 2c-3.8 0-7.1 2.1-8.3 5.4z"/>
+            <path fill="#FBBC05" d="M12 22c2.7 0 5-1 6.7-2.6l-3.1-2.4c-.9.6-2 .9-3.6.9A6.1 6.1 0 0 1 6.7 14l-3.1 2.4A10 10 0 0 0 12 22z"/>
+            <path fill="#4285F4" d="M21.7 12.1c0-.7-.1-1.2-.2-1.7H12v3.7h5.2c-.3 1.1-1.3 2.7-3.4 3.4l3.1 2.4c1.9-1.8 2.8-4.4 2.8-7.8z"/>
+          </svg>
+          Google (demo)
+        </span>
+        <span class="stars">★★★★★</span>
+      </div>
+
+      <div class="slider" aria-label="Opiniones deslizables">
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“La dirección dejó de discutir números.”</b>
+          <p>Se consolidó una sola definición de KPI y la lectura se volvió consistente por área y por semana.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“Ahora se ve dónde actuar primero.”</b>
+          <p>Se ordenaron ventas, costos y márgenes por producto/cliente. La prioridad quedó evidente.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“El control dio confianza al cierre.”</b>
+          <p>QA y alertas evitaron desvíos silenciosos. Los números pasaron a ser confiables.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“La lectura semanal cambió la conversación.”</b>
+          <p>De reportes sueltos a rutina ejecutiva: señales claras y decisiones con criterio.</p>
+        </div>
+        <div class="tCard">
+          <div class="stars">★★★★★</div>
+          <b>“Se ganó tiempo en el equipo.”</b>
+          <p>Menos horas armando Excel, más foco en análisis y acciones que mueven resultado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="sec">
+    <div class="container">
+      <h2 class="sectionTitle">Contacto</h2>
+      <p class="sectionLead">
+        Diagnóstico inicial para entender objetivo, contexto y datos disponibles. Si hay ajuste, Prisma BI lo propone con claridad.
+      </p>
+
+      <div class="contactGrid">
+        <div class="cBox">
+          <p class="t">Ubicación</p>
+          <p class="v">Argentina (UTC-3) · Remoto LATAM</p>
+        </div>
+        <div class="cBox">
+          <p class="t">WhatsApp</p>
+          <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener noreferrer">Abrir chat</a></p>
+        </div>
+        <div class="cBox">
+          <p class="t">Email</p>
+          <p class="v"><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></p>
+        </div>
+        <div class="cBox">
+          <p class="t">LinkedIn</p>
+          <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener noreferrer">/in/daiana-beltran</a></p>
+        </div>
+      </div>
+
+      <form class="form" id="contactForm" action="#" method="post" aria-label="Formulario de contacto">
+        <input class="input" type="text" name="nombre" placeholder="Nombre y apellido" required>
+        <input class="input" type="text" name="empresa" placeholder="Empresa / Rubro" required>
+        <input class="input" type="email" name="email" placeholder="Email" required>
+        <input class="input" type="text" name="fuente" placeholder="Datos hoy: Excel / ERP / Sistema / eCommerce">
+        <textarea class="input" name="mensaje" placeholder="¿Qué decisión se está volviendo difícil hoy? (margen, costos, ventas, stock, caja…)" required></textarea>
+        <div class="sendRow">
+          <button class="btn btnPrimary" type="button" id="send-whatsapp">Enviar por WhatsApp</button>
+        </div>
+      </form>
+
+      <p class="sectionLead" style="margin-top:18px">
+        Respuesta rápida por WhatsApp. También se puede coordinar por email.
+      </p>
+    </div>
+  </section>
+
+  <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
+
+  <script>
+    /* ===== Año ===== */
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    /* ===== Smooth scroll (offset dinámico) ===== */
+    function getHeaderOffset(){
+      const topbar = document.querySelector('.topbar');
+      const header = document.querySelector('header');
+      const tb = topbar ? topbar.getBoundingClientRect().height : 0;
+      const hd = header ? header.getBoundingClientRect().height : 0;
+      return Math.round(tb + hd + 18);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href = a.getAttribute('href');
+        if(!href || href.length < 2) return;
+        const el = document.querySelector(href);
+        if(!el) return;
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + scrollY - getHeaderOffset();
+        window.scrollTo({top, behavior:'smooth'});
+      });
+    });
+
+    /* ===== WhatsApp links (CTA único) ===== */
+    const WA_PHONE = "542996032267";
+
+    function waUrl(text){
+      return "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(text);
+    }
+
+    (function(){
+      const msg =
+        "Hola 👋 Quiero solicitar un diagnóstico.\n\n" +
+        "Empresa/Rubro: ____\n" +
+        "Objetivo principal: ____\n" +
+        "Qué no se ve con claridad hoy: ____\n" +
+        "Datos disponibles (Excel/ERP/sistema/eCommerce): ____\n" +
+        "Plazo ideal: ____\n\n" +
+        "¿Qué día y horario conviene?";
+
+      const url = waUrl(msg);
+
+      ["cta-main","cta-hero","wa-link"].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.href = url;
+      });
+
+      const solCta = document.getElementById("solCta");
+      if(solCta){
+        solCta.addEventListener("click", ()=> window.open(url, "_blank", "noopener"));
+      }
+    })();
+
+    /* ===== Botón del formulario: arma mensaje con tus inputs ===== */
+    (function(){
+      const form = document.getElementById("contactForm");
+      const sendBtn = document.getElementById("send-whatsapp");
+      if(!form || !sendBtn) return;
+
+      sendBtn.addEventListener("click", ()=>{
+        const fd = new FormData(form);
+        const nombre  = (fd.get("nombre")  || "").toString().trim();
+        const empresa = (fd.get("empresa") || "").toString().trim();
+        const email   = (fd.get("email")   || "").toString().trim();
+        const fuente  = (fd.get("fuente")  || "").toString().trim();
+        const mensaje = (fd.get("mensaje") || "").toString().trim();
+
+        const text =
+          "Hola 👋 Quiero solicitar un diagnóstico.\n\n" +
+          "Nombre: " + (nombre || "—") + "\n" +
+          "Empresa/Rubro: " + (empresa || "—") + "\n" +
+          "Email: " + (email || "—") + "\n" +
+          "Datos hoy: " + (fuente || "—") + "\n\n" +
+          "Situación / decisión a destrabar:\n" + (mensaje || "—") + "\n\n" +
+          "¿Qué día y horario conviene?";
+
+        window.open(waUrl(text), "_blank", "noopener");
+      });
+    })();
+
+    /* ===== Nav active state ===== */
+    (function(){
+      const links = Array.from(document.querySelectorAll('.menu a'));
+      const sections = links
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+
+      if(!sections.length) return;
+
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            links.forEach(l=>l.classList.remove('active'));
+            const id = '#'+entry.target.id;
+            const active = links.find(l=>l.getAttribute('href')===id);
+            if(active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.02 });
+
+      sections.forEach(s=>io.observe(s));
+    })();
+
+(function(){
+  // ✅ Si querés usar imágenes reales: subilas a /assets/sol/ y poné img:"assets/sol/xxx.jpg"
+  const data = [
+    {
+      tab: "PyMEs",
+      sub: "Orden & control",
+      title: "Lleve el control de su PyME con claridad y foco en resultados",
+      desc: "Centralice datos sueltos (Excel / sistema / facturación) para ver margen, costos, ventas y caja en un tablero simple.",
+      bullets: [
+        "Ventas, costos y margen por producto/cliente/canal",
+        "Desvíos y “fugas” (descuentos, costos ocultos, desperdicio)",
+        "Top pérdidas y prioridades de acción",
+        "Rutina semanal: qué mirar y qué mover primero"
+      ],
+      note: "Ideal para empezar: se arma rápido, se entiende fácil y ordena la decisión.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 4h16v16H4z"/><path fill="rgba(34,211,238,.95)" d="M7 15h2V9H7zm4 0h2V6h-2zm4 0h2V11h-2z"/></svg>`,
+      media: dashboardFrame(),
+      img: "assets/brand/pyme.webp"
+    },
+    {
+      tab: "Petróleo & Energía",
+      sub: "Operación & costos",
+      title: "Visibilidad ejecutiva para operación, costos y performance (Oil & Gas)",
+      desc: "Tableros para gerencia: producción, costos operativos, mantenimiento, seguridad y cumplimiento en una lectura única.",
+      bullets: [
+        "Costos por unidad / frente / contratista (y desvíos)",
+        "Disponibilidad de equipos (uptime) y paradas",
+        "Mantenimiento: preventivo vs correctivo",
+        "Indicadores HSE (seguridad) y cumplimiento"
+      ],
+      note: "En Neuquén esto es clave: sin lectura única, se pierde plata en silencios.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path fill="rgba(17,214,180,.95)" d="M10 14h4v2h-4z"/></svg>`,
+      media: oilFrame(),
+      img: "assets/brand/petroleo.webp"
+    },
+    {
+      tab: "Finanzas",
+      sub: "Cashflow & proyección",
+      title: "Controle finanzas con información precisa y proyecciones claras",
+      desc: "FP&A práctico: caja, cobranza, pagos, escenarios y señales tempranas para decidir antes de que apriete.",
+      bullets: [
+        "Cashflow y liquidez continua",
+        "Forecast con escenarios ajustables",
+        "Rentabilidad por unidad / proyecto / período",
+        "Centralización contable desde múltiples fuentes"
+      ],
+      note: "La dirección necesita señales: no un Excel eterno.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M12 2l7 4v12l-7 4-7-4V6z"/><path fill="rgba(34,211,238,.95)" d="M10 8h4v2h-4zm0 4h4v2h-4z"/></svg>`,
+      media: financeFrame(),
+      img: "assets/brand/finanzas.webp"
+    },
+    {
+      tab: "Comercial",
+      sub: "Ventas & rentabilidad",
+      title: "Ventas con lectura real: qué deja margen y qué lo consume",
+      desc: "De “facturar más” a “ganar mejor”: mix, descuentos, margen por cliente y producto, y foco de acción.",
+      bullets: [
+        "Margen por producto/cliente/canal",
+        "Descuento efectivo y erosión de rentabilidad",
+        "Cohortes: retención, recurrencia y ticket",
+        "Objetivos y señales por semana"
+      ],
+      note: "La venta sin margen es trabajo sin resultado.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M4 18V6h2v12zm4 0V9h2v9zm4 0V4h2v14zm4 0v-7h2v7z"/></svg>`,
+      media: salesFrame(),
+      img: "assets/brand/comercial.webp"
+    },
+    {
+      tab: "Operaciones",
+      sub: "Productividad & SLA",
+      title: "Operaciones con control: capacidad, cuellos de botella y tiempos",
+      desc: "Indicadores de proceso para ver saturación, retrasos y eficiencia sin discusión de números.",
+      bullets: [
+        "Lead time / tiempos por etapa",
+        "Capacidad vs demanda (y saturación)",
+        "Cuellos de botella por turno / zona",
+        "Calidad y reprocesos"
+      ],
+      note: "Más velocidad sin perder control.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M7 2h10v4H7z"/><path fill="rgba(17,214,180,.95)" d="M6 8h12v14H6z"/><path fill="rgba(11,47,86,.95)" d="M9 11h6v2H9zm0 4h6v2H9z"/></svg>`,
+      media: opsFrame(),
+      img: "assets/brand/operaciones.webp"
+    },
+    {
+      tab: "RRHH",
+      sub: "Talento & desempeño",
+      title: "Analítica de RRHH para estructura, rotación y desempeño",
+      desc: "Visualice indicadores para entender dinámica interna, optimizar procesos y fortalecer decisiones.",
+      bullets: [
+        "Ausentismo y causas asociadas",
+        "Rotación, permanencia y engagement",
+        "Eficiencia en selección, desarrollo y retención",
+        "Comparación entre equipos/áreas/sedes"
+      ],
+      note: "Una estructura sana se mide: lo que no se ve, se deteriora.",
+      icon: `<svg viewBox="0 0 24 24"><path fill="rgba(11,47,86,.95)" d="M16 11a4 4 0 1 0-8 0c0 2.2 1.8 4 4 4s4-1.8 4-4z"/><path fill="rgba(34,211,238,.95)" d="M4 22c0-4 4-6 8-6s8 2 8 6z"/></svg>`,
+      media: hrFrame(),
+      img: "assets/brand/recursos-humanos.webp"
+    }
+  ];
+
+  const tabsEl = document.getElementById("solTabs");
+  const titleEl = document.getElementById("solTitle");
+  const descEl = document.getElementById("solDesc");
+  const bulletsEl = document.getElementById("solBullets");
+  const noteEl = document.getElementById("solNote");
+  const mediaEl = document.getElementById("solMedia");
+
+  if(!tabsEl || !titleEl || !bulletsEl || !noteEl || !mediaEl || !descEl) return;
+
+  function render(idx){
+    const item = data[idx];
+    titleEl.textContent = item.title;
+    descEl.textContent = item.desc;
+    bulletsEl.innerHTML = item.bullets.map(b => `<li><span class="solCheck"></span><span>${b}</span></li>`).join("");
+    noteEl.textContent = item.note;
+
+    if(item.img && item.img.trim().length){
+      mediaEl.innerHTML = `<div class="imgFrame"><img src="${item.img}" alt="" loading="lazy"></div>`;
+    } else {
+      mediaEl.innerHTML = `<div class="frame">${item.media}</div>`;
+    }
+
+    Array.from(tabsEl.querySelectorAll(".solTab")).forEach((t,i)=>{
+      t.classList.toggle("active", i === idx);
+    });
+  }
+
+  tabsEl.innerHTML = data.map((d,i)=>`
+    <button class="solTab ${i===0?'active':''}" type="button" data-i="${i}">
+      <span class="solIcon">${d.icon}</span>
+      <span class="solText">
+        <b>${d.tab}</b>
+        <small>${d.sub}</small>
+      </span>
+    </button>
+  `).join("");
+
+  tabsEl.addEventListener("click", (e)=>{
+    const btn = e.target.closest(".solTab");
+    if(!btn) return;
+    render(parseInt(btn.dataset.i, 10));
+  });
+
+  render(0);
+
+  /* ===== SVG frames (fallback, si no subís imágenes) ===== */
+  function dashboardFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+          <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="190" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="240" y="44" width="120" height="24" rx="12" fill="rgba(17,214,180,.12)"/>
+      <rect x="368" y="44" width="110" height="24" rx="12" fill="rgba(34,211,238,.12)"/>
+      <rect x="40" y="92" width="200" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="254" y="92" width="224" height="90" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="40" y="198" width="438" height="84" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M68 254 C120 220, 170 268, 220 236 C270 204, 320 264, 364 226 C404 194, 440 214, 466 206" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="220" cy="236" r="6" fill="rgba(34,211,238,.95)"/>
+      <circle cx="364" cy="226" r="6" fill="rgba(17,214,180,.95)"/>
+    </svg>`; }
+
+  function oilFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
+          <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="220" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="40" y="160" width="210" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="268" y="160" width="210" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M96 258 V196 h18 v62" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M136 258 V178 h18 v80" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M176 258 V212 h18 v46" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 226 C350 196, 386 256, 430 210" fill="none" stroke="rgba(34,211,238,.90)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="430" cy="210" r="6" fill="rgba(34,211,238,.95)"/>
+    </svg>`; }
+
+  function financeFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+          <stop offset="1" stop-color="rgba(11,47,86,.95)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="200" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M70 248 L130 210 L190 228 L250 176 L310 208 L370 150 L450 178" fill="none" stroke="url(#g3)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M70 248 L450 248" stroke="rgba(10,16,34,.14)" stroke-width="2"/>
+      <circle cx="370" cy="150" r="6" fill="rgba(17,214,180,.95)"/>
+    </svg>`; }
+
+  function salesFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(17,214,180,.95)"/>
+          <stop offset="1" stop-color="rgba(34,211,238,.95)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="170" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="80" y="208" width="40" height="48" rx="10" fill="url(#g4)"/>
+      <rect x="140" y="188" width="40" height="68" rx="10" fill="url(#g4)"/>
+      <rect x="200" y="160" width="40" height="96" rx="10" fill="url(#g4)"/>
+      <rect x="260" y="182" width="40" height="74" rx="10" fill="url(#g4)"/>
+      <rect x="320" y="146" width="40" height="110" rx="10" fill="url(#g4)"/>
+      <rect x="380" y="172" width="40" height="84" rx="10" fill="url(#g4)"/>
+    </svg>`; }
+
+  function opsFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(11,47,86,.95)"/>
+          <stop offset="1" stop-color="rgba(34,211,238,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="230" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="54" rx="14" fill="rgba(11,47,86,.06)"/>
+      <rect x="40" y="160" width="438" height="122" rx="14" fill="rgba(11,47,86,.06)"/>
+      <path d="M74 222 h120" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M74 252 h220" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 222 h130" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 252 h90" stroke="rgba(17,214,180,.90)" stroke-width="10" stroke-linecap="round"/>
+    </svg>`; }
+
+  function hrFrame(){ return `
+    <svg viewBox="0 0 520 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,211,238,.95)"/>
+          <stop offset="1" stop-color="rgba(17,214,180,.90)"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="18" width="488" height="284" rx="18" fill="rgba(255,255,255,.75)" stroke="rgba(10,16,34,.12)"/>
+      <rect x="40" y="44" width="220" height="24" rx="12" fill="rgba(11,47,86,.10)"/>
+      <rect x="40" y="92" width="438" height="190" rx="14" fill="rgba(11,47,86,.06)"/>
+      <circle cx="170" cy="170" r="34" fill="url(#g6)" opacity=".85"/>
+      <circle cx="260" cy="156" r="28" fill="rgba(11,47,86,.90)" opacity=".20"/>
+      <circle cx="335" cy="178" r="30" fill="url(#g6)" opacity=".75"/>
+      <path d="M130 238c18-24 70-24 88 0" fill="none" stroke="rgba(11,47,86,.25)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M304 238c16-22 62-22 78 0" fill="none" stroke="rgba(11,47,86,.25)" stroke-width="6" stroke-linecap="round"/>
+    </svg>`; }
+})();
+</script>
+
+<!-- ===== NET CANVAS (más dinámico + más brillo + destellos) ===== -->
+<script>
+(function(){
+  const c = document.getElementById("net");
+  if(!c) return;
+  const ctx = c.getContext("2d", { alpha: true });
+
+  const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(prefersReduce) return;
+
+  let W=0,H=0,DPR=1, nodes=[], raf=0;
+  const pointer = { x: 0, y: 0, active: false };
+
+  const cfg = {
+    base: 56,
+    density: 50000,
+    maxDist: 185,
+    speed: 2.6,
+    nodeRadius: 1.45,
+    nodeAlpha: 1.00,
+    lineAlpha: 0.42,
+    glow: true,
+    glowStrength: 28,
+    attract: 0.030,
+
+    // ✨ Destellos (premium)
+    sparkChance: 0.08,
+    sparksPerFrame: 2,
+    sparkMinR: 2.2,
+    sparkMaxR: 3.6,
+    sparkBlur: 26
+  };
+
+  let t0 = performance.now();
+
+  function resize(){
+    const r = c.parentElement.getBoundingClientRect();
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = Math.max(1, Math.floor(r.width));
+    H = Math.max(1, Math.floor(r.height));
+    c.width = Math.floor(W*DPR);
+    c.height = Math.floor(H*DPR);
+    c.style.width = W+"px";
+    c.style.height = H+"px";
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+
+    const count = Math.floor(cfg.base + (W*H)/cfg.density);
+    nodes = new Array(count).fill(0).map(()=>({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      vx: (Math.random()*2-1)*cfg.speed,
+      vy: (Math.random()*2-1)*cfg.speed
+    }));
+  }
+
+  function onPointerMove(e){
+    const rect = c.getBoundingClientRect();
+    pointer.x = e.clientX - rect.left;
+    pointer.y = e.clientY - rect.top;
+    pointer.active = true;
+  }
+  function onPointerLeave(){ pointer.active = false; }
+
+  window.addEventListener("resize", resize, { passive:true });
+  window.addEventListener("mousemove", onPointerMove, { passive:true });
+  window.addEventListener("mouseleave", onPointerLeave, { passive:true });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const t = (performance.now() - t0) / 1000;
+
+    if(cfg.glow){
+      ctx.shadowColor = "rgba(34,211,238,.42)";
+      ctx.shadowBlur = cfg.glowStrength;
+    } else ctx.shadowBlur = 0;
+
+    for(const n of nodes){
+      if(pointer.active){
+        const dx = pointer.x - n.x;
+        const dy = pointer.y - n.y;
+        const d2 = dx*dx + dy*dy;
+        if(d2 < 240*240){
+          n.vx += dx * cfg.attract / 240;
+          n.vy += dy * cfg.attract / 240;
+        }
+      }
+      n.vx = Math.max(-1.4, Math.min(1.4, n.vx));
+      n.vy = Math.max(-1.4, Math.min(1.4, n.vy));
+
+      n.x += n.vx; n.y += n.vy;
+      if(n.x < 0 || n.x > W) n.vx *= -1;
+      if(n.y < 0 || n.y > H) n.vy *= -1;
+      n.x = Math.max(0, Math.min(W, n.x));
+      n.y = Math.max(0, Math.min(H, n.y));
+    }
+
+    const cell = cfg.maxDist;
+    const cols = Math.ceil(W/cell);
+    const rows = Math.ceil(H/cell);
+    const buckets = new Array(cols*rows);
+    for(let i=0;i<buckets.length;i++) buckets[i]=[];
+    for(const n of nodes){
+      const cx = Math.floor(n.x/cell);
+      const cy = Math.floor(n.y/cell);
+      buckets[cx + cy*cols].push(n);
+    }
+
+    for(let cy=0;cy<rows;cy++){
+      for(let cx=0;cx<cols;cx++){
+        const b = buckets[cx + cy*cols];
+        for(const n of b){
+          for(let oy=-1;oy<=1;oy++){
+            for(let ox=-1;ox<=1;ox++){
+              const nx = cx+ox, ny = cy+oy;
+              if(nx<0||ny<0||nx>=cols||ny>=rows) continue;
+              const b2 = buckets[nx + ny*cols];
+              for(const m of b2){
+                if(m===n) continue;
+                const dx = n.x - m.x;
+                const dy = n.y - m.y;
+                const d = Math.sqrt(dx*dx + dy*dy);
+                if(d < cfg.maxDist){
+                  const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
+                  const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
+                  ctx.lineWidth = w;
+
+                  const g = ctx.createLinearGradient(n.x,n.y,m.x,m.y);
+                  g.addColorStop(0, `rgba(34,211,238,${a})`);
+                  g.addColorStop(1, `rgba(17,214,180,${a})`);
+                  ctx.strokeStyle = g;
+
+                  ctx.beginPath();
+                  ctx.moveTo(n.x,n.y);
+                  ctx.lineTo(m.x,m.y);
+                  ctx.stroke();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
+    for(const n of nodes){
+      ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,cfg.nodeRadius,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    for(let i=0;i<cfg.sparksPerFrame;i++){
+      if(Math.random() < cfg.sparkChance){
+        const n = nodes[(Math.random()*nodes.length)|0];
+        const pulse = 0.55 + 0.45*Math.sin(t*10 + Math.random()*6.283);
+
+        ctx.save();
+        ctx.globalCompositeOperation = "lighter";
+        ctx.shadowColor = "rgba(34,211,238,.75)";
+        ctx.shadowBlur = cfg.sparkBlur;
+
+        const r = cfg.sparkMinR + (cfg.sparkMaxR - cfg.sparkMinR)*pulse;
+        ctx.fillStyle = `rgba(34,211,238,${0.35 + 0.25*pulse})`;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize(); draw();
+  window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
+})();
+</script>
+</body>
+</html>
