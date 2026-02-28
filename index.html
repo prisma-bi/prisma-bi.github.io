@@ -14,7 +14,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -1813,7 +1813,8 @@ const base = isMobile ? 28 : cfg.base;
 const density = isMobile ? 95000 : cfg.density;
 
 const count = Math.floor(base + (W*H)/density);
-    nodes = new Array(count).fill(0).map(()=>({
+    const capped = Math.min(count, 120);   // máximo 120 nodos
+    nodes = new Array(capped).fill(0).map(()=>({
       x: Math.random()*W,
       y: Math.random()*H,
       vx: (Math.random()*2-1)*cfg.speed,
