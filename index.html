@@ -28,7 +28,7 @@
       /* ✅ Azul oscuro (no eléctrico) + acentos tech */
       --blue:#0B2F56;
       --blue2:#0E3B6B;
-      --cyan:#22D3EE;     /* un poco menos “eléctrico” */
+      --cyan:#22D3EE;
       --teal:#11D6B4;
 
       --card:rgba(10,18,38,.58);
@@ -48,15 +48,15 @@
 
     *{box-sizing:border-box}
     html,body{margin:0}
+
+    /* ✅ Fondo uniforme (para que no “tiña” ni oscurezca la foto) */
     body{
       font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(900px 520px at 18% 12%, rgba(34,211,238,.14), transparent 62%),
-        radial-gradient(820px 520px at 78% 18%, rgba(17,214,180,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg0));
+      background: linear-gradient(180deg, var(--bg1), var(--bg0));
       overflow-x:hidden;
     }
+
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{max-width:var(--container);margin:0 auto;padding:0 28px}
@@ -76,90 +76,9 @@
       filter: blur(.2px);
     }
 
-    /* ===== TOPBAR ===== */
-    .topbar{
-      position:sticky;top:0;z-index:70;
-      background:rgba(2,5,14,.55);
-      backdrop-filter: blur(14px) saturate(170%);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .topbarInner{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:10px 0;
-    }
-    .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .chip{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.38);
-      color:rgba(244,248,255,.85);
-      font-weight:800;font-size:13px;
-      white-space:nowrap;
-    }
-    .chip b{color:rgba(244,248,255,.95)}
-    .dot{
-      width:8px;height:8px;border-radius:999px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 18px rgba(34,211,238,.28);
-    }
-    .topbarRight{
-      display:flex;align-items:center;gap:10px;
-      color:rgba(244,248,255,.70);
-      font-weight:800;font-size:13px;
-    }
-/* TOPBAR: links + iconos */
-.chipLink{
-  cursor:pointer;
-  transition: transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
-}
-
-.chipLink:hover{
-  border-color: rgba(34,211,238,.22);
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-  background: rgba(10,18,38,.48);
-}
-
-.chipIco{
-  width:16px;
-  height:16px;
-  opacity:.92;
-}
-
-/* WhatsApp chip (verde) */
-.chipWA{
-  background: rgba(16,185,129,.14);
-  border-color: rgba(16,185,129,.30);
-  color: rgba(244,248,255,.92);
-}
-.chipWA .dot{
-  background: linear-gradient(90deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
-  box-shadow: 0 0 18px rgba(34,197,94,.22);
-}
-.chipWA:hover{
-  border-color: rgba(34,197,94,.45);
-  background: rgba(16,185,129,.18);
-}
-
-/* LinkedIn chip (azul) */
-.chipLI{
-  background: rgba(59,130,246,.14);
-  border-color: rgba(59,130,246,.30);
-  color: rgba(244,248,255,.92);
-}
-.chipLI .dot{
-  background: linear-gradient(90deg, rgba(59,130,246,.95), rgba(34,211,238,.92));
-  box-shadow: 0 0 18px rgba(59,130,246,.20);
-}
-.chipLI:hover{
-  border-color: rgba(59,130,246,.45);
-  background: rgba(59,130,246,.18);
-}
-    
     /* ===== HEADER / NAV ===== */
     header{
-      position:sticky; top:44px; z-index:65;
+      position:sticky; top:0; z-index:65; /* ✅ antes top:44px (porque existía topbar) */
       background:rgba(2,5,14,.72);
       backdrop-filter: blur(14px) saturate(170%);
       border-bottom:1px solid rgba(255,255,255,.06);
@@ -171,28 +90,28 @@
       min-height:98px;
     }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex:0 0 auto;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex:0 0 auto;
+    }
 
-.brand img{
-  width: 240px;        /* 👈 SUBÍ/BAJÁ: 180–280 */
-  height: auto;
-  max-height: 88px;    /* alto máximo dentro del header */
-  object-fit: contain;
-  display:block;
-  filter: drop-shadow(0 16px 40px rgba(0,0,0,.45)) brightness(1.08);
-}
+    .brand img{
+      width: 240px;
+      height: auto;
+      max-height: 88px;
+      object-fit: contain;
+      display:block;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.45)) brightness(1.08);
+    }
 
-@media (max-width:980px){
-  .brand img{
-    width: 185px;
-    max-height: 72px;
-  }
-}
+    @media (max-width:980px){
+      .brand img{
+        width: 185px;
+        max-height: 72px;
+      }
+    }
 
     .menu{display:flex;gap:10px;align-items:center}
     .menu a{
@@ -254,221 +173,215 @@
     }
 
     @media (max-width:980px){
-      header{top:0}
-      .chips{display:none}
       .menu{display:none}
       .brand{min-width:auto}
-      .topbarRight{display:none}
     }
 
-/* ===== HERO ===== */
-.hero{
-  position:relative;
-  /* ✅ evita superposición con topbar+header sticky */
-  padding-top: calc(72px + 110px); /* ajusta si tu header cambia */
-  padding-bottom: 80px;
+    /* ===== HERO ===== */
+    .hero{
+      position:relative;
+      /* ✅ más chico y proporcional */
+      padding-top: 120px;      /* antes calc(72px + 110px) */
+      padding-bottom: 64px;   /* antes 80px */
+      min-height: 72vh;       /* antes calc(88vh - 120px) */
+      display:flex;
+      align-items:flex-start;
+      overflow:hidden;
+      isolation:isolate;
+      text-align:center;
+    }
 
-  min-height: calc(88vh - 120px);
-  display:flex;
-  align-items:flex-start; /* ✅ arranca más arriba, no queda tapado */
-  overflow:hidden;
-  isolation:isolate;
-  text-align:center;
-}
+    /* ✅ FOTO CLARA Y PROTAGONISTA */
+    .heroBg{
+      position:absolute;
+      inset:0;
+      z-index:-4;
 
-/* ===== FONDO CON IMAGEN PROTAGONISTA ===== */
-.heroBg{
-  position:absolute;
-  inset:0;
-  z-index:-4;
+      background:
+        /* overlay MUY suave (solo para que el texto se lea, sin “tapar” la foto) */
+        linear-gradient(180deg, rgba(2,5,14,.08), rgba(2,5,14,.18)),
+        url("assets/brand/prisma-hero.webp");
 
-  background:
-    /* ✅ overlays más controlados (se ve la foto y el texto se lee) */
-    linear-gradient(180deg, rgba(2,5,14,.38), rgba(2,5,14,.72)),
-    radial-gradient(900px 520px at 18% 12%, rgba(34,211,238,.10), transparent 62%),
-    radial-gradient(820px 520px at 78% 18%, rgba(17,214,180,.08), transparent 60%),
-    url("assets/brand/prisma-hero.webp");
+      background-size: cover;
+      background-position: center 35%;
+      background-repeat: no-repeat;
 
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
+      /* ✅ sin filtros que apaguen */
+      filter: none;
+    }
 
-  /* ✅ menos agresivo (antes oscurecía demasiado) */
-  filter: saturate(1.06) contrast(1.02) brightness(1.03);
-}
+    /* estrellas muy sutiles */
+    .heroStars{
+      position:absolute;
+      inset:-60px;
+      z-index:-3;
+      pointer-events:none;
+      opacity:.10;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.55), transparent 55%),
+        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.40), transparent 55%),
+        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.38), transparent 55%),
+        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.34), transparent 55%);
+      mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
+    }
 
-/* estrellas muy sutiles */
-.heroStars{
-  position:absolute;
-  inset:-60px;
-  z-index:-3;
-  pointer-events:none;
-  opacity:.14;
-  background:
-    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.55), transparent 55%),
-    radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.40), transparent 55%),
-    radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.38), transparent 55%),
-    radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.34), transparent 55%);
-  mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
-}
+    /* ✅ la red no debe “ensuciar” la foto */
+    .netCanvas{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      width:100%;
+      height:100%;
+      opacity:.18;              /* antes .38 */
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 18px rgba(34,211,238,.14));
+      pointer-events:none;
+    }
 
-/* NODOS más sutiles */
-.netCanvas{
-  position:absolute;
-  inset:0;
-  z-index:-2;
-  width:100%;
-  height:100%;
-  opacity:.38;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 0 18px rgba(34,211,238,.18));
-  pointer-events:none;
-}
+    /* ✅ Vignette MUY liviana (antes oscurecía bastante) */
+    .heroVignette{
+      position:absolute;
+      inset:-80px;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.18) 72%),
+        linear-gradient(180deg, rgba(2,5,14,.06) 0%, rgba(2,5,14,.10) 55%, rgba(2,5,14,.14) 100%);
+      opacity:.60;
+    }
 
-/* ✅ Vignette liviana (solo para ayudar a lectura, no “tapar” foto) */
-.heroVignette{
-  position:absolute;
-  inset:-80px;
-  z-index:-1;
-  pointer-events:none;
-  background:
-    radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.36) 72%),
-    linear-gradient(180deg, rgba(2,5,14,.25) 0%, rgba(2,5,14,.35) 55%, rgba(2,5,14,.55) 100%);
-  opacity:.70;
-}
+    .heroInner{
+      max-width:980px;
+      margin:0 auto;
+      padding:0 10px;
+    }
 
-.heroInner{
-  max-width:980px;
-  margin:0 auto;
-  padding:0 10px;
-}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(6,12,26,.45);
+      box-shadow:0 14px 40px rgba(0,0,0,.34);
+      width:max-content;
+      margin:0 auto 18px;
+      font-weight:900;
+      color:rgba(244,248,255,.92);
+    }
 
-.pill{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(6,12,26,.45);
-  box-shadow:0 14px 40px rgba(0,0,0,.34);
-  width:max-content;
-  margin:0 auto 18px;
-  font-weight:900;
-  color:rgba(244,248,255,.92);
-}
+    .pill i{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      box-shadow:0 0 22px rgba(34,211,238,.35);
+    }
 
-.pill i{
-  width:10px;
-  height:10px;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--cyan),var(--teal));
-  box-shadow:0 0 22px rgba(34,211,238,.35);
-}
+    h1{
+      margin:0 0 14px;
+      font-size:var(--h1);
+      line-height:1.02;
+      font-weight:950;
+      letter-spacing:-.03em;
+      text-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
 
-h1{
-  margin:0 0 14px;
-  font-size:var(--h1);
-  line-height:1.02;
-  font-weight:950;
-  letter-spacing:-.03em;
-  text-shadow: 0 20px 60px rgba(0,0,0,.55);
-}
+    .accent{
+      background:linear-gradient(90deg,var(--cyan),var(--teal));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
 
-.accent{
-  background:linear-gradient(90deg,var(--cyan),var(--teal));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
+    .lede{
+      margin:0 auto 24px;
+      font-size:var(--lead);
+      color:rgba(244,248,255,.88);
+      max-width:72ch;
+      line-height:1.7;
+      text-shadow: 0 12px 34px rgba(0,0,0,.28);
+    }
 
-.lede{
-  margin:0 auto 24px;
-  font-size:var(--lead);
-  color:rgba(244,248,255,.86);
-  max-width:72ch;
-  line-height:1.7;
-  text-shadow: 0 12px 34px rgba(0,0,0,.35);
-}
+    .ctaRow{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin:20px 0 0;
+    }
 
-.ctaRow{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin:20px 0 0;
-}
+    .heroContext{
+      margin:32px auto 0; /* antes 38 */
+      max-width:980px;
+    }
 
-.heroContext{
-  margin:38px auto 0;
-  max-width:980px;
-}
+    .heroContextTitle{
+      margin:0 0 14px;
+      color:rgba(244,248,255,.82);
+      font-weight:950;
+      letter-spacing:-.01em;
+      font-size:14px;
+      text-transform:uppercase;
+      opacity:.95;
+    }
 
-.heroContextTitle{
-  margin:0 0 14px;
-  color:rgba(244,248,255,.82);
-  font-weight:950;
-  letter-spacing:-.01em;
-  font-size:14px;
-  text-transform:uppercase;
-  opacity:.95;
-}
+    .heroCards{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+    }
 
-.heroCards{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:16px;
-}
+    @media (max-width:980px){
+      .hero{
+        padding-top: 110px;
+        padding-bottom: 54px;
+        min-height:auto;
+      }
+      .heroBg{
+        background-position: center 28%;
+      }
+      .heroCards{
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+    }
 
-@media (max-width:980px){
-  .hero{
-    padding-top: calc(64px + 96px); /* menos alto en mobile */
-    padding-bottom: 60px;
-    min-height:auto;
-  }
-  .heroBg{
-    background-position: center 22%;
-  }
-  .heroCards{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-}
+    .hCard{
+      text-align:left;
+      position:relative;
+      background:rgba(10,18,38,.65);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:18px 18px 16px;
+      box-shadow:0 22px 70px rgba(0,0,0,.34);
+      overflow:hidden;
+    }
 
-.hCard{
-  text-align:left;
-  position:relative;
-  background:rgba(10,18,38,.65);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:18px;
-  padding:18px 18px 16px;
-  box-shadow:0 22px 70px rgba(0,0,0,.34);
-  overflow:hidden;
-}
+    .hCard b{
+      display:block;
+      font-weight:950;
+      margin-bottom:6px;
+    }
 
-.hCard b{
-  display:block;
-  font-weight:950;
-  margin-bottom:6px;
-}
+    .hCard p{
+      margin:0;
+      color:rgba(244,248,255,.78);
+      line-height:1.65;
+      font-size:14px;
+    }
 
-.hCard p{
-  margin:0;
-  color:rgba(244,248,255,.78);
-  line-height:1.65;
-  font-size:14px;
-}
-
-.hDot{
-  width:10px;
-  height:10px;
-  border-radius:999px;
-  background:linear-gradient(90deg, var(--cyan), var(--teal));
-  box-shadow:0 0 18px rgba(34,211,238,.22);
-  display:inline-block;
-  margin-right:10px;
-  transform:translateY(1px);
-}
+    .hDot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow:0 0 18px rgba(34,211,238,.22);
+      display:inline-block;
+      margin-right:10px;
+      transform:translateY(1px);
+    }
 
     /* ===== QUIÉNES SOMOS (video + bullets) ===== */
     .aboutGrid{
@@ -564,233 +477,218 @@ h1{
       display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
     }
     .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
-/* =========================================================
-   ===== SOLUCIONES (Premium Dark / Corporate) — LIMPIO =====
-   Reemplazar TODO tu bloque de SOLUCIONES por este
-========================================================= */
 
-/* Sección (fondo) */
-.secLight{
-  background:
-    radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
-    radial-gradient(900px 520px at 78% 22%, rgba(17,214,180,.08), transparent 62%),
-    linear-gradient(180deg, rgba(4,10,24,.92), rgba(2,5,14,.98));
-  color: var(--text);
-  position: relative;
-}
-.secLight:before,
-.secLight:after{ display:block; }
+    /* =========================================================
+       ===== SOLUCIONES (Premium Dark / Corporate) — LIMPIO =====
+    ========================================================= */
 
-.secLight .sectionTitle{
-  color: var(--text);
-  text-shadow: 0 18px 46px rgba(0,0,0,.30);
-}
-.secLight .sectionLead{ color: rgba(244,248,255,.68); }
+    .secLight{
+      background:
+        radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
+        radial-gradient(900px 520px at 78% 22%, rgba(17,214,180,.08), transparent 62%),
+        linear-gradient(180deg, rgba(4,10,24,.92), rgba(2,5,14,.98));
+      color: var(--text);
+      position: relative;
+    }
+    .secLight:before,
+    .secLight:after{ display:block; }
 
-/* Contenedor principal */
-.solutionsWrap{
-  max-width:1160px;
-  margin:0 auto;
-  border-radius:26px;
-  background:
-    radial-gradient(520px 260px at 18% 18%, rgba(34,211,238,.10), transparent 62%),
-    radial-gradient(520px 260px at 82% 82%, rgba(17,214,180,.08), transparent 62%),
-    rgba(10,18,38,.56);
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow: 0 22px 80px rgba(0,0,0,.32);
-  overflow:hidden;
-  display:grid;
-  grid-template-columns: 340px 1fr;   /* un poquito más angosto a la izquierda */
-  align-items: stretch;               /* ✅ importante */
-}
-@media (max-width:980px){
-  .solutionsWrap{grid-template-columns:1fr}
-}
+    .secLight .sectionTitle{
+      color: var(--text);
+      text-shadow: 0 18px 46px rgba(0,0,0,.30);
+    }
+    .secLight .sectionLead{ color: rgba(244,248,255,.68); }
 
-/* Columna izquierda */
-.solLeft{
-  background: rgba(8,14,30,.34);
-  border-right:1px solid rgba(255,255,255,.06);
-  padding:16px;
+    .solutionsWrap{
+      max-width:1160px;
+      margin:0 auto;
+      border-radius:26px;
+      background:
+        radial-gradient(520px 260px at 18% 18%, rgba(34,211,238,.10), transparent 62%),
+        radial-gradient(520px 260px at 82% 82%, rgba(17,214,180,.08), transparent 62%),
+        rgba(10,18,38,.56);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 80px rgba(0,0,0,.32);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 340px 1fr;
+      align-items: stretch;
+    }
+    @media (max-width:980px){
+      .solutionsWrap{grid-template-columns:1fr}
+    }
 
-  display:flex;               /* ✅ */
-  flex-direction:column;      /* ✅ */
-}
+    .solLeft{
+      background: rgba(8,14,30,.34);
+      border-right:1px solid rgba(255,255,255,.06);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+    }
 
-/* Tabs: ocupar todo el alto (como el ejemplo blanco) */
-.solTabs{
-  display:flex;               /* ✅ antes era grid */
-  flex-direction:column;
-  gap:12px;
-  height:100%;
-  justify-content:space-between;  /* ✅ reparte hasta abajo */
-}
+    .solTabs{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      height:100%;
+      justify-content:space-between;
+    }
 
-/* TAB (sin íconos) */
-.solTab{
-  width:100%;
-  min-height:72px;            /* ✅ más alto */
-  flex:1;                     /* ✅ cada tab crece para llenar */
-  border-radius:14px;
-  padding:12px 14px;
-  padding-left:24px;                 /* aire al ocultar iconos */
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(10,18,38,.40);
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease, filter .14s ease;
-  text-align:left;
-  position:relative;
-  color: rgba(244,248,255,.90);
-}
+    .solTab{
+      width:100%;
+      min-height:72px;
+      flex:1;
+      border-radius:14px;
+      padding:12px 14px;
+      padding-left:24px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,18,38,.40);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease, filter .14s ease;
+      text-align:left;
+      position:relative;
+      color: rgba(244,248,255,.90);
+    }
 
-.solTab:hover{
-  transform:translateY(-1px);
-  border-color:rgba(34,211,238,.20);
-  filter:brightness(1.06);
-}
-.solTab.active{
-  background: rgba(10,18,38,.58);
-  border-color: rgba(34,211,238,.22);
-  box-shadow: 0 10px 30px rgba(0,0,0,.18);
-  padding-left:28px;                 /* un poco más al activo */
-}
-.solTab.active:before{
-  content:"";
-  position:absolute;
-  left:12px; top:12px; bottom:12px;
-  width:3px;
-  border-radius:999px;
-  background: linear-gradient(180deg, rgba(34,211,238,.92), rgba(17,214,180,.88));
-  opacity:.95;
-}
+    .solTab:hover{
+      transform:translateY(-1px);
+      border-color:rgba(34,211,238,.20);
+      filter:brightness(1.06);
+    }
+    .solTab.active{
+      background: rgba(10,18,38,.58);
+      border-color: rgba(34,211,238,.22);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      padding-left:28px;
+    }
+    .solTab.active:before{
+      content:"";
+      position:absolute;
+      left:12px; top:12px; bottom:12px;
+      width:3px;
+      border-radius:999px;
+      background: linear-gradient(180deg, rgba(34,211,238,.92), rgba(17,214,180,.88));
+      opacity:.95;
+    }
 
-/* Iconos: ocultos */
-.solIcon{ display:none !important; }
+    .solIcon{ display:none !important; }
 
-/* Texto del tab */
-.solText{display:flex;flex-direction:column;gap:2px;min-width:0}
-.solText b{
-  font-weight:950;
-  color: rgba(244,248,255,.92);
-  font-size:13.5px;
-  line-height:1.15;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.solText small{
-  color: rgba(244,248,255,.62);
-  font-weight:800;
-  font-size:11.5px;
-  line-height:1.2;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
+    .solText{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .solText b{
+      font-weight:950;
+      color: rgba(244,248,255,.92);
+      font-size:13.5px;
+      line-height:1.15;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .solText small{
+      color: rgba(244,248,255,.62);
+      font-weight:800;
+      font-size:11.5px;
+      line-height:1.2;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
 
-/* ===== Columna derecha (estilo “modelo blanco”: aire + orden) ===== */
-.solRight{
-  padding: 46px 52px;
-  display:grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 34px;
-  align-items:start;
-}
-@media (max-width:980px){
-  .solRight{
-    grid-template-columns:1fr;
-    padding:24px;
-    gap:18px;
-  }
-}
+    .solRight{
+      padding: 46px 52px;
+      display:grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 34px;
+      align-items:start;
+    }
+    @media (max-width:980px){
+      .solRight{
+        grid-template-columns:1fr;
+        padding:24px;
+        gap:18px;
+      }
+    }
 
-/* Título / descripción */
-.solTitle{
-  margin:0 0 14px;
-  font-size: clamp(24px, 2.6vw, 38px);
-  font-weight:950;
-  letter-spacing:-.02em;
-  color: rgba(244,248,255,.96);
-  line-height:1.02;
-  max-width:28ch;                 /* ✅ más ancho */
-}
-.solDesc{
-  margin:0 0 22px;
-  color: rgba(244,248,255,.72);
-  line-height:1.85;
-  font-size:15.5px;
-  max-width:56ch;
-}
+    .solTitle{
+      margin:0 0 14px;
+      font-size: clamp(24px, 2.6vw, 38px);
+      font-weight:950;
+      letter-spacing:-.02em;
+      color: rgba(244,248,255,.96);
+      line-height:1.02;
+      max-width:28ch;
+    }
+    .solDesc{
+      margin:0 0 22px;
+      color: rgba(244,248,255,.72);
+      line-height:1.85;
+      font-size:15.5px;
+      max-width:56ch;
+    }
 
-/* Bullets: solo 3 visibles para NO aglutinar */
-.solBullets{
-  margin:0;
-  padding:0;
-  list-style:none;
-  display:grid;
-  gap:16px;
-  color: rgba(244,248,255,.84);
-  line-height:1.75;
-  font-size:15px;
-  max-width:56ch;
-}
-.solBullets li{display:flex;gap:12px;align-items:flex-start}
-.solBullets li:nth-child(n+4){ display:none; }  /* SOLO 3 bullets */
+    .solBullets{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:16px;
+      color: rgba(244,248,255,.84);
+      line-height:1.75;
+      font-size:15px;
+      max-width:56ch;
+    }
+    .solBullets li{display:flex;gap:12px;align-items:flex-start}
+    .solBullets li:nth-child(n+4){ display:none; }
 
-.solCheck{
-  width:18px;height:18px;border-radius:999px;
-  background: rgba(34,211,238,.10);
-  border:1px solid rgba(34,211,238,.22);
-  display:grid;place-items:center;flex:0 0 18px;margin-top:4px;
-}
-.solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
+    .solCheck{
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(34,211,238,.10);
+      border:1px solid rgba(34,211,238,.22);
+      display:grid;place-items:center;flex:0 0 18px;margin-top:4px;
+    }
+    .solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-/* Acciones / nota: ocultas (no las usás) */
-.solActions{ display:none !important; }
-.solLeft .solNote,
-.solRight .solNote{ display:none !important; }
+    .solActions{ display:none !important; }
+    .solLeft .solNote,
+    .solRight .solNote{ display:none !important; }
 
-/* ===== Media: sin cuadro gigante. Muestra imagen o fallback prolijo ===== */
-.solMedia{
-  background: transparent;
-  border:0;
-  box-shadow:none;
-  min-height:unset;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    .solMedia{
+      background: transparent;
+      border:0;
+      box-shadow:none;
+      min-height:unset;
+      padding:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-/* Fallback (SVG) visible hasta que subas imágenes reales */
-.solMedia .frame{
-  display:block;
-  width: min(560px, 100%);
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow: 0 22px 70px rgba(0,0,0,.30);
-  background: rgba(10,18,38,.15);
-}
-.solMedia .frame svg{
-  width:100%;
-  height:auto;
-  display:block;
-}
+    .solMedia .frame{
+      display:block;
+      width: min(560px, 100%);
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.30);
+      background: rgba(10,18,38,.15);
+    }
+    .solMedia .frame svg{
+      width:100%;
+      height:auto;
+      display:block;
+    }
 
-/* Imagen real */
-.solMedia .imgFrame{
-  width: min(560px, 100%);
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow: 0 22px 70px rgba(0,0,0,.30);
-  background: rgba(10,18,38,.15);
-}
-.solMedia .imgFrame img{
-  width:100%;
-  height:auto;
-  display:block;
-}
+    .solMedia .imgFrame{
+      width: min(560px, 100%);
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.30);
+      background: rgba(10,18,38,.15);
+    }
+    .solMedia .imgFrame img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
 
     /* ===== MÉTODO ===== */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
@@ -814,7 +712,6 @@ h1{
     }
     .step .t{margin:0 0 6px;font-weight:950}
     .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
-
 
     /* ===== OPINIONES ===== */
     .reviewsHeader{
@@ -910,119 +807,69 @@ h1{
       .netCanvas{display:none}
       .track{animation:none!important}
     }
-      /* ================================
-   SOLUCIONES — FOTO ABAJO DEL TEXTO
-   (pegar al FINAL del <style>)
-================================ */
 
-/* Columna derecha: 1 columna (texto arriba, media abajo) */
-.solRight{
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 22px !important;           /* aire entre texto e imagen */
-  padding: 46px 52px !important;  /* look “blanco” (limpio) */
-  align-items: start !important;
-}
-
-/* Media abajo */
-.solMedia{
-  order: 2 !important;
-  margin-top: 6px !important;
-}
-
-/* Caja imagen: prolija, sin “cuadro gigante” extra */
-.solMedia .imgFrame{
-  width: min(760px, 100%) !important;
-  border-radius: 22px !important;
-  overflow: hidden !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
-  background: rgba(10,18,38,.12) !important;
-}
-
-.solMedia .imgFrame img{
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-}
-
-/* Responsive */
-@media (max-width:980px){
-  .solRight{
-    padding: 26px !important;
-    gap: 16px !important;
-  }
-}
-/* ===== PATCH: Tabs (Soluciones) texto más grande y legible ===== */
-.solTab{
-  padding: 16px 16px !important;     /* más aire */
-  padding-left: 28px !important;     /* mantiene look del activo */
-  border-radius: 16px !important;
-}
-
-.solText b{
-  font-size: 15.5px !important;      /* antes 13.5 */
-  line-height: 1.2 !important;
-  letter-spacing: -0.01em !important;
-}
-
-.solText small{
-  font-size: 12.5px !important;      /* antes 11.5 */
-  line-height: 1.25 !important;
-  margin-top: 2px !important;
-  opacity: .85 !important;
-}
-
-/* opcional: que el activo se note más */
-.solTab.active .solText b{
-  color: rgba(244,248,255,.98) !important;
-}
+    /* ================================
+       SOLUCIONES — FOTO ABAJO DEL TEXTO
+       (pegar al FINAL del <style>)
+    ================================ */
+    .solRight{
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 22px !important;
+      padding: 46px 52px !important;
+      align-items: start !important;
+    }
+    .solMedia{
+      order: 2 !important;
+      margin-top: 6px !important;
+    }
+    .solMedia .imgFrame{
+      width: min(760px, 100%) !important;
+      border-radius: 22px !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(255,255,255,.10) !important;
+      box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
+      background: rgba(10,18,38,.12) !important;
+    }
+    .solMedia .imgFrame img{
+      width: 100% !important;
+      height: auto !important;
+      display: block !important;
+    }
+    @media (max-width:980px){
+      .solRight{
+        padding: 26px !important;
+        gap: 16px !important;
+      }
+    }
+    .solTab{
+      padding: 16px 16px !important;
+      padding-left: 28px !important;
+      border-radius: 16px !important;
+    }
+    .solText b{
+      font-size: 15.5px !important;
+      line-height: 1.2 !important;
+      letter-spacing: -0.01em !important;
+    }
+    .solText small{
+      font-size: 12.5px !important;
+      line-height: 1.25 !important;
+      margin-top: 2px !important;
+      opacity: .85 !important;
+    }
+    .solTab.active .solText b{
+      color: rgba(244,248,255,.98) !important;
+    }
   </style>
 </head>
 
 <body>
 
-<!-- TOPBAR (solo botones: WhatsApp + LinkedIn) -->
-<div class="topbar">
-  <div class="container topbarInner">
-    <div class="chips" aria-label="Contacto rápido">
-
-      <!-- WhatsApp (verde, sin teléfono visible) -->
-      <a class="chip chipLink chipWA"
-         href="https://wa.me/542996032267"
-         target="_blank" rel="noopener"
-         aria-label="WhatsApp Prisma BI">
-        <span class="dot"></span>
-        <svg class="chipIco" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M20.52 3.48A11.86 11.86 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.11.55 4.17 1.6 5.99L0 24l6.2-1.63A11.9 11.9 0 0 0 12.02 24C18.63 24 24 18.62 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12.02 22.02c-1.86 0-3.69-.5-5.29-1.45l-.38-.23-3.68.97.98-3.59-.25-.37A9.95 9.95 0 0 1 2.02 12c0-5.51 4.48-9.99 10-9.99 2.67 0 5.18 1.04 7.07 2.93A9.92 9.92 0 0 1 22.01 12c0 5.51-4.48 10.02-9.99 10.02Zm5.8-7.48c-.32-.16-1.9-.94-2.19-1.05-.29-.11-.5-.16-.71.16-.21.32-.82 1.05-1 1.26-.18.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.54-.71-.55h-.61c-.21 0-.55.08-.84.4-.29.32-1.1 1.07-1.1 2.61 0 1.54 1.13 3.03 1.29 3.24.16.21 2.22 3.39 5.38 4.76.75.32 1.33.51 1.79.66.75.24 1.43.21 1.97.13.6-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.61-.37Z"/>
-        </svg>
-        WhatsApp
-      </a>
-
-      <!-- LinkedIn (azul) -->
-      <a class="chip chipLink chipLI"
-         href="https://www.linkedin.com/in/daiana-beltran/"
-         target="_blank" rel="noopener"
-         aria-label="LinkedIn Daiana Beltrán">
-        <span class="dot"></span>
-        <svg class="chipIco" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.35-1.86 3.58 0 4.24 2.36 4.24 5.43v6.32ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/>
-        </svg>
-        LinkedIn
-      </a>
-
-    </div>
-
-    <!-- derecha vacía para no sumar más cosas -->
-    <div class="topbarRight" aria-label="Nota"></div>
-  </div>
-</div>
-
   <!-- NAV -->
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Ir al inicio">
-        <!-- Ajustá la ruta si tu logo está en otro lugar -->
         <img src="assets/brand/logo-prisma-bi.webp" alt="PRISMA BI">
       </a>
 
@@ -1102,20 +949,11 @@ h1{
       <div class="aboutGrid">
         <div class="videoCard" aria-label="Video presentación Prisma BI">
           <div class="videoRatio">
-            <!-- OPCIÓN A: YouTube/Vimeo (recomendado por peso y velocidad en GitHub Pages)
-                 Reemplazá el src con tu link (podés ponerlo “no listado”). -->
             <iframe
               src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
               title="Presentación Prisma BI"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
-
-            <!-- OPCIÓN B: Video local (si realmente querés mp4 en tu repo)
-                 Comentá el iframe y descomentá esto.
-            <video controls poster="assets/media/video-poster.jpg">
-              <source src="assets/media/prisma-intro.mp4" type="video/mp4">
-            </video>
-            -->
           </div>
         </div>
 
@@ -1234,8 +1072,7 @@ h1{
             <h3 class="solTitle" id="solTitle">—</h3>
             <p class="solDesc" id="solDesc"></p>
             <ul class="solBullets" id="solBullets"></ul>
-            <div class="solActions">
-            </div>
+            <div class="solActions"></div>
             <p class="solNote" id="solNote"></p>
           </div>
 
@@ -1354,11 +1191,9 @@ h1{
 
     /* ===== Smooth scroll (offset dinámico) ===== */
     function getHeaderOffset(){
-      const topbar = document.querySelector('.topbar');
       const header = document.querySelector('header');
-      const tb = topbar ? topbar.getBoundingClientRect().height : 0;
       const hd = header ? header.getBoundingClientRect().height : 0;
-      return Math.round(tb + hd + 18);
+      return Math.round(hd + 18);
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -1454,7 +1289,6 @@ h1{
     })();
 
 (function(){
-  // ✅ Si querés usar imágenes reales: subilas a /assets/sol/ y poné img:"assets/sol/xxx.jpg"
   const data = [
     {
       tab: "PyMEs",
@@ -1599,7 +1433,6 @@ h1{
 
   render(0);
 
-  /* ===== SVG frames (fallback, si no subís imágenes) ===== */
   function dashboardFrame(){ return `
     <svg viewBox="0 0 520 320" aria-hidden="true">
       <defs>
@@ -1726,8 +1559,8 @@ h1{
   let W=0,H=0,DPR=1, nodes=[], raf=0;
   const pointer = { x: 0, y: 0, active: false };
   let last = 0;
-const fps = 30;
-const frameTime = 1000 / fps;
+  const fps = 30;
+  const frameTime = 1000 / fps;
 
   const cfg = {
     base: 56,
@@ -1740,8 +1573,6 @@ const frameTime = 1000 / fps;
     glow: false,
     glowStrength: 28,
     attract: 0.030,
-
-    // ✨ Destellos (premium)
     sparkChance: 0,
     sparksPerFrame: 0,
     sparkMinR: 2.2,
@@ -1762,20 +1593,19 @@ const frameTime = 1000 / fps;
     c.style.height = H+"px";
     ctx.setTransform(DPR,0,0,DPR,0,0);
 
-    // ✅ mobile: menos carga
-const isMobile = W < 900;
-const base = isMobile ? 18 : 34;      // antes 28 y 56
-const density = isMobile ? 130000 : 90000; // más density = menos nodos
+    const isMobile = W < 900;
+    const base = isMobile ? 18 : 34;
+    const density = isMobile ? 130000 : 90000;
 
-const count = Math.floor(base + (W*H)/density);
-    const capped = Math.min(count, isMobile ? 55 : 90); // antes 120
+    const count = Math.floor(base + (W*H)/density);
+    const capped = Math.min(count, isMobile ? 55 : 90);
     nodes = new Array(capped).fill(0).map(()=>({
       x: Math.random()*W,
       y: Math.random()*H,
       vx: (Math.random()*2-1)*cfg.speed,
       vy: (Math.random()*2-1)*cfg.speed
     }));
-    last = performance.now();  // ✅ ACÁ (después de crear nodes)
+    last = performance.now();
   }
 
   function onPointerMove(e){
@@ -1791,15 +1621,15 @@ const count = Math.floor(base + (W*H)/density);
   window.addEventListener("mouseleave", onPointerLeave, { passive:true });
 
   function draw(){
-  const now = performance.now();
-  if (now - last < frameTime) { 
-    raf = requestAnimationFrame(draw); 
-    return; 
-  }
-  last = now;
+    const now = performance.now();
+    if (now - last < frameTime) { 
+      raf = requestAnimationFrame(draw); 
+      return; 
+    }
+    last = now;
 
-  ctx.clearRect(0,0,W,H);
-  const t = (now - t0) / 1000;
+    ctx.clearRect(0,0,W,H);
+    const t = (now - t0) / 1000;
 
     if(cfg.glow){
       ctx.shadowColor = "rgba(34,211,238,.42)";
@@ -1856,9 +1686,9 @@ const count = Math.floor(base + (W*H)/density);
                   const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
                   ctx.lineWidth = w;
 
-                 ctx.strokeStyle = (Math.random() < 0.5)
-  ? `rgba(34,211,238,${a})`
-  : `rgba(17,214,180,${a})`;
+                  ctx.strokeStyle = (Math.random() < 0.5)
+                    ? `rgba(34,211,238,${a})`
+                    : `rgba(17,214,180,${a})`;
 
                   ctx.beginPath();
                   ctx.moveTo(n.x,n.y);
@@ -1904,10 +1734,9 @@ const count = Math.floor(base + (W*H)/density);
   }
 
   resize();
-raf = requestAnimationFrame(draw);
+  raf = requestAnimationFrame(draw);
   window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
 })();
 </script>
 </body>
 </html>
-
