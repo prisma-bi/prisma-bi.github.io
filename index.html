@@ -274,13 +274,23 @@
     }
 
     .heroBg{
-      position:absolute;inset:0;z-index:-4;
-      background:
-        radial-gradient(1000px 700px at 20% 20%, rgba(34,211,238,.12), transparent 64%),
-        radial-gradient(900px 650px at 78% 22%, rgba(17,214,180,.10), transparent 62%),
-        radial-gradient(900px 650px at 66% 86%, rgba(34,211,238,.07), transparent 62%),
-        linear-gradient(180deg, rgba(2,5,14,.96), rgba(2,5,14,.84));
-    }
+  position:absolute; inset:0; z-index:-4;
+
+  /* ✅ Foto de hero + overlays para que el texto siempre se lea */
+  background:
+    /* oscurece un poco para lectura */
+    linear-gradient(180deg, rgba(2,5,14,.86), rgba(2,5,14,.62)),
+    /* acentos de marca */
+    radial-gradient(1000px 700px at 20% 20%, rgba(34,211,238,.14), transparent 64%),
+    radial-gradient(900px 650px at 78% 22%, rgba(17,214,180,.12), transparent 62%),
+    /* ✅ tu imagen */
+    url("assets/brand/prisma-hero.webp");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: saturate(1.05) contrast(1.02);
+}
     .heroStars{
       position:absolute;inset:-60px;z-index:-3;pointer-events:none;opacity:.35;
       background:
