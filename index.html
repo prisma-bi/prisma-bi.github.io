@@ -261,192 +261,204 @@
       .topbarRight{display:none}
     }
 
-    /* ===== HERO ===== */
-    .hero{
-      position:relative;
-      min-height: calc(92vh - 140px);
-      display:flex;
-      align-items:center;
-      padding:64px 0 68px;
-      overflow:hidden;
-      isolation:isolate;
-      text-align:center;
-    }
+   /* ===== HERO ===== */
+.hero{
+  position:relative;
+  min-height: calc(88vh - 120px); /* un poco menos alto */
+  display:flex;
+  align-items:center;
+  padding:72px 0 80px;
+  overflow:hidden;
+  isolation:isolate;
+  text-align:center;
+}
 
-    .heroBg{
-  position:absolute; inset:0; z-index:-4;
+/* ===== FONDO CON IMAGEN PROTAGONISTA ===== */
+.heroBg{
+  position:absolute;
+  inset:0;
+  z-index:-4;
 
-  /* ✅ Foto de hero + overlays para que el texto siempre se lea */
   background:
-    /* oscurece un poco para lectura */
-    linear-gradient(180deg, rgba(2,5,14,.86), rgba(2,5,14,.62)),
-    /* acentos de marca */
-    radial-gradient(1000px 700px at 20% 20%, rgba(34,211,238,.14), transparent 64%),
-    radial-gradient(900px 650px at 78% 22%, rgba(17,214,180,.12), transparent 62%),
-    /* ✅ tu imagen */
+    /* overlay suave para lectura (MUCHO más liviano que antes) */
+    linear-gradient(180deg, rgba(2,5,14,.55), rgba(2,5,14,.65)),
+    /* imagen */
     url("assets/brand/prisma-hero.webp");
 
   background-size: cover;
-  background-position: center;
+  background-position: center 40%; /* baja un poco la imagen */
   background-repeat: no-repeat;
-  filter: saturate(1.05) contrast(1.02);
+
+  filter: saturate(1.08) contrast(1.04);
 }
-    .heroStars{
-      position:absolute;inset:-60px;z-index:-3;pointer-events:none;opacity:.35;
-      background:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.50), transparent 55%),
-        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.32), transparent 55%),
-        radial-gradient(1px 1px at 72% 40%, rgba(255,255,255,.24), transparent 55%),
-        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.20), transparent 55%);
-      mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
-    }
 
-    .netCanvas{
-      position:absolute;inset:0;z-index:-2;
-      width:100%;height:100%;
-      opacity:1;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 0 18px rgba(34,211,238,.18));
-      pointer-events:none;
-    }
+/* estrellas muy sutiles */
+.heroStars{
+  position:absolute;
+  inset:-60px;
+  z-index:-3;
+  pointer-events:none;
+  opacity:.18; /* antes .35 → ahora más limpio */
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.50), transparent 55%),
+    radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.35), transparent 55%),
+    radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.35), transparent 55%),
+    radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.32), transparent 55%);
+  mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
+}
 
-    .heroVignette{
-      position:absolute;inset:-80px;z-index:-1;pointer-events:none;
-      background:
-        radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.58) 74%),
-        linear-gradient(180deg, rgba(2,5,14,.86) 0%, rgba(2,5,14,.75) 40%, rgba(2,5,14,.55) 100%);
-      opacity:.92;
-    }
+/* NODOS más sutiles */
+.netCanvas{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  width:100%;
+  height:100%;
+  opacity:.45; /* antes 1 → ahora más elegante */
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 18px rgba(34,211,238,.18));
+  pointer-events:none;
+}
 
-    .heroInner{max-width: 980px;margin:0 auto;padding:0 10px;}
+/* Vignette reducida (antes estaba muy pesada) */
+.heroVignette{
+  position:absolute;
+  inset:-80px;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.42) 74%);
+  opacity:.65; /* antes .92 */
+}
 
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(6,12,26,.45);
-      box-shadow:0 14px 40px rgba(0,0,0,.34);
-      width:max-content;
-      margin:0 auto 18px;
-      font-weight:900;
-      color:rgba(244,248,255,.92);
-    }
-    .pill i{
-      width:10px;height:10px;border-radius:999px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 22px rgba(34,211,238,.35);
-    }
+.heroInner{
+  max-width:980px;
+  margin:0 auto;
+  padding:0 10px;
+}
 
-    h1{
-      margin:0 0 12px;
-      font-size:var(--h1);
-      line-height:1.02;
-      font-weight:950;
-      letter-spacing:-.03em;
-      text-shadow: 0 18px 56px rgba(0,0,0,.42);
-    }
-    .accent{
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .lede{
-      margin:0 auto 20px;
-      font-size:var(--lead);
-      color:rgba(244,248,255,.78);
-      max-width:78ch;
-      line-height:1.72;
-      text-shadow: 0 12px 34px rgba(0,0,0,.22);
-    }
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(6,12,26,.45);
+  box-shadow:0 14px 40px rgba(0,0,0,.34);
+  width:max-content;
+  margin:0 auto 18px;
+  font-weight:900;
+  color:rgba(244,248,255,.92);
+}
 
-    .ctaRow{
-      display:flex;gap:12px;flex-wrap:wrap;
-      justify-content:center;
-      margin:18px 0 0;
-    }
+.pill i{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),var(--teal));
+  box-shadow:0 0 22px rgba(34,211,238,.35);
+}
 
-    .heroContext{margin:34px auto 0;max-width: 980px;}
-    .heroContextTitle{
-      margin:0 0 14px;
-      color:rgba(244,248,255,.82);
-      font-weight:950;
-      letter-spacing:-.01em;
-      font-size:14px;
-      text-transform:uppercase;
-      opacity:.95;
-    }
-    .heroCards{display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;}
-    @media (max-width:980px){
-      .hero{min-height:auto;padding:64px 0 54px}
-      .heroCards{grid-template-columns:1fr;gap:12px}
-    }
+h1{
+  margin:0 0 14px;
+  font-size:var(--h1);
+  line-height:1.02;
+  font-weight:950;
+  letter-spacing:-.03em;
+  text-shadow: 0 20px 60px rgba(0,0,0,.55);
+}
 
-    .hCard{
-      text-align:left;
-      position:relative;
-      background:
-        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
-        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
-        rgba(10,18,38,.56);
-      border:1px solid rgba(255,255,255,.11);
-      border-radius: 18px;
-      padding:18px 18px 16px;
-      box-shadow: 0 22px 70px rgba(0,0,0,.34);
-      overflow:hidden;
-    }
-    .hCard b{display:block;font-weight:950;margin-bottom:6px}
-    .hCard p{margin:0;color:rgba(244,248,255,.72);line-height:1.65;font-size:14px}
-    .hDot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(90deg, var(--cyan), var(--teal));
-      box-shadow:0 0 18px rgba(34,211,238,.22);
-      display:inline-block;margin-right:10px;transform:translateY(1px);
-    }
+.accent{
+  background:linear-gradient(90deg,var(--cyan),var(--teal));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
 
-    /* ===== SECTIONS ===== */
-    .sep{
-      height:1px;max-width:1050px;margin:0 auto;
-      background: linear-gradient(90deg, transparent, rgba(34,211,238,.18), rgba(17,214,180,.14), transparent);
-    }
+.lede{
+  margin:0 auto 24px;
+  font-size:var(--lead);
+  color:rgba(244,248,255,.85);
+  max-width:72ch;
+  line-height:1.7;
+  text-shadow: 0 12px 34px rgba(0,0,0,.35);
+}
 
-    .sec{position:relative;padding: var(--secPad) 0;overflow:hidden;}
-    .sec:before{
-      content:"";position:absolute;inset:0;
-      background:
-        radial-gradient(900px 520px at 20% 20%, rgba(34,211,238,.08), transparent 62%),
-        radial-gradient(900px 520px at 78% 10%, rgba(17,214,180,.07), transparent 62%),
-        radial-gradient(900px 520px at 70% 85%, rgba(34,211,238,.05), transparent 60%),
-        linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
-      z-index:-3;
-    }
-    .sec:after{
-      content:"";
-      position:absolute;inset:-80px;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/110px 110px,
-        linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0/110px 110px,
-        radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.0), rgba(0,0,0,.72));
-      opacity:.18;
-      z-index:-2;
-      pointer-events:none;
-      mask-image: radial-gradient(780px 520px at 50% 40%, black 55%, transparent 100%);
-    }
+.ctaRow{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:20px 0 0;
+}
 
-    .sectionTitle{
-      text-align:center;margin:0 0 10px;
-      font-size:var(--h2);
-      font-weight:950;
-      letter-spacing:-.02em;
-      text-shadow: 0 18px 46px rgba(0,0,0,.30);
-    }
-    .sectionLead{
-      text-align:center;
-      color:rgba(244,248,255,.68);
-      max-width:96ch;margin:0 auto 34px;
-      line-height:1.7;
-      font-size:15px;
-    }
+.heroContext{
+  margin:38px auto 0;
+  max-width:980px;
+}
+
+.heroContextTitle{
+  margin:0 0 14px;
+  color:rgba(244,248,255,.82);
+  font-weight:950;
+  letter-spacing:-.01em;
+  font-size:14px;
+  text-transform:uppercase;
+  opacity:.95;
+}
+
+.heroCards{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
+
+@media (max-width:980px){
+  .hero{
+    min-height:auto;
+    padding:64px 0 60px;
+  }
+  .heroCards{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+}
+
+.hCard{
+  text-align:left;
+  position:relative;
+  background:rgba(10,18,38,.65);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:18px 18px 16px;
+  box-shadow:0 22px 70px rgba(0,0,0,.34);
+  overflow:hidden;
+}
+
+.hCard b{
+  display:block;
+  font-weight:950;
+  margin-bottom:6px;
+}
+
+.hCard p{
+  margin:0;
+  color:rgba(244,248,255,.78);
+  line-height:1.65;
+  font-size:14px;
+}
+
+.hDot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--cyan), var(--teal));
+  box-shadow:0 0 18px rgba(34,211,238,.22);
+  display:inline-block;
+  margin-right:10px;
+  transform:translateY(1px);
+}
 
     /* ===== QUIÉNES SOMOS (video + bullets) ===== */
     .aboutGrid{
