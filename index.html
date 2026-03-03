@@ -783,48 +783,6 @@
     .step .t{margin:0 0 6px;font-weight:950}
     .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
 
-    /* ===== CLIENTES ===== */
-    .marquee{
-      position:relative;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(10,18,38,.40);
-      box-shadow:0 22px 80px rgba(0,0,0,.28);
-      overflow:hidden;
-      padding:18px 0;
-    }
-    .track{
-      display:flex;gap:38px;align-items:center;
-      width:max-content;
-      animation: scroll 22s linear infinite;
-      padding-left:38px;
-    }
-    .marquee:hover .track{animation-play-state: paused}
-    @keyframes scroll{
-      from{transform:translateX(0)}
-      to{transform:translateX(-50%)}
-    }
-    .logoPill{
-      display:flex;align-items:center;gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(2,5,14,.35);
-      color:rgba(244,248,255,.82);
-      font-weight:950;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      min-height:42px;
-    }
-    .logoMark{
-      width:22px;height:22px;border-radius:7px;
-      background: linear-gradient(90deg, rgba(34,211,238,.85), rgba(17,214,180,.80));
-      box-shadow:0 0 20px rgba(34,211,238,.18);
-      flex:0 0 22px;
-    }
-    .fadeL,.fadeR{position:absolute;top:0;bottom:0;width:120px;pointer-events:none;z-index:2;}
-    .fadeL{left:0;background:linear-gradient(90deg, rgba(2,5,14,.95), transparent)}
-    .fadeR{right:0;background:linear-gradient(270deg, rgba(2,5,14,.95), transparent)}
 
     /* ===== OPINIONES ===== */
     .reviewsHeader{
@@ -1041,7 +999,6 @@
         <a href="#entregables">Entregables</a>
         <a href="#metodo">Método</a>
         <a href="#soluciones">Soluciones</a>
-        <a href="#clientes">Clientes</a>
         <a href="#opiniones">Opiniones</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -1254,43 +1211,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- CLIENTES -->
-  <section id="clientes" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Clientes</h2>
-      <p class="sectionLead">
-        Logos demostrativos (ficticios) para presentación visual. Se reemplazan por marcas reales cuando existan autorizaciones.
-      </p>
-
-      <div class="marquee" aria-label="Logos en movimiento">
-        <div class="fadeL" aria-hidden="true"></div>
-        <div class="fadeR" aria-hidden="true"></div>
-
-        <div class="track" aria-hidden="false">
-          <div class="logoPill"><span class="logoMark"></span>Andes Retail</div>
-          <div class="logoPill"><span class="logoMark"></span>NorteLog</div>
-          <div class="logoPill"><span class="logoMark"></span>Patagonia Foods</div>
-          <div class="logoPill"><span class="logoMark"></span>Delta Services</div>
-          <div class="logoPill"><span class="logoMark"></span>BlueWave Energy</div>
-          <div class="logoPill"><span class="logoMark"></span>Solidez Finanzas</div>
-          <div class="logoPill"><span class="logoMark"></span>Arca Industria</div>
-          <div class="logoPill"><span class="logoMark"></span>Neuquén Partners</div>
-
-          <div class="logoPill"><span class="logoMark"></span>Andes Retail</div>
-          <div class="logoPill"><span class="logoMark"></span>NorteLog</div>
-          <div class="logoPill"><span class="logoMark"></span>Patagonia Foods</div>
-          <div class="logoPill"><span class="logoMark"></span>Delta Services</div>
-          <div class="logoPill"><span class="logoMark"></span>BlueWave Energy</div>
-          <div class="logoPill"><span class="logoMark"></span>Solidez Finanzas</div>
-          <div class="logoPill"><span class="logoMark"></span>Arca Industria</div>
-          <div class="logoPill"><span class="logoMark"></span>Neuquén Partners</div>
-        </div>
-      </div>
     </div>
   </section>
 
