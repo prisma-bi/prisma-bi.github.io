@@ -1693,22 +1693,25 @@
 
   let W=0,H=0,DPR=1, nodes=[], raf=0;
   const pointer = { x: 0, y: 0, active: false };
+  let last = 0;
+const fps = 30;
+const frameTime = 1000 / fps;
 
   const cfg = {
     base: 56,
     density: 50000,
-    maxDist: 185,
+    maxDist: 130,
     speed: 2.6,
     nodeRadius: 1.45,
     nodeAlpha: 1.00,
-    lineAlpha: 0.42,
-    glow: true,
+    lineAlpha: 0.30,
+    glow: false,
     glowStrength: 28,
     attract: 0.030,
 
     // ✨ Destellos (premium)
-    sparkChance: 0.08,
-    sparksPerFrame: 2,
+    sparkChance: 0,
+    sparksPerFrame: 0,
     sparkMinR: 2.2,
     sparkMaxR: 3.6,
     sparkBlur: 26
@@ -1729,17 +1732,18 @@
 
     // ✅ mobile: menos carga
 const isMobile = W < 900;
-const base = isMobile ? 28 : cfg.base;
-const density = isMobile ? 95000 : cfg.density;
+const base = isMobile ? 18 : 34;      // antes 28 y 56
+const density = isMobile ? 130000 : 90000; // más density = menos nodos
 
 const count = Math.floor(base + (W*H)/density);
-    const capped = Math.min(count, 120);   // máximo 120 nodos
+    const capped = Math.min(count, isMobile ? 55 : 90); // antes 120
     nodes = new Array(capped).fill(0).map(()=>({
       x: Math.random()*W,
       y: Math.random()*H,
       vx: (Math.random()*2-1)*cfg.speed,
       vy: (Math.random()*2-1)*cfg.speed
     }));
+    last = performance.now();  // ✅ ACÁ (después de crear nodes)
   }
 
   function onPointerMove(e){
@@ -1755,8 +1759,15 @@ const count = Math.floor(base + (W*H)/density);
   window.addEventListener("mouseleave", onPointerLeave, { passive:true });
 
   function draw(){
-    ctx.clearRect(0,0,W,H);
-    const t = (performance.now() - t0) / 1000;
+  const now = performance.now();
+  if (now - last < frameTime) { 
+    raf = requestAnimationFrame(draw); 
+    return; 
+  }
+  last = now;
+
+  ctx.clearRect(0,0,W,H);
+  const t = (now - t0) / 1000;
 
     if(cfg.glow){
       ctx.shadowColor = "rgba(34,211,238,.42)";
@@ -1813,10 +1824,9 @@ const count = Math.floor(base + (W*H)/density);
                   const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
                   ctx.lineWidth = w;
 
-                  const g = ctx.createLinearGradient(n.x,n.y,m.x,m.y);
-                  g.addColorStop(0, `rgba(34,211,238,${a})`);
-                  g.addColorStop(1, `rgba(17,214,180,${a})`);
-                  ctx.strokeStyle = g;
+                 ctx.strokeStyle = (Math.random() < 0.5)
+  ? `rgba(34,211,238,${a})`
+  : `rgba(17,214,180,${a})`;
 
                   ctx.beginPath();
                   ctx.moveTo(n.x,n.y);
