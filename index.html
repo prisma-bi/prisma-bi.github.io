@@ -202,9 +202,9 @@
   /* ✅ overlay mínimo para uniformidad, sin oscurecer */
   background:
     linear-gradient(180deg, rgba(2,5,14,.06), rgba(2,5,14,.12)),
-    url("assets/brand/prisma-hero.webp");
+    url("assets/brand/prisma-baner.webp");
 
-  background-size: cover;
+  background-size: contain;
   background-position: center 28%; /* 👈 probá 18%, 28%, 35% */
   background-repeat: no-repeat;
 
@@ -216,17 +216,6 @@
 .netCanvas,
 .heroVignette{
   display:none !important;
-}
-
-@media (max-width:980px){
-  .hero{
-    height: 52vh;
-    min-height: 420px;
-    max-height: 620px;
-  }
-  .heroBg{
-    background-position: center 22%;
-  }
 }
 
     /* ===== QUIÉNES SOMOS (video + bullets) ===== */
