@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prisma BI — Dirección ejecutiva con datos confiables</title>
+  <title>Prisma BI — Control financiero-operativo por contrato</title>
 
   <meta
     name="description"
-    content="Prisma BI brinda control financiero-operativo por contrato para empresas de servicios industriales: margen real, costos por equipo/cuadrilla, productividad y cash flow con una sola lectura ejecutiva."
+    content="Prisma BI brinda control financiero-operativo por contrato para empresas de servicios industriales (Oil & Gas): margen real, costos por equipo/cuadrilla, productividad y caja/cobranzas."
   />
 
-  <meta property="og:title" content="Prisma BI — Dirección ejecutiva con datos confiables" />
+  <meta property="og:title" content="Prisma BI — Control financiero-operativo por contrato" />
   <meta
     property="og:description"
-    content="Control financiero-operativo por contrato: margen real, costos por equipo/cuadrilla, productividad y cobranzas/caja en una sola lectura confiable."
+    content="Dirección con números confiables: rentabilidad por contrato, costos por equipo/cuadrilla, productividad y caja/cobranzas. Una sola lectura. Sin discusión de números."
   />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_AR" />
@@ -87,76 +87,20 @@
       filter: blur(.2px);
     }
 
-    /* ===== TOPBAR (opcional / no usada actualmente) ===== */
-    .topbar{
-      position:sticky;top:0;z-index:70;
-      background:rgba(2,5,14,.55);
-      backdrop-filter: blur(14px) saturate(170%);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .topbarInner{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:10px 0;
-    }
-    .chips{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .chip{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.38);
-      color:rgba(244,248,255,.85);
-      font-weight:800;font-size:13px;
-      white-space:nowrap;
-      transition: transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
-    }
-    .dot{
-      width:8px;height:8px;border-radius:999px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 18px rgba(34,211,238,.28);
-    }
-    .chipIco{width:16px;height:16px;opacity:.92}
-    .chip:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.08);
-      background: rgba(10,18,38,.48);
-      border-color: rgba(255,255,255,.16);
-    }
-    .chipWA{
-      background: rgba(16,185,129,.14);
-      border-color: rgba(16,185,129,.30);
-      color: rgba(244,248,255,.92);
-    }
-    .chipWA .dot{
-      background: linear-gradient(90deg, rgba(34,197,94,.95), rgba(16,185,129,.92));
-      box-shadow: 0 0 18px rgba(34,197,94,.22);
-    }
-    .chipWA:hover{border-color: rgba(34,197,94,.45);background: rgba(16,185,129,.18);}
-    .chipLI{
-      background: rgba(59,130,246,.14);
-      border-color: rgba(59,130,246,.30);
-      color: rgba(244,248,255,.92);
-    }
-    .chipLI .dot{
-      background: linear-gradient(90deg, rgba(59,130,246,.95), rgba(34,211,238,.92));
-      box-shadow: 0 0 18px rgba(59,130,246,.20);
-    }
-    .chipLI:hover{border-color: rgba(59,130,246,.45);background: rgba(59,130,246,.18);}
-    .topbarRight{display:flex;align-items:center;gap:10px;color:rgba(244,248,255,.70);font-weight:800;font-size:13px}
-
     /* ===== HEADER / NAV ===== */
     header{
-      position:sticky; top:44px; z-index:65;
+      position:sticky; top:0; z-index:65;
       background:rgba(2,5,14,.72);
       backdrop-filter: blur(14px) saturate(170%);
       border-bottom:1px solid rgba(255,255,255,.06);
     }
     .nav{
       display:flex;align-items:center;justify-content:space-between;
-      gap:16px;padding:12px 0;min-height:98px;
+      gap:16px;padding:12px 0;min-height:92px;
     }
     .brand{display:flex;align-items:center;gap:12px;flex:0 0 auto}
     .brand img{
-      width:240px;height:auto;max-height:88px;
+      width:220px;height:auto;max-height:78px;
       object-fit:contain;
       filter: drop-shadow(0 16px 40px rgba(0,0,0,.45)) brightness(1.08);
     }
@@ -218,11 +162,8 @@
     }
 
     @media (max-width:980px){
-      header{top:0}
-      .chips{display:none}
       .menu{display:none}
-      .brand img{width:185px;max-height:72px}
-      .topbarRight{display:none}
+      .brand img{width:175px;max-height:64px}
     }
 
     /* ===== HERO ===== */
@@ -439,7 +380,7 @@
     }
     .aboutCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-    /* ===== ENTREGABLES ===== */
+    /* ===== CARDS BASE ===== */
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
 
@@ -455,7 +396,7 @@
       box-shadow: 0 22px 70px rgba(0,0,0,.34);
       transition: transform .18s ease, border-color .18s ease, filter .18s ease;
       overflow:hidden;
-      min-height: 220px;
+      min-height: 240px;
     }
     .card:hover{transform: translateY(-2px);border-color: rgba(34,211,238,.22);filter: brightness(1.06);}
     .kicker{display:flex;align-items:center;gap:10px;font-weight:950;margin-bottom:10px}
@@ -465,19 +406,20 @@
       box-shadow:0 0 18px rgba(34,211,238,.22);
     }
     .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
-    .miniBullets{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
-    .miniBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
-    .miniBullets .miniCheck{
-      width:18px;height:18px;border-radius:999px;
+
+    /* ===== ICONOS MINI (Servicio / Método) ===== */
+    .iRow{display:flex;gap:10px;align-items:flex-start;margin-top:12px}
+    .i{
+      width:34px;height:34px;flex:0 0 34px;border-radius:12px;
       background: rgba(34,211,238,.10);
       border:1px solid rgba(34,211,238,.22);
-      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
+      display:grid;place-items:center;
     }
-    .miniBullets .miniCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
+    .i svg{width:18px;height:18px;opacity:.98}
+    .iTitle{font-weight:950;margin:0 0 4px}
+    .iText{margin:0;color:rgba(244,248,255,.74);line-height:1.55;font-size:14px}
 
-    /* =========================================================
-       ===== SOLUCIONES (Premium Dark / Corporate) — LIMPIO =====
-    ========================================================= */
+    /* ===== SOLUCIONES (tabs) ===== */
     .secLight{
       background:
         radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
@@ -486,14 +428,6 @@
       color: var(--text);
       position: relative;
     }
-    .secLight:before,
-    .secLight:after{ display:block; }
-
-    .secLight .sectionTitle{
-      color: var(--text);
-      text-shadow: 0 18px 46px rgba(0,0,0,.30);
-    }
-    .secLight .sectionLead{ color: rgba(244,248,255,.68); }
 
     .solutionsWrap{
       max-width:1160px;
@@ -510,9 +444,7 @@
       grid-template-columns: 340px 1fr;
       align-items: stretch;
     }
-    @media (max-width:980px){
-      .solutionsWrap{grid-template-columns:1fr}
-    }
+    @media (max-width:980px){ .solutionsWrap{grid-template-columns:1fr} }
 
     .solLeft{
       background: rgba(8,14,30,.34);
@@ -521,22 +453,15 @@
       display:flex;
       flex-direction:column;
     }
-
-    .solTabs{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      height:100%;
-      justify-content:space-between;
-    }
+    .solTabs{display:flex;flex-direction:column;gap:12px;height:100%;justify-content:space-between;}
 
     .solTab{
       width:100%;
       min-height:72px;
       flex:1;
-      border-radius:14px;
-      padding:12px 14px;
-      padding-left:24px;
+      border-radius:16px;
+      padding:16px 16px;
+      padding-left:28px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(10,18,38,.40);
       cursor:pointer;
@@ -548,17 +473,11 @@
       position:relative;
       color: rgba(244,248,255,.90);
     }
-
-    .solTab:hover{
-      transform:translateY(-1px);
-      border-color:rgba(34,211,238,.20);
-      filter:brightness(1.06);
-    }
+    .solTab:hover{transform:translateY(-1px);border-color:rgba(34,211,238,.20);filter:brightness(1.06);}
     .solTab.active{
       background: rgba(10,18,38,.58);
       border-color: rgba(34,211,238,.22);
       box-shadow: 0 10px 30px rgba(0,0,0,.18);
-      padding-left:28px;
     }
     .solTab.active:before{
       content:"";
@@ -570,38 +489,30 @@
       opacity:.95;
     }
 
-    .solIcon{ display:none !important; }
-
     .solText{display:flex;flex-direction:column;gap:2px;min-width:0}
     .solText b{
-      font-weight:950;
-      color: rgba(244,248,255,.92);
-      font-size:13.5px;
-      line-height:1.15;
+      font-weight:950;color: rgba(244,248,255,.92);
+      font-size:15.5px;line-height:1.2;letter-spacing:-.01em;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
     .solText small{
       color: rgba(244,248,255,.62);
       font-weight:800;
-      font-size:11.5px;
-      line-height:1.2;
+      font-size:12.5px;
+      line-height:1.25;
+      margin-top:2px;
+      opacity:.85;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
 
     .solRight{
-      padding: 46px 52px;
       display:grid;
-      grid-template-columns: 1fr 1.05fr;
-      gap: 34px;
+      grid-template-columns: 1fr;
+      gap:22px;
+      padding:46px 52px;
       align-items:start;
     }
-    @media (max-width:980px){
-      .solRight{
-        grid-template-columns:1fr;
-        padding:24px;
-        gap:18px;
-      }
-    }
+    @media (max-width:980px){ .solRight{padding:26px;gap:16px} }
 
     .solTitle{
       margin:0 0 14px;
@@ -610,26 +521,25 @@
       letter-spacing:-.02em;
       color: rgba(244,248,255,.96);
       line-height:1.02;
-      max-width:28ch;
+      max-width:32ch;
     }
     .solDesc{
-      margin:0 0 22px;
+      margin:0 0 18px;
       color: rgba(244,248,255,.72);
       line-height:1.85;
       font-size:15.5px;
-      max-width:56ch;
+      max-width:60ch;
     }
-
     .solBullets{
       margin:0;
       padding:0;
       list-style:none;
       display:grid;
-      gap:16px;
+      gap:14px;
       color: rgba(244,248,255,.84);
       line-height:1.75;
       font-size:15px;
-      max-width:56ch;
+      max-width:60ch;
     }
     .solBullets li{display:flex;gap:12px;align-items:flex-start}
     .solBullets li:nth-child(n+4){ display:none; }
@@ -642,72 +552,16 @@
     }
     .solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
 
-    .solActions{ display:none !important; }
-    .solLeft .solNote,
-    .solRight .solNote{ display:none !important; }
-
-    .solMedia{
-      background: transparent;
-      border:0;
-      box-shadow:none;
-      min-height:unset;
-      padding:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .solMedia .frame{
-      display:block;
-      width: min(560px, 100%);
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.30);
-      background: rgba(10,18,38,.15);
-    }
-    .solMedia .frame svg{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-
+    .solMedia{margin-top:6px}
     .solMedia .imgFrame{
-      width: min(560px, 100%);
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
+      width: min(760px, 100%);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: 0 22px 70px rgba(0,0,0,.30);
-      background: rgba(10,18,38,.15);
+      background: rgba(10,18,38,.12);
     }
-    .solMedia .imgFrame img{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-
-    /* ===== MÉTODO ===== */
-    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
-    @media (max-width:980px){ .steps{grid-template-columns:1fr} }
-    .step{
-      position:relative;
-      background: rgba(10,18,38,.52);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      padding:16px;
-      box-shadow: 0 18px 54px rgba(0,0,0,.26);
-      overflow:hidden;
-    }
-    .step .n{
-      font-weight:950;
-      display:inline-flex;align-items:center;justify-content:center;
-      width:32px;height:32px;border-radius:12px;
-      background: rgba(17,214,180,.10);
-      border:1px solid rgba(17,214,180,.22);
-      margin-bottom:10px;
-    }
-    .step .t{margin:0 0 6px;font-weight:950}
-    .step .d{margin:0;color:rgba(244,248,255,.74);font-size:14px;line-height:1.65}
+    .solMedia .imgFrame img{width:100%;height:auto;display:block}
 
     /* ===== OPINIONES ===== */
     .reviewsHeader{
@@ -801,61 +655,6 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none!important;animation:none!important}
       .netCanvas{display:none}
-      .track{animation:none!important}
-    }
-
-    /* ================================
-       SOLUCIONES — FOTO ABAJO DEL TEXTO
-       (pegar al FINAL del <style>)
-    ================================ */
-    .solRight{
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 22px !important;
-      padding: 46px 52px !important;
-      align-items: start !important;
-    }
-    .solMedia{
-      order: 2 !important;
-      margin-top: 6px !important;
-    }
-    .solMedia .imgFrame{
-      width: min(760px, 100%) !important;
-      border-radius: 22px !important;
-      overflow: hidden !important;
-      border: 1px solid rgba(255,255,255,.10) !important;
-      box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
-      background: rgba(10,18,38,.12) !important;
-    }
-    .solMedia .imgFrame img{
-      width: 100% !important;
-      height: auto !important;
-      display: block !important;
-    }
-    @media (max-width:980px){
-      .solRight{
-        padding: 26px !important;
-        gap: 16px !important;
-      }
-    }
-    .solTab{
-      padding: 16px 16px !important;
-      padding-left: 28px !important;
-      border-radius: 16px !important;
-    }
-    .solText b{
-      font-size: 15.5px !important;
-      line-height: 1.2 !important;
-      letter-spacing: -0.01em !important;
-    }
-    .solText small{
-      font-size: 12.5px !important;
-      line-height: 1.25 !important;
-      margin-top: 2px !important;
-      opacity: .85 !important;
-    }
-    .solTab.active .solText b{
-      color: rgba(244,248,255,.98) !important;
     }
   </style>
 </head>
@@ -871,9 +670,8 @@
 
       <nav class="menu" aria-label="Navegación principal">
         <a href="#quienes">Quiénes somos</a>
-        <a href="#entregables">Servicio</a>
-        <a href="#metodo">Método</a>
-        <a href="#soluciones">Casos de uso</a>
+        <a href="#servicio">Servicio</a>
+        <a href="#casos">Casos de uso</a>
         <a href="#opiniones">Opiniones</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -892,7 +690,6 @@
     <canvas id="net" class="netCanvas" aria-hidden="true"></canvas>
     <div class="heroVignette" aria-hidden="true"></div>
 
-    <!-- ✅ HERO COPY (aplicado) -->
     <div class="heroInner">
       <div class="pill"><i></i> Prisma BI · Control para Dirección (Oil & Gas / Servicios industriales)</div>
 
@@ -907,7 +704,7 @@
 
       <div class="ctaRow">
         <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico estratégico</a>
-        <a class="btn" href="#soluciones">Ver casos de uso</a>
+        <a class="btn" href="#casos">Ver casos de uso</a>
       </div>
 
       <div class="heroContext">
@@ -962,44 +759,160 @@
 
   <div class="sep"></div>
 
-  <!-- SERVICIO (antes ENTREGABLES) -->
-  <section id="entregables" class="sec">
+  <!-- SERVICIO (un producto premium en 3 fases) -->
+  <section id="servicio" class="sec">
     <div class="container">
       <h2 class="sectionTitle">Servicio</h2>
       <p class="sectionLead">
-        Entregables diseñados para dirección: lectura simple, definiciones claras y control para decidir sin discusión.
-        Enfocado en <b>contratos, equipos/cuadrillas y caja</b>.
+        Un solo producto premium, enfocado en <b>contratos</b>, <b>equipos/cuadrillas</b> y <b>caja</b>.
+        Se entrega en 3 fases para que dirección tenga lectura confiable y accionable.
       </p>
 
       <div class="grid3">
+        <!-- FASE 1 -->
         <div class="card">
-          <div class="kicker"><span class="kDot"></span> Tablero Dirección (Contrato · Margen · Caja)</div>
-          <p class="small">Lectura ejecutiva en 5 minutos: qué pasa, por qué pasa y dónde actuar primero.</p>
-          <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>KPIs: margen por contrato, costos por equipo/cuadrilla, productividad y caja.</span></li>
-            <li><span class="miniCheck"></span><span>Semáforos y excepciones: desvíos críticos (combustible, mantenimiento, horas improductivas).</span></li>
-            <li><span class="miniCheck"></span><span>Panel móvil para seguimiento y decisiones rápidas.</span></li>
-          </ul>
+          <div class="kicker"><span class="kDot"></span> Fase 1 — Diagnóstico estratégico (pagado)</div>
+          <p class="small">Mapa de indicadores + auditoría de datos. Definimos “una sola verdad” para toda la empresa.</p>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16v12H4z" stroke="rgba(244,248,255,.30)" stroke-width="2"/>
+                <path d="M7 10h10" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 14h7" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Mapa KPI (Dirección)</p>
+              <p class="iText">Margen por contrato · Costos por equipo/cuadrilla · Productividad · Caja.</p>
+            </div>
+          </div>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v18" stroke="rgba(244,248,255,.22)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 8h10" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 12h10" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 16h10" stroke="rgba(34,211,238,.75)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Fuentes y reglas</p>
+              <p class="iText">De dónde sale cada número y cómo se calcula (criterio por contrato/frente/equipo).</p>
+            </div>
+          </div>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 13l3 3 7-8" stroke="rgba(17,214,180,.95)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 4h12v16H6z" stroke="rgba(244,248,255,.24)" stroke-width="2"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Auditoría rápida</p>
+              <p class="iText">Nulos, duplicados, totales, cortes por período/contrato y consistencia.</p>
+            </div>
+          </div>
         </div>
 
+        <!-- FASE 2 -->
         <div class="card">
-          <div class="kicker"><span class="kDot"></span> Modelo & Glosario KPI (Reglas de negocio)</div>
-          <p class="small">Una métrica consistente elimina la discusión interna y permite decidir con criterio.</p>
-          <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Definición + fórmula + fuente de cada KPI (margen, costos directos/indirectos, productividad, caja).</span></li>
-            <li><span class="miniCheck"></span><span>Reglas de negocio: imputación de costos, criterio por contrato/frente/equipo.</span></li>
-            <li><span class="miniCheck"></span><span>Diccionario común para dirección y áreas.</span></li>
-          </ul>
+          <div class="kicker"><span class="kDot"></span> Fase 2 — Implementación ejecutiva</div>
+          <p class="small">Tablero Dirección + tableros por rol. Publicación móvil y lectura en minutos.</p>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 5h16v12H4z" stroke="rgba(244,248,255,.28)" stroke-width="2"/>
+                <path d="M7 14V9" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 14V7" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M17 14V11" stroke="rgba(34,211,238,.75)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Tablero Dirección</p>
+              <p class="iText">Mismo criterio, misma lectura: qué pasa, por qué pasa y dónde actuar primero.</p>
+            </div>
+          </div>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 7a4 4 0 1 0 0 8" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M14 8h7" stroke="rgba(244,248,255,.24)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M14 12h7" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M14 16h7" stroke="rgba(244,248,255,.24)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Tableros por rol</p>
+              <p class="iText">Gerencia · Comercial · Operaciones (según contratos, equipos y servicio).</p>
+            </div>
+          </div>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9 5h6v14H9z" stroke="rgba(244,248,255,.28)" stroke-width="2" />
+                <path d="M11 18h2" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M11 7h2" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Móvil y actualización</p>
+              <p class="iText">Acceso ejecutivo + actualización diaria/semanal (según operación).</p>
+            </div>
+          </div>
         </div>
 
+        <!-- FASE 3 -->
         <div class="card">
-          <div class="kicker"><span class="kDot"></span> QA & Alertas (Confianza en cierres)</div>
-          <p class="small">Sin control, todo parece correcto… hasta el cierre. Con QA, la decisión se sostiene.</p>
-          <ul class="miniBullets">
-            <li><span class="miniCheck"></span><span>Validaciones: duplicados, nulos, totales, cortes por período/contrato.</span></li>
-            <li><span class="miniCheck"></span><span>Alertas: si algo se rompe o se desvía, se ve.</span></li>
-            <li><span class="miniCheck"></span><span>Rutina de lectura: mirar, entender, decidir y ajustar.</span></li>
-          </ul>
+          <div class="kicker"><span class="kDot"></span> Fase 3 — Gobierno y evolución mensual</div>
+          <p class="small">Seguimiento + mejoras + soporte. Para que el tablero se use y sostenga el control.</p>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 4h10v3H7z" stroke="rgba(244,248,255,.26)" stroke-width="2"/>
+                <path d="M6 9h12v11H6z" stroke="rgba(244,248,255,.26)" stroke-width="2"/>
+                <path d="M8 12h8" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 16h6" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Rutina ejecutiva</p>
+              <p class="iText">Lectura mensual/semanal: qué mirar, qué mover y responsables por desvío.</p>
+            </div>
+          </div>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3a9 9 0 1 0 9 9" stroke="rgba(244,248,255,.24)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 7v5l4 2" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Mejoras continuas</p>
+              <p class="iText">Backlog, nuevas vistas y ajustes por cambios de contratos/operación.</p>
+            </div>
+          </div>
+
+          <div class="iRow">
+            <span class="i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 12h12" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 6v12" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M5 5h14v14H5z" stroke="rgba(244,248,255,.22)" stroke-width="2"/>
+              </svg>
+            </span>
+            <div>
+              <p class="iTitle">Soporte & QA continuo</p>
+              <p class="iText">Alertas y validaciones para sostener confianza en cierres.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1007,48 +920,12 @@
 
   <div class="sep"></div>
 
-  <!-- MÉTODO -->
-  <section id="metodo" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Método</h2>
-      <p class="sectionLead">
-        Primero se define la decisión y el marco de medición. Después se implementa. Por último, se asegura adopción real.
-        Servicio premium en fases: <b>Diagnóstico (pagado) → Implementación → Gobierno mensual</b>.
-      </p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="n">1</div>
-          <p class="t">Diagnóstico estratégico (pagado)</p>
-          <p class="d">Se define el objetivo y el mapa de indicadores: margen por contrato, costos por equipo/cuadrilla, productividad y caja.</p>
-        </div>
-        <div class="step">
-          <div class="n">2</div>
-          <p class="t">Marco de medición</p>
-          <p class="d">KPIs + definiciones + fuentes. Se ordena el criterio y se elimina la ambigüedad entre áreas.</p>
-        </div>
-        <div class="step">
-          <div class="n">3</div>
-          <p class="t">Implementación ejecutiva</p>
-          <p class="d">Modelo + tableros + QA. Tablero Dirección y tableros por área según operación y contratos.</p>
-        </div>
-        <div class="step">
-          <div class="n">4</div>
-          <p class="t">Gobierno mensual</p>
-          <p class="d">Seguimiento + mejoras + soporte. Rutina ejecutiva para que el tablero se use y evolucione.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- CASOS DE USO (antes SOLUCIONES) -->
-  <section id="soluciones" class="sec secLight" aria-label="Casos de uso por contrato y operación">
+  <!-- CASOS DE USO -->
+  <section id="casos" class="sec secLight" aria-label="Casos de uso por contrato y operación">
     <div class="container">
       <h2 class="sectionTitle">Casos de uso (Servicios industriales / Oil & Gas)</h2>
       <p class="sectionLead">
-        Ejemplos de lectura ejecutiva por operación. Se adapta a tus datos y a la decisión que querés destrabar:
+        Se adapta a tus datos y a la decisión que querés destrabar:
         <b>margen por contrato</b>, <b>costos por equipo/cuadrilla</b>, <b>productividad</b> o <b>caja/cobranzas</b>.
       </p>
 
@@ -1062,14 +939,12 @@
             <h3 class="solTitle" id="solTitle">—</h3>
             <p class="solDesc" id="solDesc"></p>
             <ul class="solBullets" id="solBullets"></ul>
-            <div class="solActions"></div>
-            <p class="solNote" id="solNote"></p>
+            <p class="sectionLead" id="solNote" style="text-align:left;margin:12px 0 0;max-width:60ch"></p>
           </div>
 
           <div class="solMedia" aria-hidden="true" id="solMedia"></div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -1208,7 +1083,7 @@
 
     (function(){
       const msg =
-        "Hola 👋 Quiero solicitar un diagnóstico estratégico.\n\n" +
+        "Hola 👋 Quiero solicitar un diagnóstico estratégico (pagado).\n\n" +
         "Empresa/Rubro: ____\n" +
         "Contratos / Servicios principales: ____\n" +
         "Qué no se ve con claridad hoy (margen/costos/productividad/caja): ____\n" +
@@ -1222,11 +1097,6 @@
         const el = document.getElementById(id);
         if(el) el.href = url;
       });
-
-      const solCta = document.getElementById("solCta");
-      if(solCta){
-        solCta.addEventListener("click", ()=> window.open(url, "_blank", "noopener"));
-      }
     })();
 
     /* ===== Botón del formulario: arma mensaje con tus inputs ===== */
@@ -1244,7 +1114,7 @@
         const mensaje = (fd.get("mensaje") || "").toString().trim();
 
         const text =
-          "Hola 👋 Quiero solicitar un diagnóstico estratégico.\n\n" +
+          "Hola 👋 Quiero solicitar un diagnóstico estratégico (pagado).\n\n" +
           "Nombre: " + (nombre || "—") + "\n" +
           "Empresa/Rubro: " + (empresa || "—") + "\n" +
           "Email: " + (email || "—") + "\n" +
@@ -1279,7 +1149,7 @@
       sections.forEach(s=>io.observe(s));
     })();
 
-    /* ===== SOLUCIONES (tabs) — ORIENTADO A SERVICIOS INDUSTRIALES ===== */
+    /* ===== CASOS DE USO (tabs) — SERVICIOS INDUSTRIALES ===== */
     (function(){
       const data = [
         {
@@ -1414,16 +1284,16 @@
     })();
   </script>
 
-  <!-- ===== NET CANVAS (más dinámico + más brillo + destellos) ===== -->
+  <!-- ===== NET CANVAS (liviano) ===== -->
   <script>
   (function(){
     const c = document.getElementById("net");
     if(!c) return;
-    const ctx = c.getContext("2d", { alpha: true });
 
     const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(prefersReduce) return;
 
+    const ctx = c.getContext("2d", { alpha: true });
     let W=0,H=0,DPR=1, nodes=[], raf=0;
     const pointer = { x: 0, y: 0, active: false };
     let last = 0;
@@ -1431,24 +1301,13 @@
     const frameTime = 1000 / fps;
 
     const cfg = {
-      base: 56,
-      density: 50000,
       maxDist: 130,
-      speed: 2.6,
-      nodeRadius: 1.45,
-      nodeAlpha: 1.00,
-      lineAlpha: 0.30,
-      glow: false,
-      glowStrength: 28,
-      attract: 0.030,
-      sparkChance: 0,
-      sparksPerFrame: 0,
-      sparkMinR: 2.2,
-      sparkMaxR: 3.6,
-      sparkBlur: 26
+      speed: 2.2,
+      nodeRadius: 1.35,
+      nodeAlpha: 1.0,
+      lineAlpha: 0.28,
+      attract: 0.03
     };
-
-    let t0 = performance.now();
 
     function resize(){
       const r = c.parentElement.getBoundingClientRect();
@@ -1464,15 +1323,15 @@
       const isMobile = W < 900;
       const base = isMobile ? 18 : 34;
       const density = isMobile ? 130000 : 90000;
-
       const count = Math.floor(base + (W*H)/density);
       const capped = Math.min(count, isMobile ? 55 : 90);
-      nodes = new Array(capped).fill(0).map(()=>( {
+
+      nodes = new Array(capped).fill(0).map(()=>({
         x: Math.random()*W,
         y: Math.random()*H,
         vx: (Math.random()*2-1)*cfg.speed,
         vy: (Math.random()*2-1)*cfg.speed
-      } ));
+      }));
       last = performance.now();
     }
 
@@ -1490,19 +1349,12 @@
 
     function draw(){
       const now = performance.now();
-      if (now - last < frameTime) { 
-        raf = requestAnimationFrame(draw); 
-        return; 
-      }
+      if (now - last < frameTime) { raf = requestAnimationFrame(draw); return; }
       last = now;
 
       ctx.clearRect(0,0,W,H);
 
-      if(cfg.glow){
-        ctx.shadowColor = "rgba(34,211,238,.42)";
-        ctx.shadowBlur = cfg.glowStrength;
-      } else ctx.shadowBlur = 0;
-
+      // mover nodos
       for(const n of nodes){
         if(pointer.active){
           const dx = pointer.x - n.x;
@@ -1523,6 +1375,7 @@
         n.y = Math.max(0, Math.min(H, n.y));
       }
 
+      // grid buckets
       const cell = cfg.maxDist;
       const cols = Math.ceil(W/cell);
       const rows = Math.ceil(H/cell);
@@ -1534,6 +1387,7 @@
         buckets[cx + cy*cols].push(n);
       }
 
+      // líneas
       for(let cy=0;cy<rows;cy++){
         for(let cx=0;cx<cols;cx++){
           const b = buckets[cx + cy*cols];
@@ -1550,13 +1404,10 @@
                   const d = Math.sqrt(dx*dx + dy*dy);
                   if(d < cfg.maxDist){
                     const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
-                    const w = 0.6 + (1 - d/cfg.maxDist) * 1.1;
-                    ctx.lineWidth = w;
-
+                    ctx.lineWidth = 0.8;
                     ctx.strokeStyle = (Math.random() < 0.5)
                       ? `rgba(34,211,238,${a})`
                       : `rgba(17,214,180,${a})`;
-
                     ctx.beginPath();
                     ctx.moveTo(n.x,n.y);
                     ctx.lineTo(m.x,m.y);
@@ -1569,7 +1420,7 @@
         }
       }
 
-      ctx.shadowBlur = cfg.glow ? cfg.glowStrength : 0;
+      // nodos
       for(const n of nodes){
         ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
         ctx.beginPath();
