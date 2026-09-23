@@ -1,1440 +1,751 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prisma BI — Control financiero-operativo por contrato</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prisma BI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap');
 
-  <meta
-    name="description"
-    content="Prisma BI brinda control financiero-operativo por contrato para empresas de servicios industriales (Oil & Gas): margen real, costos por equipo/cuadrilla, productividad y caja/cobranzas."
-  />
+  :root{
+    color-scheme: light;
+    --navy:#141A37;
+    --navy-2:#1B2247;
+    --cream:#F3ECDE;
+    --white:#FFFFFF;
+    --ink:#14162B;
+    --ink-soft:#5B5F73;
+    --on-navy:#F3ECDE;
+    --on-navy-soft:#A7ACC7;
+    --teal:#1FA9C2;
+    --teal-ink:#07222A;
+    --pink:#D93E85;
+    --lime:#C7DC3A;
+    --lime-ink:#20290A;
+    --chart-pos:#1FA9C2;
+    --chart-neg:#D93E85;
+    --focus:#1FA9C2;
+    --shadow: 0 18px 40px -14px rgba(20,26,55,.22);
+    --shadow-sm: 0 8px 20px -8px rgba(20,26,55,.18);
+  }
 
-  <meta property="og:title" content="Prisma BI — Control financiero-operativo por contrato" />
-  <meta
-    property="og:description"
-    content="Dirección con números confiables: rentabilidad por contrato, costos por equipo/cuadrilla, productividad y caja/cobranzas. Una sola lectura. Sin discusión de números."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="es_AR" />
-  <meta name="theme-color" content="#040a18" />
+  *{box-sizing:border-box;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  img,svg{max-width:100%;}
+  h1,h2,h3{text-wrap:balance; margin:0; font-weight:800; letter-spacing:-0.01em;}
+  p{margin:0;}
+  .mono{font-variant-numeric:tabular-nums;}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
-    rel="stylesheet"
-  />
+  .wrap{max-width:1180px; margin-inline:auto; padding-inline:clamp(20px,4vw,48px);}
+  .eyebrow{
+    display:inline-block; font-size:0.78rem; font-weight:700; letter-spacing:0.09em;
+    text-transform:uppercase; color:var(--teal); margin-bottom:12px;
+  }
+  .eyebrow.on-navy{color:var(--lime);}
 
-  <style>
-    :root{
-      --ink:#050a18;
-      --bg0:#02050e;
-      --bg1:#040a18;
-      --text:#F4F8FF;
-      --muted:rgba(244,248,255,.72);
+  /* header */
+  header.site{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:40;
+    background:color-mix(in srgb, var(--white) 90%, transparent);
+    backdrop-filter:blur(10px);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding-block:16px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.2rem; white-space:nowrap;}
+  .mark{width:30px; height:30px; flex:none;}
+  .mark svg{width:100%; height:100%;}
+  nav.links{display:flex; gap:28px; font-size:0.95rem;}
+  nav.links a{text-decoration:none; color:var(--ink-soft); font-weight:600; transition:color .15s;}
+  nav.links a:hover{color:var(--ink);}
+  .btn{
+    font-family:inherit; font-weight:700; font-size:0.92rem;
+    padding:13px 24px; border-radius:999px; border:2px solid transparent;
+    cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    white-space:nowrap; transition:transform .15s ease, filter .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px); filter:brightness(1.04);}
+  .btn-primary{background:var(--teal); color:var(--teal-ink);}
+  .btn-outline{background:transparent; color:var(--on-navy); border-color:rgba(243,236,222,.4);}
+  .btn-outline:hover{border-color:var(--on-navy);}
+  .btn-outline-dark{background:transparent; color:var(--ink); border-color:var(--ink);}
+  .btn-sm{padding:9px 16px; font-size:0.82rem;}
+  .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, button:focus-visible{
+    outline:2px solid var(--focus); outline-offset:2px;
+  }
+  .menu-toggle{display:none; background:none; border:2px solid var(--ink); border-radius:999px; padding:8px 14px; color:var(--ink); font-weight:700;}
 
-      /* Azul oscuro + acentos tech */
-      --blue:#0B2F56;
-      --blue2:#0E3B6B;
-      --cyan:#22D3EE;
-      --teal:#11D6B4;
+  @media (max-width: 820px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; background:var(--white); box-shadow:var(--shadow);
+      padding:20px clamp(20px,4vw,48px); gap:18px;
+    }
+    nav.links[hidden]{display:none;}
+    .menu-toggle{display:inline-flex;}
+    .nav-cta{display:none;}
+  }
 
-      --card:rgba(10,18,38,.58);
-      --stroke:rgba(255,255,255,.11);
-      --shadow:0 24px 90px rgba(0,0,0,.55);
-      --shadow2:0 16px 55px rgba(0,0,0,.35);
-      --r:18px;
+  /* hero */
+  .hero{background:var(--navy); color:var(--on-navy); padding-block:52px 96px; position:relative; overflow:hidden;}
+  .badge{
+    display:inline-flex; align-items:center; gap:8px; background:var(--lime); color:var(--lime-ink);
+    border-radius:999px; padding:8px 16px; font-size:0.72rem; font-weight:800; letter-spacing:0.08em;
+    text-transform:uppercase; margin-bottom:26px;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(28px,5vw,56px); align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem); line-height:1.05; color:#fff;}
+  .hero h1 em{font-style:normal; color:var(--teal);}
+  .hero .lede{margin-top:20px; max-width:56ch; font-size:1.08rem; color:var(--on-navy-soft);}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-top:32px;}
 
-      --h1: clamp(42px, 5.0vw, 78px);
-      --lead: clamp(16px, 1.2vw, 20px);
-      --h2: clamp(28px, 2.6vw, 44px);
+  /* blob photo placeholders */
+  .photo-frame{position:relative; width:100%; max-width:340px; margin-inline:auto;}
+  .photo-frame .blob{position:absolute; inset:0; border-radius:44% 56% 68% 32% / 45% 38% 62% 55%;}
+  .photo-frame .blob.b-teal{background:var(--teal);}
+  .photo-frame .blob.b-pink{background:var(--pink); inset:auto; width:46%; height:46%; right:-8%; bottom:-8%; border-radius:50%; opacity:.92;}
+  .photo-frame .blob.b-lime{background:var(--lime); inset:auto; width:38%; height:38%; left:-6%; top:-6%; border-radius:50%; opacity:.92;}
+  .photo-frame .placeholder{
+    position:relative; z-index:1; aspect-ratio:1/1; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:14px; color:#fff; text-align:center; padding:20px;
+  }
+  .photo-frame .placeholder svg{width:56px; height:56px; opacity:.9;}
+  .photo-frame .placeholder span{
+    font-size:0.76rem; font-weight:700; background:rgba(20,26,55,.32);
+    padding:7px 14px; border-radius:999px; letter-spacing:0.02em;
+  }
+  .photo-frame.sm{max-width:260px;}
 
-      --secPad: 86px;
-      --container: 1180px;
-    }
+  /* section rhythm */
+  section{padding-block:clamp(56px,7vw,92px);}
+  .bg-cream{background:var(--cream);}
+  .bg-navy{background:var(--navy); color:var(--on-navy);}
+  .curve-top{border-radius:36px 36px 0 0; margin-top:-28px; position:relative; z-index:2;}
+  .section-head{max-width:64ch; margin-bottom:clamp(36px,5vw,56px);}
+  .section-head.center{margin-inline:auto; text-align:center;}
+  .section-head h2{font-size:clamp(1.7rem,3.2vw,2.5rem);}
+  .section-head p{color:var(--ink-soft); margin-top:16px; font-size:1.02rem;}
+  .bg-navy .section-head h2{color:#fff;}
+  .bg-navy .section-head p{color:var(--on-navy-soft);}
 
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{
-      font-family:"Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(900px 520px at 18% 12%, rgba(34,211,238,.14), transparent 62%),
-        radial-gradient(820px 520px at 78% 18%, rgba(17,214,180,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg0));
-      overflow-x:hidden;
-    }
+  /* quienes / dashboard panel */
+  .who-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,56px); align-items:center;}
+  @media (max-width:900px){.who-grid{grid-template-columns:1fr;}}
+  .who-list{list-style:none; padding:0; margin:24px 0 0; display:grid; gap:16px;}
+  .who-list li{display:flex; gap:12px; font-size:0.96rem;}
+  .who-list b{font-weight:700;}
+  .checkmark{
+    flex:none; width:26px; height:26px; border-radius:50%; background:var(--teal); color:#fff;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .checkmark svg{width:14px; height:14px;}
 
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{max-width:var(--container);margin:0 auto;padding:0 28px}
-    .sr{position:absolute;left:-9999px}
+  .panel-card{
+    background:var(--white); border-radius:24px; box-shadow:var(--shadow); padding:24px;
+    display:grid; gap:20px;
+  }
+  .panel-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .panel-head h3{font-size:1rem;}
+  .demo-tag{
+    font-size:0.68rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink-soft); background:var(--cream); border-radius:999px; padding:5px 12px;
+  }
+  .panel-kpis{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  @media (max-width:520px){.panel-kpis{grid-template-columns:1fr;}}
+  .kpi{background:var(--cream); border-radius:16px; padding:16px; display:flex; gap:12px; align-items:center;}
+  .kpi-dial{
+    width:38px; height:38px; border-radius:50%; flex:none;
+    background:conic-gradient(var(--teal) 0turn var(--frac,0.65turn), rgba(20,26,55,.09) 0turn);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .kpi-dial::after{content:''; width:26px; height:26px; border-radius:50%; background:var(--cream);}
+  .kpi h4{font-size:0.82rem; font-weight:700;}
+  .kpi p{font-size:0.86rem; color:var(--ink-soft); margin-top:2px;}
+  .panel-chart-title{font-size:0.86rem; font-weight:700; margin-bottom:12px;}
+  .divchart-legend{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+  .divchart-legend span{display:inline-flex; align-items:center; gap:6px; font-size:0.74rem; color:var(--ink-soft); font-weight:600;}
+  .divchart-legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
+  .divchart{display:flex; gap:10px; align-items:stretch; height:170px;}
+  .divbar-col{flex:1; display:flex; flex-direction:column; align-items:center;}
+  .divbar-upper{height:125px; width:100%; display:flex; align-items:flex-end; justify-content:center;}
+  .divbar-lower{height:45px; width:100%; display:flex; align-items:flex-start; justify-content:center; border-top:1px solid var(--ink-soft);}
+  .divbar{width:64%; max-width:32px; border-radius:8px 8px 4px 4px; position:relative;}
+  .divbar-lower .divbar{border-radius:4px 4px 8px 8px;}
+  .divbar-val{position:absolute; left:50%; transform:translateX(-50%); font-size:0.7rem; font-weight:700; white-space:nowrap; color:var(--ink);}
+  .divbar-upper .divbar-val{top:-18px;}
+  .divbar-lower .divbar-val{bottom:-18px;}
+  .divbar-code{margin-top:22px; font-size:0.68rem; color:var(--ink-soft); font-weight:600;}
 
-    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-      outline: 2px solid rgba(34,211,238,.70);
-      outline-offset: 3px;
-      border-radius: 12px;
-    }
+  /* alternating feature rows (servicio) */
+  .feature-row{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,56px); align-items:center;}
+  .feature-row + .feature-row{margin-top:clamp(48px,6vw,80px);}
+  .feature-row.rev .photo-col{order:2;}
+  @media (max-width:860px){
+    .feature-row{grid-template-columns:1fr;}
+    .feature-row.rev .photo-col{order:0;}
+  }
+  .feature-tag{display:inline-flex; align-items:center; gap:8px; font-size:0.72rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;}
+  .feature-row h3{font-size:clamp(1.3rem,2.2vw,1.7rem);}
+  .feature-row p.desc{margin-top:14px; color:var(--ink-soft); font-size:0.98rem; max-width:52ch;}
+  .feature-row ul{list-style:none; padding:0; margin:18px 0 0; display:grid; gap:10px;}
+  .feature-row li{font-size:0.9rem; display:flex; gap:10px; align-items:flex-start; color:var(--ink);}
+  .feature-row li .dot{width:6px; height:6px; border-radius:50%; margin-top:8px; flex:none;}
+  .feature-link{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-weight:700; font-size:0.92rem; text-decoration:none;}
 
-    /* Top glow line */
-    body:before{
-      content:"";
-      position:fixed;left:0;right:0;top:0;height:4px;
-      z-index:9999;
-      background:linear-gradient(90deg, transparent, rgba(34,211,238,.78), rgba(17,214,180,.72), transparent);
-      pointer-events:none;opacity:.92;
-      filter: blur(.2px);
-    }
+  /* metodo */
+  .method-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  @media (max-width:980px){.method-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.method-grid{grid-template-columns:1fr;}}
+  .method-card{background:var(--white); border-radius:20px; box-shadow:var(--shadow-sm); padding:26px 22px;}
+  .method-num{font-size:2rem; font-weight:800; color:var(--teal); line-height:1;}
+  .method-card h3{margin-top:12px; font-size:1.05rem;}
+  .method-card p{margin-top:10px; color:var(--ink-soft); font-size:0.9rem;}
 
-    /* ===== HEADER / NAV ===== */
-    header{
-      position:sticky; top:0; z-index:65;
-      background:rgba(2,5,14,.72);
-      backdrop-filter: blur(14px) saturate(170%);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:16px;padding:12px 0;min-height:92px;
-    }
-    .brand{display:flex;align-items:center;gap:12px;flex:0 0 auto}
-    .brand img{
-      width:220px;height:auto;max-height:78px;
-      object-fit:contain;
-      filter: drop-shadow(0 16px 40px rgba(0,0,0,.45)) brightness(1.08);
-    }
-    .menu{display:flex;gap:10px;align-items:center}
-    .menu a{
-      font-weight:900;color:rgba(244,248,255,.78);
-      padding:10px 12px;border-radius:12px;
-      border:1px solid transparent;
-      transition:transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
-      white-space:nowrap;
-    }
-    .menu a:hover{
-      filter:brightness(1.12);
-      border-color:rgba(34,211,238,.18);
-      background:rgba(10,18,38,.30);
-      transform:translateY(-1px);
-    }
-    .menu a.active{
-      color:rgba(244,248,255,.92);
-      border-color:rgba(34,211,238,.22);
-      background:rgba(10,18,38,.36);
-    }
-    .navRight{display:flex;gap:10px;align-items:center}
+  /* sobre */
+  .about-grid{display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(32px,5vw,56px); align-items:center;}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid h3{font-size:1.5rem;}
+  .about-grid p.bio{margin-top:14px; color:var(--ink-soft); font-size:1rem; max-width:58ch;}
+  .tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
+  .tag-chip{background:var(--cream); border-radius:999px; padding:8px 16px; font-size:0.82rem; font-weight:700; color:var(--ink);}
 
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:14px;
-      font-weight:900;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(10,18,38,.38);
-      box-shadow:0 16px 44px rgba(0,0,0,.22);
-      transition:transform .16s ease, filter .16s ease, border-color .16s ease;
-      white-space:nowrap;cursor:pointer;
-    }
-    .btn:hover{transform:translateY(-1px);filter:brightness(1.08);border-color:rgba(34,211,238,.26)}
-    .btnPrimary{
-      color:#06101f;
-      background: linear-gradient(90deg, rgba(11,47,86,.98), rgba(34,211,238,.92), rgba(17,214,180,.88));
-      border:1px solid rgba(0,0,0,.12);
-      box-shadow:
-        0 24px 78px rgba(0,0,0,.35),
-        0 0 0 1px rgba(34,211,238,.12) inset,
-        0 0 60px rgba(34,211,238,.10);
-      position:relative;overflow:hidden;
-    }
-    .btnPrimary:before{
-      content:"";
-      position:absolute;top:-40%;left:-40%;
-      width:50%;height:180%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.70), transparent);
-      transform: rotate(18deg);
-      opacity:0;
-    }
-    .btnPrimary:hover:before{opacity:.9;animation: shine .85s ease forwards;}
-    @keyframes shine{
-      0%{left:-40%;opacity:0}
-      15%{opacity:.9}
-      100%{left:120%;opacity:0}
-    }
+  /* casos de uso */
+  .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:980px){.case-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:660px){.case-grid{grid-template-columns:1fr;}}
+  .case-card{background:var(--white); border-radius:22px; box-shadow:var(--shadow-sm); padding:26px 24px; display:flex; flex-direction:column; gap:14px;}
+  .case-bar{width:40px; height:6px; border-radius:999px;}
+  .case-card h3{font-size:1.08rem;}
+  .case-card p.body{color:var(--ink-soft); font-size:0.9rem;}
+  .case-card ul{list-style:none; padding:0; margin:4px 0 0; display:grid; gap:8px;}
+  .case-card li{font-size:0.84rem; display:flex; gap:8px; align-items:flex-start; color:var(--ink);}
+  .case-card li .dot{width:5px; height:5px; border-radius:50%; margin-top:7px; flex:none; background:var(--ink-soft);}
+  .case-quote{margin-top:auto; padding-top:14px; font-size:0.84rem; color:var(--ink-soft); font-style:italic;}
 
-    @media (max-width:980px){
-      .menu{display:none}
-      .brand img{width:175px;max-height:64px}
-    }
+  /* opiniones */
+  .demo-flag{
+    display:inline-flex; text-align:left; margin-bottom:32px; max-width:60ch;
+    font-size:0.82rem; color:var(--on-navy-soft); background:rgba(243,236,222,.08);
+    border-radius:14px; padding:12px 18px;
+  }
+  .testis{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:860px){.testis{grid-template-columns:1fr;}}
+  .testi{background:var(--white); border-radius:20px; padding:24px; display:flex; flex-direction:column; gap:14px; color:var(--ink);}
+  .stars{color:var(--lime-ink); background:var(--lime); display:inline-flex; padding:4px 10px; border-radius:999px; font-size:0.8rem; width:max-content;}
+  .testi p{font-size:0.96rem;}
+  .testi .who{font-size:0.8rem; color:var(--ink-soft); margin-top:auto; font-weight:600;}
 
-    /* ===== HERO ===== */
-    .hero{
-      position:relative;
-      min-height: calc(92vh - 140px);
-      display:flex;align-items:center;
-      padding:64px 0 68px;
-      overflow:hidden;
-      isolation:isolate;
-      text-align:center;
-    }
-    .heroBg{
-      position:absolute;inset:0;z-index:-4;
-      background:
-        radial-gradient(1000px 700px at 20% 20%, rgba(34,211,238,.12), transparent 64%),
-        radial-gradient(900px 650px at 78% 22%, rgba(17,214,180,.10), transparent 62%),
-        radial-gradient(900px 650px at 66% 86%, rgba(34,211,238,.07), transparent 62%),
-        linear-gradient(180deg, rgba(2,5,14,.96), rgba(2,5,14,.84));
-    }
-    .heroStars{
-      position:absolute;inset:-60px;z-index:-3;
-      pointer-events:none;opacity:.35;
-      background:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.50), transparent 55%),
-        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,.32), transparent 55%),
-        radial-gradient(1px 1px at 72% 40%, rgba(255,255,255,.24), transparent 55%),
-        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.20), transparent 55%);
-      mask-image: radial-gradient(900px 560px at 50% 45%, black 62%, transparent 100%);
-    }
-    .netCanvas{
-      position:absolute;inset:0;z-index:-2;
-      width:100%;height:100%;
-      opacity:1;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 0 18px rgba(34,211,238,.18));
-      pointer-events:none;
-    }
-    .heroVignette{
-      position:absolute;inset:-80px;z-index:-1;pointer-events:none;
-      background:
-        radial-gradient(980px 620px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.58) 74%),
-        linear-gradient(180deg, rgba(2,5,14,.86) 0%, rgba(2,5,14,.75) 40%, rgba(2,5,14,.55) 100%);
-      opacity:.92;
-    }
-    .heroInner{max-width:980px;margin:0 auto;padding:0 10px}
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(6,12,26,.45);
-      box-shadow:0 14px 40px rgba(0,0,0,.34);
-      width:max-content;
-      margin:0 auto 18px;
-      font-weight:900;
-      color:rgba(244,248,255,.92);
-    }
-    .pill i{
-      width:10px;height:10px;border-radius:999px;
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      box-shadow:0 0 22px rgba(34,211,238,.35);
-    }
-    h1{
-      margin:0 0 12px;
-      font-size:var(--h1);
-      line-height:1.02;
-      font-weight:950;
-      letter-spacing:-.03em;
-      text-shadow: 0 18px 56px rgba(0,0,0,.42);
-    }
-    .accent{
-      background:linear-gradient(90deg,var(--cyan),var(--teal));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .lede{
-      margin:0 auto 20px;
-      font-size:var(--lead);
-      color:rgba(244,248,255,.78);
-      max-width:78ch;
-      line-height:1.72;
-      text-shadow: 0 12px 34px rgba(0,0,0,.22);
-    }
-    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0 0}
+  /* contacto */
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:clamp(32px,5vw,56px);}
+  @media (max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-info{display:grid; gap:22px; align-content:start;}
+  .contact-item .eyebrow{margin-bottom:6px;}
+  .copy-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .copy-btn{
+    font-size:0.76rem; font-weight:700; border:none; background:var(--cream); color:var(--ink);
+    border-radius:999px; padding:6px 14px; cursor:pointer;
+  }
+  .copy-btn:hover{background:var(--teal); color:var(--teal-ink);}
+  form{display:grid; gap:16px; background:var(--white); box-shadow:var(--shadow); padding:clamp(26px,3vw,34px); border-radius:24px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:560px){.field-row{grid-template-columns:1fr;}}
+  label{font-size:0.8rem; color:var(--ink-soft); font-weight:700; display:block; margin-bottom:7px;}
+  input, textarea{
+    width:100%; background:var(--cream); border:2px solid transparent; border-radius:14px;
+    padding:13px 15px; color:var(--ink); font-family:inherit; font-size:0.95rem;
+  }
+  input:focus, textarea:focus{border-color:var(--teal); outline:none;}
+  textarea{resize:vertical; min-height:90px;}
+  .form-foot{font-size:0.78rem; color:var(--ink-soft);}
+  .result-box{
+    display:none; margin-top:6px; padding:18px; border-radius:16px; background:var(--cream); font-size:0.88rem;
+  }
+  .result-box.show{display:block;}
+  .result-box pre{white-space:pre-wrap; font-size:0.82rem; margin:12px 0; font-family:inherit;}
 
-    .heroContext{margin:34px auto 0;max-width:980px}
-    .heroContextTitle{
-      margin:0 0 14px;
-      color:rgba(244,248,255,.82);
-      font-weight:950;
-      letter-spacing:-.01em;
-      font-size:14px;
-      text-transform:uppercase;
-      opacity:.95;
-    }
-    .heroCards{display:grid;grid-template-columns:repeat(3, 1fr);gap:16px}
-    @media (max-width:980px){
-      .hero{min-height:auto;padding:64px 0 54px}
-      .heroCards{grid-template-columns:1fr;gap:12px}
-    }
-    .hCard{
-      text-align:left;
-      background:
-        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
-        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
-        rgba(10,18,38,.56);
-      border:1px solid rgba(255,255,255,.11);
-      border-radius:18px;
-      padding:18px 18px 16px;
-      box-shadow: 0 22px 70px rgba(0,0,0,.34);
-      overflow:hidden;
-    }
-    .hCard b{display:block;font-weight:950;margin-bottom:6px}
-    .hCard p{margin:0;color:rgba(244,248,255,.72);line-height:1.65;font-size:14px}
-    .hDot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(90deg, var(--cyan), var(--teal));
-      box-shadow:0 0 18px rgba(34,211,238,.22);
-      display:inline-block;margin-right:10px;transform:translateY(1px);
-    }
-
-    /* ===== SECTIONS ===== */
-    .sep{
-      height:1px;max-width:1050px;margin:0 auto;
-      background: linear-gradient(90deg, transparent, rgba(34,211,238,.18), rgba(17,214,180,.14), transparent);
-    }
-    .sec{position:relative;padding: var(--secPad) 0;overflow:hidden;}
-    .sec:before{
-      content:"";position:absolute;inset:0;
-      background:
-        radial-gradient(900px 520px at 20% 20%, rgba(34,211,238,.08), transparent 62%),
-        radial-gradient(900px 520px at 78% 10%, rgba(17,214,180,.07), transparent 62%),
-        radial-gradient(900px 520px at 70% 85%, rgba(34,211,238,.05), transparent 60%),
-        linear-gradient(180deg, rgba(2,5,14,0.0), rgba(2,5,14,.55));
-      z-index:-3;
-    }
-    .sec:after{
-      content:"";position:absolute;inset:-80px;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/110px 110px,
-        linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0/110px 110px,
-        radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.0), rgba(0,0,0,.72));
-      opacity:.18;z-index:-2;pointer-events:none;
-      mask-image: radial-gradient(780px 520px at 50% 40%, black 55%, transparent 100%);
-    }
-    .sectionTitle{
-      text-align:center;margin:0 0 10px;
-      font-size:var(--h2);font-weight:950;letter-spacing:-.02em;
-      text-shadow: 0 18px 46px rgba(0,0,0,.30);
-    }
-    .sectionLead{
-      text-align:center;color:rgba(244,248,255,.68);
-      max-width:96ch;margin:0 auto 34px;
-      line-height:1.7;font-size:15px;
-    }
-
-    /* ===== QUIÉNES SOMOS (video + bullets) ===== */
-    .aboutGrid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top: 18px;
-    }
-    @media (max-width:980px){ .aboutGrid{grid-template-columns:1fr;} }
-
-    .videoCard{
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(10,18,38,.56);
-      box-shadow: 0 22px 70px rgba(0,0,0,.34);
-      overflow:hidden;
-      min-height: 340px;
-      position:relative;
-    }
-    .videoRatio{
-      position:relative;
-      width:100%;
-      padding-top:56.25%;
-      background:#0a1022;
-    }
-    .videoRatio iframe,
-    .videoRatio video{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      border:0;
-    }
-    .aboutCard{
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(380px 220px at 18% 18%, rgba(34,211,238,.11), transparent 70%),
-        radial-gradient(360px 220px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
-        rgba(10,18,38,.56);
-      box-shadow: 0 22px 70px rgba(0,0,0,.34);
-      padding: 18px 18px 16px;
-      overflow:hidden;
-    }
-    .aboutCard h3{
-      margin:0 0 8px;
-      font-size: clamp(22px, 2.2vw, 30px);
-      font-weight:950;
-      letter-spacing:-.02em;
-    }
-    .aboutCard p{margin:0 0 12px;color:rgba(244,248,255,.74);line-height:1.7;font-size:14.5px}
-    .aboutBullets{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-    .aboutBullets li{display:flex;gap:10px;align-items:flex-start;color:rgba(244,248,255,.86);font-size:14px;line-height:1.55}
-    .aboutCheck{
-      width:18px;height:18px;border-radius:999px;
-      background: rgba(34,211,238,.10);
-      border:1px solid rgba(34,211,238,.22);
-      display:grid;place-items:center;flex:0 0 18px;margin-top:2px;
-    }
-    .aboutCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
-
-    /* ===== CARDS BASE ===== */
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
-
-    .card{
-      position:relative;
-      background:
-        radial-gradient(320px 180px at 18% 18%, rgba(34,211,238,.12), transparent 70%),
-        radial-gradient(300px 180px at 82% 82%, rgba(17,214,180,.10), transparent 72%),
-        rgba(10,18,38,.56);
-      border:1px solid rgba(255,255,255,.11);
-      border-radius: var(--r);
-      padding:22px 18px;
-      box-shadow: 0 22px 70px rgba(0,0,0,.34);
-      transition: transform .18s ease, border-color .18s ease, filter .18s ease;
-      overflow:hidden;
-      min-height: 240px;
-    }
-    .card:hover{transform: translateY(-2px);border-color: rgba(34,211,238,.22);filter: brightness(1.06);}
-    .kicker{display:flex;align-items:center;gap:10px;font-weight:950;margin-bottom:10px}
-    .kDot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(90deg, var(--cyan), var(--teal));
-      box-shadow:0 0 18px rgba(34,211,238,.22);
-    }
-    .small{margin:0;color:rgba(244,248,255,.76);line-height:1.7;font-size:14px}
-
-    /* ===== ICONOS MINI (Servicio / Método) ===== */
-    .iRow{display:flex;gap:10px;align-items:flex-start;margin-top:12px}
-    .i{
-      width:34px;height:34px;flex:0 0 34px;border-radius:12px;
-      background: rgba(34,211,238,.10);
-      border:1px solid rgba(34,211,238,.22);
-      display:grid;place-items:center;
-    }
-    .i svg{width:18px;height:18px;opacity:.98}
-    .iTitle{font-weight:950;margin:0 0 4px}
-    .iText{margin:0;color:rgba(244,248,255,.74);line-height:1.55;font-size:14px}
-
-    /* ===== SOLUCIONES (tabs) ===== */
-    .secLight{
-      background:
-        radial-gradient(900px 520px at 18% 10%, rgba(34,211,238,.10), transparent 60%),
-        radial-gradient(900px 520px at 78% 22%, rgba(17,214,180,.08), transparent 62%),
-        linear-gradient(180deg, rgba(4,10,24,.92), rgba(2,5,14,.98));
-      color: var(--text);
-      position: relative;
-    }
-
-    .solutionsWrap{
-      max-width:1160px;
-      margin:0 auto;
-      border-radius:26px;
-      background:
-        radial-gradient(520px 260px at 18% 18%, rgba(34,211,238,.10), transparent 62%),
-        radial-gradient(520px 260px at 82% 82%, rgba(17,214,180,.08), transparent 62%),
-        rgba(10,18,38,.56);
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 80px rgba(0,0,0,.32);
-      overflow:hidden;
-      display:grid;
-      grid-template-columns: 340px 1fr;
-      align-items: stretch;
-    }
-    @media (max-width:980px){ .solutionsWrap{grid-template-columns:1fr} }
-
-    .solLeft{
-      background: rgba(8,14,30,.34);
-      border-right:1px solid rgba(255,255,255,.06);
-      padding:16px;
-      display:flex;
-      flex-direction:column;
-    }
-    .solTabs{display:flex;flex-direction:column;gap:12px;height:100%;justify-content:space-between;}
-
-    .solTab{
-      width:100%;
-      min-height:72px;
-      flex:1;
-      border-radius:16px;
-      padding:16px 16px;
-      padding-left:28px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,18,38,.40);
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      transition:transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease, filter .14s ease;
-      text-align:left;
-      position:relative;
-      color: rgba(244,248,255,.90);
-    }
-    .solTab:hover{transform:translateY(-1px);border-color:rgba(34,211,238,.20);filter:brightness(1.06);}
-    .solTab.active{
-      background: rgba(10,18,38,.58);
-      border-color: rgba(34,211,238,.22);
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
-    }
-    .solTab.active:before{
-      content:"";
-      position:absolute;
-      left:12px; top:12px; bottom:12px;
-      width:3px;
-      border-radius:999px;
-      background: linear-gradient(180deg, rgba(34,211,238,.92), rgba(17,214,180,.88));
-      opacity:.95;
-    }
-
-    .solText{display:flex;flex-direction:column;gap:2px;min-width:0}
-    .solText b{
-      font-weight:950;color: rgba(244,248,255,.92);
-      font-size:15.5px;line-height:1.2;letter-spacing:-.01em;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-    .solText small{
-      color: rgba(244,248,255,.62);
-      font-weight:800;
-      font-size:12.5px;
-      line-height:1.25;
-      margin-top:2px;
-      opacity:.85;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-
-    .solRight{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:22px;
-      padding:46px 52px;
-      align-items:start;
-    }
-    @media (max-width:980px){ .solRight{padding:26px;gap:16px} }
-
-    .solTitle{
-      margin:0 0 14px;
-      font-size: clamp(24px, 2.6vw, 38px);
-      font-weight:950;
-      letter-spacing:-.02em;
-      color: rgba(244,248,255,.96);
-      line-height:1.02;
-      max-width:32ch;
-    }
-    .solDesc{
-      margin:0 0 18px;
-      color: rgba(244,248,255,.72);
-      line-height:1.85;
-      font-size:15.5px;
-      max-width:60ch;
-    }
-    .solBullets{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:14px;
-      color: rgba(244,248,255,.84);
-      line-height:1.75;
-      font-size:15px;
-      max-width:60ch;
-    }
-    .solBullets li{display:flex;gap:12px;align-items:flex-start}
-    .solBullets li:nth-child(n+4){ display:none; }
-
-    .solCheck{
-      width:18px;height:18px;border-radius:999px;
-      background: rgba(34,211,238,.10);
-      border:1px solid rgba(34,211,238,.22);
-      display:grid;place-items:center;flex:0 0 18px;margin-top:4px;
-    }
-    .solCheck:before{content:"✓";font-weight:950;color:rgba(34,211,238,.95);font-size:12px}
-
-    .solMedia{margin-top:6px}
-    .solMedia .imgFrame{
-      width: min(760px, 100%);
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.30);
-      background: rgba(10,18,38,.12);
-    }
-    .solMedia .imgFrame img{width:100%;height:auto;display:block}
-
-    /* ===== OPINIONES ===== */
-    .reviewsHeader{
-      display:flex;align-items:center;justify-content:center;gap:12px;
-      margin: 0 auto 10px;
-      color: rgba(244,248,255,.84);
-      font-weight:950;
-    }
-    .gBadge{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(10,18,38,.35);
-      font-weight:950;
-    }
-    .gIcon{width:18px;height:18px;display:inline-block}
-    .stars{color:rgba(34,211,238,.95);letter-spacing:1px;font-weight:950}
-
-    .slider{
-      display:flex;gap:14px;overflow:auto;
-      scroll-snap-type:x mandatory;
-      padding:4px 2px 10px;
-      -webkit-overflow-scrolling:touch;
-    }
-    .slider::-webkit-scrollbar{height:10px}
-    .slider::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
-    .tCard{
-      flex:0 0 360px;
-      scroll-snap-align:start;
-      border-radius:18px;
-      background:rgba(10,18,38,.52);
-      border:1px solid rgba(255,255,255,.10);
-      padding:16px;
-      box-shadow:0 18px 60px rgba(0,0,0,.26);
-    }
-    .tCard b{display:block;margin:8px 0 6px;font-weight:950}
-    .tCard p{margin:0;color:rgba(244,248,255,.74);line-height:1.7;font-size:14px}
-    @media (max-width:420px){ .tCard{flex-basis: 88vw} }
-
-    /* ===== CONTACT ===== */
-    .contactGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    @media (max-width:980px){ .contactGrid{grid-template-columns:1fr 1fr} }
-    @media (max-width:640px){ .contactGrid{grid-template-columns:1fr} }
-
-    .cBox{
-      position:relative;
-      background:
-        radial-gradient(220px 120px at 20% 20%, rgba(34,211,238,.10), transparent 72%),
-        rgba(10,18,38,.56);
-      border:1px solid rgba(255,255,255,.11);
-      border-radius: 18px;
-      padding:16px;
-      box-shadow: 0 20px 64px rgba(0,0,0,.26);
-      overflow:hidden;
-    }
-    .cBox .t{font-weight:950;margin:0 0 6px}
-    .cBox .v{margin:0;color:rgba(244,248,255,.74);font-size:14px}
-
-    .form{
-      margin-top:18px;
-      display:grid;grid-template-columns:1fr 1fr;gap:12px;
-      max-width:980px;margin-left:auto;margin-right:auto;
-    }
-    .form textarea{grid-column:1/-1;min-height:120px;resize:vertical}
-    .input{
-      width:100%;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(8,14,30,.40);
-      color:rgba(244,248,255,.92);
-      padding:12px 12px;
-      font:inherit;
-      box-shadow:0 14px 42px rgba(0,0,0,.18) inset;
-    }
-    .sendRow{grid-column:1/-1;display:flex;justify-content:center;margin-top:6px}
-
-    footer{
-      padding:30px 0;
-      text-align:center;
-      color:rgba(244,248,255,.55);
-      font-size:13px;
-      position:relative;
-    }
-    footer:before{
-      content:"";
-      position:absolute;left:0;right:0;top:0;height:1px;
-      background: linear-gradient(90deg, transparent, rgba(34,211,238,.14), rgba(17,214,180,.12), transparent);
-      opacity:.9;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{transition:none!important;animation:none!important}
-      .netCanvas{display:none}
-    }
-  </style>
+  footer{background:var(--navy); color:var(--on-navy-soft); padding-block:52px 30px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
+  @media (max-width:700px){.footer-grid{grid-template-columns:1fr;}}
+  .footer-grid .brand{color:#fff;}
+  .footer-grid p.tagline{margin-top:12px; font-size:0.9rem; max-width:34ch;}
+  .footer-col h4{color:#fff; font-size:0.85rem; margin-bottom:14px;}
+  .footer-col ul{list-style:none; padding:0; margin:0; display:grid; gap:10px;}
+  .footer-col a{text-decoration:none; font-size:0.9rem; color:var(--on-navy-soft);}
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{margin-top:44px; padding-top:24px; border-top:1px solid rgba(243,236,222,.14); font-size:0.8rem;}
+</style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="Ir al inicio">
-        <img src="assets/brand/logo-prisma-bi.webp" alt="PRISMA BI">
-      </a>
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 30 30"><polygon points="15,1 29,15 15,29 1,15" fill="none" stroke="#1FA9C2" stroke-width="2.5"/><polygon points="15,8 22,15 15,22 8,15" fill="#D93E85"/></svg>
+      </span>
+      Prisma BI
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menú</button>
+    <nav class="links" id="navLinks" hidden>
+      <a href="#quienes">Quiénes somos</a>
+      <a href="#servicio">Servicio</a>
+      <a href="#metodo">Método</a>
+      <a href="#casos">Casos de uso</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a href="#contacto" class="btn btn-primary btn-sm nav-cta">Contacto</a>
+  </div>
+</header>
 
-      <nav class="menu" aria-label="Navegación principal">
-        <a href="#quienes">Quiénes somos</a>
-        <a href="#servicio">Servicio</a>
-        <a href="#casos">Casos de uso</a>
-        <a href="#opiniones">Opiniones</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-
-      <div class="navRight">
-        <a class="btn btnPrimary" id="cta-main" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico estratégico</a>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">Control para dirección · Oil &amp; Gas / Servicios industriales</span>
+      <h1>Control financiero&#8209;operativo <em>por contrato.</em></h1>
+      <p class="lede">Ayudamos a empresas de servicios industriales a ver, en una sola lectura, rentabilidad por contrato, costos por equipo o cuadrilla, productividad operativa y caja / cobranza. Sin discusión de números en la mesa de dirección.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn btn-primary">Solicitar diagnóstico estratégico</a>
+        <a href="#casos" class="btn btn-outline">Ver casos de uso</a>
       </div>
     </div>
-  </header>
-
-  <!-- HERO -->
-  <section id="home" class="hero" aria-label="Portada Prisma BI">
-    <div class="heroBg" aria-hidden="true"></div>
-    <div class="heroStars" aria-hidden="true"></div>
-
-    <canvas id="net" class="netCanvas" aria-hidden="true"></canvas>
-    <div class="heroVignette" aria-hidden="true"></div>
-
-    <div class="heroInner">
-      <div class="pill"><i></i> Prisma BI · Control para Dirección (Oil & Gas / Servicios industriales)</div>
-
-      <h1>Control financiero–operativo <span class="accent">por contrato</span>.</h1>
-
-      <p class="lede">
-        Ayudamos a empresas de servicios industriales a ver en tiempo real:
-        <b>rentabilidad por contrato</b>, <b>costos por equipo/cuadrilla</b>,
-        <b>productividad operativa</b> y <b>cobranza/caja</b>.
-        Una sola lectura. Sin discusión de números.
-      </p>
-
-      <div class="ctaRow">
-        <a class="btn btnPrimary" id="cta-hero" href="#" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico estratégico</a>
-        <a class="btn" href="#casos">Ver casos de uso</a>
-      </div>
-
-      <div class="heroContext">
-        <p class="heroContextTitle">Lo que destrabamos</p>
-        <div class="heroCards">
-          <div class="hCard"><span class="hDot"></span><b>Margen real por contrato</b><p>Qué contrato deja plata, cuál la quema y por qué.</p></div>
-          <div class="hCard"><span class="hDot"></span><b>Costos y desvíos</b><p>Combustible, mantenimiento, horas improductivas, sobrecostos silenciosos.</p></div>
-          <div class="hCard"><span class="hDot"></span><b>Caja y cobranzas</b><p>Aging, riesgo de morosidad y proyección de flujo de fondos.</p></div>
-        </div>
+    <div class="photo-frame">
+      <div class="blob b-teal" aria-hidden="true"></div>
+      <div class="blob b-pink" aria-hidden="true"></div>
+      <div class="blob b-lime" aria-hidden="true"></div>
+      <div class="placeholder">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8.5" cy="8" r="3.2" stroke="#fff" stroke-width="1.6"/><circle cx="16" cy="9" r="2.6" stroke="#fff" stroke-width="1.6"/><path d="M2.8 20c.6-3.4 3-5.4 5.7-5.4s5.1 2 5.7 5.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><path d="M13.8 20c.5-2.7 2.2-4.4 4.3-4.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Foto del equipo — próximamente</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="sep"></div>
+<section id="quienes" class="bg-cream curve-top">
+  <div class="wrap who-grid">
+    <div>
+      <span class="eyebrow">Quiénes somos</span>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem);">Dirección con números confiables, por contrato.</h2>
+      <p style="margin-top:16px; color:var(--ink-soft);">Prisma BI trabaja con dirección y gerencias de empresas de servicios industriales. Primero definimos el criterio — KPIs, reglas y fuentes. Después implementamos tableros ejecutivos. El objetivo: crecer sin perder control del margen y la caja.</p>
+      <ul class="who-list">
+        <li><span class="checkmark"><svg viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3 3L15 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Misma definición para todos:</b> margen, costos, productividad y caja no cambian según quién arma la planilla.</span></li>
+        <li><span class="checkmark"><svg viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3 3L15 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Controles de datos:</b> cierres que cierran, sin Excel paralelo corriendo por atrás.</span></li>
+        <li><span class="checkmark"><svg viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3 3L15 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Rutina ejecutiva:</b> lectura semanal, con responsables asignados por cada desvío.</span></li>
+      </ul>
+    </div>
 
-  <!-- QUIÉNES SOMOS -->
-  <section id="quienes" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Quiénes somos</h2>
-      <p class="sectionLead">
-        Prisma BI trabaja con dirección y gerencias de empresas de servicios industriales.
-        Primero definimos el criterio (KPIs + reglas + fuentes). Después implementamos tableros ejecutivos.
-        El objetivo: <b>crecer sin perder control del margen y la caja</b>.
-      </p>
-
-      <div class="aboutGrid">
-        <div class="videoCard" aria-label="Video presentación Prisma BI">
-          <div class="videoRatio">
-            <iframe
-              src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
-              title="Presentación Prisma BI"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
+    <div class="panel-card" role="img" aria-label="Panel ilustrativo de dirección con datos de ejemplo: cuatro indicadores (margen promedio 18%, desvío de costo por equipo +6%, productividad 82%, días de cobranza 46) y un gráfico de margen por contrato con cinco contratos ficticios entre -8% y +24%.">
+      <div class="panel-head">
+        <h3>Panel ilustrativo · Dirección</h3>
+        <span class="demo-tag">Datos de ejemplo</span>
+      </div>
+      <div class="panel-kpis">
+        <div class="kpi"><span class="kpi-dial" style="--frac:0.65turn" aria-hidden="true"></span><div><h4>Margen promedio</h4><p class="mono">18%</p></div></div>
+        <div class="kpi"><span class="kpi-dial" style="--frac:0.22turn" aria-hidden="true"></span><div><h4>Desvío costo/equipo</h4><p class="mono">+6% vs. presup.</p></div></div>
+        <div class="kpi"><span class="kpi-dial" style="--frac:0.82turn" aria-hidden="true"></span><div><h4>Productividad</h4><p class="mono">82%</p></div></div>
+        <div class="kpi"><span class="kpi-dial" style="--frac:0.5turn" aria-hidden="true"></span><div><h4>Días de cobranza</h4><p class="mono">46 días</p></div></div>
+      </div>
+      <div>
+        <p class="panel-chart-title">Margen por contrato — ejemplo</p>
+        <div class="divchart-legend">
+          <span><i style="background:var(--chart-pos)"></i> Sobre objetivo</span>
+          <span><i style="background:var(--chart-neg)"></i> Por debajo de objetivo</span>
         </div>
-
-        <div class="aboutCard">
-          <h3>Dirección con números confiables (por contrato).</h3>
-          <p>
-            Consolidamos datos de Excel, ERP y sistemas para transformar información dispersa en control:
-            una lectura única, consistente y accionable para dirección.
-          </p>
-          <ul class="aboutBullets">
-            <li><span class="aboutCheck"></span><span><b>Misma definición para todos:</b> margen, costos, productividad y caja.</span></li>
-            <li><span class="aboutCheck"></span><span><b>Controles de datos:</b> cierres que cierran, sin “Excel paralelo”.</span></li>
-            <li><span class="aboutCheck"></span><span><b>Rutina ejecutiva:</b> lectura semanal y responsables por desvío.</span></li>
-          </ul>
+        <div class="divchart" aria-hidden="true">
+          <div class="divbar-col"><div class="divbar-upper"><div class="divbar" style="height:95px; background:var(--chart-pos);"><span class="divbar-val">+24%</span></div></div><div class="divbar-lower"></div><span class="divbar-code">CT‑014</span></div>
+          <div class="divbar-col"><div class="divbar-upper"><div class="divbar" style="height:44px; background:var(--chart-pos);"><span class="divbar-val">+11%</span></div></div><div class="divbar-lower"></div><span class="divbar-code">CT‑022</span></div>
+          <div class="divbar-col"><div class="divbar-upper"><div class="divbar" style="height:24px; background:var(--chart-pos);"><span class="divbar-val">+6%</span></div></div><div class="divbar-lower"></div><span class="divbar-code">CT‑031</span></div>
+          <div class="divbar-col"><div class="divbar-upper"></div><div class="divbar-lower"><div class="divbar" style="height:11px; background:var(--chart-neg);"><span class="divbar-val">−3%</span></div></div><span class="divbar-code">CT‑045</span></div>
+          <div class="divbar-col"><div class="divbar-upper"></div><div class="divbar-lower"><div class="divbar" style="height:28px; background:var(--chart-neg);"><span class="divbar-val">−8%</span></div></div><span class="divbar-code">CT‑052</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="sep"></div>
+<section id="servicio" class="bg-cream">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Servicio</span>
+      <h2>Un solo producto premium, en tres fases.</h2>
+      <p>Enfocado en contratos, equipos/cuadrillas y caja — para que dirección tenga una lectura confiable y accionable desde el primer tablero.</p>
+    </div>
 
-  <!-- SERVICIO (un producto premium en 3 fases) -->
-  <section id="servicio" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Servicio</h2>
-      <p class="sectionLead">
-        Un solo producto premium, enfocado en <b>contratos</b>, <b>equipos/cuadrillas</b> y <b>caja</b>.
-        Se entrega en 3 fases para que dirección tenga lectura confiable y accionable.
-      </p>
-
-      <div class="grid3">
-        <!-- FASE 1 -->
-        <div class="card">
-          <div class="kicker"><span class="kDot"></span> Fase 1 — Diagnóstico estratégico (pagado)</div>
-          <p class="small">Mapa de indicadores + auditoría de datos. Definimos “una sola verdad” para toda la empresa.</p>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 6h16v12H4z" stroke="rgba(244,248,255,.30)" stroke-width="2"/>
-                <path d="M7 10h10" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 14h7" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Mapa KPI (Dirección)</p>
-              <p class="iText">Margen por contrato · Costos por equipo/cuadrilla · Productividad · Caja.</p>
-            </div>
-          </div>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 3v18" stroke="rgba(244,248,255,.22)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 8h10" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 12h10" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 16h10" stroke="rgba(34,211,238,.75)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Fuentes y reglas</p>
-              <p class="iText">De dónde sale cada número y cómo se calcula (criterio por contrato/frente/equipo).</p>
-            </div>
-          </div>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 13l3 3 7-8" stroke="rgba(17,214,180,.95)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6 4h12v16H6z" stroke="rgba(244,248,255,.24)" stroke-width="2"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Auditoría rápida</p>
-              <p class="iText">Nulos, duplicados, totales, cortes por período/contrato y consistencia.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- FASE 2 -->
-        <div class="card">
-          <div class="kicker"><span class="kDot"></span> Fase 2 — Implementación ejecutiva</div>
-          <p class="small">Tablero Dirección + tableros por rol. Publicación móvil y lectura en minutos.</p>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 5h16v12H4z" stroke="rgba(244,248,255,.28)" stroke-width="2"/>
-                <path d="M7 14V9" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 14V7" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M17 14V11" stroke="rgba(34,211,238,.75)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Tablero Dirección</p>
-              <p class="iText">Mismo criterio, misma lectura: qué pasa, por qué pasa y dónde actuar primero.</p>
-            </div>
-          </div>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M8 7a4 4 0 1 0 0 8" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M14 8h7" stroke="rgba(244,248,255,.24)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M14 12h7" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M14 16h7" stroke="rgba(244,248,255,.24)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Tableros por rol</p>
-              <p class="iText">Gerencia · Comercial · Operaciones (según contratos, equipos y servicio).</p>
-            </div>
-          </div>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M9 5h6v14H9z" stroke="rgba(244,248,255,.28)" stroke-width="2" />
-                <path d="M11 18h2" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M11 7h2" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Móvil y actualización</p>
-              <p class="iText">Acceso ejecutivo + actualización diaria/semanal (según operación).</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- FASE 3 -->
-        <div class="card">
-          <div class="kicker"><span class="kDot"></span> Fase 3 — Gobierno y evolución mensual</div>
-          <p class="small">Seguimiento + mejoras + soporte. Para que el tablero se use y sostenga el control.</p>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 4h10v3H7z" stroke="rgba(244,248,255,.26)" stroke-width="2"/>
-                <path d="M6 9h12v11H6z" stroke="rgba(244,248,255,.26)" stroke-width="2"/>
-                <path d="M8 12h8" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M8 16h6" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Rutina ejecutiva</p>
-              <p class="iText">Lectura mensual/semanal: qué mirar, qué mover y responsables por desvío.</p>
-            </div>
-          </div>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 3a9 9 0 1 0 9 9" stroke="rgba(244,248,255,.24)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 7v5l4 2" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Mejoras continuas</p>
-              <p class="iText">Backlog, nuevas vistas y ajustes por cambios de contratos/operación.</p>
-            </div>
-          </div>
-
-          <div class="iRow">
-            <span class="i" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 12h12" stroke="rgba(34,211,238,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 6v12" stroke="rgba(17,214,180,.95)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M5 5h14v14H5z" stroke="rgba(244,248,255,.22)" stroke-width="2"/>
-              </svg>
-            </span>
-            <div>
-              <p class="iTitle">Soporte & QA continuo</p>
-              <p class="iText">Alertas y validaciones para sostener confianza en cierres.</p>
-            </div>
+    <div class="feature-row">
+      <div>
+        <span class="feature-tag" style="color:var(--teal)">Fase 01 · Pagado</span>
+        <h3>Diagnóstico estratégico</h3>
+        <p class="desc">Mapa de indicadores y auditoría de datos. Definimos "una sola verdad" para toda la empresa, antes de tocar un solo tablero.</p>
+        <ul>
+          <li><span class="dot" style="background:var(--teal)"></span>Mapa de KPI de dirección: margen por contrato, costos por equipo/cuadrilla, productividad, caja.</li>
+          <li><span class="dot" style="background:var(--teal)"></span>Fuentes y reglas: de dónde sale cada número y cómo se calcula, por contrato/frente/equipo.</li>
+          <li><span class="dot" style="background:var(--teal)"></span>Auditoría rápida: nulos, duplicados, totales y cortes por período que no cierran.</li>
+        </ul>
+        <a href="#contacto" class="feature-link" style="color:var(--teal)">Solicitar este diagnóstico →</a>
+      </div>
+      <div class="photo-col">
+        <div class="photo-frame sm">
+          <div class="blob b-teal" aria-hidden="true"></div>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="#fff" stroke-width="1.6"/><path d="M7 10h10M7 14h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Imagen próximamente</span>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="sep"></div>
-
-  <!-- CASOS DE USO -->
-  <section id="casos" class="sec secLight" aria-label="Casos de uso por contrato y operación">
-    <div class="container">
-      <h2 class="sectionTitle">Casos de uso (Servicios industriales / Oil & Gas)</h2>
-      <p class="sectionLead">
-        Se adapta a tus datos y a la decisión que querés destrabar:
-        <b>margen por contrato</b>, <b>costos por equipo/cuadrilla</b>, <b>productividad</b> o <b>caja/cobranzas</b>.
-      </p>
-
-      <div class="solutionsWrap">
-        <div class="solLeft">
-          <div class="solTabs" id="solTabs"></div>
-        </div>
-
-        <div class="solRight">
-          <div>
-            <h3 class="solTitle" id="solTitle">—</h3>
-            <p class="solDesc" id="solDesc"></p>
-            <ul class="solBullets" id="solBullets"></ul>
-            <p class="sectionLead" id="solNote" style="text-align:left;margin:12px 0 0;max-width:60ch"></p>
+    <div class="feature-row rev">
+      <div>
+        <span class="feature-tag" style="color:var(--pink)">Fase 02 · 4–6 semanas</span>
+        <h3>Implementación ejecutiva</h3>
+        <p class="desc">Tablero de dirección más tableros por rol. Publicación móvil, lectura en minutos, no en reuniones.</p>
+        <ul>
+          <li><span class="dot" style="background:var(--pink)"></span>Tablero de dirección: mismo criterio, misma lectura — qué pasa y dónde actuar primero.</li>
+          <li><span class="dot" style="background:var(--pink)"></span>Tableros por rol: gerencia, comercial, operaciones, según contratos, equipos y servicio.</li>
+          <li><span class="dot" style="background:var(--pink)"></span>Móvil y actualización: acceso ejecutivo con frecuencia diaria o semanal, según la operación.</li>
+        </ul>
+        <a href="#contacto" class="feature-link" style="color:var(--pink)">Consultar esta fase →</a>
+      </div>
+      <div class="photo-col">
+        <div class="photo-frame sm">
+          <div class="blob b-pink" aria-hidden="true"></div>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M4 18h16" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Imagen próximamente</span>
           </div>
-
-          <div class="solMedia" aria-hidden="true" id="solMedia"></div>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="sep"></div>
+    <div class="feature-row">
+      <div>
+        <span class="feature-tag" style="color:var(--lime-ink)">Fase 03 · Mensual</span>
+        <h3>Gobierno y evolución</h3>
+        <p class="desc">Seguimiento, mejoras y soporte continuo, para que el tablero se use de verdad y sostenga el control en el tiempo.</p>
+        <ul>
+          <li><span class="dot" style="background:var(--lime)"></span>Rutina ejecutiva mensual/semanal: qué mirar, quién mueve cada desvío.</li>
+          <li><span class="dot" style="background:var(--lime)"></span>Mejoras continuas: backlog, nuevas vistas y ajustes cuando cambia un contrato u operación.</li>
+          <li><span class="dot" style="background:var(--lime)"></span>Soporte y QA continuo: alertas y validaciones que sostienen la confianza en los cierres.</li>
+        </ul>
+        <a href="#contacto" class="feature-link" style="color:var(--lime-ink)">Consultar esta fase →</a>
+      </div>
+      <div class="photo-col">
+        <div class="photo-frame sm">
+          <div class="blob b-lime" aria-hidden="true"></div>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="#fff" stroke-width="1.6"/><path d="M12 8v4l3 2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Imagen próximamente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- OPINIONES -->
-  <section id="opiniones" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Opiniones</h2>
-      <p class="sectionLead">
-        Este bloque queda listo para publicar feedback verificable (cuando existan autorizaciones).
-        Mientras tanto, se muestra un formato demostrativo.
-      </p>
+<section id="metodo" class="bg-cream">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Método</span>
+      <h2>Antes de armar un tablero, se audita el dato.</h2>
+      <p>La metodología de Prisma BI no arranca en Power BI. Arranca revisando si los números de origen —ERP, Excel, partes de campo— son confiables. Recién después se construye, en cuatro niveles.</p>
+    </div>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="method-num">01</div>
+        <h3>Auditoría</h3>
+        <p>Nulos, duplicados, totales que no cierran, fuentes que compiten entre sí — el ERP dice una cosa, el Excel de la cuadrilla dice otra.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-num" style="color:var(--pink)">02</div>
+        <h3>Nivel funcional</h3>
+        <p>Paneles para quien carga y usa el dato todos los días: supervisores de campo, administración. La base de la que depende todo lo demás.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-num">03</div>
+        <h3>Nivel dirección</h3>
+        <p>El tablero ejecutivo: margen, costos, productividad y caja en una sola lectura, con la misma definición para toda la empresa.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-num" style="color:var(--pink)">04</div>
+        <h3>Nivel accionable</h3>
+        <p>Cada desvío tiene una alerta y un responsable asignado. El tablero deja de ser un reporte y pasa a ser una rutina de gestión.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="reviewsHeader" aria-label="Badge Google">
-        <span class="gBadge">
-          <svg class="gIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#EA4335" d="M12 10.2v3.7h5.2c-.2 1.2-1.4 3.5-5.2 3.5A6.1 6.1 0 0 1 12 5.2c1.7 0 2.9.7 3.6 1.3l2.5-2.4A9.9 9.9 0 0 0 12 2 10 10 0 1 0 12 22c5.8 0 9.7-4.1 9.7-9.9 0-.7-.1-1.2-.2-1.7H12z"/>
-            <path fill="#34A853" d="M3.7 7.4l3 2.2A6.1 6.1 0 0 1 12 5.2c1.7 0 2.9.7 3.6 1.3l2.5-2.4A9.9 9.9 0 0 0 12 2c-3.8 0-7.1 2.1-8.3 5.4z"/>
-            <path fill="#FBBC05" d="M12 22c2.7 0 5-1 6.7-2.6l-3.1-2.4c-.9.6-2 .9-3.6.9A6.1 6.1 0 0 1 6.7 14l-3.1 2.4A10 10 0 0 0 12 22z"/>
-            <path fill="#4285F4" d="M21.7 12.1c0-.7-.1-1.2-.2-1.7H12v3.7h5.2c-.3 1.1-1.3 2.7-3.4 3.4l3.1 2.4c1.9-1.8 2.8-4.4 2.8-7.8z"/>
-          </svg>
-          Google (demo)
-        </span>
+<section id="sobre" class="bg-cream curve-top">
+  <div class="wrap about-grid">
+    <div class="photo-frame">
+      <div class="blob b-teal" aria-hidden="true"></div>
+      <div class="blob b-lime" aria-hidden="true"></div>
+      <div class="placeholder">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="4" stroke="#fff" stroke-width="1.6"/><path d="M4.5 20c.8-4.2 3.7-6.6 7.5-6.6s6.7 2.4 7.5 6.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Foto próximamente</span>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">Sobre Prisma BI</span>
+      <h3>Daiana Beltrán</h3>
+      <p class="bio">Psicóloga de formación, hoy especializada en Business Intelligence para empresas de servicios industriales. Ese recorrido es la base del método: primero entender cómo decide y qué le preocupa a la dirección, después traducirlo en datos confiables — no al revés.</p>
+      <div class="tag-row">
+        <span class="tag-chip">Bootcamp Unicorn Academy — 300h</span>
+        <span class="tag-chip">Metodología Sánchez De Boeck</span>
+        <span class="tag-chip">Power BI · SQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="casos" class="bg-cream">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Casos de uso — servicios industriales / Oil &amp; Gas</span>
+      <h2>Se adapta a tus datos y a la decisión que querés destrabar.</h2>
+      <p>Margen por contrato, costos por equipo/cuadrilla, productividad o caja/cobranzas — elegí el foco.</p>
+    </div>
+    <div class="case-grid">
+      <div class="case-card">
+        <span class="case-bar" style="background:var(--teal)"></span>
+        <h3>Rentabilidad real por contrato</h3>
+        <p class="body">Vea qué contratos dejan margen, cuáles lo erosionan y qué componente lo explica: horas, equipos, combustible, mantenimiento, logística o penalidades.</p>
+        <ul>
+          <li><span class="dot"></span>Margen por contrato / cliente / frente</li>
+          <li><span class="dot"></span>Costos directos vs. indirectos, con criterio claro</li>
+          <li><span class="dot"></span>Alertas de desvío (top 5 causas)</li>
+        </ul>
+        <p class="case-quote">"Ideal cuando hay discusión interna: 'a mí me da otro número'."</p>
+      </div>
+      <div class="case-card">
+        <span class="case-bar" style="background:var(--pink)"></span>
+        <h3>Costos y desvíos por equipo</h3>
+        <p class="body">Detecte sobrecostos silenciosos antes de que aparezcan en el cierre: combustible fuera de rango, mantenimiento no planificado, horas improductivas.</p>
+        <ul>
+          <li><span class="dot"></span>Costo real vs. presupuestado por equipo</li>
+          <li><span class="dot"></span>Horas improductivas y su causa</li>
+          <li><span class="dot"></span>Ranking de cuadrillas por eficiencia de costo</li>
+        </ul>
+        <p class="case-quote">"Ideal cuando el combustible o el mantenimiento se comen el margen y nadie sabe bien dónde."</p>
+      </div>
+      <div class="case-card">
+        <span class="case-bar" style="background:var(--lime)"></span>
+        <h3>Productividad y cumplimiento de SLA</h3>
+        <p class="body">Mida horas facturables contra horas disponibles, cumplimiento de nivel de servicio por contrato y eficiencia real por frente de trabajo.</p>
+        <ul>
+          <li><span class="dot"></span>Horas facturables vs. disponibles</li>
+          <li><span class="dot"></span>Cumplimiento de SLA por contrato</li>
+          <li><span class="dot"></span>Eficiencia por equipo / frente</li>
+        </ul>
+        <p class="case-quote">"Ideal cuando factura horas pero no sabe cuántas realmente son productivas."</p>
+      </div>
+      <div class="case-card">
+        <span class="case-bar" style="background:var(--teal)"></span>
+        <h3>Cobranza, aging y proyección de caja</h3>
+        <p class="body">Vea el aging de cuentas por cobrar, el riesgo real de morosidad por cliente y una proyección de flujo de fondos a 12 semanas.</p>
+        <ul>
+          <li><span class="dot"></span>Aging de cuentas por cobrar</li>
+          <li><span class="dot"></span>Riesgo de morosidad por cliente / contrato</li>
+          <li><span class="dot"></span>Proyección de caja a 12 semanas</li>
+        </ul>
+        <p class="case-quote">"Ideal cuando la caja se entera de un problema después de que ya es un problema."</p>
+      </div>
+      <div class="case-card">
+        <span class="case-bar" style="background:var(--pink)"></span>
+        <h3>Tablero de dirección: una sola lectura</h3>
+        <p class="body">Margen, costos, productividad y caja usan siempre la misma definición — sin que cada área traiga su propio número a la reunión.</p>
+        <ul>
+          <li><span class="dot"></span>Misma definición de KPI para toda la empresa</li>
+          <li><span class="dot"></span>Filtro por contrato, cliente o unidad de negocio</li>
+          <li><span class="dot"></span>Vista ejecutiva, sin planillas paralelas</li>
+        </ul>
+        <p class="case-quote">"Ideal para la reunión de directorio que hoy arranca discutiendo de dónde sale cada cifra."</p>
+      </div>
+      <div class="case-card">
+        <span class="case-bar" style="background:var(--lime)"></span>
+        <h3>Gobierno: que el tablero se use</h3>
+        <p class="body">Una rutina mensual de revisión, con responsables asignados por cada desvío, para que el control no se pierda cuando termina la implementación.</p>
+        <ul>
+          <li><span class="dot"></span>Agenda mensual de revisión con dirección</li>
+          <li><span class="dot"></span>Responsable asignado por cada desvío detectado</li>
+          <li><span class="dot"></span>Backlog de mejoras por cambios de contrato</li>
+        </ul>
+        <p class="case-quote">"Ideal para que el tablero no termine como el Power BI que nadie mira después del segundo mes."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="opiniones" class="bg-navy curve-top">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow on-navy">Opiniones</span>
+      <h2>Este bloque queda listo para feedback verificable.</h2>
+    </div>
+    <p class="demo-flag" style="margin-inline:auto;">Formato demostrativo — se activa con reseñas reales y autorizadas de clientes, una vez publicadas.</p>
+    <div class="testis">
+      <div class="testi">
         <span class="stars">★★★★★</span>
+        <p>"La dirección dejó de discutir números."</p>
+        <span class="who">Google (demo) · Gerencia, servicios de perforación</span>
       </div>
-
-      <div class="slider" aria-label="Opiniones deslizables">
-        <div class="tCard">
-          <div class="stars">★★★★★</div>
-          <b>“La dirección dejó de discutir números.”</b>
-          <p>Se consolidó una sola definición de KPI y la lectura se volvió consistente por área y por semana.</p>
-        </div>
-        <div class="tCard">
-          <div class="stars">★★★★★</div>
-          <b>“Ahora se ve dónde actuar primero.”</b>
-          <p>Se ordenaron margen por contrato, costos y desvíos. La prioridad quedó evidente.</p>
-        </div>
-        <div class="tCard">
-          <div class="stars">★★★★★</div>
-          <b>“El control dio confianza al cierre.”</b>
-          <p>QA y alertas evitaron desvíos silenciosos. Los números pasaron a ser confiables.</p>
-        </div>
-        <div class="tCard">
-          <div class="stars">★★★★★</div>
-          <b>“La lectura semanal cambió la conversación.”</b>
-          <p>De reportes sueltos a rutina ejecutiva: señales claras y decisiones con criterio.</p>
-        </div>
-        <div class="tCard">
-          <div class="stars">★★★★★</div>
-          <b>“Se ganó tiempo en el equipo.”</b>
-          <p>Menos horas armando Excel, más foco en análisis y acciones que mueven resultado.</p>
-        </div>
+      <div class="testi">
+        <span class="stars">★★★★★</span>
+        <p>"Ahora se ve dónde actuar primero."</p>
+        <span class="who">Google (demo) · Dirección, mantenimiento industrial</span>
+      </div>
+      <div class="testi">
+        <span class="stars">★★★★★</span>
+        <p>"El control le dio confianza al cierre."</p>
+        <span class="who">Google (demo) · Administración, logística de campo</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="sep"></div>
-
-  <!-- CONTACTO -->
-  <section id="contacto" class="sec">
-    <div class="container">
-      <h2 class="sectionTitle">Contacto</h2>
-      <p class="sectionLead">
-        Diagnóstico inicial para entender objetivo, contexto y datos disponibles (Excel / ERP / sistemas).
-        Si hay ajuste, Prisma BI propone un plan con claridad.
-      </p>
-
-      <div class="contactGrid">
-        <div class="cBox">
-          <p class="t">Ubicación</p>
-          <p class="v">Argentina (UTC-3) · Remoto LATAM</p>
+<section id="contacto" class="bg-cream curve-top">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="eyebrow">Contacto</span>
+      <h2>Diagnóstico inicial, sin vueltas.</h2>
+      <p>Entendemos objetivo, contexto y datos disponibles (Excel / ERP / sistemas). Si hay ajuste, Prisma BI propone un plan con claridad.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="eyebrow">Ubicación</span>
+          <p>Argentina (UTC−3) · Remoto LATAM</p>
         </div>
-        <div class="cBox">
-          <p class="t">WhatsApp</p>
-          <p class="v"><a id="wa-link" href="#" target="_blank" rel="noopener noreferrer">Abrir chat</a></p>
+        <div class="contact-item">
+          <span class="eyebrow">Email</span>
+          <div class="copy-row">
+            <span class="mono" id="emailText">daianabeltran@gmail.com</span>
+            <button class="copy-btn" data-copy="daianabeltran@gmail.com" data-target="emailText">copiar</button>
+          </div>
         </div>
-        <div class="cBox">
-          <p class="t">Email</p>
-          <p class="v"><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></p>
+        <div class="contact-item">
+          <span class="eyebrow">LinkedIn</span>
+          <p><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">/in/daiana-beltran</a></p>
         </div>
-        <div class="cBox">
-          <p class="t">LinkedIn</p>
-          <p class="v"><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener noreferrer">/in/daiana-beltran</a></p>
+        <div class="contact-item">
+          <span class="eyebrow">WhatsApp</span>
+          <p style="color:var(--ink-soft); font-size:0.9rem;">Se coordina por email o LinkedIn en el primer contacto.</p>
         </div>
       </div>
 
-      <form class="form" id="contactForm" action="#" method="post" aria-label="Formulario de contacto">
-        <input class="input" type="text" name="nombre" placeholder="Nombre y apellido" required>
-        <input class="input" type="text" name="empresa" placeholder="Empresa / Rubro (servicios industriales / Oil & Gas)" required>
-        <input class="input" type="email" name="email" placeholder="Email" required>
-        <input class="input" type="text" name="fuente" placeholder="Datos hoy: Excel / ERP / Sistema / Parte diario / Mantenimiento">
-        <textarea class="input" name="mensaje" placeholder="¿Qué está en riesgo hoy? (margen por contrato / costos por equipo / productividad / cobranzas / caja)" required></textarea>
-        <div class="sendRow">
-          <button class="btn btnPrimary" type="button" id="send-whatsapp">Enviar solicitud de diagnóstico</button>
+      <form id="contactForm">
+        <div class="field-row">
+          <div><label for="fname">Nombre y apellido</label><input id="fname" name="fname" type="text" required></div>
+          <div><label for="fcompany">Empresa / rubro</label><input id="fcompany" name="fcompany" type="text" placeholder="Servicios industriales / Oil &amp; Gas" required></div>
+        </div>
+        <div class="field-row">
+          <div><label for="femail">Email</label><input id="femail" name="femail" type="email" required></div>
+          <div><label for="fdata">Datos hoy</label><input id="fdata" name="fdata" type="text" placeholder="Excel / ERP / sistema / parte diario"></div>
+        </div>
+        <div>
+          <label for="frisk">¿Qué está en riesgo hoy? (margen por contrato, costos por equipo, productividad, cobranzas)</label>
+          <textarea id="frisk" name="frisk"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-self:start;">Preparar solicitud de diagnóstico</button>
+        <p class="form-foot">Esto arma un resumen para copiar y enviarnos por WhatsApp o email — no se envía nada automáticamente.</p>
+        <div class="result-box" id="resultBox">
+          <strong>Listo. Copiá esto y mandalo por WhatsApp o email:</strong>
+          <pre id="resultText"></pre>
+          <button type="button" class="copy-btn" id="copyResult" data-target="resultText">copiar resumen</button>
         </div>
       </form>
-
-      <p class="sectionLead" style="margin-top:18px">
-        Respuesta rápida por WhatsApp. También se puede coordinar por email.
-      </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>© <span id="y"></span> Prisma BI · by Daiana Beltrán</footer>
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 30 30"><polygon points="15,1 29,15 15,29 1,15" fill="none" stroke="#1FA9C2" stroke-width="2.5"/><polygon points="15,8 22,15 15,22 8,15" fill="#D93E85"/></svg>
+        </span>
+        Prisma BI
+      </div>
+      <p class="tagline">Control financiero-operativo por contrato, para dirección de empresas de servicios industriales.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#servicio">Servicio</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#casos">Casos de uso</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/daiana-beltran" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Prisma BI · by Daiana Beltrán</div>
+</footer>
 
-  <script>
-    /* ===== Año ===== */
-    document.getElementById('y').textContent = new Date().getFullYear();
+<script>
+(function(){
+  var toggle = document.getElementById('menuToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var isHidden = links.hasAttribute('hidden');
+    if(isHidden){ links.removeAttribute('hidden'); toggle.setAttribute('aria-expanded','true'); }
+    else { links.setAttribute('hidden',''); toggle.setAttribute('aria-expanded','false'); }
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ links.setAttribute('hidden',''); toggle.setAttribute('aria-expanded','false'); });
+  });
 
-    /* ===== Smooth scroll (offset dinámico) ===== */
-    function getHeaderOffset(){
-      const header = document.querySelector('header');
-      const hd = header ? header.getBoundingClientRect().height : 0;
-      return Math.round(hd + 18);
+  document.body.addEventListener('click', function(e){
+    var btn = e.target.closest('.copy-btn');
+    if(!btn) return;
+    var text = btn.dataset.copy;
+    if(!text){
+      var targetId = btn.dataset.target;
+      var el = document.getElementById(targetId);
+      text = el ? el.textContent : '';
     }
+    var original = btn.textContent;
+    function done(ok){ btn.textContent = ok ? 'copiado' : 'no se pudo copiar'; setTimeout(function(){ btn.textContent = original; }, 1600); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){done(true);}, function(){done(false);});
+    } else { done(false); }
+  });
 
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const href = a.getAttribute('href');
-        if(!href || href.length < 2) return;
-        const el = document.querySelector(href);
-        if(!el) return;
-        e.preventDefault();
-        const top = el.getBoundingClientRect().top + scrollY - getHeaderOffset();
-        window.scrollTo({top, behavior:'smooth'});
-      });
-    });
-
-    /* ===== WhatsApp links (CTA único) ===== */
-    const WA_PHONE = "542996032267";
-
-    function waUrl(text){
-      return "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(text);
-    }
-
-    (function(){
-      const msg =
-        "Hola 👋 Quiero solicitar un diagnóstico estratégico (pagado).\n\n" +
-        "Empresa/Rubro: ____\n" +
-        "Contratos / Servicios principales: ____\n" +
-        "Qué no se ve con claridad hoy (margen/costos/productividad/caja): ____\n" +
-        "Datos disponibles (Excel/ERP/sistema/parte diario): ____\n" +
-        "Plazo ideal: ____\n\n" +
-        "¿Qué día y horario conviene?";
-
-      const url = waUrl(msg);
-
-      ["cta-main","cta-hero","wa-link"].forEach(id=>{
-        const el = document.getElementById(id);
-        if(el) el.href = url;
-      });
-    })();
-
-    /* ===== Botón del formulario: arma mensaje con tus inputs ===== */
-    (function(){
-      const form = document.getElementById("contactForm");
-      const sendBtn = document.getElementById("send-whatsapp");
-      if(!form || !sendBtn) return;
-
-      sendBtn.addEventListener("click", ()=>{
-        const fd = new FormData(form);
-        const nombre  = (fd.get("nombre")  || "").toString().trim();
-        const empresa = (fd.get("empresa") || "").toString().trim();
-        const email   = (fd.get("email")   || "").toString().trim();
-        const fuente  = (fd.get("fuente")  || "").toString().trim();
-        const mensaje = (fd.get("mensaje") || "").toString().trim();
-
-        const text =
-          "Hola 👋 Quiero solicitar un diagnóstico estratégico (pagado).\n\n" +
-          "Nombre: " + (nombre || "—") + "\n" +
-          "Empresa/Rubro: " + (empresa || "—") + "\n" +
-          "Email: " + (email || "—") + "\n" +
-          "Datos hoy: " + (fuente || "—") + "\n\n" +
-          "Qué está en riesgo / decisión a destrabar:\n" + (mensaje || "—") + "\n\n" +
-          "¿Qué día y horario conviene?";
-
-        window.open(waUrl(text), "_blank", "noopener");
-      });
-    })();
-
-    /* ===== Nav active state ===== */
-    (function(){
-      const links = Array.from(document.querySelectorAll('.menu a'));
-      const sections = links
-        .map(a => document.querySelector(a.getAttribute('href')))
-        .filter(Boolean);
-
-      if(!sections.length) return;
-
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            links.forEach(l=>l.classList.remove('active'));
-            const id = '#'+entry.target.id;
-            const active = links.find(l=>l.getAttribute('href')===id);
-            if(active) active.classList.add('active');
-          }
-        });
-      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.02 });
-
-      sections.forEach(s=>io.observe(s));
-    })();
-
-    /* ===== CASOS DE USO (tabs) — SERVICIOS INDUSTRIALES ===== */
-    (function(){
-      const data = [
-        {
-          tab: "Rentabilidad",
-          sub: "Margen por contrato",
-          title: "Rentabilidad real por contrato (no estimada)",
-          desc: "Vea qué contratos dejan margen, cuáles lo erosionan y qué componente lo explica: horas, equipos, combustible, mantenimiento, logística o penalidades.",
-          bullets: [
-            "Margen por contrato / cliente / frente",
-            "Costos directos vs indirectos (criterio claro)",
-            "Alertas de desvío (top 5 causas)",
-            "Ranking: contratos que financian vs contratos que consumen caja"
-          ],
-          note: "Ideal cuando hay discusión interna: “a mí me da otro número”.",
-          img: "assets/brand/contratos.webp"
-        },
-        {
-          tab: "Costos",
-          sub: "Equipo / cuadrilla",
-          title: "Costos por equipo y cuadrilla con desvíos críticos",
-          desc: "Controle costos variables grandes y desvíos silenciosos: combustible, mantenimiento, repuestos, horas improductivas y sobreconsumos.",
-          bullets: [
-            "Costo por equipo: disponibilidad, uso y paradas",
-            "Combustible: consumo esperado vs real",
-            "Mantenimiento: preventivo vs correctivo",
-            "Horas improductivas y causas"
-          ],
-          note: "Cuando el margen se pierde “sin que nadie lo vea”.",
-          img: "assets/brand/costos.webp"
-        },
-        {
-          tab: "Productividad",
-          sub: "Operación & SLA",
-          title: "Productividad operativa y cumplimiento (SLA)",
-          desc: "Indicadores de operación para dirección y jefaturas: capacidad, eficiencia, tiempos y cumplimiento por servicio o frente.",
-          bullets: [
-            "Productividad por cuadrilla/turno/frente",
-            "Cumplimiento SLA y penalidades",
-            "Cuellos de botella y saturación",
-            "Tiempos: lead time y causas de demora"
-          ],
-          note: "Más velocidad sin perder control.",
-          img: "assets/brand/productividad.webp"
-        },
-        {
-          tab: "Cobranza",
-          sub: "Cash flow sensible",
-          title: "Cobranzas, aging y flujo de fondos",
-          desc: "Caja bajo control: aging por cliente/contrato, riesgo de morosidad, proyección de flujo y escenarios.",
-          bullets: [
-            "Aging: 0–30 / 31–60 / 61–90 / +90",
-            "Proyección de caja por semana/mes",
-            "Alertas por concentración de riesgo",
-            "Pagos, compromisos y tensión de liquidez"
-          ],
-          note: "Para decidir antes de que apriete.",
-          img: "assets/brand/caja.webp"
-        },
-        {
-          tab: "Dirección",
-          sub: "Lectura única",
-          title: "Tablero Dirección: una sola lectura ejecutiva",
-          desc: "Resumen para gerencia: margen, costos, productividad y caja en un tablero que se mira en 5 minutos y define prioridad.",
-          bullets: [
-            "KPIs ejecutivos + tendencias",
-            "Semáforos y excepciones (qué mirar hoy)",
-            "Cortes por contrato/cliente/equipo",
-            "Panel móvil para seguimiento"
-          ],
-          note: "Dirección no necesita más reportes: necesita señales.",
-          img: "assets/brand/direccion.webp"
-        },
-        {
-          tab: "Gobierno",
-          sub: "Rutina mensual",
-          title: "Gobierno y evolución mensual (para que se use)",
-          desc: "Aseguramos adopción: responsables, frecuencia, revisiones y mejoras. Un tablero sin rutina no cambia decisiones.",
-          bullets: [
-            "Reunión mensual de lectura (dirección)",
-            "Backlog de mejoras y nuevas vistas",
-            "QA continuo: datos que no cierran se detectan",
-            "Soporte y documentación (glosario KPI)"
-          ],
-          note: "Así se sostiene el control a lo largo del año.",
-          img: "assets/brand/gobierno.webp"
-        }
-      ];
-
-      const tabsEl = document.getElementById("solTabs");
-      const titleEl = document.getElementById("solTitle");
-      const descEl = document.getElementById("solDesc");
-      const bulletsEl = document.getElementById("solBullets");
-      const noteEl = document.getElementById("solNote");
-      const mediaEl = document.getElementById("solMedia");
-
-      if(!tabsEl || !titleEl || !bulletsEl || !noteEl || !mediaEl || !descEl) return;
-
-      function render(idx){
-        const item = data[idx];
-        titleEl.textContent = item.title;
-        descEl.textContent = item.desc;
-        bulletsEl.innerHTML = item.bullets.map(b => `<li><span class="solCheck"></span><span>${b}</span></li>`).join("");
-        noteEl.textContent = item.note;
-
-        if(item.img && item.img.trim().length){
-          mediaEl.innerHTML = `<div class="imgFrame"><img src="${item.img}" alt="" loading="lazy"></div>`;
-        } else {
-          mediaEl.innerHTML = "";
-        }
-
-        Array.from(tabsEl.querySelectorAll(".solTab")).forEach((t,i)=>{
-          t.classList.toggle("active", i === idx);
-        });
-      }
-
-      tabsEl.innerHTML = data.map((d,i)=>`
-        <button class="solTab ${i===0?'active':''}" type="button" data-i="${i}">
-          <span class="solText">
-            <b>${d.tab}</b>
-            <small>${d.sub}</small>
-          </span>
-        </button>
-      `).join("");
-
-      tabsEl.addEventListener("click", (e)=>{
-        const btn = e.target.closest(".solTab");
-        if(!btn) return;
-        render(parseInt(btn.dataset.i, 10));
-      });
-
-      render(0);
-    })();
-  </script>
-
-  <!-- ===== NET CANVAS (liviano) ===== -->
-  <script>
-  (function(){
-    const c = document.getElementById("net");
-    if(!c) return;
-
-    const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if(prefersReduce) return;
-
-    const ctx = c.getContext("2d", { alpha: true });
-    let W=0,H=0,DPR=1, nodes=[], raf=0;
-    const pointer = { x: 0, y: 0, active: false };
-    let last = 0;
-    const fps = 30;
-    const frameTime = 1000 / fps;
-
-    const cfg = {
-      maxDist: 130,
-      speed: 2.2,
-      nodeRadius: 1.35,
-      nodeAlpha: 1.0,
-      lineAlpha: 0.28,
-      attract: 0.03
+  var form = document.getElementById('contactForm');
+  var resultBox = document.getElementById('resultBox');
+  var resultText = document.getElementById('resultText');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = {
+      nombre: form.fname.value.trim(),
+      empresa: form.fcompany.value.trim(),
+      email: form.femail.value.trim(),
+      datos: form.fdata.value.trim(),
+      riesgo: form.frisk.value.trim()
     };
-
-    function resize(){
-      const r = c.parentElement.getBoundingClientRect();
-      DPR = Math.min(2, window.devicePixelRatio || 1);
-      W = Math.max(1, Math.floor(r.width));
-      H = Math.max(1, Math.floor(r.height));
-      c.width = Math.floor(W*DPR);
-      c.height = Math.floor(H*DPR);
-      c.style.width = W+"px";
-      c.style.height = H+"px";
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-
-      const isMobile = W < 900;
-      const base = isMobile ? 18 : 34;
-      const density = isMobile ? 130000 : 90000;
-      const count = Math.floor(base + (W*H)/density);
-      const capped = Math.min(count, isMobile ? 55 : 90);
-
-      nodes = new Array(capped).fill(0).map(()=>({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        vx: (Math.random()*2-1)*cfg.speed,
-        vy: (Math.random()*2-1)*cfg.speed
-      }));
-      last = performance.now();
-    }
-
-    function onPointerMove(e){
-      const rect = c.getBoundingClientRect();
-      pointer.x = e.clientX - rect.left;
-      pointer.y = e.clientY - rect.top;
-      pointer.active = true;
-    }
-    function onPointerLeave(){ pointer.active = false; }
-
-    window.addEventListener("resize", resize, { passive:true });
-    window.addEventListener("mousemove", onPointerMove, { passive:true });
-    window.addEventListener("mouseleave", onPointerLeave, { passive:true });
-
-    function draw(){
-      const now = performance.now();
-      if (now - last < frameTime) { raf = requestAnimationFrame(draw); return; }
-      last = now;
-
-      ctx.clearRect(0,0,W,H);
-
-      // mover nodos
-      for(const n of nodes){
-        if(pointer.active){
-          const dx = pointer.x - n.x;
-          const dy = pointer.y - n.y;
-          const d2 = dx*dx + dy*dy;
-          if(d2 < 240*240){
-            n.vx += dx * cfg.attract / 240;
-            n.vy += dy * cfg.attract / 240;
-          }
-        }
-        n.vx = Math.max(-1.4, Math.min(1.4, n.vx));
-        n.vy = Math.max(-1.4, Math.min(1.4, n.vy));
-
-        n.x += n.vx; n.y += n.vy;
-        if(n.x < 0 || n.x > W) n.vx *= -1;
-        if(n.y < 0 || n.y > H) n.vy *= -1;
-        n.x = Math.max(0, Math.min(W, n.x));
-        n.y = Math.max(0, Math.min(H, n.y));
-      }
-
-      // grid buckets
-      const cell = cfg.maxDist;
-      const cols = Math.ceil(W/cell);
-      const rows = Math.ceil(H/cell);
-      const buckets = new Array(cols*rows);
-      for(let i=0;i<buckets.length;i++) buckets[i]=[];
-      for(const n of nodes){
-        const cx = Math.floor(n.x/cell);
-        const cy = Math.floor(n.y/cell);
-        buckets[cx + cy*cols].push(n);
-      }
-
-      // líneas
-      for(let cy=0;cy<rows;cy++){
-        for(let cx=0;cx<cols;cx++){
-          const b = buckets[cx + cy*cols];
-          for(const n of b){
-            for(let oy=-1;oy<=1;oy++){
-              for(let ox=-1;ox<=1;ox++){
-                const nx = cx+ox, ny = cy+oy;
-                if(nx<0||ny<0||nx>=cols||ny>=rows) continue;
-                const b2 = buckets[nx + ny*cols];
-                for(const m of b2){
-                  if(m===n) continue;
-                  const dx = n.x - m.x;
-                  const dy = n.y - m.y;
-                  const d = Math.sqrt(dx*dx + dy*dy);
-                  if(d < cfg.maxDist){
-                    const a = (1 - d/cfg.maxDist) * cfg.lineAlpha;
-                    ctx.lineWidth = 0.8;
-                    ctx.strokeStyle = (Math.random() < 0.5)
-                      ? `rgba(34,211,238,${a})`
-                      : `rgba(17,214,180,${a})`;
-                    ctx.beginPath();
-                    ctx.moveTo(n.x,n.y);
-                    ctx.lineTo(m.x,m.y);
-                    ctx.stroke();
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      // nodos
-      for(const n of nodes){
-        ctx.fillStyle = `rgba(244,248,255,${cfg.nodeAlpha})`;
-        ctx.beginPath();
-        ctx.arc(n.x,n.y,cfg.nodeRadius,0,Math.PI*2);
-        ctx.fill();
-      }
-
-      raf = requestAnimationFrame(draw);
-    }
-
-    resize();
-    raf = requestAnimationFrame(draw);
-    window.addEventListener("beforeunload", ()=> cancelAnimationFrame(raf));
-  })();
-  </script>
+    var lines = [
+      'Solicitud de diagnóstico — Prisma BI',
+      'Nombre: '+data.nombre,
+      'Empresa / rubro: '+data.empresa,
+      'Email: '+data.email,
+      'Datos hoy: '+(data.datos || '—'),
+      'En riesgo: '+(data.riesgo || '—')
+    ];
+    resultText.textContent = lines.join('\n');
+    resultBox.classList.add('show');
+    resultBox.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+})();
+</script>
 </body>
 </html>
