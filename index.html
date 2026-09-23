@@ -207,12 +207,17 @@
   .method-card p{margin-top:10px; color:var(--ink-soft); font-size:0.9rem;}
 
   /* sobre */
-  .about-grid{display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(32px,5vw,56px); align-items:center;}
-  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid h3{font-size:1.5rem;}
-  .about-grid p.bio{margin-top:14px; color:var(--ink-soft); font-size:1rem; max-width:58ch;}
-  .tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
-  .tag-chip{background:var(--cream); border-radius:999px; padding:8px 16px; font-size:0.82rem; font-weight:700; color:var(--ink);}
+  .team-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,44px); margin-top:clamp(32px,4vw,44px);}
+  @media (max-width:760px){.team-grid{grid-template-columns:1fr;}}
+  .team-card{display:grid; grid-template-columns:150px 1fr; gap:22px; align-items:start;}
+  @media (max-width:520px){.team-card{grid-template-columns:1fr; text-align:center;}}
+  .team-card .photo-frame{max-width:150px;}
+  .team-card h3{font-size:1.25rem;}
+  .team-card .role{display:block; color:var(--teal); font-weight:700; font-size:0.82rem; letter-spacing:0.04em; text-transform:uppercase; margin-top:4px;}
+  .team-card p.bio{margin-top:12px; color:var(--ink-soft); font-size:0.94rem;}
+  .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;}
+  @media (max-width:520px){.tag-row{justify-content:center;}}
+  .tag-chip{background:var(--cream); border-radius:999px; padding:7px 14px; font-size:0.78rem; font-weight:700; color:var(--ink);}
 
   /* casos de uso */
   .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
@@ -480,23 +485,51 @@
 </section>
 
 <section id="sobre" class="bg-cream curve-top">
-  <div class="wrap about-grid">
-    <div class="photo-frame">
-      <div class="blob b-teal" aria-hidden="true"></div>
-      <div class="blob b-lime" aria-hidden="true"></div>
-      <div class="placeholder">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="4" stroke="#fff" stroke-width="1.6"/><path d="M4.5 20c.8-4.2 3.7-6.6 7.5-6.6s6.7 2.4 7.5 6.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <span>Foto próximamente</span>
-      </div>
-    </div>
-    <div>
+  <div class="wrap">
+    <div class="section-head">
       <span class="eyebrow">Sobre Prisma BI</span>
-      <h3>Daiana Beltrán</h3>
-      <p class="bio">Psicóloga de formación, hoy especializada en Business Intelligence para empresas de servicios industriales. Ese recorrido es la base del método: primero entender cómo decide y qué le preocupa a la dirección, después traducirlo en datos confiables — no al revés.</p>
-      <div class="tag-row">
-        <span class="tag-chip">Bootcamp Unicorn Academy — 300h</span>
-        <span class="tag-chip">Metodología Sánchez De Boeck</span>
-        <span class="tag-chip">Power BI · SQL</span>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem);">Un método de dirección + una capa predictiva.</h2>
+      <p>Prisma BI lo llevan adelante dos hermanos, desde dos disciplinas distintas que se complementan.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="photo-frame">
+          <div class="blob b-teal" aria-hidden="true"></div>
+          <div class="blob b-lime" aria-hidden="true"></div>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="4" stroke="#fff" stroke-width="1.6"/><path d="M4.5 20c.8-4.2 3.7-6.6 7.5-6.6s6.7 2.4 7.5 6.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+        </div>
+        <div>
+          <h3>Daiana Beltrán</h3>
+          <span class="role">Dirección &amp; método</span>
+          <p class="bio">Psicóloga de formación, hoy especializada en Business Intelligence para empresas de servicios industriales. Ese recorrido es la base del método: primero entender cómo decide y qué le preocupa a la dirección, después traducirlo en datos confiables — no al revés.</p>
+          <div class="tag-row">
+            <span class="tag-chip">Bootcamp Unicorn Academy — 300h</span>
+            <span class="tag-chip">Metodología Sánchez De Boeck</span>
+            <span class="tag-chip">Power BI · SQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="photo-frame">
+          <div class="blob b-pink" aria-hidden="true"></div>
+          <div class="blob b-lime" aria-hidden="true"></div>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="4" stroke="#fff" stroke-width="1.6"/><path d="M4.5 20c.8-4.2 3.7-6.6 7.5-6.6s6.7 2.4 7.5 6.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+        </div>
+        <div>
+          <h3>Ezequiel Beltrán</h3>
+          <span class="role" style="color:var(--pink)">Machine learning</span>
+          <p class="bio">Trabaja en machine learning y suma la capa predictiva al método: sobre la misma base de datos auditada, mantenimiento predictivo de equipos, forecasting de demanda o de morosidad, y detección temprana de desvíos.</p>
+          <div class="tag-row">
+            <span class="tag-chip">Machine Learning</span>
+            <span class="tag-chip">Modelos predictivos</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
