@@ -175,6 +175,9 @@
     background:var(--white); border-radius:24px; box-shadow:var(--shadow); padding:24px;
     display:grid; gap:20px;
   }
+  .panel-live{gap:14px; margin:0;}
+  .panel-gif{display:block; width:100%; height:auto; border-radius:14px; border:1px solid rgba(20,26,55,.08); background:var(--cream);}
+  .panel-caption{font-size:0.74rem; color:var(--ink-soft); line-height:1.45;}
   .panel-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
   .panel-head h3{font-size:1rem;}
   .demo-tag{
@@ -358,32 +361,15 @@
       </ul>
     </div>
 
-    <div class="panel-card" role="img" aria-label="Panel ilustrativo de dirección con datos de ejemplo: cuatro indicadores (margen promedio 18%, desvío de costo por equipo +6%, productividad 82%, días de cobranza 46) y un gráfico de margen por contrato con cinco contratos ficticios entre -8% y +24%.">
+    <figure class="panel-card panel-live">
       <div class="panel-head">
-        <h3>Panel ilustrativo · Dirección</h3>
-        <span class="demo-tag">Datos de ejemplo</span>
+        <h3>Dashboard real · Vaca Muerta</h3>
+        <span class="demo-tag">Proyecto propio · datos públicos</span>
       </div>
-      <div class="panel-kpis">
-        <div class="kpi"><span class="kpi-dial" style="--frac:0.65turn" aria-hidden="true"></span><div><h4>Margen promedio</h4><p class="mono">18%</p></div></div>
-        <div class="kpi"><span class="kpi-dial" style="--frac:0.22turn" aria-hidden="true"></span><div><h4>Desvío costo/equipo</h4><p class="mono">+6% vs. presup.</p></div></div>
-        <div class="kpi"><span class="kpi-dial" style="--frac:0.82turn" aria-hidden="true"></span><div><h4>Productividad</h4><p class="mono">82%</p></div></div>
-        <div class="kpi"><span class="kpi-dial" style="--frac:0.5turn" aria-hidden="true"></span><div><h4>Días de cobranza</h4><p class="mono">46 días</p></div></div>
-      </div>
-      <div>
-        <p class="panel-chart-title">Margen por contrato — ejemplo</p>
-        <div class="divchart-legend">
-          <span><i style="background:var(--chart-pos)"></i> Sobre objetivo</span>
-          <span><i style="background:var(--chart-neg)"></i> Por debajo de objetivo</span>
-        </div>
-        <div class="divchart" aria-hidden="true">
-          <div class="divbar-col"><div class="divbar-upper"><div class="divbar" style="height:95px; background:var(--chart-pos);"><span class="divbar-val">+24%</span></div></div><div class="divbar-lower"></div><span class="divbar-code">CT‑014</span></div>
-          <div class="divbar-col"><div class="divbar-upper"><div class="divbar" style="height:44px; background:var(--chart-pos);"><span class="divbar-val">+11%</span></div></div><div class="divbar-lower"></div><span class="divbar-code">CT‑022</span></div>
-          <div class="divbar-col"><div class="divbar-upper"><div class="divbar" style="height:24px; background:var(--chart-pos);"><span class="divbar-val">+6%</span></div></div><div class="divbar-lower"></div><span class="divbar-code">CT‑031</span></div>
-          <div class="divbar-col"><div class="divbar-upper"></div><div class="divbar-lower"><div class="divbar" style="height:11px; background:var(--chart-neg);"><span class="divbar-val">−3%</span></div></div><span class="divbar-code">CT‑045</span></div>
-          <div class="divbar-col"><div class="divbar-upper"></div><div class="divbar-lower"><div class="divbar" style="height:28px; background:var(--chart-neg);"><span class="divbar-val">−8%</span></div></div><span class="divbar-code">CT‑052</span></div>
-        </div>
-      </div>
-    </div>
+      <img class="panel-gif" src="assets/brand/dashboard-vaca-muerta.gif" width="960" height="538" loading="lazy" decoding="async"
+           alt="Recorrido animado por un dashboard de Power BI de Prisma BI sobre pozos de Vaca Muerta: indicadores de pozos analizados y caída de producción, curva de declino, ranking por empresa, mapa de pozos y filtro por empresa aplicado.">
+      <figcaption class="panel-caption">Power BI · datos públicos de producción no convencional (Secretaría de Energía, datos.gob.ar). Filtro por empresa aplicado en vivo.</figcaption>
+    </figure>
   </div>
 </section>
 
