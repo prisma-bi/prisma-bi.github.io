@@ -180,6 +180,9 @@
   .who-grid:has(.panel-live){grid-template-columns:1fr; align-items:start;}
   .who-grid:has(.panel-live) > div:first-child{max-width:760px;}
   .panel-live{gap:14px; margin:0; padding:clamp(16px,2.4vw,28px);}
+  .panel-embed{display:block; width:100%; height:900px; border:0; border-radius:14px; background:#F7F3EC; box-shadow:inset 0 0 0 1px rgba(20,26,55,.08);}
+  @media (max-width:640px){.panel-live{padding:12px; border-radius:18px;} .panel-embed{border-radius:10px;}}
+  .panel-caption a{color:var(--teal); font-weight:700; white-space:nowrap;}
   .panel-gif-link{display:block; border-radius:14px; cursor:zoom-in;}
   .panel-gif-link:focus-visible{outline:3px solid var(--focus); outline-offset:3px;}
   .panel-gif{display:block; width:100%; height:auto; border-radius:14px; border:1px solid rgba(20,26,55,.08); background:var(--cream);}
@@ -369,11 +372,11 @@
 
     <figure class="panel-card panel-live">
       <div class="panel-head">
-        <h3>Dashboard real · Vaca Muerta</h3>
+        <h3>Dashboard interactivo · Vaca Muerta</h3>
         <span class="demo-tag">Proyecto propio · datos públicos</span>
       </div>
-      <video class="panel-gif" autoplay muted loop playsinline preload="metadata" width="2000" height="1126" poster="assets/brand/dashboard-vaca-muerta-poster.jpg" aria-label="Recorrido por un dashboard de Power BI de Prisma BI sobre pozos de Vaca Muerta: análisis de declino de producción y panel operativo con mapa de pozos."><source src="assets/brand/dashboard-vaca-muerta.mp4" type="video/mp4"></video>
-      <figcaption class="panel-caption">Power BI · datos públicos de producción no convencional (Secretaría de Energía, datos.gob.ar).</figcaption>
+      <iframe class="panel-embed" id="vmDash" src="dashboard-vaca-muerta/" title="Dashboard interactivo de Vaca Muerta" loading="lazy"></iframe>
+      <figcaption class="panel-caption">Probalo: elegí una empresa, cambiá entre las vistas Declino y Operativo, o hacé clic en las barras para filtrar. Datos públicos de producción no convencional (Secretaría de Energía, datos.gob.ar). <a href="dashboard-vaca-muerta/" target="_blank" rel="noopener">Abrir en pantalla completa →</a></figcaption>
     </figure>
   </div>
 </section>
@@ -669,5 +672,8 @@
 })();
 </script>
 
+<script>
+(function(){var f=document.getElementById("vmDash");if(!f)return;window.addEventListener("message",function(e){if(e.source===f.contentWindow&&e.data&&e.data.vmHeight){f.style.height=Math.ceil(e.data.vmHeight)+"px";}});})();
+</script>
 </body>
 </html>
