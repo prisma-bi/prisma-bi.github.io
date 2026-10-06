@@ -175,7 +175,11 @@
     background:var(--white); border-radius:24px; box-shadow:var(--shadow); padding:24px;
     display:grid; gap:20px;
   }
-  .panel-live{gap:14px; margin:0;}
+  .who-grid:has(.panel-live){grid-template-columns:1fr; align-items:start;}
+  .who-grid:has(.panel-live) > div:first-child{max-width:760px;}
+  .panel-live{gap:14px; margin:0; padding:clamp(16px,2.4vw,28px);}
+  .panel-gif-link{display:block; border-radius:14px; cursor:zoom-in;}
+  .panel-gif-link:focus-visible{outline:3px solid var(--focus); outline-offset:3px;}
   .panel-gif{display:block; width:100%; height:auto; border-radius:14px; border:1px solid rgba(20,26,55,.08); background:var(--cream);}
   .panel-caption{font-size:0.74rem; color:var(--ink-soft); line-height:1.45;}
   .panel-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
@@ -366,8 +370,8 @@
         <h3>Dashboard real · Vaca Muerta</h3>
         <span class="demo-tag">Proyecto propio · datos públicos</span>
       </div>
-      <img class="panel-gif" src="assets/brand/dashboard-vaca-muerta.gif" width="960" height="538" loading="lazy" decoding="async"
-           alt="Recorrido animado por un dashboard de Power BI de Prisma BI sobre pozos de Vaca Muerta: indicadores de pozos analizados y caída de producción, curva de declino, ranking por empresa, mapa de pozos y filtro por empresa aplicado.">
+      <a class="panel-gif-link" href="assets/brand/dashboard-vaca-muerta.gif" target="_blank" rel="noopener" aria-label="Ver el dashboard en tamaño completo"><img class="panel-gif" src="assets/brand/dashboard-vaca-muerta.gif" width="1172" height="657" loading="lazy" decoding="async"
+           alt="Recorrido animado por un dashboard de Power BI de Prisma BI sobre pozos de Vaca Muerta: indicadores de pozos analizados y caída de producción, curva de declino, ranking por empresa, mapa de pozos y filtro por empresa aplicado."></a>
       <figcaption class="panel-caption">Power BI · datos públicos de producción no convencional (Secretaría de Energía, datos.gob.ar). Filtro por empresa aplicado en vivo.</figcaption>
     </figure>
   </div>
