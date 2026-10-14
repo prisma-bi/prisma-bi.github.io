@@ -590,10 +590,10 @@
           <label for="frisk">¿Qué está en riesgo hoy? (margen por contrato, costos por equipo, productividad, cobranzas)</label>
           <textarea id="frisk" name="frisk"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="justify-self:start;">Preparar solicitud de diagnóstico</button>
-        <p class="form-foot">Esto arma un resumen para copiar y enviarnos por WhatsApp o email — no se envía nada automáticamente.</p>
+        <button type="submit" class="btn btn-primary" style="justify-self:start;">Enviar solicitud por WhatsApp</button>
+        <p class="form-foot">Al tocar el botón se abre WhatsApp con tu solicitud ya escrita: solo tenés que tocar enviar.</p>
         <div class="result-box" id="resultBox">
-          <strong>Listo. Copiá esto y mandalo por WhatsApp o email:</strong>
+          <strong>¿No se abrió WhatsApp? Copiá esto y mandalo por mail a <a id="mailResult" href="mailto:daianabeltran@gmail.com">daianabeltran@gmail.com</a>:</strong>
           <pre id="resultText"></pre>
           <button type="button" class="copy-btn" id="copyResult" data-target="resultText">copiar resumen</button>
         </div>
@@ -681,7 +681,11 @@
       'Datos hoy: '+(data.datos || '—'),
       'En riesgo: '+(data.riesgo || '—')
     ];
-    resultText.textContent = lines.join('\n');
+    var msg = lines.join('\n');
+    resultText.textContent = msg;
+    var mail = document.getElementById('mailResult');
+    if (mail) mail.href = 'mailto:daianabeltran@gmail.com?subject=' + encodeURIComponent('Solicitud de diagnóstico — Prisma BI') + '&body=' + encodeURIComponent(msg);
+    window.open('https://wa.me/5492996032267?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     resultBox.classList.add('show');
     resultBox.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
