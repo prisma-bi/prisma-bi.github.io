@@ -256,7 +256,7 @@
   .predict-block{
     margin-top:clamp(56px,7vw,96px); padding:clamp(24px,4vw,48px); border-radius:28px;
     background:var(--white); box-shadow:var(--shadow-sm);
-    display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(28px,4vw,48px); align-items:start;
+    display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(28px,4vw,48px); align-items:center;
   }
   .predict-block > *{min-width:0;}
   .predict-block h3{font-size:clamp(1.45rem,2.6vw,1.9rem); line-height:1.15;}
@@ -343,6 +343,11 @@
   .result-box.show{display:block;}
   .result-box pre{white-space:pre-wrap; font-size:0.82rem; margin:12px 0; font-family:inherit;}
 
+  /* términos de tecnología resaltados */
+  .tech{color:#14839A; font-weight:800;}
+  .bg-navy .tech, .hero .tech, footer .tech, .predict-demo .tech{color:var(--teal);}
+  .tech-line{margin-top:14px; font-size:clamp(1rem,1.6vw,1.15rem); font-weight:600; color:var(--on-navy);}
+  footer .tech-line{font-size:0.9rem; margin-top:10px; max-width:34ch;}
   footer{background:var(--navy); color:var(--on-navy-soft); padding-block:52px 30px;}
   .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
   @media (max-width:700px){.footer-grid{grid-template-columns:1fr;}}
@@ -391,6 +396,7 @@
     <div>
       <span class="badge">Para dirección · Servicios industriales, proveedores de Oil &amp; Gas</span>
       <h1>Control financiero-operativo <em>por contrato.</em></h1>
+      <p class="tech-line">Con <strong class="tech">Business Intelligence</strong>, <strong class="tech">Machine Learning</strong> e <strong class="tech">Inteligencia Artificial</strong>.</p>
       <p class="lede">Cada área tiene su propio Excel, y cuando los números no coinciden, dirección termina eligiendo a cuál creerle — no cuál es correcto. Prisma BI audita esa información y arma un tablero con una sola definición para toda la empresa: el número en el que dirección puede confiar.</p>
       <div class="hero-ctas">
         <a href="#contacto" class="btn btn-primary">Solicitar diagnóstico estratégico</a>
@@ -436,7 +442,7 @@
   <div class="wrap">
     <div class="section-head center">
       <span class="eyebrow">Servicio</span>
-      <h2>Un servicio integral, en tres fases.</h2>
+      <h2>Un servicio integral en tres fases, con <span class="tech">tecnología</span> aplicada a tu negocio.</h2>
       <p>No vendemos un tablero lindo. Vendemos el final de la discusión de números en la mesa de dirección — enfocado en contratos, equipos/cuadrillas y caja.</p>
     </div>
 
@@ -502,17 +508,10 @@
 
     <div class="predict-block" id="prediccion">
       <div>
-        <span class="feature-tag" style="color:var(--pink)">Servicio adicional · Predicción</span>
-        <h3>Ver venir los problemas antes de que lleguen a la caja.</h3>
-        <p class="desc">Usamos la historia de tu propia empresa (partes de trabajo, facturación, mantenimiento, cobranzas) para estimar qué es probable que pase en las próximas semanas. No es magia ni una caja negra: es aprender de lo que ya pasó para decidir antes y no correr detrás de la urgencia.</p>
-        <ul class="predict-list">
-          <li><span class="dot"></span><span><b>Cobranzas:</b> qué clientes tienen más chances de pagar tarde este mes, para gestionarlos antes de que falte la plata.</span></li>
-          <li><span class="dot"></span><span><b>Equipos:</b> qué equipo tiene más riesgo de parar, para programar el mantenimiento en vez de pagar la parada.</span></li>
-          <li><span class="dot"></span><span><b>Demanda y cuadrillas:</b> cuánto trabajo se viene el próximo mes, para dimensionar personal sin que sobre ni falte gente.</span></li>
-          <li><span class="dot"></span><span><b>Contratos:</b> cómo va a cerrar el margen de un contrato si sigue al ritmo actual, para corregir mientras todavía hay tiempo.</span></li>
-        </ul>
-        <p class="predict-req"><b>Con los pies en la tierra:</b> cada predicción viene con su nivel de confianza y se compara todos los meses con lo que realmente pasó. Necesita datos ordenados y con historia (idealmente un año o más), por eso se suma después del diagnóstico, no antes.</p>
-        <a href="#contacto" class="feature-link" style="color:var(--pink)">Consultar por predicción →</a>
+        <span class="feature-tag" style="color:var(--pink)">Inteligencia artificial aplicada a tu operación</span>
+        <h3>Análisis predictivo con <span class="tech">Machine Learning</span>.</h3>
+        <p class="desc">Anticipá demanda, stock, paradas de equipos y cobranzas con los datos de tu propia empresa.</p>
+        <a href="#contacto" class="feature-link" style="color:var(--pink)">Pedí una evaluación de viabilidad →</a>
       </div>
 
       <div class="predict-demo" aria-label="Ejemplo de cómo se ven las predicciones en el tablero">
@@ -521,30 +520,19 @@
           <span>Ejemplo ilustrativo</span>
         </div>
         <ul class="predict-rows">
+          <li style="--c:var(--lime)">
+            <div class="q">Demanda · próximo mes</div>
+            <div class="a">Ventas estimadas: 12% más que este mes</div>
+            <div class="do">Qué hacer: <b>reforzar stock</b> de los productos que más rotan.</div>
+          </li>
           <li style="--c:var(--pink)">
             <div class="q">Cobranzas · este mes</div>
-            <div class="a">Cliente A: 78% de probabilidad de pagar tarde</div>
+            <div class="a">Cliente A: alta probabilidad de pagar tarde</div>
             <div class="do">Qué hacer: <b>llamar esta semana</b>, antes del vencimiento.</div>
-          </li>
-          <li style="--c:var(--teal)">
-            <div class="q">Equipos · próximos 30 días</div>
-            <div class="a">Equipo 14: riesgo alto de parada</div>
-            <div class="do">Qué hacer: <b>adelantar el service</b> a una semana sin trabajo.</div>
-          </li>
-          <li style="--c:var(--lime)">
-            <div class="q">Demanda · próximas 4 semanas</div>
-            <div class="a">Se esperan entre 2.900 y 3.400 horas de servicio</div>
-            <div class="do">Qué hacer: <b>sumar una cuadrilla</b> desde la semana 2.</div>
-          </li>
-          <li style="--c:var(--pink)">
-            <div class="q">Contratos · cierre proyectado</div>
-            <div class="a">Contrato Mantenimiento Norte: margen 9% (meta 15%)</div>
-            <div class="do">Qué hacer: <b>revisar horas extra</b> y consumo de repuestos.</div>
           </li>
         </ul>
       </div>
     </div>
-  </div>
 </section>
 
 <section id="casos" class="bg-cream">
@@ -687,6 +675,7 @@
         Prisma BI
       </div>
       <p class="tagline">Control financiero-operativo por contrato, para dirección de empresas de servicios industriales.</p>
+      <p class="tech-line">Con <strong class="tech">Business Intelligence</strong>, <strong class="tech">Machine Learning</strong> e <strong class="tech">Inteligencia Artificial</strong>.</p>
     </div>
     <div class="footer-col">
       <h4>Navegación</h4>
