@@ -252,12 +252,36 @@
   .feature-row li{font-size:0.9rem; display:flex; gap:10px; align-items:flex-start; color:var(--ink);}
   .feature-row li .dot{width:6px; height:6px; border-radius:50%; margin-top:8px; flex:none;}
   .feature-link{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-weight:700; font-size:0.92rem; text-decoration:none;}
-  .predictive-note{
-    margin-top:clamp(48px,6vw,72px); padding:clamp(24px,3vw,32px); border-radius:22px;
-    background:var(--white); box-shadow:var(--shadow-sm); max-width:64ch;
+  /* servicio de predicción */
+  .predict-block{
+    margin-top:clamp(56px,7vw,96px); padding:clamp(24px,4vw,48px); border-radius:28px;
+    background:var(--white); box-shadow:var(--shadow-sm);
+    display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(28px,4vw,48px); align-items:start;
   }
-  .predictive-note h3{font-size:1.15rem; margin-top:8px;}
-  .predictive-note .desc{margin-top:12px; color:var(--ink-soft); font-size:0.95rem;}
+  .predict-block > *{min-width:0;}
+  .predict-block h3{font-size:clamp(1.45rem,2.6vw,1.9rem); line-height:1.15;}
+  .predict-block .desc{margin-top:14px; color:var(--ink-soft); font-size:1.02rem; line-height:1.65; max-width:56ch;}
+  .predict-list{list-style:none; padding:0; margin:22px 0 0; display:grid; gap:14px;}
+  .predict-list li{display:flex; gap:12px; align-items:flex-start; font-size:0.93rem; line-height:1.55;}
+  .predict-list li .dot{width:7px; height:7px; border-radius:50%; margin-top:8px; flex:none; background:var(--pink);}
+  .predict-req{
+    margin-top:22px; padding:14px 16px; border-radius:14px; font-size:0.86rem; line-height:1.55;
+    background:color-mix(in srgb, var(--teal) 10%, transparent); color:var(--ink);
+  }
+  .predict-demo{background:var(--navy); color:var(--on-navy); border-radius:22px; padding:clamp(20px,3vw,28px);}
+  .predict-demo-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .predict-demo-head h4{font-size:1rem; color:#fff;}
+  .predict-demo-head span{font-size:0.72rem; color:var(--on-navy-soft); letter-spacing:.04em;}
+  .predict-rows{list-style:none; padding:0; margin:18px 0 0; display:grid; gap:12px;}
+  .predict-rows li{
+    background:rgba(243,236,222,.06); border:1px solid rgba(243,236,222,.1);
+    border-radius:14px; padding:14px 16px; border-left:4px solid var(--c);
+  }
+  .predict-rows .q{font-size:0.74rem; text-transform:uppercase; letter-spacing:.07em; color:var(--on-navy-soft); font-weight:700;}
+  .predict-rows .a{margin-top:4px; font-size:0.98rem; font-weight:700; color:#fff;}
+  .predict-rows .do{margin-top:4px; font-size:0.85rem; color:var(--on-navy-soft);}
+  .predict-rows .do b{color:var(--c);}
+  @media (max-width: 900px){ .predict-block{grid-template-columns:1fr;} }
 
   /* casos de uso */
   .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
@@ -476,10 +500,49 @@
       </div>
     </div>
 
-    <div class="predictive-note">
-      <span class="feature-tag" style="color:var(--pink)">Capacidad adicional</span>
-      <h3>Saber qué va a pasar, no solo qué pasó</h3>
-      <p class="desc">Con datos ya confiables, se puede sumar una capa que anticipa: qué equipo puede fallar, cuánto se va a vender, qué cliente puede atrasarse. Un siguiente paso, no un servicio aparte.</p>
+    <div class="predict-block" id="prediccion">
+      <div>
+        <span class="feature-tag" style="color:var(--pink)">Servicio adicional · Predicción</span>
+        <h3>Ver venir los problemas antes de que lleguen a la caja.</h3>
+        <p class="desc">Usamos la historia de tu propia empresa (partes de trabajo, facturación, mantenimiento, cobranzas) para estimar qué es probable que pase en las próximas semanas. No es magia ni una caja negra: es aprender de lo que ya pasó para decidir antes y no correr detrás de la urgencia.</p>
+        <ul class="predict-list">
+          <li><span class="dot"></span><span><b>Cobranzas:</b> qué clientes tienen más chances de pagar tarde este mes, para gestionarlos antes de que falte la plata.</span></li>
+          <li><span class="dot"></span><span><b>Equipos:</b> qué equipo tiene más riesgo de parar, para programar el mantenimiento en vez de pagar la parada.</span></li>
+          <li><span class="dot"></span><span><b>Demanda y cuadrillas:</b> cuánto trabajo se viene el próximo mes, para dimensionar personal sin que sobre ni falte gente.</span></li>
+          <li><span class="dot"></span><span><b>Contratos:</b> cómo va a cerrar el margen de un contrato si sigue al ritmo actual, para corregir mientras todavía hay tiempo.</span></li>
+        </ul>
+        <p class="predict-req"><b>Con los pies en la tierra:</b> cada predicción viene con su nivel de confianza y se compara todos los meses con lo que realmente pasó. Necesita datos ordenados y con historia (idealmente un año o más), por eso se suma después del diagnóstico, no antes.</p>
+        <a href="#contacto" class="feature-link" style="color:var(--pink)">Consultar por predicción →</a>
+      </div>
+
+      <div class="predict-demo" aria-label="Ejemplo de cómo se ven las predicciones en el tablero">
+        <div class="predict-demo-head">
+          <h4>Así se ve en el tablero</h4>
+          <span>Ejemplo ilustrativo</span>
+        </div>
+        <ul class="predict-rows">
+          <li style="--c:var(--pink)">
+            <div class="q">Cobranzas · este mes</div>
+            <div class="a">Cliente A: 78% de probabilidad de pagar tarde</div>
+            <div class="do">Qué hacer: <b>llamar esta semana</b>, antes del vencimiento.</div>
+          </li>
+          <li style="--c:var(--teal)">
+            <div class="q">Equipos · próximos 30 días</div>
+            <div class="a">Equipo 14: riesgo alto de parada</div>
+            <div class="do">Qué hacer: <b>adelantar el service</b> a una semana sin trabajo.</div>
+          </li>
+          <li style="--c:var(--lime)">
+            <div class="q">Demanda · próximas 4 semanas</div>
+            <div class="a">Se esperan entre 2.900 y 3.400 horas de servicio</div>
+            <div class="do">Qué hacer: <b>sumar una cuadrilla</b> desde la semana 2.</div>
+          </li>
+          <li style="--c:var(--pink)">
+            <div class="q">Contratos · cierre proyectado</div>
+            <div class="a">Contrato Mantenimiento Norte: margen 9% (meta 15%)</div>
+            <div class="do">Qué hacer: <b>revisar horas extra</b> y consumo de repuestos.</div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
